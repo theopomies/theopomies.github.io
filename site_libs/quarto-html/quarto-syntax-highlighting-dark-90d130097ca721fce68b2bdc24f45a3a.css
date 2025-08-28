@@ -1,0 +1,132 @@
+/* quarto syntax highlight colors */
+:root {
+  --quarto-hl-kw-color: #ADD7FF;
+  --quarto-hl-cf-color: #ADD7FF;
+  --quarto-hl-op-color: #ADD7FF;
+  --quarto-hl-fu-color: #5DE4C7;
+  --quarto-hl-va-color: #E4F0FB;
+  --quarto-hl-cn-color: #5DE4C7;
+  --quarto-hl-st-color: #5DE4C7;
+  --quarto-hl-ch-color: #5DE4C7;
+  --quarto-hl-co-color: #767C9D;
+  --quarto-hl-do-color: #767C9D;
+  --quarto-hl-pp-color: #ADD7FF;
+  --quarto-hl-at-color: #91B4D5;
+  --quarto-hl-wa-color: #FFFAC2;
+  --quarto-hl-in-color: #ADD7FF;
+  --quarto-hl-er-color: #D0679D;
+  --quarto-hl-al-color: #D0679D;
+}
+
+/* other quarto variables */
+:root {
+  --quarto-font-monospace: "Geist Mono", monospace;
+}
+
+/* syntax highlight based on Pandoc's rules */
+pre > code.sourceCode > span {
+  color: #E4F0FB;
+}
+
+code.sourceCode > span {
+  color: #E4F0FB;
+}
+
+div.sourceCode,
+div.sourceCode pre.sourceCode {
+  color: #E4F0FB;
+}
+
+/* Normal */
+code span {
+  color: #E4F0FB;
+}
+
+/* Alert */
+code span.al {
+  color: #D0679D;
+}
+
+/* Attribute */
+code span.at {
+  color: #91B4D5;
+  font-style: italic;
+}
+
+/* ControlFlow */
+code span.cf {
+  color: #ADD7FF;
+}
+
+/* Char */
+code span.ch {
+  color: #5DE4C7;
+}
+
+/* Constant */
+code span.cn {
+  color: #5DE4C7;
+}
+
+/* Comment */
+code span.co {
+  color: #767C9D;
+  font-style: italic;
+}
+
+/* Documentation */
+code span.do {
+  color: #767C9D;
+  font-style: italic;
+}
+
+/* Error */
+code span.er {
+  color: #D0679D;
+}
+
+/* Function */
+code span.fu {
+  color: #5DE4C7;
+}
+
+/* Information */
+code span.in {
+  color: #ADD7FF;
+}
+
+/* Keyword */
+code span.kw {
+  color: #ADD7FF;
+}
+
+/* Operator */
+code span.op {
+  color: #ADD7FF;
+}
+
+/* Preprocessor */
+code span.pp {
+  color: #ADD7FF;
+}
+
+/* String */
+code span.st {
+  color: #5DE4C7;
+}
+
+/* Variable */
+code span.va {
+  color: #E4F0FB;
+}
+
+/* Warning */
+code span.wa {
+  color: #FFFAC2;
+}
+
+.prevent-inlining {
+  content: "</";
+}
+
+/*# sourceMappingURL=8a93ae52bf6530879a9616b3fba50b2c.css.map */

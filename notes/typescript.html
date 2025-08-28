@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-02-14">
 
-<title>Theo POMIES – Theo Pomies</title>
+<title>On Typescript – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-90d130097ca721fce68b2bdc24f45a3a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b10c9c617886865bc75341d5c0b364da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-90d130097ca721fce68b2bdc24f45a3a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b10c9c617886865bc75341d5c0b364da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,12 +106,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta name="twitter:title" content="Theo POMIES – Theo Pomies">
-<meta name="twitter:description" content="I’m a software engineer and entrepreneur. Currently working on my startup, Kivala, a new kind of interphone and digicode. I’m also tryharding AI/ML, from the research to the production (math, kernels, training, inference, deployment, etc.). This is where I try to dump my notes and thoughts, throughout the learning journey.">
+<meta name="twitter:title" content="On Typescript – Theo Pomies">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,11 +118,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
           <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">about me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notes/index.html"> 
+    <a class="nav-link" href="../notes/index.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
 </ul>
@@ -103,13 +138,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#first-principles" id="toc-first-principles" class="nav-link active" data-scroll-target="#first-principles">First Principles</a></li>
+  <li><a href="#tldr-rules" id="toc-tldr-rules" class="nav-link" data-scroll-target="#tldr-rules">TL;DR Rules</a></li>
+  <li><a href="#recommandations" id="toc-recommandations" class="nav-link" data-scroll-target="#recommandations">Recommandations</a></li>
+  <li><a href="#explanations" id="toc-explanations" class="nav-link" data-scroll-target="#explanations">Explanations</a>
+  <ul class="collapse">
+  <li><a href="#narrowing-over-using-as" id="toc-narrowing-over-using-as" class="nav-link" data-scroll-target="#narrowing-over-using-as">Narrowing over using <code>as</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Theo POMIES</h1>
+<h1 class="title">On Typescript</h1>
 </div>
 
 
@@ -117,7 +166,19 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 14, 2025</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">February 15, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -126,37 +187,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>I am a 25-year-old CTO and co-founder of a tech startup, <a href="https://www.kivala.fr" target="_blank">Kivala</a>, with a Master’s degree in Information Technology from EPITECH. My dual role as both a technical leader and developer allows me to bring a strategic vision to projects.</p>
-<section id="expertise" class="level2">
-<h2 class="anchored" data-anchor-id="expertise">Expertise</h2>
-<section id="mobile-full-stack-development" class="level3">
-<h3 class="anchored" data-anchor-id="mobile-full-stack-development">Mobile &amp; Full-Stack Development</h3>
-<p>I specialize in React, React Native, and Next.js, with a strong focus on:</p>
+<section id="first-principles" class="level2">
+<h2 class="anchored" data-anchor-id="first-principles">First Principles</h2>
 <ul>
-<li>Rapid development of mobile applications</li>
-<li>Creating and optimizing native modules (iOS/Android, Swift, Kotlin, C++)</li>
-<li>Maintaining legacy native modules (Objective-C, Java)</li>
-<li>Integrating complex native functionalities</li>
-<li>Designing robust and scalable mobile architectures</li>
-</ul>
-<p>From prototyping to production, I ensure a smooth and native user experience.</p>
-</section>
-<section id="backend-development" class="level3">
-<h3 class="anchored" data-anchor-id="backend-development">Backend Development</h3>
-<p>I have extensive experience with backend development, particularly in TypeScript, including:</p>
-<ul>
-<li>Designing high-performance, secure APIs</li>
-<li>Choosing between REST or RPC depending on the use case</li>
-<li>Architecting distributed systems</li>
-<li>Integrating complex third-party services</li>
+<li>Let your types be flexible</li>
+<li>Let your constraints be rigid</li>
 </ul>
 </section>
+<section id="tldr-rules" class="level2">
+<h2 class="anchored" data-anchor-id="tldr-rules">TL;DR Rules</h2>
+<ul>
+<li>Use <code>unknown</code> instead of <code>any</code>, then use type narrowing to get the correct type.</li>
+<li>Use <code>type</code> over <code>interface</code>, unless you <em>actually</em> need to reach for an interface or need to express objects/class inheritance.</li>
+<li>Avoid using <code>as</code> to <em>assert</em> types, most of the time you actually want to <strong>narrow</strong> the type with checks (if/else).</li>
+<li>Use <code>array.at(index)</code> instead of <code>array[index]</code> unless array is a tuple (fixed size array).</li>
+<li><strong>NEVER</strong> use TS specifics (<code>enum</code>, <code>private</code> in constructor, etc.).</li>
+</ul>
 </section>
-<section id="approach" class="level2">
-<h2 class="anchored" data-anchor-id="approach">Approach</h2>
-<p>With a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.</p>
+<section id="recommandations" class="level2">
+<h2 class="anchored" data-anchor-id="recommandations">Recommandations</h2>
+<ul>
+<li>Use <code>satisfies</code> to check if an object fits a type but not erase the type.</li>
+<li>Use <code>as const</code> whenever possible. (Immutable data, enum-like objects, etc.)</li>
+<li>Define (and export) types where they are consumed, and import them from other files if needed.</li>
+</ul>
+</section>
+<section id="explanations" class="level2">
+<h2 class="anchored" data-anchor-id="explanations">Explanations</h2>
+<section id="narrowing-over-using-as" class="level3">
+<h3 class="anchored" data-anchor-id="narrowing-over-using-as">Narrowing over using <code>as</code></h3>
+<p>Suppose you have a function that takes a number</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">double</span>(a<span class="op">:</span> <span class="dt">number</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And you have a variable that could be a number or a string</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getNumberOrString</span>()<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">string</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="st">"1"</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> a<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">getNumberOrString</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Typescript will allow you to use <code>as</code> to <em>assert</em> the variable to a number (this is one of the ways that TypeScript is not sound)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="fu">double</span>(a <span class="im">as</span> <span class="dt">number</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But this not correct/sound at runtime!</p>
+<p>The correct way to do this is to narrow the type with a check (if/else/early return).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="kw">typeof</span> a <span class="op">===</span> <span class="st">"number"</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> result <span class="op">=</span> <span class="fu">double</span>(a)<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

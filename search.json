@@ -2,15 +2,64 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Hello World",
+    "title": "Theo POMIES",
     "section": "",
-    "text": "Hello, world1!\n\n\n\nprint(\"Hello YO2!\")\n\nHello YOU!"
+    "text": "I am a 25-year-old CTO and co-founder of a tech startup, Kivala, with a Master’s degree in Information Technology from EPITECH. My dual role as both a technical leader and developer allows me to bring a strategic vision to projects."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html#expertise",
+    "href": "index.html#expertise",
+    "title": "Theo POMIES",
+    "section": "Expertise",
+    "text": "Expertise\n\nMobile & Full-Stack Development\nI specialize in React, React Native, and Next.js, with a strong focus on:\n\nRapid development of mobile applications\nCreating and optimizing native modules (iOS/Android, Swift, Kotlin, C++)\nMaintaining legacy native modules (Objective-C, Java)\nIntegrating complex native functionalities\nDesigning robust and scalable mobile architectures\n\nFrom prototyping to production, I ensure a smooth and native user experience.\n\n\nBackend Development\nI have extensive experience with backend development, particularly in TypeScript, including:\n\nDesigning high-performance, secure APIs\nChoosing between REST or RPC depending on the use case\nArchitecting distributed systems\nIntegrating complex third-party services"
+  },
+  {
+    "objectID": "index.html#approach",
+    "href": "index.html#approach",
+    "title": "Theo POMIES",
+    "section": "Approach",
+    "text": "Approach\nWith a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints."
+  },
+  {
+    "objectID": "notes/typescript.html",
+    "href": "notes/typescript.html",
+    "title": "On Typescript",
     "section": "",
-    "text": "About this site\n\nprint(\"Hello, by Theo\")\n\nHello, by Theo"
+    "text": "Let your types be flexible\nLet your constraints be rigid"
+  },
+  {
+    "objectID": "notes/typescript.html#first-principles",
+    "href": "notes/typescript.html#first-principles",
+    "title": "On Typescript",
+    "section": "",
+    "text": "Let your types be flexible\nLet your constraints be rigid"
+  },
+  {
+    "objectID": "notes/typescript.html#tldr-rules",
+    "href": "notes/typescript.html#tldr-rules",
+    "title": "On Typescript",
+    "section": "TL;DR Rules",
+    "text": "TL;DR Rules\n\nUse unknown instead of any, then use type narrowing to get the correct type.\nUse type over interface, unless you actually need to reach for an interface or need to express objects/class inheritance.\nAvoid using as to assert types, most of the time you actually want to narrow the type with checks (if/else).\nUse array.at(index) instead of array[index] unless array is a tuple (fixed size array).\nNEVER use TS specifics (enum, private in constructor, etc.)."
+  },
+  {
+    "objectID": "notes/typescript.html#recommandations",
+    "href": "notes/typescript.html#recommandations",
+    "title": "On Typescript",
+    "section": "Recommandations",
+    "text": "Recommandations\n\nUse satisfies to check if an object fits a type but not erase the type.\nUse as const whenever possible. (Immutable data, enum-like objects, etc.)\nDefine (and export) types where they are consumed, and import them from other files if needed."
+  },
+  {
+    "objectID": "notes/typescript.html#explanations",
+    "href": "notes/typescript.html#explanations",
+    "title": "On Typescript",
+    "section": "Explanations",
+    "text": "Explanations\n\nNarrowing over using as\nSuppose you have a function that takes a number\nfunction double(a: number) {\n    return a * 2;\n}\nAnd you have a variable that could be a number or a string\nfunction getNumberOrString(): number | string {\n    return Math.random() &gt; 0.5 ? 1 : \"1\";\n}\nconst a: number | string = getNumberOrString();\nTypescript will allow you to use as to assert the variable to a number (this is one of the ways that TypeScript is not sound)\nconst result: number = double(a as number);\nBut this not correct/sound at runtime!\nThe correct way to do this is to narrow the type with a check (if/else/early return).\nif (typeof a === \"number\") {\n    const result = double(a);\n}"
+  },
+  {
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Notes",
+    "section": "",
+    "text": "On Typescript\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\n\n\n\nNo matching items"
   }
 ]
