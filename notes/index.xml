@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Theo Pomies</title>
+<link>https://theopomies.com/notes/</link>
+<atom:link href="https://theopomies.com/notes/index.xml" rel="self" type="application/rss+xml"/>
+<description>All my notes. Read them at your own risk.</description>
+<generator>quarto-1.7.33</generator>
+<lastBuildDate>Fri, 14 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>On Typescript</title>
+  <link>https://theopomies.com/notes/typescript.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="first-principles" class="level2">
+<h2 class="anchored" data-anchor-id="first-principles">First Principles</h2>
+<ul>
+<li>Let your types be flexible</li>
+<li>Let your constraints be rigid</li>
+</ul>
+</section>
+<section id="tldr-rules" class="level2">
+<h2 class="anchored" data-anchor-id="tldr-rules">TL;DR Rules</h2>
+<ul>
+<li>Use <code>unknown</code> instead of <code>any</code>, then use type narrowing to get the correct type.</li>
+<li>Use <code>type</code> over <code>interface</code>, unless you <em>actually</em> need to reach for an interface or need to express objects/class inheritance.</li>
+<li>Avoid using <code>as</code> to <em>assert</em> types, most of the time you actually want to <strong>narrow</strong> the type with checks (if/else).</li>
+<li>Use <code>array.at(index)</code> instead of <code>array[index]</code> unless array is a tuple (fixed size array).</li>
+<li><strong>NEVER</strong> use TS specifics (<code>enum</code>, <code>private</code> in constructor, etc.).</li>
+</ul>
+</section>
+<section id="recommandations" class="level2">
+<h2 class="anchored" data-anchor-id="recommandations">Recommandations</h2>
+<ul>
+<li>Use <code>satisfies</code> to check if an object fits a type but not erase the type.</li>
+<li>Use <code>as const</code> whenever possible. (Immutable data, enum-like objects, etc.)</li>
+<li>Define (and export) types where they are consumed, and import them from other files if needed.</li>
+</ul>
+</section>
+<section id="explanations" class="level2">
+<h2 class="anchored" data-anchor-id="explanations">Explanations</h2>
+<section id="narrowing-over-using-as" class="level3">
+<h3 class="anchored" data-anchor-id="narrowing-over-using-as">Narrowing over using <code>as</code></h3>
+<p>Suppose you have a function that takes a number</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">double</span>(a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">number</span>) {</span>
+<span id="cb1-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-3">}</span></code></pre></div>
+<p>And you have a variable that could be a number or a string</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getNumberOrString</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">number</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">string</span> {</span>
+<span id="cb2-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">Math</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">random</span>() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">?</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-3">}</span>
+<span id="cb2-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">number</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">string</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getNumberOrString</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div>
+<p>Typescript will allow you to use <code>as</code> to <em>assert</em> the variable to a number (this is one of the ways that TypeScript is not sound)</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> result<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">number</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">double</span>(a <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">number</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div>
+<p>But this not correct/sound at runtime!</p>
+<p>The correct way to do this is to narrow the type with a check (if/else/early return).</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb4-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">typeof</span> a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">===</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"number"</span>) {</span>
+<span id="cb4-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> result <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">double</span>(a)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb4-3">}</span></code></pre></div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://theopomies.com/notes/typescript.html</guid>
+  <pubDate>Fri, 14 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
