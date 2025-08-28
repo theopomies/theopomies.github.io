@@ -2,7 +2,7 @@
 // quarto-scss-analysis-annotation { "origin": "theopoimandres" }
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
 
-$theme: "theopoimandres" !default;
+$theme: "theopoimandres";
 /* ==========================================================================
    Theopoimandres Bootstrap Theme
    Based on Zed Theme by theopomies
@@ -11,50 +11,50 @@ $theme: "theopoimandres" !default;
 /* ==========================================================================
    Theme Colors
    ========================================================================== */
-$blue:    #89ddff !default;
-$indigo:  #91B4D5 !default;
-$purple:  #c4a7e7 !default;
-$pink:    #d0679d !default;
-$red:     #d0679d !default;
-$orange:  #f5a97f !default;
-$yellow:  #fffac2 !default;
-$green:   #5DE4c7 !default;
-$teal:    #5fb3a1 !default;
-$cyan:    #ADD7FF !default;
+$blue:    #89ddff;
+$indigo:  #91B4D5;
+$purple:  #c4a7e7;
+$pink:    #d0679d;
+$red:     #d0679d;
+$orange:  #f5a97f;
+$yellow:  #fffac2;
+$green:   #5DE4c7;
+$teal:    #5fb3a1;
+$cyan:    #ADD7FF;
 
 /* ==========================================================================
    Grays
    ========================================================================== */
-$white:    #ffffff !default;
-$gray-100: #f5f5f5 !default;
-$gray-200: #e5e5e5 !default;
-$gray-300: #d4d4d4 !default;
-$gray-400: #a3a3a3 !default;
-$gray-500: #737373 !default;
-$gray-600: #525252 !default;
-$gray-700: #404040 !default;
-$gray-800: #262626 !default;
-$gray-900: #171717 !default;
-$black:    #0c0c0c !default;
+$white:    #ffffff;
+$gray-100: #f5f5f5;
+$gray-200: #e5e5e5;
+$gray-300: #d4d4d4;
+$gray-400: #a3a3a3;
+$gray-500: #737373;
+$gray-600: #525252;
+$gray-700: #404040;
+$gray-800: #262626;
+$gray-900: #171717;
+$black:    #0c0c0c;
 
 /* ==========================================================================
    Theme Map
    ========================================================================== */
-$primary:       $green !default;
-$secondary:     $gray-500 !default;
-$success:       $teal !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-900 !default;
+$primary:       $green;
+$secondary:     $gray-500;
+$success:       $teal;
+$info:          $cyan;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $gray-100;
+$dark:          $gray-900;
 
-$breakpoint-xs: 0 !default;
-$breakpoint-sm: 640px !default;
-$breakpoint-md: 768px !default;
-$breakpoint-lg: 1024px !default;
-$breakpoint-xl: 1280px !default;
-$breakpoint-xxl: 1536px !default;
+$breakpoint-xs: 0;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-xxl: 1536px;
 
 $container-max-widths: (
   sm: 640px,
@@ -62,7 +62,7 @@ $container-max-widths: (
   lg: 768px,
   xl: 768px,
   xxl: 768px
-) !default;
+);
 
 $theme-colors: (
   "primary":    $primary,
@@ -73,160 +73,227 @@ $theme-colors: (
   "danger":     $danger,
   "light":      $light,
   "dark":       $dark
-) !default;
+);
 
 /* ==========================================================================
    Body
    ========================================================================== */
-$body-bg:       $black !default;
-$body-color:    $gray-200 !default;
+$body-bg:       $black;
+$body-color:    $gray-200;
 
 /* Links */
-$link-color:            $body-color !default;
-$link-hover-color:      $body-color !default;
-$link-decoration:       none !default;
-$link-hover-decoration: underline !default;
+$link-color:            $body-color;
+$link-hover-color:      $body-color;
+$link-decoration:       none;
+$link-hover-decoration: none;
 
 /* ==========================================================================
    Borders
    ========================================================================== */
-$border-color:          #ffffff10 !default;
-$border-color-translucent: rgba(255,255,255,.1) !default;
-$border-radius:         0.5rem !default;
-$border-radius-sm:      0.25rem !default;
-$border-radius-lg:      0.75rem !default;
-$border-radius-xl:      1rem !default;
+$border-color:          #ffffff10;
+$border-color-translucent: rgba(255,255,255,.1);
+$border-radius:         0.5rem;
+$border-radius-sm:      0.25rem;
+$border-radius-lg:      0.75rem;
+$border-radius-xl:      1rem;
 
 /* ==========================================================================
    Fonts
    ========================================================================== */
-$font-family-sans-serif:    "Geist", system-ui, -apple-system, sans-serif !default;
-$font-family-monospace:     "Geist Mono", monospace !default;
+$font-family-sans-serif:    "Geist", system-ui, -apple-system, sans-serif;
+$font-family-monospace:     "Geist Mono", monospace;
 
-$font-size-base:            1rem !default;
-$font-weight-base:          400 !default;
-$line-height-base:          1.5 !default;
+$font-size-base:            16px;
+$font-weight-base:          400;
+$line-height-base:          1.5;
 
-$h1-font-size: 2.25rem !default;
-$h2-font-size: 1.5rem !default;
-$h3-font-size: 1.25rem !default;
-$h4-font-size: 1.125rem !default;
-$h5-font-size: 0.875rem !default;
-$h6-font-size: 0.75rem !default;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.25rem;
+$h4-font-size: 1.125rem;
+$h5-font-size: 0.875rem;
+$h6-font-size: 0.75rem;
 
 /* ==========================================================================
    Buttons
    ========================================================================== */
-$btn-border-radius:         $border-radius !default;
-$btn-border-radius-sm:      $border-radius-sm !default;
-$btn-border-radius-lg:      $border-radius-lg !default;
+$btn-border-radius:         $border-radius;
+$btn-border-radius-sm:      $border-radius-sm;
+$btn-border-radius-lg:      $border-radius-lg;
 
-$btn-padding-y:             0.5rem !default;
-$btn-padding-x:             1rem !default;
+$btn-padding-y:             0.5rem;
+$btn-padding-x:             1rem;
 
 /* ==========================================================================
    Tables
    ========================================================================== */
-$table-bg:                  transparent !default;
-$table-color:               $body-color !default;
-$table-border-color:        $border-color !default;
-$table-hover-color:         $body-color !default;
-$table-hover-bg:            rgba($gray-800, 0.5) !default;
+$table-bg:                  transparent;
+$table-color:               $body-color;
+$table-border-color:        $border-color;
+$table-hover-color:         $body-color;
+$table-hover-bg:            rgba($gray-800, 0.5);
 
 /* ==========================================================================
    Forms
    ========================================================================== */
-$input-bg:                  $gray-800 !default;
-$input-color:               $gray-100 !default;
-$input-border-color:        $border-color !default;
-$input-focus-border-color:  $cyan !default;
-$input-placeholder-color:   $gray-400 !default;
+$input-bg:                  $gray-800;
+$input-color:               $gray-100;
+$input-border-color:        $border-color;
+$input-focus-border-color:  $cyan;
+$input-placeholder-color:   $gray-400;
 
 /* ==========================================================================
    Navbar
    ========================================================================== */
-$navbar-dark-color:                 $body-color !default;
-$navbar-dark-hover-color:           $body-color !default;
-$navbar-dark-active-color:          $body-color !default;
-$navbar-dark-brand-color:           $body-color !default;
-$navbar-dark-brand-hover-color:     $body-color !default;
+$navbar-dark-color:                 $body-color;
+$navbar-dark-hover-color:           $body-color;
+$navbar-dark-active-color:          $body-color;
+$navbar-dark-brand-color:           $body-color;
+$navbar-dark-brand-hover-color:     $body-color;
 
 /* ==========================================================================
    Dropdowns
    ========================================================================== */
-$dropdown-bg:               $gray-900 !default;
-$dropdown-border-color:     $border-color !default;
-$dropdown-divider-bg:       rgba($white, .1) !default;
-$dropdown-link-color:       $gray-200 !default;
-$dropdown-link-hover-color: $white !default;
-$dropdown-link-hover-bg:    rgba($gray-800, .5) !default;
+$dropdown-bg:               $gray-900;
+$dropdown-border-color:     $border-color;
+$dropdown-divider-bg:       rgba($white, .1);
+$dropdown-link-color:       $gray-200;
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg:    rgba($gray-800, .5);
 
 /* ==========================================================================
    Modals
    ========================================================================== */
-$modal-content-bg:          $gray-900 !default;
-$modal-content-border-color: $border-color !default;
-$modal-header-border-color: $border-color !default;
+$modal-content-bg:          $gray-900;
+$modal-content-border-color: $border-color;
+$modal-header-border-color: $border-color;
 
 /* ==========================================================================
    Alerts
    ========================================================================== */
-$alert-bg-scale:            0 !default;
-$alert-border-scale:        0 !default;
-$alert-color-scale:         0 !default;
+$alert-bg-scale:            0;
+$alert-border-scale:        0;
+$alert-color-scale:         0;
 
 /* ==========================================================================
    Cards
    ========================================================================== */
-$card-bg:                   $gray-900 !default;
-$card-color:                $body-color !default;
-$card-border-color:         $border-color !default;
+$card-bg:                   $gray-900;
+$card-color:                $body-color;
+$card-border-color:         $border-color;
 
 /* ==========================================================================
    Tooltips
    ========================================================================== */
-$tooltip-bg:                $gray-800 !default;
-$tooltip-color:             $white !default;
+$tooltip-bg:                $gray-800;
+$tooltip-color:             $white;
 
 /* ==========================================================================
    Popovers
    ========================================================================== */
-$popover-bg:                $gray-900 !default;
-$popover-border-color:      $border-color !default;
-$popover-header-bg:         $gray-800 !default;
+$popover-bg:                $gray-900;
+$popover-border-color:      $border-color;
+$popover-header-bg:         $gray-800;
 
 /* ==========================================================================
    Progress bars
    ========================================================================== */
-$progress-bg:               $gray-800 !default;
-$progress-bar-color:        $cyan !default;
+$progress-bg:               $gray-800;
+$progress-bar-color:        $cyan;
 
 /* ==========================================================================
    Pagination
    ========================================================================== */
-$pagination-color:          $cyan !default;
-$pagination-bg:             transparent !default;
-$pagination-border-color:   $border-color !default;
-$pagination-hover-color:    $white !default;
-$pagination-hover-bg:       rgba($gray-800, .5) !default;
-$pagination-hover-border-color: $cyan !default;
+$pagination-color:          $cyan;
+$pagination-bg:             transparent;
+$pagination-border-color:   $border-color;
+$pagination-hover-color:    $white;
+$pagination-hover-bg:       rgba($gray-800, .5);
+$pagination-hover-border-color: $cyan;
 
 /* ==========================================================================
    List groups
    ========================================================================== */
-$list-group-bg:             $gray-900 !default;
-$list-group-border-color:   $border-color !default;
-$list-group-hover-bg:       rgba($gray-800, .5) !default;
+$list-group-bg:             $gray-900;
+$list-group-border-color:   $border-color;
+$list-group-hover-bg:       rgba($gray-800, .5);
 
 /* ==========================================================================
    Code
    ========================================================================== */
-$code-color:                $body-color !default;
-$code-bg:                   #13161c !default;
-$code-border-color:         $border-color !default;
+$code-color:                $body-color;
+$code-bg:                   #13161c;
+$code-border-color:         $border-color;
 
 
 /*-- scss:rules --*/
+::selection {
+  background-color: #47a3f3;
+  color: #fefefe;
+}
+
+/* ==========================================================================
+   Inline code
+   ========================================================================== */
+.cell-output pre {
+   background-color: $code-bg;
+   border-radius: $border-radius;
+   border: 1px solid $border-color;
+   border-left: 1px solid $primary;
+   color: $body-color;
+   overflow-x: auto;
+   padding: 0.5rem 1rem;
+}
+
+a:not(.nav-link):not(.btn):not(.anchorjs-link) {
+   text-decoration: underline;
+   text-decoration-color: $gray-600;
+   text-underline-offset: 0.2em;
+}
+
+.quarto-listing a {
+   text-decoration: none !important;
+}
+
+nav .nav-link {
+   color: $body-color;
+   &:hover {
+      color: $body-color;
+   }
+}
+
+/* styles.css
+   Make the navbar-container (which Quarto emits as container-fluid) act like a .container
+   by centering it and applying the same max-width breakpoints as Bootstrap.
+*/
+
+/* center it and keep full width on very small screens */
+.navbar-container.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  max-width: 1200px !important; 
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  @media (min-width: $breakpoint-lg) {
+   & .navbar-nav {
+      gap: 1.5rem;
+   }
+
+   & .nav-link {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+   }
+  }
+}
+
+
+/* Bootstrap container-equivalent max-widths (matching Bootstrap 5 defaults). */
+// @media (min-width: $breakpoint-sm) {
+// }
+
+
 // .nav-link {
 //    color: $body-color;
 //    .navbar & {
@@ -247,10 +314,6 @@ $code-border-color:         $border-color !default;
 //    Tailwind-like refinements to match old blog styling
 //    ------------------------------------------------------------- */
 // /* Selection */
-// ::selection {
-//   background-color: #47a3f3;
-//   color: #fefefe;
-// }
 
 // /* Root / scrollbars */
 // html {

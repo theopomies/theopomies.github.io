@@ -3,6 +3,8 @@ title: "Notes"
 format: html
 description: "All my notes. Read them at your own risk."
 listing:
-  - id: notes
     sort: "date desc"
+    feed: true
 ---
+
+[rss](index.xml)

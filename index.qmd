@@ -29,3 +29,7 @@ I have extensive experience with backend development, particularly in TypeScript
 
 ## Approach
 With a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.
+
+```{python}
+print("Hello, World!")
+```
