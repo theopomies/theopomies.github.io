@@ -1,5 +1,6 @@
 ---
 title: "On Typescript"
+author: "Theo Pomies"
 date: "2025-02-14"
 date-modified: "2025-02-15"
 categories: ["typescript"]
