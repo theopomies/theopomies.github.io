@@ -1,0 +1,430 @@
+/*-- scss:defaults --*/
+// quarto-scss-analysis-annotation { "origin": "theopoimandres" }
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
+
+$theme: "theopoimandres" !default;
+/* ==========================================================================
+   Theopoimandres Bootstrap Theme
+   Based on Zed Theme by theopomies
+   ========================================================================== */
+
+/* ==========================================================================
+   Theme Colors
+   ========================================================================== */
+$blue:    #89ddff !default;
+$indigo:  #91B4D5 !default;
+$purple:  #c4a7e7 !default;
+$pink:    #d0679d !default;
+$red:     #d0679d !default;
+$orange:  #f5a97f !default;
+$yellow:  #fffac2 !default;
+$green:   #5DE4c7 !default;
+$teal:    #5fb3a1 !default;
+$cyan:    #ADD7FF !default;
+
+/* ==========================================================================
+   Grays
+   ========================================================================== */
+$white:    #ffffff !default;
+$gray-100: #f5f5f5 !default;
+$gray-200: #e5e5e5 !default;
+$gray-300: #d4d4d4 !default;
+$gray-400: #a3a3a3 !default;
+$gray-500: #737373 !default;
+$gray-600: #525252 !default;
+$gray-700: #404040 !default;
+$gray-800: #262626 !default;
+$gray-900: #171717 !default;
+$black:    #0c0c0c !default;
+
+/* ==========================================================================
+   Theme Map
+   ========================================================================== */
+$primary:       $green !default;
+$secondary:     $gray-500 !default;
+$success:       $teal !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900 !default;
+
+$breakpoint-xs: 0 !default;
+$breakpoint-sm: 640px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 1024px !default;
+$breakpoint-xl: 1280px !default;
+$breakpoint-xxl: 1536px !default;
+
+$container-max-widths: (
+  sm: 640px,
+  md: 768px,
+  lg: 768px,
+  xl: 768px,
+  xxl: 768px
+) !default;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+) !default;
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+$body-bg:       $black !default;
+$body-color:    $gray-200 !default;
+
+/* Links */
+$link-color:            $body-color !default;
+$link-hover-color:      $body-color !default;
+$link-decoration:       none !default;
+$link-hover-decoration: underline !default;
+
+/* ==========================================================================
+   Borders
+   ========================================================================== */
+$border-color:          #ffffff10 !default;
+$border-color-translucent: rgba(255,255,255,.1) !default;
+$border-radius:         0.5rem !default;
+$border-radius-sm:      0.25rem !default;
+$border-radius-lg:      0.75rem !default;
+$border-radius-xl:      1rem !default;
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+$font-family-sans-serif:    "Geist", system-ui, -apple-system, sans-serif !default;
+$font-family-monospace:     "Geist Mono", monospace !default;
+
+$font-size-base:            1rem !default;
+$font-weight-base:          400 !default;
+$line-height-base:          1.5 !default;
+
+$h1-font-size: 2.25rem !default;
+$h2-font-size: 1.5rem !default;
+$h3-font-size: 1.25rem !default;
+$h4-font-size: 1.125rem !default;
+$h5-font-size: 0.875rem !default;
+$h6-font-size: 0.75rem !default;
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+$btn-border-radius:         $border-radius !default;
+$btn-border-radius-sm:      $border-radius-sm !default;
+$btn-border-radius-lg:      $border-radius-lg !default;
+
+$btn-padding-y:             0.5rem !default;
+$btn-padding-x:             1rem !default;
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+$table-bg:                  transparent !default;
+$table-color:               $body-color !default;
+$table-border-color:        $border-color !default;
+$table-hover-color:         $body-color !default;
+$table-hover-bg:            rgba($gray-800, 0.5) !default;
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+$input-bg:                  $gray-800 !default;
+$input-color:               $gray-100 !default;
+$input-border-color:        $border-color !default;
+$input-focus-border-color:  $cyan !default;
+$input-placeholder-color:   $gray-400 !default;
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+$navbar-dark-color:                 $body-color !default;
+$navbar-dark-hover-color:           $body-color !default;
+$navbar-dark-active-color:          $body-color !default;
+$navbar-dark-brand-color:           $body-color !default;
+$navbar-dark-brand-hover-color:     $body-color !default;
+
+/* ==========================================================================
+   Dropdowns
+   ========================================================================== */
+$dropdown-bg:               $gray-900 !default;
+$dropdown-border-color:     $border-color !default;
+$dropdown-divider-bg:       rgba($white, .1) !default;
+$dropdown-link-color:       $gray-200 !default;
+$dropdown-link-hover-color: $white !default;
+$dropdown-link-hover-bg:    rgba($gray-800, .5) !default;
+
+/* ==========================================================================
+   Modals
+   ========================================================================== */
+$modal-content-bg:          $gray-900 !default;
+$modal-content-border-color: $border-color !default;
+$modal-header-border-color: $border-color !default;
+
+/* ==========================================================================
+   Alerts
+   ========================================================================== */
+$alert-bg-scale:            0 !default;
+$alert-border-scale:        0 !default;
+$alert-color-scale:         0 !default;
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+$card-bg:                   $gray-900 !default;
+$card-color:                $body-color !default;
+$card-border-color:         $border-color !default;
+
+/* ==========================================================================
+   Tooltips
+   ========================================================================== */
+$tooltip-bg:                $gray-800 !default;
+$tooltip-color:             $white !default;
+
+/* ==========================================================================
+   Popovers
+   ========================================================================== */
+$popover-bg:                $gray-900 !default;
+$popover-border-color:      $border-color !default;
+$popover-header-bg:         $gray-800 !default;
+
+/* ==========================================================================
+   Progress bars
+   ========================================================================== */
+$progress-bg:               $gray-800 !default;
+$progress-bar-color:        $cyan !default;
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+$pagination-color:          $cyan !default;
+$pagination-bg:             transparent !default;
+$pagination-border-color:   $border-color !default;
+$pagination-hover-color:    $white !default;
+$pagination-hover-bg:       rgba($gray-800, .5) !default;
+$pagination-hover-border-color: $cyan !default;
+
+/* ==========================================================================
+   List groups
+   ========================================================================== */
+$list-group-bg:             $gray-900 !default;
+$list-group-border-color:   $border-color !default;
+$list-group-hover-bg:       rgba($gray-800, .5) !default;
+
+/* ==========================================================================
+   Code
+   ========================================================================== */
+$code-color:                $body-color !default;
+$code-bg:                   #13161c !default;
+$code-border-color:         $border-color !default;
+
+
+/*-- scss:rules --*/
+// .nav-link {
+//    color: $body-color;
+//    .navbar & {
+//       padding-left: 0 !important;
+//       padding-right: 0 !important;
+//    }
+//    &:hover {
+//       color: $body-color;
+//    }
+// }
+
+// .navbar-nav {
+//    gap: 1.5rem;
+// }
+
+
+// /* -------------------------------------------------------------
+//    Tailwind-like refinements to match old blog styling
+//    ------------------------------------------------------------- */
+// /* Selection */
+// ::selection {
+//   background-color: #47a3f3;
+//   color: #fefefe;
+// }
+
+// /* Root / scrollbars */
+// html {
+//   min-width: 360px;
+//   background-color: $body-bg;
+//   color: $body-color;
+//   scrollbar-width: none;
+//   -ms-overflow-style: none;
+//   font-size: 16px;
+// }
+
+// /* Ensure rem baseline matches old site */
+// :root { font-size: 16px !important; }
+
+// html::-webkit-scrollbar { display: none; }
+
+// body { background-color: $body-bg; }
+// body { font-size: 16px; line-height: 24px; }
+
+// /* Layout: constrain content like old site and remove margin sidebar */
+// #quarto-margin-sidebar { display: none !important; }
+
+// #quarto-document-content,
+// main.content,
+// main {
+//   max-width: 768px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+// body {
+//   padding-left: 1rem;
+//   padding-right: 1rem;
+// }
+
+// /* Quarto grid: collapse to single column like the old site */
+// .page-columns { display: block !important; }
+// .page-columns .content,
+// .quarto-title-block { max-width: 768px; margin-left: auto; margin-right: auto; }
+
+// @media (min-width: 768px) {
+//   .container,
+//   .container-fluid,
+//   .quarto-container {
+//     max-width: 768px;
+//     margin: auto;
+//   }
+// }
+
+// /* Navbar: transparent and aligned with content */
+// .navbar {
+//   background: transparent !important;
+//   min-height: 40px;
+//   padding-top: 0.25rem;
+//   padding-bottom: 0.25rem;
+//   border-bottom: none;
+//   box-shadow: none;
+//   text-transform: lowercase;
+// }
+// .navbar .container,
+// .navbar .container-fluid {
+//   max-width: 768px;
+//   padding-left: 0;
+//   padding-right: 0;
+// }
+
+// /* Keep navbar links clean (no underline) */
+// .navbar .nav-link { text-decoration: none; }
+
+// /* Anchors on headings (Quarto uses AnchorJS) */
+// .anchored { position: relative; }
+// .anchored .anchorjs-link {
+//   position: absolute;
+//   visibility: hidden;
+//   margin-left: -1em;
+//   padding-right: 0.5rem;
+//   width: 80%;
+//   max-width: 700px;
+//   text-decoration: none;
+//   color: $gray-400;
+// }
+// .anchored:hover .anchorjs-link,
+// .anchored .anchorjs-link:focus { visibility: visible; }
+
+// /* Links inside content */
+// a {
+//   text-decoration: underline;
+//   text-decoration-color: $gray-600;
+//   text-underline-offset: 0.2em;
+// }
+
+// /* Headings */
+// h1 { font-weight: 600; letter-spacing: -0.075rem; margin-top: 1.5rem; margin-bottom: 1.5rem !important; font-size: 1.5rem; line-height: 2rem; }
+// h2 { font-weight: 500; letter-spacing: -0.0375rem; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.5rem; line-height: 2rem; }
+// h3 { font-weight: 500; letter-spacing: -0.03125rem; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; }
+// h4 { font-weight: 500; letter-spacing: -0.01em; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.125rem; }
+
+// /* Typography */
+// p { margin: 1rem 0; color: $body-color; }
+// strong { font-weight: 600; }
+// ul { list-style: disc; padding-left: 1.5rem; }
+// ol { list-style: decimal; padding-left: 1.5rem; }
+
+// /* Blockquotes */
+// blockquote {
+//   margin-left: 0.075em;
+//   border-left: 3px solid $gray-600;
+//   padding-left: 1rem;
+//   color: $gray-300;
+// }
+
+// /* Code blocks and inline code */
+// pre, .sourceCode pre {
+//   background-color: $code-bg;
+//   border-radius: $border-radius;
+//   overflow-x: auto;
+//   font-size: 0.9em;
+//   padding: 1.5rem 2rem;
+// }
+
+// pre:hover .code-copy-button { display: inline-flex; }
+
+// pre::-webkit-scrollbar { display: none; }
+// pre { -ms-overflow-style: none; scrollbar-width: none; }
+
+// pre code { padding: 0; border: initial; line-height: 1.5; }
+// code span { font-weight: 500; }
+
+// /* Inline code (not in pre) */
+// :not(pre) > code,
+// code:not(pre):not(.sourceCode) {
+//   white-space: normal;
+//   border-radius: $border-radius-sm;
+//   padding: 0.125rem 0.25rem;
+//   background-color: $gray-800;
+//   color: $gray-300;
+//   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+// }
+
+// /* Language-tagged blocks (Prism-like selectors kept for compatibility) */
+// code[class*="language-"],
+// pre[class*="language-"] {
+//   word-spacing: normal;
+//   word-wrap: normal;
+//   tab-size: 2;
+//   hyphens: none;
+//   font-size: 0.9em;
+//   text-align: left;
+//   line-height: 1.6;
+// }
+
+// /* Show copy button on hover (Quarto) */
+// .code-copy-button { display: none; }
+// pre:hover .code-copy-button { display: inline-flex; }
+
+// /* Tables: horizontal scroll when needed */
+// table {
+//   display: block;
+//   max-width: fit-content;
+//   overflow-x: auto;
+//   white-space: nowrap;
+// }
+
+// /* Inputs: remove iOS Safari shadow */
+// input[type="text"],
+// input[type="email"] {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+// }
+
+// /* Title balance */
+// .title { text-wrap: balance; }
+
+// h2 {
+//    border-bottom: none;
+// }

@@ -1,0 +1,31 @@
+---
+title: Theo POMIES 
+toc: false
+---
+
+I am a 25-year-old CTO and co-founder of a tech startup, [Kivala](https://www.kivala.fr){target="_blank"}, with a Master's degree in Information Technology from EPITECH. My dual role as both a technical leader and developer allows me to bring a strategic vision to projects.
+
+## Expertise
+
+### Mobile & Full-Stack Development
+
+I specialize in React, React Native, and Next.js, with a strong focus on:
+
+- Rapid development of mobile applications
+- Creating and optimizing native modules (iOS/Android, Swift, Kotlin, C++) 
+- Maintaining legacy native modules (Objective-C, Java)
+- Integrating complex native functionalities
+- Designing robust and scalable mobile architectures
+
+From prototyping to production, I ensure a smooth and native user experience.
+
+### Backend Development
+I have extensive experience with backend development, particularly in TypeScript, including:
+
+- Designing high-performance, secure APIs
+- Choosing between REST or RPC depending on the use case
+- Architecting distributed systems
+- Integrating complex third-party services
+
+## Approach
+With a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.

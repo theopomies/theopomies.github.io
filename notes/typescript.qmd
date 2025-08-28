@@ -1,0 +1,62 @@
+---
+title: "On Typescript"
+date: "2025-02-14"
+date-modified: "2025-02-15"
+tags: ["typescript"]
+---
+
+## First Principles
+
+- Let your types be flexible
+- Let your constraints be rigid
+
+## TL;DR Rules
+
+- Use `unknown` instead of `any`, then use type narrowing to get the correct type.
+- Use `type` over `interface`, unless you _actually_ need to reach for an interface or need to express objects/class inheritance.
+- Avoid using `as` to _assert_ types, most of the time you actually want to **narrow** the type with checks (if/else).
+- Use `array.at(index)` instead of `array[index]` unless array is a tuple (fixed size array).
+- **NEVER** use TS specifics (`enum`, `private` in constructor, etc.).
+
+## Recommandations
+
+- Use `satisfies` to check if an object fits a type but not erase the type.
+- Use `as const` whenever possible. (Immutable data, enum-like objects, etc.)
+- Define (and export) types where they are consumed, and import them from other files if needed.
+
+## Explanations
+
+### Narrowing over using `as`
+
+Suppose you have a function that takes a number
+
+```ts
+function double(a: number) {
+    return a * 2;
+}
+```
+
+And you have a variable that could be a number or a string
+
+```ts
+function getNumberOrString(): number | string {
+    return Math.random() > 0.5 ? 1 : "1";
+}
+const a: number | string = getNumberOrString();
+```
+
+Typescript will allow you to use `as` to _assert_ the variable to a number (this is one of the ways that TypeScript is not sound)
+
+```ts
+const result: number = double(a as number);
+```
+
+But this not correct/sound at runtime!
+
+The correct way to do this is to narrow the type with a check (if/else/early return).
+
+```ts
+if (typeof a === "number") {
+    const result = double(a);
+}
+```

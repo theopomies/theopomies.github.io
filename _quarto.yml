@@ -1,24 +1,40 @@
 project:
   type: website
+  resources:
+    - .well-known/*
 
 execute:
-    freeze: auto
+  freeze: auto
 
 website:
-  title: "website"
+  title: Theo Pomies
+  description: |
+    I'm a software engineer and entrepreneur. Currently working on my startup, Kivala, a new kind of interphone and digicode.
+    I'm also tryharding AI/ML, from the research to the production (math, kernels, training, inference, deployment, etc.).
+    This is where I try to dump my notes and thoughts, throughout the learning journey.
+  favicon: img/favicon.ico
   navbar:
+    title: false
+    collapse: false
+    background: $body-bg
+    color: $body-color
+    tools:
+      - icon: twitter
+        href: https://x.com/theopomies
+      - icon: github
+        href: https://github.com/theopomies
     left:
-      - href: index.ipynb
-        text: Home
-      - about.qmd
+      - href: index.qmd
+        text: about me
+      - href: notes/index.qmd
+        text: notes
+  twitter-card: true
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
+    theme: theopoimandres.scss
     toc: true
+    highlight-style: theopoimandres.theme
 
 
 
