@@ -2,7 +2,8 @@
 title: "On Typescript"
 date: "2025-02-14"
 date-modified: "2025-02-15"
-tags: ["typescript"]
+categories: ["typescript"]
+description: "A few notes on Typescript for my future self."
 ---
 
 ## First Principles

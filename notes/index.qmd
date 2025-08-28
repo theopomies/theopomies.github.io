@@ -5,6 +5,11 @@ description: "All my notes. Read them at your own risk."
 listing:
     sort: "date desc"
     feed: true
+    fields:
+      - categories
+      - reading-time
+      - date
+      - title
 ---
 
 [rss](index.xml)

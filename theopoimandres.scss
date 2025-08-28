@@ -262,6 +262,10 @@ nav .nav-link {
    }
 }
 
+.listing-categories {
+   padding: 0.5rem 0;
+}
+
 /* styles.css
    Make the navbar-container (which Quarto emits as container-fluid) act like a .container
    by centering it and applying the same max-width breakpoints as Bootstrap.
