@@ -60,6 +60,7 @@
             ruff # Python linter
             basedpyright # Python type checker
             nushell # Better shell for me
+            quarto # .qmd -> blog
           ];
 
           shellHook = ''
@@ -70,7 +71,6 @@
             echo "  - basedpyright: $(basedpyright --version)"
             echo "  - LaTeX: Custom TeXlive set for Manim"
             echo "Use 'uv' to manage Python dependencies (e.g., 'uv add manim manim-slides[pyside6-full]')"
-            nu
           '';
         };
       }

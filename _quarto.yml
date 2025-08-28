@@ -1,0 +1,24 @@
+project:
+  type: website
+
+execute:
+    freeze: auto
+
+website:
+  title: "website"
+  navbar:
+    left:
+      - href: index.ipynb
+        text: Home
+      - about.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+
