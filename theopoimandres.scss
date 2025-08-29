@@ -239,10 +239,22 @@ $code-border-color:         $border-color;
    background-color: $code-bg;
    border-radius: $border-radius;
    border: 1px solid $border-color;
-   border-left: 1px solid $primary;
    color: $body-color;
    overflow-x: auto;
    padding: 0.5rem 1rem;
+   margin-bottom: 0.5rem;
+}
+
+.cell-output-stderr pre {
+   border-left: 1px solid $danger;
+}
+
+.cell-output-stdout pre {
+   border-left: 1px solid $cyan;
+}
+
+.cell-output-display pre {
+   border-left: 1px solid $primary;
 }
 
 a:not(.nav-link):not(.btn):not(.anchorjs-link) {
@@ -290,6 +302,10 @@ nav .nav-link {
       padding-right: 0 !important;
    }
   }
+}
+
+.sourceCode.cell-code {
+   margin-bottom: 0.5rem !important;
 }
 
 

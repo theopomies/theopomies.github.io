@@ -1,10 +1,10 @@
 ---
-title: "On Typescript"
-author: "Theo Pomies"
-date: "2025-02-14"
-date-modified: "2025-02-15"
-categories: ["typescript"]
-description: "A few notes on Typescript for my future self."
+title: On Typescript
+author: Theo POMIES
+date: 2025-02-14
+date-modified: 2025-02-15
+categories: [typescript]
+description: A few notes on Typescript for my future self.
 ---
 
 ## First Principles

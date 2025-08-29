@@ -34,6 +34,12 @@
     "Operator": {
       "text-color": "#ADD7FF"
     },
+    "Import": {
+      "text-color": "#ADD7FF"
+    },
+    "DecVal": {
+      "text-color": "#5DE4C7"
+    },
     "Function": {
       "text-color": "#5DE4C7"
     },

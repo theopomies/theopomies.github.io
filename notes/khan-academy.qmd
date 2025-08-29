@@ -1,0 +1,8 @@
+---
+title: (Back to) Khan Academy
+author: Theo POMIES
+date: 2025-08-29
+date-modified: 2025-08-29
+description: Just a collection on notes re-learning math on Khan Academy
+categories: [math]
+---
