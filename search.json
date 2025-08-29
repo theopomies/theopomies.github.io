@@ -18,7 +18,7 @@
     "href": "index.html#approach",
     "title": "Theo POMIES",
     "section": "Approach",
-    "text": "Approach\nWith a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.\n\nprint(\"Hello, World!\")\n\nHello, World!"
+    "text": "Approach\nWith a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.\n\nprint(\"Hello, World!\")  # Stdout = cyan\n\"Hello, World!\"  # Output display = primary\n\nHello, World!\n\n\n'Hello, World!'"
   },
   {
     "objectID": "notes/typescript.html",
@@ -60,6 +60,6 @@
     "href": "notes/index.html",
     "title": "Notes",
     "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\n\n\n\nFeb 14, 2025\n\n2 min\n\n\n\n\nNo matching items"
+    "text": "rss\n\n\n\n\n\n\n\n\n\n(Back to) Khan Academy\n\n\n\nmath\n\n\n\n\n\n\nAug 29, 2025\n\n1 min\n\n\n\n\n\n\nDive Into Deep Learning\n\n\n\nmath\n\nml\n\npython\n\n\n\n\n\n\nAug 29, 2025\n\n1 min\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\n\n\n\nFeb 14, 2025\n\n2 min\n\n\n\n\nNo matching items"
   }
 ]

@@ -9,11 +9,47 @@
 <link>https://theopomies.com/notes/</link>
 <atom:link href="https://theopomies.com/notes/index.xml" rel="self" type="application/rss+xml"/>
 <description>All my notes. Read them at your own risk.</description>
-<generator>quarto-1.7.33</generator>
-<lastBuildDate>Fri, 14 Feb 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.34</generator>
+<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>(Back to) Khan Academy</title>
+  <dc:creator>Theo POMIES</dc:creator>
+  <link>https://theopomies.com/notes/khan-academy.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+ ]]></description>
+  <category>math</category>
+  <guid>https://theopomies.com/notes/khan-academy.html</guid>
+  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Dive Into Deep Learning</title>
+  <dc:creator>Theo POMIES</dc:creator>
+  <link>https://theopomies.com/notes/dive-into-deep-learning.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+ ]]></description>
+  <category>math</category>
+  <category>ml</category>
+  <category>python</category>
+  <guid>https://theopomies.com/notes/dive-into-deep-learning.html</guid>
+  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>On Typescript</title>
-  <dc:creator>Theo Pomies</dc:creator>
+  <dc:creator>Theo POMIES</dc:creator>
   <link>https://theopomies.com/notes/typescript.html</link>
   <description><![CDATA[ 
 

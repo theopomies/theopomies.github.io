@@ -2,6 +2,8 @@
   {
     "listing": "/notes/index.html",
     "items": [
+      "/notes/khan-academy.html",
+      "/notes/dive-into-deep-learning.html",
       "/notes/typescript.html"
     ]
   }
