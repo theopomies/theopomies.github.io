@@ -3,32 +3,21 @@ title: Theo POMIES
 toc: false
 ---
 
-I am a 25-year-old CTO and co-founder of a tech startup, [Kivala](https://www.kivala.fr){target="_blank"}, with a Master's degree in Information Technology from EPITECH. My dual role as both a technical leader and developer allows me to bring a strategic vision to projects.
+I’m Théo, a graduate of EPITECH and currently CTO of a tech startup, [Kivala](https://www.kivala.fr){target="_blank"}. My background is in AI, large language models, backend development, and data engineering. Over the past years, I’ve worked on building robust backends with Python and FastAPI, designing automation pipelines, and deploying AI systems ranging from custom LLMs to retrieval-augmented generation (RAG) architectures.
 
-## Expertise
+My technical work usually revolves around:
 
-### Mobile & Full-Stack Development
+* **Backend & automation** — building scalable backends, integrating data pipelines, and streamlining workflows with Python.
+* **AI agents & RAG systems** — designing conversational agents, retrieval pipelines, and prompt engineering strategies for LLMs.
+* **Fine-tuning & custom models** — adapting open-source models like LLaMA or Mistral to specific domains, with attention to data quality and deployment.
 
-I specialize in React, React Native, and Next.js, with a strong focus on:
 
-- Rapid development of mobile applications
-- Creating and optimizing native modules (iOS/Android, Swift, Kotlin, C++) 
-- Maintaining legacy native modules (Objective-C, Java)
-- Integrating complex native functionalities
-- Designing robust and scalable mobile architectures
+## Transition to MLE & Applied Research
 
-From prototyping to production, I ensure a smooth and native user experience.
+I’m now in the process of transitioning towards **machine learning engineering and applied research**. This blog is where I’ll share my journey — notes from my learning process, experiments, and articles about the concepts and techniques I find valuable along the way.
 
-### Backend Development
-I have extensive experience with backend development, particularly in TypeScript, including:
+It’s part notebook, part knowledge base, and part exploration. My goal is to document both the practice of building systems and the research side of AI that makes them possible.
 
-- Designing high-performance, secure APIs
-- Choosing between REST or RPC depending on the use case
-- Architecting distributed systems
-- Integrating complex third-party services
-
-## Approach
-With a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.
 
 ```{python}
 print("Hello, World!")  # Stdout = cyan
