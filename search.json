@@ -4,21 +4,14 @@
     "href": "index.html",
     "title": "Theo POMIES",
     "section": "",
-    "text": "I am a 25-year-old CTO and co-founder of a tech startup, Kivala, with a Master’s degree in Information Technology from EPITECH. My dual role as both a technical leader and developer allows me to bring a strategic vision to projects."
+    "text": "I’m Théo, a graduate of EPITECH and currently CTO of a tech startup, Kivala. My background is in AI, large language models, backend development, and data engineering. Over the past years, I’ve worked on building robust backends with Python and FastAPI, designing automation pipelines, and deploying AI systems ranging from custom LLMs to retrieval-augmented generation (RAG) architectures.\nMy technical work usually revolves around:"
   },
   {
-    "objectID": "index.html#expertise",
-    "href": "index.html#expertise",
+    "objectID": "index.html#transition-to-mle-applied-research",
+    "href": "index.html#transition-to-mle-applied-research",
     "title": "Theo POMIES",
-    "section": "Expertise",
-    "text": "Expertise\n\nMobile & Full-Stack Development\nI specialize in React, React Native, and Next.js, with a strong focus on:\n\nRapid development of mobile applications\nCreating and optimizing native modules (iOS/Android, Swift, Kotlin, C++)\nMaintaining legacy native modules (Objective-C, Java)\nIntegrating complex native functionalities\nDesigning robust and scalable mobile architectures\n\nFrom prototyping to production, I ensure a smooth and native user experience.\n\n\nBackend Development\nI have extensive experience with backend development, particularly in TypeScript, including:\n\nDesigning high-performance, secure APIs\nChoosing between REST or RPC depending on the use case\nArchitecting distributed systems\nIntegrating complex third-party services"
-  },
-  {
-    "objectID": "index.html#approach",
-    "href": "index.html#approach",
-    "title": "Theo POMIES",
-    "section": "Approach",
-    "text": "Approach\nWith a background as both a full-stack developer and CTO, I combine deep technical expertise with a strong understanding of business challenges and project constraints.\n\nprint(\"Hello, World!\")  # Stdout = cyan\n\"Hello, World!\"  # Output display = primary\n\nHello, World!\n\n\n'Hello, World!'"
+    "section": "Transition to MLE & Applied Research",
+    "text": "Transition to MLE & Applied Research\nI’m now in the process of transitioning towards machine learning engineering and applied research. This blog is where I’ll share my journey — notes from my learning process, experiments, and articles about the concepts and techniques I find valuable along the way.\nIt’s part notebook, part knowledge base, and part exploration. My goal is to document both the practice of building systems and the research side of AI that makes them possible.\n\nprint(\"Hello, World!\")  # Stdout = cyan\n\"Hello, World!\"  # Output display = primary\n\nHello, World!\n\n\n'Hello, World!'"
   },
   {
     "objectID": "notes/typescript.html",
