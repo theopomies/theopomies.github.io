@@ -1,0 +1,12 @@
+{
+  "hash": "c811b2b64ed6f184b5e53670fde8be7f",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Distributed Training\nauthor: Theo POMIES\ndate: 2025-09-02\ndate-modified: 2025-09-04\ndescription: Distributed training study notes and algorithms.\ncategories: [mle, python]\n---\n\n\n\n## Algorithms\n\n## Notes\n\n## Notation\n\n",
+    "supporting": [
+      "distributed-training_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

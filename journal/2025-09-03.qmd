@@ -1,0 +1,9 @@
+---
+title: Some D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S
+description: Finishing the preliminaries for D2L + questions surrounding distributed training at FAIR
+categories: [math, mle, python]
+date: 2025-09-03
+---
+
+Some notes and answers by Yuxiang Wei here
+Probabilities on D2L

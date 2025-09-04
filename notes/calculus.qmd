@@ -1,0 +1,104 @@
+---
+title: Calculus
+author: Theo POMIES
+date: 2025-09-02
+date-modified: 2025-09-04
+description: All things calculus, differential or integral.
+categories: [math]
+---
+
+```{python}
+# | echo: false
+import torch
+```
+
+## Definitions & Formulas
+### Differential Calculus
+
+As the name states, we analyze differences in the output(s) of a function based on differences in the input(s)
+$$ \dfrac{dy}{dx} = \lim_{h \rightarrow \infty} \dfrac{f(x + h) - f(x)}{h} $$
+
+A function is said to be differentiable at $x$ if this limit exists, and differentiable on an interval if it exists at any $x$ in this interval.
+
+#### Common Derivatives
+From that we can get common derivatives
+
+$$ \begin{aligned}
+    \dfrac{d}{dx}C & = 0 && \text{for any constant C} \\
+    \dfrac{d}{dx}x^n & = nx^{n - 1} && \text{for n} \neq 0 \\
+    \dfrac{d}{dx}e^x & = e^x \\
+    \dfrac{d}{dx}\ln x & = x^{-1} \\
+    \dfrac{d}{dx}\cos x & = -\sin x \\
+    \dfrac{d}{dx}\sin x & = \cos x \\
+\end{aligned} $$
+
+From these it becomes trivial to derive $\tan$, $\sec$, $\csc$ and $\cot$.
+
+#### Derivation Rules 
+Finally a composition of differentiable functions is also differentiable, so we have the following rules that allow us to derive almost any function:
+
+$$ \begin{aligned}
+    \dfrac{d}{dx}Cf(x) & = C\dfrac{d}{dx}f(x) && \text{Constant multiple rule} \\
+    \dfrac{d}{dx}[f(x) + g(x)] & = \dfrac{d}{dx}f(x) + \dfrac{d}{dx}g(x) && \text{Sum rule} \\
+    \dfrac{d}{dx}[f(x)g(x)] & = \dfrac{d}{dx}f(x)g(x) + f(x)\dfrac{d}{dx}g(x) && \text{Product rule} \\
+    \dfrac{dy}{dx} & = \dfrac{dy}{dz}\dfrac{dz}{dx} = \dfrac{\frac{dy}{dz}}{\frac{dx}{dz}} && \text{Chain rule} \\
+\end{aligned} $$
+
+From these we can easily find a Quotient Rule, a Power Rule and a Reciprocal Rule:
+
+$$ \begin{aligned}
+    \dfrac{d}{dx}\dfrac{f(x)}{g(x)} & = \dfrac{\frac{d}{dx}f(x)g(x) - f(x)\frac{d}{dx}g(x)}{g(x)^2} && \text{Quotient rule} \\
+    \dfrac{d}{dx}f(x)^n & = nf(x)^{n-1}\dfrac{d}{dx}f(x) && \text{Power rule} \\
+    \dfrac{dy}{dx}\dfrac{1}{f(x)} & = -\dfrac{\frac{d}{dx}f(x)}{f(x)^2} && \text{Reciprocal rule} \\
+\end{aligned} $$
+
+### Multivariate Calculus
+
+Very similar, but now our function takes a vector $\mathbf{x} \in \mathbb{R}^n$ as input and returns a scalar $y \in \mathbb{R}$ — or even a vector $\mathbf{y} \in \mathbb{R}^m$.
+
+To paraphrase D2L because their explanation is perfect:
+
+Let $y = f(x_1, x_2, \ldots, x_n)$ be a function with $n$ variables. 
+The *partial derivative* of $y$ 
+with respect to its $i^\textrm{th}$ parameter $x_i$ is
+
+$$ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.$$
+
+If $f(\mathbf{x}) = y$, a scalar, we collect/concatenate all the partial derivatives to obtain the _gradient_ of $y$ with respect to $\mathbf{x}$
+$$ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} $$
+
+```{python}
+#| echo: false
+# TODO: Jacobian
+```
+
+#### Handy Rules 
+
+The follow rules come straight from D2L:
+
+* For all $\mathbf{A} \in \mathbb{R}^{m \times n}$ we have $\nabla_{\mathbf{x}} \mathbf{A} \mathbf{x} = \mathbf{A}^\top$ and $\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A}  = \mathbf{A}$.
+* For square matrices $\mathbf{A} \in \mathbb{R}^{n \times n}$ we have that $\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x}  = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}$ and in particular
+$\nabla_{\mathbf{x}} \|\mathbf{x} \|^2 = \nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2\mathbf{x}$.
+
+Then the chain rule states that
+
+$$\frac{\partial y}{\partial x_{i}} = \frac{\partial y}{\partial u_{1}} \frac{\partial u_{1}}{\partial x_{i}} + \frac{\partial y}{\partial u_{2}} \frac{\partial u_{2}}{\partial x_{i}} + \ldots + \frac{\partial y}{\partial u_{m}} \frac{\partial u_{m}}{\partial x_{i}} \ \textrm{ and so } \ \nabla_{\mathbf{x}} y =  \mathbf{A} \nabla_{\mathbf{u}} y,$$
+
+where $\mathbf{A} \in \mathbb{R}^{n \times m}$ is a *matrix*
+that contains the derivative of vector $\mathbf{u}$
+with respect to vector $\mathbf{x}$.
+
+## Notes
+
+## Proofs
+
+Later!
+
+## Notation
+
+* $f(\cdot)$: a function
+* $\dfrac{dy}{dx}$: derivative of $y$ with respect to $x$
+* $\dfrac{\partial y}{\partial x}$: partial derivative of $y$ with respect to $x$
+* $\nabla_{\mathbf{x}} y$: gradient of $y$ with respect to $\mathbf{x}$
+* $\int_a^b f(x) \;dx$: definite integral of $f$ from $a$ to $b$ with respect to $x$
+* $\int f(x) \;dx$: indefinite integral of $f$ with respect to $x$

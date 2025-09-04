@@ -1,0 +1,12 @@
+{
+  "hash": "ddfd9c8d0528ba60e3cad33343ac3d8d",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Probability\nauthor: Theo POMIES\ndate: 2025-09-02\ndate-modified: 2025-09-04\ndescription: All things regarding probability, Bayesian or frequentist.\ncategories: [math]\n---\n\n\n\n## Definitions & Formulas\n\n## Notes\n\n## Proofs\n\nLater!\n\n## Algorithms\n\n## Notation\n\n",
+    "supporting": [
+      "probability_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

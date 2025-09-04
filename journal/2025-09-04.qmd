@@ -1,0 +1,25 @@
+---
+title: Going through DDP with S2S 
+description: Quick evening study session on DDP with torch.distributed primitives
+categories: [python, mle]
+date: 2025-09-04
+---
+
+DDP -> parallelizing data
+
+Types of parallelism
+DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)
+
+Pipeline P -> layers on gpus so they run on a chain
+
+Tensor P (mostly intra-node) -> distributes a single matrix / splits a single layer
+
+
+# DDP
+
+n gpus = n replicants of the model
+
+
+_ notebook _
+
+Try to understand data sharding / sharded sampling (see torch / accelerate)

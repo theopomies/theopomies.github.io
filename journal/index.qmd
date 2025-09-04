@@ -1,6 +1,6 @@
 ---
-title: "Journal"
-description: "Daily journal, accountability management and learning tracking."
+title: Journal
+description: Daily journal, accountability management and learning tracking.
 listing:
     sort: "date desc"
     feed: true

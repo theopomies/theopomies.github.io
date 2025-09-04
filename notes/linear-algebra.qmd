@@ -3,16 +3,22 @@ title: Linear Algebra
 author: Theo POMIES
 date: 2025-08-29
 date-modified: 2025-09-04
-description: Notes, formulas and proofs for me to reference later. This is an evolving document, so it might at times be incomplete
+description: All things Linear Algebra, matrices, vectors etc.
 categories: [math]
 ---
 
 ```{python}
 # | echo: false
 import torch
+
+# TODO: Elementary Matrix / Gaussian Elimination / Determinants of Elementary matrix
+# TODO: Linear Independence and Basis
+# TODO: subspace and dimensions
+# TODO: Rank
+# TODO: eigen-{vectors, values}
 ```
 
-## Formulas
+## Definitions & Formulas
 
 ### Dot Product
 $$ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i $$
@@ -133,12 +139,13 @@ Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})
 
 ## Notation
 
-- $x$: a scalar
-- $\mathbf{x}$: a vector
-- $\mathbf{X}$: a matrix
-- $x_i$: the $i^\textrm{th}$ element of vector $\mathbf{x}$
-- $x_{i,j}$: the element of matrix $\mathbf{X}$ at row $i$ and column $j$
-- $\mathbf{x}_{i, :}$: the $i^\textrm{th}$ row-vector of $\mathbf{X}$
-- $\mathbf{x}_{:,j}$: the $j^\textrm{th}$ column-vector of $\mathbf{X}$
-- $\operatorname{diag}(a_1, \dots, a_n)$: a diagonal matrix
-- $\mathbf{I}$: the indentity matrix
+* $x$: a scalar
+* $\mathbf{x}$: a vector
+* $\mathbf{X}$: a matrix
+* $x_i$: the $i^\textrm{th}$ element of vector $\mathbf{x}$
+* $x_{i,j}$: the element of matrix $\mathbf{X}$ at row $i$ and column $j$
+* $\mathbf{x}_{i, :}$: the $i^\textrm{th}$ row-vector of $\mathbf{X}$
+* $\mathbf{x}_{:,j}$: the $j^\textrm{th}$ column-vector of $\mathbf{X}$
+* $\operatorname{diag}(a_1, \dots, a_n)$: a diagonal matrix
+* $\mathbf{I}$: the indentity matrix
+* $\mathbf{A}^{-1}$: the inverse of a matrix

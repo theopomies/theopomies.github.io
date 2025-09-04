@@ -1,7 +1,7 @@
 ---
 title: Started reading The Manga Guide to Linear Algebra
 description: (Re-)Developping intuition around Linear Algebra
-categories: [python, math]
+categories: [math]
 date: 2025-08-29
 ---
 

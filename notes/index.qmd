@@ -1,13 +1,12 @@
 ---
-title: "Notes"
-format: html
-description: "All my notes. Read them at your own risk."
+title: Notes
+description: All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete
 listing:
-    sort: "date desc"
+    sort: "date-modified desc"
     feed: true
     fields:
       - categories
-      - date
+      - date-modified
       - title
       - description
 ---

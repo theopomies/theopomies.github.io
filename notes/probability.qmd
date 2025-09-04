@@ -1,0 +1,25 @@
+---
+title: Probability
+author: Theo POMIES
+date: 2025-09-02
+date-modified: 2025-09-04
+description: All things regarding probability, Bayesian or frequentist.
+categories: [math]
+---
+
+```{python}
+# | echo: false
+import torch
+```
+
+## Definitions & Formulas
+
+## Notes
+
+## Proofs
+
+Later!
+
+## Algorithms
+
+## Notation

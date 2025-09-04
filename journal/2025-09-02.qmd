@@ -1,0 +1,24 @@
+---
+title: Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)
+description: Learning about distributed training on GPUs (S2S) and preliminaries for D2L
+categories: [math, python, mle]
+date: 2025-09-02
+---
+
+Today I revised the basics of calculus on D2L, and ended the day with the first "lesson" on Distributed Training (S2S) by [Zach Mueller](https://www.x.com/thezachmueller).
+
+### Calculus
+
+I worked a bit on calculus, and there's always something to learn, even we you go as far back as the high-school level stuff. Small example, it's just today that I realized that $\dfrac{dx}{dy} = \dfrac{1}{\frac{dy}{dx}}$ (cf. the definition of derivative as a limit).
+
+I also got my hands back into multivariate calculus and learning useful identities.
+
+### Distributed Training (S2S)
+
+Finally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using `torch.distributed`, we're not yet at the triton or CUDA level, but someday we'll be there, just watch).
+
+We went from the primitives — (i)send and (i)recv — to the collective operations — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.
+
+I learned a few distributed training concepts, such as the _rank_.
+
+I concluded the day by running my first notebooks accelerated by more than 1 GPU on [Modal](https://www.modal.com){target=_blank}. I'd done some lightly GPU accelerated stuff on [Kaggle](https://www.kaggle.com){target=_blank}, but now I could grasp how to do stuff with multiple GPUs.

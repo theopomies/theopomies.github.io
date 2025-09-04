@@ -1,0 +1,19 @@
+---
+title: Distributed Training
+author: Theo POMIES
+date: 2025-09-02
+date-modified: 2025-09-04
+description: Distributed training study notes and algorithms.
+categories: [mle, python]
+---
+
+```{python}
+# | echo: false
+import torch
+```
+
+## Algorithms
+
+## Notes
+
+## Notation

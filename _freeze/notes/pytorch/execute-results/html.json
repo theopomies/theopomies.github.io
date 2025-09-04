@@ -1,0 +1,12 @@
+{
+  "hash": "cc6e547e3e3e33d71bfeefe6177741d1",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: PyTorch\nauthor: Theo POMIES\ndate: 2025-09-02\ndate-modified: 2025-09-04\ndescription: torch cheatsheet, common methods or tricks.\ncategories: [python, mle]\n---\n\n\n\n## Definitions & Formulas\n\n## Notes\n\n## Proofs\n\nLater!\n\n## Algorithms\n\n## Notation\n\n",
+    "supporting": [
+      "pytorch_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
