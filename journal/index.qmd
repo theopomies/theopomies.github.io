@@ -1,0 +1,14 @@
+---
+title: "Journal"
+description: "Daily journal, accountability management and learning tracking."
+listing:
+    sort: "date desc"
+    feed: true
+    fields:
+      - categories
+      - date
+      - title
+      - description
+---
+
+[rss](index.xml)

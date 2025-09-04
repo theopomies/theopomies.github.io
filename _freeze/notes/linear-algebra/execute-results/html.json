@@ -1,0 +1,12 @@
+{
+  "hash": "82c8c7d5517fd6ab19d1bf2c9d962c60",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Linear Algebra \nauthor: Theo POMIES\ndate: 2025-08-29\ndate-modified: 2025-09-04\ndescription: Notes, formulas and proofs for me to reference later\ncategories: [math]\n---\n\n\n\n## Formulas\n\n### Dot Product\n$$ \\mathbf{u} \\cdot \\mathbf{v} = \\sum_{i} u_i v_i $$\n\n::: {#24243b2f .cell execution_count=2}\n``` {.python .cell-code}\nu, v = torch.arange(3), torch.arange(3)  # torch.tensor([0, 1, 2])\ntorch.dot(u, v)  # u @ v\n```\n\n::: {.cell-output .cell-output-display execution_count=189}\n```\ntensor(5)\n```\n:::\n:::\n\n\n### Matrix-Vector Product\n$$ (\\mathbf{A}\\mathbf{u})_{i} = \\mathbf{a}_{i,:} \\cdot \\mathbf{u} = \\sum_{j} a_{i,j} u_j  $$\n\n::: {#49925ee8 .cell execution_count=3}\n``` {.python .cell-code}\nu, v = torch.arange(2), torch.arange(6).reshape(2, 3)\nu @ v\n```\n\n::: {.cell-output .cell-output-display execution_count=190}\n```\ntensor([3, 4, 5])\n```\n:::\n:::\n\n\n### Matrix Multiplication\n$$ (\\mathbf{A}\\mathbf{B})_{i,j} = \\mathbf{a}_{i,:} \\cdot \\mathbf{b}_{:, j} = \\sum_{k} a_{i,k} b_{k,j} $$\n\n::: {#49b65a13 .cell execution_count=4}\n``` {.python .cell-code}\nu, v = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)\nu @ v\n```\n\n::: {.cell-output .cell-output-display execution_count=191}\n```\ntensor([[ 3,  4,  5],\n        [ 9, 14, 19],\n        [15, 24, 33]])\n```\n:::\n:::\n\n\n## Notes\n\n## Proofs\n\n## Notation\n- $x$: a scalar\n- $\\mathbf{x}$: a vector\n- $\\mathbf{X}$: a matrix\n- $x_i$: the $i^\\textrm{th}$ element of vector $\\mathbf{x}$\n- $x_{i,j}$: the element of matrix $\\mathbf{X}$ at row $i$ and column $j$\n- $\\mathbf{x}_{i, :}$: the $i^\\textrm{th}$ row-vector of $\\mathbf{X}$\n- $\\mathbf{x}_{:,j}$: the $j^\\textrm{th}$ column-vector of $\\mathbf{X}$\n\n",
+    "supporting": [
+      "linear-algebra_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

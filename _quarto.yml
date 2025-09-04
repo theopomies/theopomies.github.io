@@ -23,8 +23,12 @@ website:
     left:
       - href: index.qmd
         text: about me
+      - href: posts/index.qmd
+        text: posts
       - href: notes/index.qmd
         text: notes
+      - href: journal/index.qmd
+        text: journal
     tools:
       - icon: twitter-x
         href: https://x.com/theopomies

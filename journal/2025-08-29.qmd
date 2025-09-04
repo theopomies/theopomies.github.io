@@ -1,0 +1,27 @@
+---
+title: Started reading The Manga Guide to Linear Algebra
+description: (Re-)Developping intuition around Linear Algebra
+categories: [python, math]
+date: 2025-08-29
+---
+
+## The Manga Guide to Linear Algebra
+
+### Why?
+
+Yes, this might sound weird if you don't know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of [The Manga Guide to Linear Algebra](https://www.amazon.com/Manga-Guide-Linear-Algebra/dp/1593274130){target=_blank}.
+
+It's pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.
+
+You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too "theorical", not concrete enough for me, I needed to _grok_ the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.
+
+Now that I've become a SWE, I've seen the practical uses of such Math, and I now find myself _needing_ more of it! So, step by step I'll try to go from intuition and basics (this book) -> implementing existing algorithms -> proofs and more advanced formulas and theorem (some other textbook like [Linear Algebra Done Right](https://linear.axler.net/LADR4e.pdf){target=_blank}) -> understanding ML architecture choices -> being able to invent/discover new arch and techniques? 
+
+### What I learned so far
+
+Being somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.
+
+The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above.
+There's a technique based on the generalisation of the formula $\det(\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}$.
+
+But there's also [an algorithm](/notes/linear-algebra.qmd) used in computer science based on a set of rules for determinant and gaussian reduction.

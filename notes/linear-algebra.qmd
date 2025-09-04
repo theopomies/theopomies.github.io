@@ -1,0 +1,49 @@
+---
+title: Linear Algebra 
+author: Theo POMIES
+date: 2025-08-29
+date-modified: 2025-09-04
+description: Notes, formulas and proofs for me to reference later
+categories: [math]
+---
+
+```{python}
+# | echo: false
+import torch
+```
+
+## Formulas
+
+### Dot Product
+$$ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i $$
+```{python}
+u, v = torch.arange(3), torch.arange(3)  # torch.tensor([0, 1, 2])
+torch.dot(u, v)  # u @ v
+```
+
+### Matrix-Vector Product
+$$ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  $$
+```{python}
+u, v = torch.arange(2), torch.arange(6).reshape(2, 3)
+u @ v
+```
+
+### Matrix Multiplication
+$$ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} $$
+```{python}
+u, v = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)
+u @ v
+```
+
+## Notes
+
+## Proofs
+
+## Notation
+- $x$: a scalar
+- $\mathbf{x}$: a vector
+- $\mathbf{X}$: a matrix
+- $x_i$: the $i^\textrm{th}$ element of vector $\mathbf{x}$
+- $x_{i,j}$: the element of matrix $\mathbf{X}$ at row $i$ and column $j$
+- $\mathbf{x}_{i, :}$: the $i^\textrm{th}$ row-vector of $\mathbf{X}$
+- $\mathbf{x}_{:,j}$: the $j^\textrm{th}$ column-vector of $\mathbf{X}$

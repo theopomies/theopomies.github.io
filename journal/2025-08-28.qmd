@@ -1,0 +1,18 @@
+---
+title: Setting up this blog!
+description: Today I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process
+categories: [python]
+date: 2025-08-28
+---
+
+## This "Blog"
+
+Today's the day! 
+
+I've decided to document my learning process to "transition" from SWE / using AI $\longrightarrow$ MLE/Applied Research/ building and training AI.
+
+After experimenting with [marimo](https://marimo.io){target=_blank}, loving it and [struggling](https://github.com/marimo-team/marimo/issues/6172){target=_blank} to make a blog out of marimo notebooks and experiments, I've stumbled upon [this article](https://www.fast.ai/posts/2020-01-20-nb2md.html){target=_blank} by [Jeremy Howard](https://x.com/jeremyphoward){target=_blank} encouraging me to write my blog via notebooks + [Quarto](https://quarto.org){target=_blank}.
+
+It also happens that I had just purchased the [Scratch To Scale course/conference](https://maven.com/walk-with-code/scratch-to-scale){target=_blank} by the brilliant [Zach Mueller](https://x.com/thezachmueller){target=_blank} and [his blog](https://muellerzr.github.io){target=_blank} was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy's framework, [fast.ai](https://www.fast.ai){target=_blank}.
+
+So there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I've finally understood even if I'm the last person on earth to do so, bookmarks, reading notes etc.
