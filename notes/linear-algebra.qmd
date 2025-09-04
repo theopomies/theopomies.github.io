@@ -3,7 +3,7 @@ title: Linear Algebra
 author: Theo POMIES
 date: 2025-08-29
 date-modified: 2025-09-04
-description: Notes, formulas and proofs for me to reference later
+description: Notes, formulas and proofs for me to reference later. This is an evolving document, so it might at times be incomplete
 categories: [math]
 ---
 
@@ -24,22 +24,115 @@ torch.dot(u, v)  # u @ v
 ### Matrix-Vector Product
 $$ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  $$
 ```{python}
-u, v = torch.arange(2), torch.arange(6).reshape(2, 3)
-u @ v
+A, u = torch.arange(6).reshape(3, 2), torch.arange(2)
+A @ u
 ```
 
 ### Matrix Multiplication
 $$ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} $$
 ```{python}
-u, v = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)
-u @ v
+U, V = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)
+U @ V
 ```
 
+### Inverse of a Square Matrix
+$$ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} $$
+Note: Might not exist if $\mathbf{A}$ is not invertible, that is $\det(\mathbf{A}) = 0$
+```{python}
+A = torch.randn(3, 3, dtype=torch.double)
+A_i = A.inverse()
+I = torch.eye(3, dtype=torch.double)
+torch.allclose(A @ A_i, I), torch.allclose(A_i @ A, I)
+```
+
+### Determinant of a Matrix
+#### Basic identities
+$$ \det(\mathbf{A}^\top) = \det(\mathbf{A}) $$
+$$ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) $$
+
+#### Determinant of Diagonal Matrix
+$$ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i $$
+```{python}
+# using I as a mask
+I = torch.eye(3, dtype=torch.float32)
+A = torch.arange(1, 10, dtype=torch.float32).reshape(3, 3) * I  # A = diag(1, 5, 9)
+torch.det(A), torch.det(A) == torch.diag(A).prod()
+```
+
+#### Determinant of a Triangular Matrix
+$$ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} $$
+```{python}
+A = torch.triu(torch.arange(1, 10, dtype=torch.float32).reshape(3, 3))
+torch.det(A), torch.det(A) == torch.diag(A).prod()
+```
+
+### Orthogonality
+$$ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^\top\mathbf{A} = \mathbf{I}\: (= \mathbf{A}\mathbf{A}^\top) $$
+
+Interstingly,
+
+$$ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^{-1} = \mathbf{A}^\top $$
+
+
 ## Notes
+### Vectors
+
+In linear algebra, vectors are column vectors by default, so
+$$ \mathbf{u} \in \mathbb{R}^{n \times 1}, \quad \mathbf{u} = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix} $$
+
+It follows that when doing a Matrix-Vector product, the matrix is on the left $\mathbf{A}\mathbf{u}$.
+
+### Order of operations
+
+Similarly, when we say "we apply a linear transformation $\mathbf{A}$ to $\mathbf{B}$", we mean $\mathbf{A}\mathbf{B}$.
+
+### Determinant
+
+I think of the determinant of $\mathbf{A}$ as the scaling factor of the linear transformation represented by $\mathbf{A}$.
+
+This explains why a matrix whose determinant is 0 is not invertible: it "collapses", and two images might have the same original input $\mathbf{x}$
 
 ## Proofs
 
+Later!
+
+## Algorithms
+### Gaussian Elimination
+
+Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following operations:
+
+- Scaling a row
+- Swapping two rows
+- Adding a multiple of one row to another
+
+### LU decomposition (or LU factorization)
+
+Computing the determinant of a Matrix is not trivial at first glance.
+
+But consider the following fact:
+
+- we know how to easily compute the [determinant of a triangular matrix](/notes/linear-algebra.html#determinant-of-a-triangular-matrix)
+- we know how to easily compute the [determinant of a product of matrices](/notes/linear-algebra.html#basic-identities)
+
+Knowing that, we want to find a representation of our original matrix $\mathbf{A}$ that involves an Upper Triangular Matrix $\mathbf{U}$, and one or more other matrices whose determinant is known or trivial to compute,  as $\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}$
+
+To go from $\mathbf{A}$ to $\mathbf{U}$ we'll use [Gaussian Elimination](/notes/linear-algebra.html#gaussian-elimination), $\mathbf{P}$ tracks our permutations (row swaps) and $\mathbf{L}$ tracks our row operations (row additions).
+
+Now, because $\mathbf{P}$ is [orthogonal](/notes/linear-algebra.html#orthogonality) (yes, since its the identity matrix with row swaps, when performing $\mathbf{P}^\top\mathbf{P}$, the ones in the rows meet the ones in the columns at the diagonal, zeros everywhere else, so we get $\mathbf{P}^\top\mathbf{P} = \mathbf{I}$), we then have
+$$ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} $$
+
+Finally, this means that
+$$ \det(\mathbf{A}) = \det(\mathbf{P}^\top) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) = \det(\mathbf{P}) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) $$
+
+Now I'm not gonna prove that, but:
+
+- $\det(\mathbf{P}) = (-1)^{\#swaps}$
+- $\det(\mathbf{L}) = 1$ (because when adding rows, we never modify the original identity's diagonal, so the diagonal is full of ones, and since L is a Lower Triangular Matrix, the determinant is 1)
+
+Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})$!
+
 ## Notation
+
 - $x$: a scalar
 - $\mathbf{x}$: a vector
 - $\mathbf{X}$: a matrix
@@ -47,3 +140,6 @@ u @ v
 - $x_{i,j}$: the element of matrix $\mathbf{X}$ at row $i$ and column $j$
 - $\mathbf{x}_{i, :}$: the $i^\textrm{th}$ row-vector of $\mathbf{X}$
 - $\mathbf{x}_{:,j}$: the $j^\textrm{th}$ column-vector of $\mathbf{X}$
+- $\operatorname{diag}(a_1, \dots, a_n)$: a diagonal matrix
+- $\mathbf{I}$: the indentity matrix
+- $\mathbf{A}^{-1}$: the inverse of A

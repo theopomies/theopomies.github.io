@@ -24,4 +24,6 @@ Being somewhat familiar with Linear Algebra and computer science, I already knew
 The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above.
 There's a technique based on the generalisation of the formula $\det(\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}$.
 
-But there's also [an algorithm](/notes/linear-algebra.qmd) used in computer science based on a set of rules for determinant and gaussian reduction.
+Along with the interpretation/intuition for the determinant (consolidated by 3b1b).
+
+But there's also [an algorithm (LU decomposition)](/notes/linear-algebra.html#lu-decomposition-or-lu-factorization) used in computer science based on a set of rules for determinant and gaussian reduction.
