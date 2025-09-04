@@ -16,7 +16,7 @@ import torch
 ### Differential Calculus
 
 As the name states, we analyze differences in the output(s) of a function based on differences in the input(s)
-$$ \dfrac{dy}{dx} = \lim_{h \rightarrow \infty} \dfrac{f(x + h) - f(x)}{h} $$
+$$ \dfrac{dy}{dx} = \lim_{h \rightarrow 0} \dfrac{f(x + h) - f(x)}{h} $$
 
 A function is said to be differentiable at $x$ if this limit exists, and differentiable on an interval if it exists at any $x$ in this interval.
 
