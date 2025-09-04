@@ -10,7 +10,106 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.7.34</generator>
-<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 04 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Going through DDP with S2S</title>
+  <link>https://theopomies.com/journal/2025-09-04.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>DDP -&gt; parallelizing data</p>
+<p>Types of parallelism DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)</p>
+<p>Pipeline P -&gt; layers on gpus so they run on a chain</p>
+<p>Tensor P (mostly intra-node) -&gt; distributes a single matrix / splits a single layer</p>
+<section id="ddp" class="level1">
+<h1>DDP</h1>
+<p>n gpus = n replicants of the model</p>
+<p>_ notebook _</p>
+<p>Try to understand data sharding / sharded sampling (see torch / accelerate)</p>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-04.html</guid>
+  <pubDate>Thu, 04 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Some D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S</title>
+  <link>https://theopomies.com/journal/2025-09-03.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Some notes and answers by Yuxiang Wei here Probabilities on D2L</p>
+
+
+
+ ]]></description>
+  <category>math</category>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-03.html</guid>
+  <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)</title>
+  <link>https://theopomies.com/journal/2025-09-02.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Today I revised the basics of calculus on D2L, and ended the day with the first “lesson” on Distributed Training (S2S) by <a href="https://www.x.com/thezachmueller">Zach Mueller</a>.</p>
+<section id="calculus" class="level3">
+<h3 class="anchored" data-anchor-id="calculus">Calculus</h3>
+<p>I worked a bit on calculus, and there’s always something to learn, even we you go as far back as the high-school level stuff. Small example, it’s just today that I realized that <img src="https://latex.codecogs.com/png.latex?%5Cdfrac%7Bdx%7D%7Bdy%7D%20=%20%5Cdfrac%7B1%7D%7B%5Cfrac%7Bdy%7D%7Bdx%7D%7D"> (cf.&nbsp;the definition of derivative as a limit).</p>
+<p>I also got my hands back into multivariate calculus and learning useful identities.</p>
+</section>
+<section id="distributed-training-s2s" class="level3">
+<h3 class="anchored" data-anchor-id="distributed-training-s2s">Distributed Training (S2S)</h3>
+<p>Finally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using <code>torch.distributed</code>, we’re not yet at the triton or CUDA level, but someday we’ll be there, just watch).</p>
+<p>We went from the primitives — (i)send and (i)recv — to the collective operations — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.</p>
+<p>I learned a few distributed training concepts, such as the <em>rank</em>.</p>
+<p>I concluded the day by running my first notebooks accelerated by more than 1 GPU on <a href="https://www.modal.com" target="_blank">Modal</a>. I’d done some lightly GPU accelerated stuff on <a href="https://www.kaggle.com" target="_blank">Kaggle</a>, but now I could grasp how to do stuff with multiple GPUs.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <category>python</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-02.html</guid>
+  <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Finished reading The Manga Guide to Linear Algebra</title>
+  <link>https://theopomies.com/journal/2025-09-01.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I had a lot of work to do for my day job, we are trying to build and commercialize V2 of <a href="https://www.kivala.fr" target="_blank">our intercom system</a>, and I was faced with technical difficulties that left me very little time to work on math / ML. I still found the time to finish The Manga Guide to Linear Algebra, and learned a few important concepts and techniques!</p>
+<section id="still-i-did-a-few-things" class="level3">
+<h3 class="anchored" data-anchor-id="still-i-did-a-few-things">Still, I did a <em>few</em> things</h3>
+<p>TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via <a href="../notes/linear-algebra.html#gaussian-elimination">Gaussian Eliminination</a> — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!</p>
+<p>I skimmed through the materials for <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale</a>, the course I’m following by <a href="https://x.com/thezachmueller" target="_blank">Scott Mueller</a>, beginning tomorrow.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <guid>https://theopomies.com/journal/2025-09-01.html</guid>
+  <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Started reading The Manga Guide to Linear Algebra</title>
   <link>https://theopomies.com/journal/2025-08-29.html</link>
@@ -40,7 +139,6 @@
 </section>
 
  ]]></description>
-  <category>python</category>
   <category>math</category>
   <guid>https://theopomies.com/journal/2025-08-29.html</guid>
   <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>

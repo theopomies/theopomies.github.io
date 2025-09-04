@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-08-29">
-<meta name="description" content="(Re-)Developping intuition around Linear Algebra">
+<meta name="author" content="Theo POMIES">
+<meta name="dcterms.date" content="2025-09-02">
+<meta name="description" content="All things calculus, differential or integral.">
 
-<title>Started reading The Manga Guide to Linear Algebra – Theo Pomies</title>
+<title>Calculus – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,8 +102,8 @@ window.Quarto = {
 };
 </script>
 
-<meta name="twitter:title" content="Started reading The Manga Guide to Linear Algebra – Theo Pomies">
-<meta name="twitter:description" content="(Re-)Developping intuition around Linear Algebra">
+<meta name="twitter:title" content="Calculus – Theo Pomies">
+<meta name="twitter:description" content="All things calculus, differential or integral.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -153,11 +154,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-manga-guide-to-linear-algebra" id="toc-the-manga-guide-to-linear-algebra" class="nav-link active" data-scroll-target="#the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</a>
+  <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
   <ul class="collapse">
-  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">Why?</a></li>
-  <li><a href="#what-i-learned-so-far" id="toc-what-i-learned-so-far" class="nav-link" data-scroll-target="#what-i-learned-so-far">What I learned so far</a></li>
+  <li><a href="#differential-calculus" id="toc-differential-calculus" class="nav-link" data-scroll-target="#differential-calculus">Differential Calculus</a></li>
+  <li><a href="#multivariate-calculus" id="toc-multivariate-calculus" class="nav-link" data-scroll-target="#multivariate-calculus">Multivariate Calculus</a></li>
   </ul></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
   </ul>
 </nav>
     </div>
@@ -166,7 +170,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Started reading The Manga Guide to Linear Algebra</h1>
+<h1 class="title">Calculus</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
   </div>
@@ -174,21 +178,33 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    (Re-)Developping intuition around Linear Algebra
+    All things calculus, differential or integral.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Theo POMIES </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 29, 2025</p>
+      <p class="date">September 2, 2025</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 4, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -197,24 +213,81 @@ window.Quarto = {
 </header>
 
 
-<section id="the-manga-guide-to-linear-algebra" class="level2">
-<h2 class="anchored" data-anchor-id="the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</h2>
-<section id="why" class="level3">
-<h3 class="anchored" data-anchor-id="why">Why?</h3>
-<p>Yes, this might sound weird if you don’t know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of <a href="https://www.amazon.com/Manga-Guide-Linear-Algebra/dp/1593274130" target="_blank">The Manga Guide to Linear Algebra</a>.</p>
-<p>It’s pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.</p>
-<p>You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too “theorical”, not concrete enough for me, I needed to <em>grok</em> the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.</p>
-<p>Now that I’ve become a SWE, I’ve seen the practical uses of such Math, and I now find myself <em>needing</em> more of it! So, step by step I’ll try to go from intuition and basics (this book) -&gt; implementing existing algorithms -&gt; proofs and more advanced formulas and theorem (some other textbook like <a href="https://linear.axler.net/LADR4e.pdf" target="_blank">Linear Algebra Done Right</a>) -&gt; understanding ML architecture choices -&gt; being able to invent/discover new arch and techniques?</p>
+<section id="definitions-formulas" class="level2">
+<h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
+<section id="differential-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="differential-calculus">Differential Calculus</h3>
+<p>As the name states, we analyze differences in the output(s) of a function based on differences in the input(s) <span class="math display">\[ \dfrac{dy}{dx} = \lim_{h \rightarrow \infty} \dfrac{f(x + h) - f(x)}{h} \]</span></p>
+<p>A function is said to be differentiable at <span class="math inline">\(x\)</span> if this limit exists, and differentiable on an interval if it exists at any <span class="math inline">\(x\)</span> in this interval.</p>
+<section id="common-derivatives" class="level4">
+<h4 class="anchored" data-anchor-id="common-derivatives">Common Derivatives</h4>
+<p>From that we can get common derivatives</p>
+<p><span class="math display">\[ \begin{aligned}
+    \dfrac{d}{dx}C &amp; = 0 &amp;&amp; \text{for any constant C} \\
+    \dfrac{d}{dx}x^n &amp; = nx^{n - 1} &amp;&amp; \text{for n} \neq 0 \\
+    \dfrac{d}{dx}e^x &amp; = e^x \\
+    \dfrac{d}{dx}\ln x &amp; = x^{-1} \\
+    \dfrac{d}{dx}\cos x &amp; = -\sin x \\
+    \dfrac{d}{dx}\sin x &amp; = \cos x \\
+\end{aligned} \]</span></p>
+<p>From these it becomes trivial to derive <span class="math inline">\(\tan\)</span>, <span class="math inline">\(\sec\)</span>, <span class="math inline">\(\csc\)</span> and <span class="math inline">\(\cot\)</span>.</p>
 </section>
-<section id="what-i-learned-so-far" class="level3">
-<h3 class="anchored" data-anchor-id="what-i-learned-so-far">What I learned so far</h3>
-<p>Being somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.</p>
-<p>The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above. There’s a technique based on the generalisation of the formula <span class="math inline">\(\det(\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}\)</span>.</p>
-<p>Along with the interpretation/intuition for the determinant (consolidated by 3b1b).</p>
-<p>But there’s also <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">an algorithm (LU decomposition)</a> used in computer science based on a set of rules for determinant and gaussian reduction.</p>
+<section id="derivation-rules" class="level4">
+<h4 class="anchored" data-anchor-id="derivation-rules">Derivation Rules</h4>
+<p>Finally a composition of differentiable functions is also differentiable, so we have the following rules that allow us to derive almost any function:</p>
+<p><span class="math display">\[ \begin{aligned}
+    \dfrac{d}{dx}Cf(x) &amp; = C\dfrac{d}{dx}f(x) &amp;&amp; \text{Constant multiple rule} \\
+    \dfrac{d}{dx}[f(x) + g(x)] &amp; = \dfrac{d}{dx}f(x) + \dfrac{d}{dx}g(x) &amp;&amp; \text{Sum rule} \\
+    \dfrac{d}{dx}[f(x)g(x)] &amp; = \dfrac{d}{dx}f(x)g(x) + f(x)\dfrac{d}{dx}g(x) &amp;&amp; \text{Product rule} \\
+    \dfrac{dy}{dx} &amp; = \dfrac{dy}{dz}\dfrac{dz}{dx} = \dfrac{\frac{dy}{dz}}{\frac{dx}{dz}} &amp;&amp; \text{Chain rule} \\
+\end{aligned} \]</span></p>
+<p>From these we can easily find a Quotient Rule, a Power Rule and a Reciprocal Rule:</p>
+<p><span class="math display">\[ \begin{aligned}
+    \dfrac{d}{dx}\dfrac{f(x)}{g(x)} &amp; = \dfrac{\frac{d}{dx}f(x)g(x) - f(x)\frac{d}{dx}g(x)}{g(x)^2} &amp;&amp; \text{Quotient rule} \\
+    \dfrac{d}{dx}f(x)^n &amp; = nf(x)^{n-1}\dfrac{d}{dx}f(x) &amp;&amp; \text{Power rule} \\
+    \dfrac{dy}{dx}\dfrac{1}{f(x)} &amp; = -\dfrac{\frac{d}{dx}f(x)}{f(x)^2} &amp;&amp; \text{Reciprocal rule} \\
+\end{aligned} \]</span></p>
+</section>
+</section>
+<section id="multivariate-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="multivariate-calculus">Multivariate Calculus</h3>
+<p>Very similar, but now our function takes a vector <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> as input and returns a scalar <span class="math inline">\(y \in \mathbb{R}\)</span> — or even a vector <span class="math inline">\(\mathbf{y} \in \mathbb{R}^m\)</span>.</p>
+<p>To paraphrase D2L because their explanation is perfect:</p>
+<p>Let <span class="math inline">\(y = f(x_1, x_2, \ldots, x_n)\)</span> be a function with <span class="math inline">\(n\)</span> variables. The <em>partial derivative</em> of <span class="math inline">\(y\)</span> with respect to its <span class="math inline">\(i^\textrm{th}\)</span> parameter <span class="math inline">\(x_i\)</span> is</p>
+<p><span class="math display">\[ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.\]</span></p>
+<p>If <span class="math inline">\(f(\mathbf{x}) = y\)</span>, a scalar, we collect/concatenate all the partial derivatives to obtain the <em>gradient</em> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span> <span class="math display">\[ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} \]</span></p>
+<section id="handy-rules" class="level4">
+<h4 class="anchored" data-anchor-id="handy-rules">Handy Rules</h4>
+<p>The follow rules come straight from D2L:</p>
+<ul>
+<li>For all <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> we have <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{A} \mathbf{x} = \mathbf{A}^\top\)</span> and <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A}  = \mathbf{A}\)</span>.</li>
+<li>For square matrices <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> we have that <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x}  = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}\)</span> and in particular <span class="math inline">\(\nabla_{\mathbf{x}} \|\mathbf{x} \|^2 = \nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2\mathbf{x}\)</span>.</li>
+</ul>
+<p>Then the chain rule states that</p>
+<p><span class="math display">\[\frac{\partial y}{\partial x_{i}} = \frac{\partial y}{\partial u_{1}} \frac{\partial u_{1}}{\partial x_{i}} + \frac{\partial y}{\partial u_{2}} \frac{\partial u_{2}}{\partial x_{i}} + \ldots + \frac{\partial y}{\partial u_{m}} \frac{\partial u_{m}}{\partial x_{i}} \ \textrm{ and so } \ \nabla_{\mathbf{x}} y =  \mathbf{A} \nabla_{\mathbf{u}} y,\]</span></p>
+<p>where <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{n \times m}\)</span> is a <em>matrix</em> that contains the derivative of vector <span class="math inline">\(\mathbf{u}\)</span> with respect to vector <span class="math inline">\(\mathbf{x}\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+</section>
+<section id="proofs" class="level2">
+<h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
+<p>Later!</p>
+</section>
+<section id="notation" class="level2">
+<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<ul>
+<li><span class="math inline">\(f(\cdot)\)</span>: a function</li>
+<li><span class="math inline">\(\dfrac{dy}{dx}\)</span>: derivative of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(\dfrac{\partial y}{\partial x}\)</span>: partial derivative of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(\nabla_{\mathbf{x}} y\)</span>: gradient of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span></li>
+<li><span class="math inline">\(\int_a^b f(x) \;dx\)</span>: definite integral of <span class="math inline">\(f\)</span> from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> with respect to <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(\int f(x) \;dx\)</span>: indefinite integral of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x\)</span></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

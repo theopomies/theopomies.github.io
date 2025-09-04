@@ -49,32 +49,60 @@
     "text": "Explanations\n\nNarrowing over using as\nSuppose you have a function that takes a number\nfunction double(a: number) {\n    return a * 2;\n}\nAnd you have a variable that could be a number or a string\nfunction getNumberOrString(): number | string {\n    return Math.random() &gt; 0.5 ? 1 : \"1\";\n}\nconst a: number | string = getNumberOrString();\nTypescript will allow you to use as to assert the variable to a number (this is one of the ways that TypeScript is not sound)\nconst result: number = double(a as number);\nBut this not correct/sound at runtime!\nThe correct way to do this is to narrow the type with a check (if/else/early return).\nif (typeof a === \"number\") {\n    const result = double(a);\n}"
   },
   {
+    "objectID": "notes/calculus.html",
+    "href": "notes/calculus.html",
+    "title": "Calculus",
+    "section": "",
+    "text": "As the name states, we analyze differences in the output(s) of a function based on differences in the input(s) \\[ \\dfrac{dy}{dx} = \\lim_{h \\rightarrow \\infty} \\dfrac{f(x + h) - f(x)}{h} \\]\nA function is said to be differentiable at \\(x\\) if this limit exists, and differentiable on an interval if it exists at any \\(x\\) in this interval.\n\n\nFrom that we can get common derivatives\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}C & = 0 && \\text{for any constant C} \\\\\n    \\dfrac{d}{dx}x^n & = nx^{n - 1} && \\text{for n} \\neq 0 \\\\\n    \\dfrac{d}{dx}e^x & = e^x \\\\\n    \\dfrac{d}{dx}\\ln x & = x^{-1} \\\\\n    \\dfrac{d}{dx}\\cos x & = -\\sin x \\\\\n    \\dfrac{d}{dx}\\sin x & = \\cos x \\\\\n\\end{aligned} \\]\nFrom these it becomes trivial to derive \\(\\tan\\), \\(\\sec\\), \\(\\csc\\) and \\(\\cot\\).\n\n\n\nFinally a composition of differentiable functions is also differentiable, so we have the following rules that allow us to derive almost any function:\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}Cf(x) & = C\\dfrac{d}{dx}f(x) && \\text{Constant multiple rule} \\\\\n    \\dfrac{d}{dx}[f(x) + g(x)] & = \\dfrac{d}{dx}f(x) + \\dfrac{d}{dx}g(x) && \\text{Sum rule} \\\\\n    \\dfrac{d}{dx}[f(x)g(x)] & = \\dfrac{d}{dx}f(x)g(x) + f(x)\\dfrac{d}{dx}g(x) && \\text{Product rule} \\\\\n    \\dfrac{dy}{dx} & = \\dfrac{dy}{dz}\\dfrac{dz}{dx} = \\dfrac{\\frac{dy}{dz}}{\\frac{dx}{dz}} && \\text{Chain rule} \\\\\n\\end{aligned} \\]\nFrom these we can easily find a Quotient Rule, a Power Rule and a Reciprocal Rule:\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}\\dfrac{f(x)}{g(x)} & = \\dfrac{\\frac{d}{dx}f(x)g(x) - f(x)\\frac{d}{dx}g(x)}{g(x)^2} && \\text{Quotient rule} \\\\\n    \\dfrac{d}{dx}f(x)^n & = nf(x)^{n-1}\\dfrac{d}{dx}f(x) && \\text{Power rule} \\\\\n    \\dfrac{dy}{dx}\\dfrac{1}{f(x)} & = -\\dfrac{\\frac{d}{dx}f(x)}{f(x)^2} && \\text{Reciprocal rule} \\\\\n\\end{aligned} \\]\n\n\n\n\nVery similar, but now our function takes a vector \\(\\mathbf{x} \\in \\mathbb{R}^n\\) as input and returns a scalar \\(y \\in \\mathbb{R}\\) — or even a vector \\(\\mathbf{y} \\in \\mathbb{R}^m\\).\nTo paraphrase D2L because their explanation is perfect:\nLet \\(y = f(x_1, x_2, \\ldots, x_n)\\) be a function with \\(n\\) variables. The partial derivative of \\(y\\) with respect to its \\(i^\\textrm{th}\\) parameter \\(x_i\\) is\n\\[ \\dfrac{\\partial y}{\\partial x_i} = \\lim_{h \\rightarrow 0} \\frac{f(x_1, \\ldots, x_{i-1}, x_i+h, x_{i+1}, \\ldots, x_n) - f(x_1, \\ldots, x_i, \\ldots, x_n)}{h}.\\]\nIf \\(f(\\mathbf{x}) = y\\), a scalar, we collect/concatenate all the partial derivatives to obtain the gradient of \\(y\\) with respect to \\(\\mathbf{x}\\) \\[ \\nabla_{\\mathbf{x}}f(\\mathbf{x}) = \\begin{bmatrix} \\frac{\\partial y}{\\partial x_1} \\\\ \\vdots \\\\ \\frac{\\partial y}{\\partial x_n} \\end{bmatrix} \\]\n\n\nThe follow rules come straight from D2L:\n\nFor all \\(\\mathbf{A} \\in \\mathbb{R}^{m \\times n}\\) we have \\(\\nabla_{\\mathbf{x}} \\mathbf{A} \\mathbf{x} = \\mathbf{A}^\\top\\) and \\(\\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{A}  = \\mathbf{A}\\).\nFor square matrices \\(\\mathbf{A} \\in \\mathbb{R}^{n \\times n}\\) we have that \\(\\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{A} \\mathbf{x}  = (\\mathbf{A} + \\mathbf{A}^\\top)\\mathbf{x}\\) and in particular \\(\\nabla_{\\mathbf{x}} \\|\\mathbf{x} \\|^2 = \\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{x} = 2\\mathbf{x}\\).\n\nThen the chain rule states that\n\\[\\frac{\\partial y}{\\partial x_{i}} = \\frac{\\partial y}{\\partial u_{1}} \\frac{\\partial u_{1}}{\\partial x_{i}} + \\frac{\\partial y}{\\partial u_{2}} \\frac{\\partial u_{2}}{\\partial x_{i}} + \\ldots + \\frac{\\partial y}{\\partial u_{m}} \\frac{\\partial u_{m}}{\\partial x_{i}} \\ \\textrm{ and so } \\ \\nabla_{\\mathbf{x}} y =  \\mathbf{A} \\nabla_{\\mathbf{u}} y,\\]\nwhere \\(\\mathbf{A} \\in \\mathbb{R}^{n \\times m}\\) is a matrix that contains the derivative of vector \\(\\mathbf{u}\\) with respect to vector \\(\\mathbf{x}\\)."
+  },
+  {
+    "objectID": "notes/calculus.html#definitions-formulas",
+    "href": "notes/calculus.html#definitions-formulas",
+    "title": "Calculus",
+    "section": "",
+    "text": "As the name states, we analyze differences in the output(s) of a function based on differences in the input(s) \\[ \\dfrac{dy}{dx} = \\lim_{h \\rightarrow \\infty} \\dfrac{f(x + h) - f(x)}{h} \\]\nA function is said to be differentiable at \\(x\\) if this limit exists, and differentiable on an interval if it exists at any \\(x\\) in this interval.\n\n\nFrom that we can get common derivatives\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}C & = 0 && \\text{for any constant C} \\\\\n    \\dfrac{d}{dx}x^n & = nx^{n - 1} && \\text{for n} \\neq 0 \\\\\n    \\dfrac{d}{dx}e^x & = e^x \\\\\n    \\dfrac{d}{dx}\\ln x & = x^{-1} \\\\\n    \\dfrac{d}{dx}\\cos x & = -\\sin x \\\\\n    \\dfrac{d}{dx}\\sin x & = \\cos x \\\\\n\\end{aligned} \\]\nFrom these it becomes trivial to derive \\(\\tan\\), \\(\\sec\\), \\(\\csc\\) and \\(\\cot\\).\n\n\n\nFinally a composition of differentiable functions is also differentiable, so we have the following rules that allow us to derive almost any function:\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}Cf(x) & = C\\dfrac{d}{dx}f(x) && \\text{Constant multiple rule} \\\\\n    \\dfrac{d}{dx}[f(x) + g(x)] & = \\dfrac{d}{dx}f(x) + \\dfrac{d}{dx}g(x) && \\text{Sum rule} \\\\\n    \\dfrac{d}{dx}[f(x)g(x)] & = \\dfrac{d}{dx}f(x)g(x) + f(x)\\dfrac{d}{dx}g(x) && \\text{Product rule} \\\\\n    \\dfrac{dy}{dx} & = \\dfrac{dy}{dz}\\dfrac{dz}{dx} = \\dfrac{\\frac{dy}{dz}}{\\frac{dx}{dz}} && \\text{Chain rule} \\\\\n\\end{aligned} \\]\nFrom these we can easily find a Quotient Rule, a Power Rule and a Reciprocal Rule:\n\\[ \\begin{aligned}\n    \\dfrac{d}{dx}\\dfrac{f(x)}{g(x)} & = \\dfrac{\\frac{d}{dx}f(x)g(x) - f(x)\\frac{d}{dx}g(x)}{g(x)^2} && \\text{Quotient rule} \\\\\n    \\dfrac{d}{dx}f(x)^n & = nf(x)^{n-1}\\dfrac{d}{dx}f(x) && \\text{Power rule} \\\\\n    \\dfrac{dy}{dx}\\dfrac{1}{f(x)} & = -\\dfrac{\\frac{d}{dx}f(x)}{f(x)^2} && \\text{Reciprocal rule} \\\\\n\\end{aligned} \\]\n\n\n\n\nVery similar, but now our function takes a vector \\(\\mathbf{x} \\in \\mathbb{R}^n\\) as input and returns a scalar \\(y \\in \\mathbb{R}\\) — or even a vector \\(\\mathbf{y} \\in \\mathbb{R}^m\\).\nTo paraphrase D2L because their explanation is perfect:\nLet \\(y = f(x_1, x_2, \\ldots, x_n)\\) be a function with \\(n\\) variables. The partial derivative of \\(y\\) with respect to its \\(i^\\textrm{th}\\) parameter \\(x_i\\) is\n\\[ \\dfrac{\\partial y}{\\partial x_i} = \\lim_{h \\rightarrow 0} \\frac{f(x_1, \\ldots, x_{i-1}, x_i+h, x_{i+1}, \\ldots, x_n) - f(x_1, \\ldots, x_i, \\ldots, x_n)}{h}.\\]\nIf \\(f(\\mathbf{x}) = y\\), a scalar, we collect/concatenate all the partial derivatives to obtain the gradient of \\(y\\) with respect to \\(\\mathbf{x}\\) \\[ \\nabla_{\\mathbf{x}}f(\\mathbf{x}) = \\begin{bmatrix} \\frac{\\partial y}{\\partial x_1} \\\\ \\vdots \\\\ \\frac{\\partial y}{\\partial x_n} \\end{bmatrix} \\]\n\n\nThe follow rules come straight from D2L:\n\nFor all \\(\\mathbf{A} \\in \\mathbb{R}^{m \\times n}\\) we have \\(\\nabla_{\\mathbf{x}} \\mathbf{A} \\mathbf{x} = \\mathbf{A}^\\top\\) and \\(\\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{A}  = \\mathbf{A}\\).\nFor square matrices \\(\\mathbf{A} \\in \\mathbb{R}^{n \\times n}\\) we have that \\(\\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{A} \\mathbf{x}  = (\\mathbf{A} + \\mathbf{A}^\\top)\\mathbf{x}\\) and in particular \\(\\nabla_{\\mathbf{x}} \\|\\mathbf{x} \\|^2 = \\nabla_{\\mathbf{x}} \\mathbf{x}^\\top \\mathbf{x} = 2\\mathbf{x}\\).\n\nThen the chain rule states that\n\\[\\frac{\\partial y}{\\partial x_{i}} = \\frac{\\partial y}{\\partial u_{1}} \\frac{\\partial u_{1}}{\\partial x_{i}} + \\frac{\\partial y}{\\partial u_{2}} \\frac{\\partial u_{2}}{\\partial x_{i}} + \\ldots + \\frac{\\partial y}{\\partial u_{m}} \\frac{\\partial u_{m}}{\\partial x_{i}} \\ \\textrm{ and so } \\ \\nabla_{\\mathbf{x}} y =  \\mathbf{A} \\nabla_{\\mathbf{u}} y,\\]\nwhere \\(\\mathbf{A} \\in \\mathbb{R}^{n \\times m}\\) is a matrix that contains the derivative of vector \\(\\mathbf{u}\\) with respect to vector \\(\\mathbf{x}\\)."
+  },
+  {
+    "objectID": "notes/calculus.html#notes",
+    "href": "notes/calculus.html#notes",
+    "title": "Calculus",
+    "section": "Notes",
+    "text": "Notes"
+  },
+  {
+    "objectID": "notes/calculus.html#proofs",
+    "href": "notes/calculus.html#proofs",
+    "title": "Calculus",
+    "section": "Proofs",
+    "text": "Proofs\nLater!"
+  },
+  {
+    "objectID": "notes/calculus.html#notation",
+    "href": "notes/calculus.html#notation",
+    "title": "Calculus",
+    "section": "Notation",
+    "text": "Notation\n\n\\(f(\\cdot)\\): a function\n\\(\\dfrac{dy}{dx}\\): derivative of \\(y\\) with respect to \\(x\\)\n\\(\\dfrac{\\partial y}{\\partial x}\\): partial derivative of \\(y\\) with respect to \\(x\\)\n\\(\\nabla_{\\mathbf{x}} y\\): gradient of \\(y\\) with respect to \\(\\mathbf{x}\\)\n\\(\\int_a^b f(x) \\;dx\\): definite integral of \\(f\\) from \\(a\\) to \\(b\\) with respect to \\(x\\)\n\\(\\int f(x) \\;dx\\): indefinite integral of \\(f\\) with respect to \\(x\\)"
+  },
+  {
+    "objectID": "notes/distributed-training.html#notes",
+    "href": "notes/distributed-training.html#notes",
+    "title": "Distributed Training",
+    "section": "Notes",
+    "text": "Notes"
+  },
+  {
+    "objectID": "notes/distributed-training.html#notation",
+    "href": "notes/distributed-training.html#notation",
+    "title": "Distributed Training",
+    "section": "Notation",
+    "text": "Notation"
+  },
+  {
     "objectID": "posts/index.html",
     "href": "posts/index.html",
     "title": "Posts",
     "section": "",
     "text": "rss\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "journal/index.html",
-    "href": "journal/index.html",
-    "title": "Journal",
-    "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\npython\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n2 min\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n1 min\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "journal/2025-08-28.html",
-    "href": "journal/2025-08-28.html",
-    "title": "Setting up this blog!",
-    "section": "",
-    "text": "Today’s the day!\nI’ve decided to document my learning process to “transition” from SWE / using AI \\(\\longrightarrow\\) MLE/Applied Research/ building and training AI.\nAfter experimenting with marimo, loving it and struggling to make a blog out of marimo notebooks and experiments, I’ve stumbled upon this article by Jeremy Howard encouraging me to write my blog via notebooks + Quarto.\nIt also happens that I had just purchased the Scratch To Scale course/conference by the brilliant Zach Mueller and his blog was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, fast.ai.\nSo there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc."
-  },
-  {
-    "objectID": "journal/2025-08-28.html#this-blog",
-    "href": "journal/2025-08-28.html#this-blog",
-    "title": "Setting up this blog!",
-    "section": "",
-    "text": "Today’s the day!\nI’ve decided to document my learning process to “transition” from SWE / using AI \\(\\longrightarrow\\) MLE/Applied Research/ building and training AI.\nAfter experimenting with marimo, loving it and struggling to make a blog out of marimo notebooks and experiments, I’ve stumbled upon this article by Jeremy Howard encouraging me to write my blog via notebooks + Quarto.\nIt also happens that I had just purchased the Scratch To Scale course/conference by the brilliant Zach Mueller and his blog was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, fast.ai.\nSo there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc."
   },
   {
     "objectID": "journal/2025-08-29.html",
@@ -91,6 +119,111 @@
     "text": "Yes, this might sound weird if you don’t know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of The Manga Guide to Linear Algebra.\nIt’s pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.\nYou might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too “theorical”, not concrete enough for me, I needed to grok the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.\nNow that I’ve become a SWE, I’ve seen the practical uses of such Math, and I now find myself needing more of it! So, step by step I’ll try to go from intuition and basics (this book) -&gt; implementing existing algorithms -&gt; proofs and more advanced formulas and theorem (some other textbook like Linear Algebra Done Right) -&gt; understanding ML architecture choices -&gt; being able to invent/discover new arch and techniques?\n\n\n\nBeing somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.\nThe first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above. There’s a technique based on the generalisation of the formula \\(\\det(\\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}\\).\nAlong with the interpretation/intuition for the determinant (consolidated by 3b1b).\nBut there’s also an algorithm (LU decomposition) used in computer science based on a set of rules for determinant and gaussian reduction."
   },
   {
+    "objectID": "journal/index.html",
+    "href": "journal/index.html",
+    "title": "Journal",
+    "section": "",
+    "text": "rss\n\n\n\n\n\n\n\n\n\nGoing through DDP with S2S\n\n\n\npython\n\nmle\n\n\n\nQuick evening study session on DDP with torch.distributed primitives\n\n\n\n\n\nSep 4, 2025\n\n1 min\n\n\n\n\n\n\nSome D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S\n\n\n\nmath\n\nmle\n\npython\n\n\n\nFinishing the preliminaries for D2L + questions surrounding distributed training at FAIR\n\n\n\n\n\nSep 3, 2025\n\n1 min\n\n\n\n\n\n\nStarting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)\n\n\n\nmath\n\npython\n\nmle\n\n\n\nLearning about distributed training on GPUs (S2S) and preliminaries for D2L\n\n\n\n\n\nSep 2, 2025\n\n1 min\n\n\n\n\n\n\nFinished reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\nLearning more about Linear Transformations, Eigen{vectors, values} and Diagonalization\n\n\n\n\n\nSep 1, 2025\n\n1 min\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n2 min\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n1 min\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "journal/2025-08-28.html",
+    "href": "journal/2025-08-28.html",
+    "title": "Setting up this blog!",
+    "section": "",
+    "text": "Today’s the day!\nI’ve decided to document my learning process to “transition” from SWE / using AI \\(\\longrightarrow\\) MLE/Applied Research/ building and training AI.\nAfter experimenting with marimo, loving it and struggling to make a blog out of marimo notebooks and experiments, I’ve stumbled upon this article by Jeremy Howard encouraging me to write my blog via notebooks + Quarto.\nIt also happens that I had just purchased the Scratch To Scale course/conference by the brilliant Zach Mueller and his blog was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, fast.ai.\nSo there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc."
+  },
+  {
+    "objectID": "journal/2025-08-28.html#this-blog",
+    "href": "journal/2025-08-28.html#this-blog",
+    "title": "Setting up this blog!",
+    "section": "",
+    "text": "Today’s the day!\nI’ve decided to document my learning process to “transition” from SWE / using AI \\(\\longrightarrow\\) MLE/Applied Research/ building and training AI.\nAfter experimenting with marimo, loving it and struggling to make a blog out of marimo notebooks and experiments, I’ve stumbled upon this article by Jeremy Howard encouraging me to write my blog via notebooks + Quarto.\nIt also happens that I had just purchased the Scratch To Scale course/conference by the brilliant Zach Mueller and his blog was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, fast.ai.\nSo there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc."
+  },
+  {
+    "objectID": "journal/2025-09-04.html",
+    "href": "journal/2025-09-04.html",
+    "title": "Going through DDP with S2S",
+    "section": "",
+    "text": "DDP -&gt; parallelizing data\nTypes of parallelism DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)\nPipeline P -&gt; layers on gpus so they run on a chain\nTensor P (mostly intra-node) -&gt; distributes a single matrix / splits a single layer\n\nDDP\nn gpus = n replicants of the model\n_ notebook _\nTry to understand data sharding / sharded sampling (see torch / accelerate)"
+  },
+  {
+    "objectID": "journal/2025-09-01.html",
+    "href": "journal/2025-09-01.html",
+    "title": "Finished reading The Manga Guide to Linear Algebra",
+    "section": "",
+    "text": "I had a lot of work to do for my day job, we are trying to build and commercialize V2 of our intercom system, and I was faced with technical difficulties that left me very little time to work on math / ML. I still found the time to finish The Manga Guide to Linear Algebra, and learned a few important concepts and techniques!\n\nStill, I did a few things\nTIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via Gaussian Eliminination — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!\nI skimmed through the materials for Scratch To Scale, the course I’m following by Scott Mueller, beginning tomorrow."
+  },
+  {
+    "objectID": "journal/2025-09-03.html",
+    "href": "journal/2025-09-03.html",
+    "title": "Some D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S",
+    "section": "",
+    "text": "Some notes and answers by Yuxiang Wei here Probabilities on D2L"
+  },
+  {
+    "objectID": "journal/2025-09-02.html",
+    "href": "journal/2025-09-02.html",
+    "title": "Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)",
+    "section": "",
+    "text": "Today I revised the basics of calculus on D2L, and ended the day with the first “lesson” on Distributed Training (S2S) by Zach Mueller.\n\nCalculus\nI worked a bit on calculus, and there’s always something to learn, even we you go as far back as the high-school level stuff. Small example, it’s just today that I realized that \\(\\dfrac{dx}{dy} = \\dfrac{1}{\\frac{dy}{dx}}\\) (cf. the definition of derivative as a limit).\nI also got my hands back into multivariate calculus and learning useful identities.\n\n\nDistributed Training (S2S)\nFinally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using torch.distributed, we’re not yet at the triton or CUDA level, but someday we’ll be there, just watch).\nWe went from the primitives — (i)send and (i)recv — to the collective operations — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.\nI learned a few distributed training concepts, such as the rank.\nI concluded the day by running my first notebooks accelerated by more than 1 GPU on Modal. I’d done some lightly GPU accelerated stuff on Kaggle, but now I could grasp how to do stuff with multiple GPUs."
+  },
+  {
+    "objectID": "notes/probability.html#notes",
+    "href": "notes/probability.html#notes",
+    "title": "Probability",
+    "section": "Notes",
+    "text": "Notes"
+  },
+  {
+    "objectID": "notes/probability.html#proofs",
+    "href": "notes/probability.html#proofs",
+    "title": "Probability",
+    "section": "Proofs",
+    "text": "Proofs\nLater!"
+  },
+  {
+    "objectID": "notes/probability.html#algorithms",
+    "href": "notes/probability.html#algorithms",
+    "title": "Probability",
+    "section": "Algorithms",
+    "text": "Algorithms"
+  },
+  {
+    "objectID": "notes/probability.html#notation",
+    "href": "notes/probability.html#notation",
+    "title": "Probability",
+    "section": "Notation",
+    "text": "Notation"
+  },
+  {
+    "objectID": "notes/pytorch.html#notes",
+    "href": "notes/pytorch.html#notes",
+    "title": "PyTorch",
+    "section": "Notes",
+    "text": "Notes"
+  },
+  {
+    "objectID": "notes/pytorch.html#proofs",
+    "href": "notes/pytorch.html#proofs",
+    "title": "PyTorch",
+    "section": "Proofs",
+    "text": "Proofs\nLater!"
+  },
+  {
+    "objectID": "notes/pytorch.html#algorithms",
+    "href": "notes/pytorch.html#algorithms",
+    "title": "PyTorch",
+    "section": "Algorithms",
+    "text": "Algorithms"
+  },
+  {
+    "objectID": "notes/pytorch.html#notation",
+    "href": "notes/pytorch.html#notation",
+    "title": "PyTorch",
+    "section": "Notation",
+    "text": "Notation"
+  },
+  {
     "objectID": "notes/linear-algebra.html",
     "href": "notes/linear-algebra.html",
     "title": "Linear Algebra",
@@ -98,8 +231,8 @@
     "text": "\\[ \\mathbf{u} \\cdot \\mathbf{v} = \\sum_{i} u_i v_i \\]\n\nu, v = torch.arange(3), torch.arange(3)  # torch.tensor([0, 1, 2])\ntorch.dot(u, v)  # u @ v\n\ntensor(5)\n\n\n\n\n\n\\[ (\\mathbf{A}\\mathbf{u})_{i} = \\mathbf{a}_{i,:} \\cdot \\mathbf{u} = \\sum_{j} a_{i,j} u_j  \\]\n\nA, u = torch.arange(6).reshape(3, 2), torch.arange(2)\nA @ u\n\ntensor([1, 3, 5])\n\n\n\n\n\n\\[ (\\mathbf{A}\\mathbf{B})_{i,j} = \\mathbf{a}_{i,:} \\cdot \\mathbf{b}_{:, j} = \\sum_{k} a_{i,k} b_{k,j} \\]\n\nU, V = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)\nU @ V\n\ntensor([[ 3,  4,  5],\n        [ 9, 14, 19],\n        [15, 24, 33]])\n\n\n\n\n\n\\[ \\mathbf{A}\\mathbf{A}^{-1} = \\mathbf{A}^{-1}\\mathbf{A} = \\mathbf{I},\\quad \\mathbf{A} \\in \\mathbb{R}^{n \\times n} \\] Note: Might not exist if \\(\\mathbf{A}\\) is not invertible, that is \\(\\det(\\mathbf{A}) = 0\\)\n\nA = torch.randn(3, 3, dtype=torch.double)\nA_i = A.inverse()\nI = torch.eye(3, dtype=torch.double)\ntorch.allclose(A @ A_i, I), torch.allclose(A_i @ A, I)\n\n(True, True)\n\n\n\n\n\n\n\n\\[ \\det(\\mathbf{A}^\\top) = \\det(\\mathbf{A}) \\] \\[ \\det(\\mathbf{A}\\mathbf{B}) = \\det(\\mathbf{A})\\det(\\mathbf{B}) \\]\n\n\n\n\\[ A = \\operatorname{diag}(a_1, \\dots, a_n), \\quad \\det(A) = \\prod_{i=1}^n a_i \\]\n\n# using I as a mask\nI = torch.eye(3, dtype=torch.float32)\nA = torch.arange(1, 10, dtype=torch.float32).reshape(3, 3) * I  # A = diag(1, 5, 9)\ntorch.det(A), torch.det(A) == torch.diag(A).prod()\n\n(tensor(45.), tensor(True))\n\n\n\n\n\n\\[ \\det(T) = \\prod_{i} t_{ii}, \\quad \\text{where $T$ is triangular} \\]\n\nA = torch.triu(torch.arange(1, 10, dtype=torch.float32).reshape(3, 3))\ntorch.det(A), torch.det(A) == torch.diag(A).prod()\n\n(tensor(45.), tensor(True))\n\n\n\n\n\n\n\\[ \\mathbf{A} \\, \\textnormal{is orthogonal} \\iff \\mathbf{A}^\\top\\mathbf{A} = \\mathbf{I}\\: (= \\mathbf{A}\\mathbf{A}^\\top) \\]\nInterstingly,\n\\[ \\mathbf{A} \\, \\textnormal{is orthogonal} \\iff \\mathbf{A}^{-1} = \\mathbf{A}^\\top \\]"
   },
   {
-    "objectID": "notes/linear-algebra.html#formulas",
-    "href": "notes/linear-algebra.html#formulas",
+    "objectID": "notes/linear-algebra.html#definitions-formulas",
+    "href": "notes/linear-algebra.html#definitions-formulas",
     "title": "Linear Algebra",
     "section": "",
     "text": "\\[ \\mathbf{u} \\cdot \\mathbf{v} = \\sum_{i} u_i v_i \\]\n\nu, v = torch.arange(3), torch.arange(3)  # torch.tensor([0, 1, 2])\ntorch.dot(u, v)  # u @ v\n\ntensor(5)\n\n\n\n\n\n\\[ (\\mathbf{A}\\mathbf{u})_{i} = \\mathbf{a}_{i,:} \\cdot \\mathbf{u} = \\sum_{j} a_{i,j} u_j  \\]\n\nA, u = torch.arange(6).reshape(3, 2), torch.arange(2)\nA @ u\n\ntensor([1, 3, 5])\n\n\n\n\n\n\\[ (\\mathbf{A}\\mathbf{B})_{i,j} = \\mathbf{a}_{i,:} \\cdot \\mathbf{b}_{:, j} = \\sum_{k} a_{i,k} b_{k,j} \\]\n\nU, V = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)\nU @ V\n\ntensor([[ 3,  4,  5],\n        [ 9, 14, 19],\n        [15, 24, 33]])\n\n\n\n\n\n\\[ \\mathbf{A}\\mathbf{A}^{-1} = \\mathbf{A}^{-1}\\mathbf{A} = \\mathbf{I},\\quad \\mathbf{A} \\in \\mathbb{R}^{n \\times n} \\] Note: Might not exist if \\(\\mathbf{A}\\) is not invertible, that is \\(\\det(\\mathbf{A}) = 0\\)\n\nA = torch.randn(3, 3, dtype=torch.double)\nA_i = A.inverse()\nI = torch.eye(3, dtype=torch.double)\ntorch.allclose(A @ A_i, I), torch.allclose(A_i @ A, I)\n\n(True, True)\n\n\n\n\n\n\n\n\\[ \\det(\\mathbf{A}^\\top) = \\det(\\mathbf{A}) \\] \\[ \\det(\\mathbf{A}\\mathbf{B}) = \\det(\\mathbf{A})\\det(\\mathbf{B}) \\]\n\n\n\n\\[ A = \\operatorname{diag}(a_1, \\dots, a_n), \\quad \\det(A) = \\prod_{i=1}^n a_i \\]\n\n# using I as a mask\nI = torch.eye(3, dtype=torch.float32)\nA = torch.arange(1, 10, dtype=torch.float32).reshape(3, 3) * I  # A = diag(1, 5, 9)\ntorch.det(A), torch.det(A) == torch.diag(A).prod()\n\n(tensor(45.), tensor(True))\n\n\n\n\n\n\\[ \\det(T) = \\prod_{i} t_{ii}, \\quad \\text{where $T$ is triangular} \\]\n\nA = torch.triu(torch.arange(1, 10, dtype=torch.float32).reshape(3, 3))\ntorch.det(A), torch.det(A) == torch.diag(A).prod()\n\n(tensor(45.), tensor(True))\n\n\n\n\n\n\n\\[ \\mathbf{A} \\, \\textnormal{is orthogonal} \\iff \\mathbf{A}^\\top\\mathbf{A} = \\mathbf{I}\\: (= \\mathbf{A}\\mathbf{A}^\\top) \\]\nInterstingly,\n\\[ \\mathbf{A} \\, \\textnormal{is orthogonal} \\iff \\mathbf{A}^{-1} = \\mathbf{A}^\\top \\]"
@@ -130,13 +263,13 @@
     "href": "notes/linear-algebra.html#notation",
     "title": "Linear Algebra",
     "section": "Notation",
-    "text": "Notation\n\n\\(x\\): a scalar\n\\(\\mathbf{x}\\): a vector\n\\(\\mathbf{X}\\): a matrix\n\\(x_i\\): the \\(i^\\textrm{th}\\) element of vector \\(\\mathbf{x}\\)\n\\(x_{i,j}\\): the element of matrix \\(\\mathbf{X}\\) at row \\(i\\) and column \\(j\\)\n\\(\\mathbf{x}_{i, :}\\): the \\(i^\\textrm{th}\\) row-vector of \\(\\mathbf{X}\\)\n\\(\\mathbf{x}_{:,j}\\): the \\(j^\\textrm{th}\\) column-vector of \\(\\mathbf{X}\\)\n\\(\\operatorname{diag}(a_1, \\dots, a_n)\\): a diagonal matrix\n\\(\\mathbf{I}\\): the indentity matrix"
+    "text": "Notation\n\n\\(x\\): a scalar\n\\(\\mathbf{x}\\): a vector\n\\(\\mathbf{X}\\): a matrix\n\\(x_i\\): the \\(i^\\textrm{th}\\) element of vector \\(\\mathbf{x}\\)\n\\(x_{i,j}\\): the element of matrix \\(\\mathbf{X}\\) at row \\(i\\) and column \\(j\\)\n\\(\\mathbf{x}_{i, :}\\): the \\(i^\\textrm{th}\\) row-vector of \\(\\mathbf{X}\\)\n\\(\\mathbf{x}_{:,j}\\): the \\(j^\\textrm{th}\\) column-vector of \\(\\mathbf{X}\\)\n\\(\\operatorname{diag}(a_1, \\dots, a_n)\\): a diagonal matrix\n\\(\\mathbf{I}\\): the indentity matrix\n\\(\\mathbf{A}^{-1}\\): the inverse of a matrix"
   },
   {
     "objectID": "notes/index.html",
     "href": "notes/index.html",
     "title": "Notes",
     "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nLinear Algebra\n\n\n\nmath\n\n\n\nNotes, formulas and proofs for me to reference later. This is an evolving document, so it might at times be incomplete\n\n\n\n\n\nAug 29, 2025\n\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\nA few notes on Typescript for my future self.\n\n\n\n\n\nFeb 14, 2025\n\n\n\n\n\nNo matching items"
+    "text": "rss\n\n\n\n\n\n\n\n\n\nProbability\n\n\n\nmath\n\n\n\nAll things regarding probability, Bayesian or frequentist.\n\n\n\n\n\nSep 4, 2025\n\n\n\n\n\n\n\nDistributed Training\n\n\n\nmle\n\npython\n\n\n\nDistributed training study notes and algorithms.\n\n\n\n\n\nSep 4, 2025\n\n\n\n\n\n\n\nPyTorch\n\n\n\npython\n\nmle\n\n\n\ntorch cheatsheet, common methods or tricks.\n\n\n\n\n\nSep 4, 2025\n\n\n\n\n\n\n\nCalculus\n\n\n\nmath\n\n\n\nAll things calculus, differential or integral.\n\n\n\n\n\nSep 4, 2025\n\n\n\n\n\n\n\nLinear Algebra\n\n\n\nmath\n\n\n\nAll things Linear Algebra, matrices, vectors etc.\n\n\n\n\n\nSep 4, 2025\n\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\nA few notes on Typescript for my future self.\n\n\n\n\n\nFeb 15, 2025\n\n\n\n\n\nNo matching items"
   }
 ]

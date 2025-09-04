@@ -6,6 +6,10 @@
   {
     "listing": "/journal/index.html",
     "items": [
+      "/journal/2025-09-04.html",
+      "/journal/2025-09-03.html",
+      "/journal/2025-09-02.html",
+      "/journal/2025-09-01.html",
       "/journal/2025-08-29.html",
       "/journal/2025-08-28.html"
     ]
@@ -13,6 +17,10 @@
   {
     "listing": "/notes/index.html",
     "items": [
+      "/notes/probability.html",
+      "/notes/distributed-training.html",
+      "/notes/pytorch.html",
+      "/notes/calculus.html",
       "/notes/linear-algebra.html",
       "/notes/typescript.html"
     ]

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-08-29">
-<meta name="description" content="(Re-)Developping intuition around Linear Algebra">
+<meta name="dcterms.date" content="2025-09-04">
+<meta name="description" content="Quick evening study session on DDP with torch.distributed primitives">
 
-<title>Started reading The Manga Guide to Linear Algebra – Theo Pomies</title>
+<title>Going through DDP with S2S – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,38 +71,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta name="twitter:title" content="Started reading The Manga Guide to Linear Algebra – Theo Pomies">
-<meta name="twitter:description" content="(Re-)Developping intuition around Linear Algebra">
+<meta name="twitter:title" content="Going through DDP with S2S – Theo Pomies">
+<meta name="twitter:description" content="Quick evening study session on DDP with torch.distributed primitives">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -153,11 +124,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-manga-guide-to-linear-algebra" id="toc-the-manga-guide-to-linear-algebra" class="nav-link active" data-scroll-target="#the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</a>
-  <ul class="collapse">
-  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">Why?</a></li>
-  <li><a href="#what-i-learned-so-far" id="toc-what-i-learned-so-far" class="nav-link" data-scroll-target="#what-i-learned-so-far">What I learned so far</a></li>
-  </ul></li>
+  <li><a href="#ddp" id="toc-ddp" class="nav-link active" data-scroll-target="#ddp">DDP</a></li>
   </ul>
 </nav>
     </div>
@@ -166,15 +133,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Started reading The Manga Guide to Linear Algebra</h1>
+<h1 class="title">Going through DDP with S2S</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">math</div>
+    <div class="quarto-category">python</div>
+    <div class="quarto-category">mle</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    (Re-)Developping intuition around Linear Algebra
+    Quick evening study session on DDP with torch.distributed primitives
   </div>
 </div>
 
@@ -185,7 +153,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 29, 2025</p>
+      <p class="date">September 4, 2025</p>
     </div>
   </div>
   
@@ -197,24 +165,17 @@ window.Quarto = {
 </header>
 
 
-<section id="the-manga-guide-to-linear-algebra" class="level2">
-<h2 class="anchored" data-anchor-id="the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</h2>
-<section id="why" class="level3">
-<h3 class="anchored" data-anchor-id="why">Why?</h3>
-<p>Yes, this might sound weird if you don’t know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of <a href="https://www.amazon.com/Manga-Guide-Linear-Algebra/dp/1593274130" target="_blank">The Manga Guide to Linear Algebra</a>.</p>
-<p>It’s pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.</p>
-<p>You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too “theorical”, not concrete enough for me, I needed to <em>grok</em> the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.</p>
-<p>Now that I’ve become a SWE, I’ve seen the practical uses of such Math, and I now find myself <em>needing</em> more of it! So, step by step I’ll try to go from intuition and basics (this book) -&gt; implementing existing algorithms -&gt; proofs and more advanced formulas and theorem (some other textbook like <a href="https://linear.axler.net/LADR4e.pdf" target="_blank">Linear Algebra Done Right</a>) -&gt; understanding ML architecture choices -&gt; being able to invent/discover new arch and techniques?</p>
-</section>
-<section id="what-i-learned-so-far" class="level3">
-<h3 class="anchored" data-anchor-id="what-i-learned-so-far">What I learned so far</h3>
-<p>Being somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.</p>
-<p>The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above. There’s a technique based on the generalisation of the formula <span class="math inline">\(\det(\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}\)</span>.</p>
-<p>Along with the interpretation/intuition for the determinant (consolidated by 3b1b).</p>
-<p>But there’s also <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">an algorithm (LU decomposition)</a> used in computer science based on a set of rules for determinant and gaussian reduction.</p>
+<p>DDP -&gt; parallelizing data</p>
+<p>Types of parallelism DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)</p>
+<p>Pipeline P -&gt; layers on gpus so they run on a chain</p>
+<p>Tensor P (mostly intra-node) -&gt; distributes a single matrix / splits a single layer</p>
+<section id="ddp" class="level1">
+<h1>DDP</h1>
+<p>n gpus = n replicants of the model</p>
+<p>_ notebook _</p>
+<p>Try to understand data sharding / sharded sampling (see torch / accelerate)</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
