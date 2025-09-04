@@ -9,6 +9,7 @@ listing:
       - date
       - title
       - description
+      - reading-time
 ---
 
 [rss](index.xml)

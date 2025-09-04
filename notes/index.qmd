@@ -7,7 +7,6 @@ listing:
     feed: true
     fields:
       - categories
-      - reading-time
       - date
       - title
       - description

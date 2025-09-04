@@ -1,0 +1,15 @@
+---
+title: "Posts"
+description: "Posts and articles, more thought-out, when I have something to say or try to explain"
+listing:
+    sort: "date desc"
+    feed: true
+    fields:
+      - categories
+      - date
+      - title
+      - description
+      - reading-time
+---
+
+[rss](index.xml)
