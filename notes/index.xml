@@ -12,39 +12,114 @@
 <generator>quarto-1.7.34</generator>
 <lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>(Back to) Khan Academy</title>
+  <title>Linear Algebra</title>
   <dc:creator>Theo POMIES</dc:creator>
-  <link>https://theopomies.com/notes/khan-academy.html</link>
+  <link>https://theopomies.com/notes/linear-algebra.html</link>
   <description><![CDATA[ 
 
 
 
 
+<section id="formulas" class="level2">
+<h2 class="anchored" data-anchor-id="formulas">Formulas</h2>
+<section id="dot-product" class="level3">
+<h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Cmathbf%7Bu%7D%20%5Ccdot%20%5Cmathbf%7Bv%7D%20=%20%5Csum_%7Bi%7D%20u_i%20v_i%20"></p>
+<div id="24243b2f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">u, v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>), torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># torch.tensor([0, 1, 2])</span></span>
+<span id="cb1-2">torch.dot(u, v)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># u @ v</span></span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="189">
+<pre><code>tensor(5)</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-vector-product" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%20(%5Cmathbf%7BA%7D%5Cmathbf%7Bu%7D)_%7Bi%7D%20=%20%5Cmathbf%7Ba%7D_%7Bi,:%7D%20%5Ccdot%20%5Cmathbf%7Bu%7D%20=%20%5Csum_%7Bj%7D%20a_%7Bi,j%7D%20u_j%20%20"></p>
+<div id="49925ee8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">u, v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>).reshape(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb3-2">u <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">@</span> v</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="190">
+<pre><code>tensor([3, 4, 5])</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%20(%5Cmathbf%7BA%7D%5Cmathbf%7BB%7D)_%7Bi,j%7D%20=%20%5Cmathbf%7Ba%7D_%7Bi,:%7D%20%5Ccdot%20%5Cmathbf%7Bb%7D_%7B:,%20j%7D%20=%20%5Csum_%7Bk%7D%20a_%7Bi,k%7D%20b_%7Bk,j%7D%20"></p>
+<div id="49b65a13" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">u, v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>).reshape(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>).reshape(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb5-2">u <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">@</span> v</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="191">
+<pre><code>tensor([[ 3,  4,  5],
+        [ 9, 14, 19],
+        [15, 24, 33]])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+</section>
+<section id="proofs" class="level2">
+<h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
+</section>
+<section id="notation" class="level2">
+<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?x">: a scalar</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D">: a vector</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D">: a matrix</li>
+<li><img src="https://latex.codecogs.com/png.latex?x_i">: the <img src="https://latex.codecogs.com/png.latex?i%5E%5Ctextrm%7Bth%7D"> element of vector <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?x_%7Bi,j%7D">: the element of matrix <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> at row <img src="https://latex.codecogs.com/png.latex?i"> and column <img src="https://latex.codecogs.com/png.latex?j"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D_%7Bi,%20:%7D">: the <img src="https://latex.codecogs.com/png.latex?i%5E%5Ctextrm%7Bth%7D"> row-vector of <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D_%7B:,j%7D">: the <img src="https://latex.codecogs.com/png.latex?j%5E%5Ctextrm%7Bth%7D"> column-vector of <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"></li>
+</ul>
 
 
+</section>
 
  ]]></description>
   <category>math</category>
-  <guid>https://theopomies.com/notes/khan-academy.html</guid>
-  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Dive Into Deep Learning</title>
-  <dc:creator>Theo POMIES</dc:creator>
-  <link>https://theopomies.com/notes/dive-into-deep-learning.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
- ]]></description>
-  <category>math</category>
-  <category>ml</category>
-  <category>python</category>
-  <guid>https://theopomies.com/notes/dive-into-deep-learning.html</guid>
+  <guid>https://theopomies.com/notes/linear-algebra.html</guid>
   <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
 </item>
 <item>

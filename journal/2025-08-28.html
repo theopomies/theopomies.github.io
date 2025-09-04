@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="All my notes. Read them at your own risk.">
+<meta name="dcterms.date" content="2025-08-28">
+<meta name="description" content="Today I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process">
 
-<title>Notes – Theo Pomies</title>
+<title>Setting up this blog! – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +33,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../img/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -71,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-categories','listing-reading-time','listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -131,8 +101,8 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="Theo Pomies" href="index.xml" data-external="1"><meta name="twitter:title" content="Notes – Theo Pomies">
-<meta name="twitter:description" content="All my notes. Read them at your own risk.">
+<meta name="twitter:title" content="Setting up this blog! – Theo Pomies">
+<meta name="twitter:description" content="Today I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -157,7 +127,7 @@ window.Quarto = {
 <span class="menu-text">posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../notes/index.html" aria-current="page"> 
+    <a class="nav-link" href="../notes/index.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item">
@@ -178,20 +148,29 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#this-blog" id="toc-this-blog" class="nav-link active" data-scroll-target="#this-blog">This “Blog”</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Notes</h1>
-</div>
+<h1 class="title">Setting up this blog!</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    All my notes. Read them at your own risk.
+    Today I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process
   </div>
 </div>
 
@@ -199,6 +178,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 28, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -208,56 +193,18 @@ window.Quarto = {
 </header>
 
 
-<p><a href="index.xml">rss</a></p>
+<section id="this-blog" class="level2">
+<h2 class="anchored" data-anchor-id="this-blog">This “Blog”</h2>
+<p>Today’s the day!</p>
+<p>I’ve decided to document my learning process to “transition” from SWE / using AI <span class="math inline">\(\longrightarrow\)</span> MLE/Applied Research/ building and training AI.</p>
+<p>After experimenting with <a href="https://marimo.io" target="_blank">marimo</a>, loving it and <a href="https://github.com/marimo-team/marimo/issues/6172" target="_blank">struggling</a> to make a blog out of marimo notebooks and experiments, I’ve stumbled upon <a href="https://www.fast.ai/posts/2020-01-20-nb2md.html" target="_blank">this article</a> by <a href="https://x.com/jeremyphoward" target="_blank">Jeremy Howard</a> encouraging me to write my blog via notebooks + <a href="https://quarto.org" target="_blank">Quarto</a>.</p>
+<p>It also happens that I had just purchased the <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale course/conference</a> by the brilliant <a href="https://x.com/thezachmueller" target="_blank">Zach Mueller</a> and <a href="https://muellerzr.github.io" target="_blank">his blog</a> was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, <a href="https://www.fast.ai" target="_blank">fast.ai</a>.</p>
+<p>So there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1756984474952" data-listing-date-modified-sort="1756944000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/linear-algebra.html" class="no-external">Linear Algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-</div>
-<div class="metadata">
-<a href="../notes/linear-algebra.html" class="no-external">
-<div class="listing-date">
-Aug 29, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="dHlwZXNjcmlwdA==" data-listing-date-sort="1739491200000" data-listing-file-modified-sort="1756984474952" data-listing-date-modified-sort="1739577600000" data-listing-reading-time-sort="2" data-listing-word-count-sort="249">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/typescript.html" class="no-external">On Typescript</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dHlwZXNjcmlwdA=='); return false;">typescript</div>
-
-</div>
-</div>
-<div class="metadata">
-<a href="../notes/typescript.html" class="no-external">
-<div class="listing-date">
-Feb 14, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

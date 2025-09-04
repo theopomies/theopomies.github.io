@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Theo Pomies</title>
+<link>https://theopomies.com/journal/</link>
+<atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
+<description>Daily journal, accountability management and learning tracking.</description>
+<generator>quarto-1.7.34</generator>
+<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Started reading The Manga Guide to Linear Algebra</title>
+  <link>https://theopomies.com/journal/2025-08-29.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="the-manga-guide-to-linear-algebra" class="level2">
+<h2 class="anchored" data-anchor-id="the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</h2>
+<section id="why" class="level3">
+<h3 class="anchored" data-anchor-id="why">Why?</h3>
+<p>Yes, this might sound weird if you don’t know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of <a href="https://www.amazon.com/Manga-Guide-Linear-Algebra/dp/1593274130" target="_blank">The Manga Guide to Linear Algebra</a>.</p>
+<p>It’s pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.</p>
+<p>You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too “theorical”, not concrete enough for me, I needed to <em>grok</em> the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.</p>
+<p>Now that I’ve become a SWE, I’ve seen the practical uses of such Math, and I now find myself <em>needing</em> more of it! So, step by step I’ll try to go from intuition and basics (this book) -&gt; implementing existing algorithms -&gt; proofs and more advanced formulas and theorem (some other textbook like <a href="https://linear.axler.net/LADR4e.pdf" target="_blank">Linear Algebra Done Right</a>) -&gt; understanding ML architecture choices -&gt; being able to invent/discover new arch and techniques?</p>
+</section>
+<section id="what-i-learned-so-far" class="level3">
+<h3 class="anchored" data-anchor-id="what-i-learned-so-far">What I learned so far</h3>
+<p>Being somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.</p>
+<p>The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above. There’s a technique based on the generalisation of the formula <img src="https://latex.codecogs.com/png.latex?%5Cdet(%5Cmathbf%7BA%7D)%20=%20a_%7B11%7Da_%7B22%7D%20-%20a_%7B12%7Da_%7B21%7D">.</p>
+<p>But there’s also <a href="../notes/linear-algebra.html">an algorithm</a> used in computer science based on a set of rules for determinant and gaussian reduction.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>math</category>
+  <guid>https://theopomies.com/journal/2025-08-29.html</guid>
+  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Setting up this blog!</title>
+  <link>https://theopomies.com/journal/2025-08-28.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="this-blog" class="level2">
+<h2 class="anchored" data-anchor-id="this-blog">This “Blog”</h2>
+<p>Today’s the day!</p>
+<p>I’ve decided to document my learning process to “transition” from SWE / using AI <img src="https://latex.codecogs.com/png.latex?%5Clongrightarrow"> MLE/Applied Research/ building and training AI.</p>
+<p>After experimenting with <a href="https://marimo.io" target="_blank">marimo</a>, loving it and <a href="https://github.com/marimo-team/marimo/issues/6172" target="_blank">struggling</a> to make a blog out of marimo notebooks and experiments, I’ve stumbled upon <a href="https://www.fast.ai/posts/2020-01-20-nb2md.html" target="_blank">this article</a> by <a href="https://x.com/jeremyphoward" target="_blank">Jeremy Howard</a> encouraging me to write my blog via notebooks + <a href="https://quarto.org" target="_blank">Quarto</a>.</p>
+<p>It also happens that I had just purchased the <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale course/conference</a> by the brilliant <a href="https://x.com/thezachmueller" target="_blank">Zach Mueller</a> and <a href="https://muellerzr.github.io" target="_blank">his blog</a> was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, <a href="https://www.fast.ai" target="_blank">fast.ai</a>.</p>
+<p>So there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-08-28.html</guid>
+  <pubDate>Thu, 28 Aug 2025 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
