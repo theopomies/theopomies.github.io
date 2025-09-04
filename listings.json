@@ -1,5 +1,9 @@
 [
   {
+    "listing": "/posts/index.html",
+    "items": []
+  },
+  {
     "listing": "/journal/index.html",
     "items": [
       "/journal/2025-08-29.html",

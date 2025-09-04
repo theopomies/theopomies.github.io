@@ -49,11 +49,18 @@
     "text": "Explanations\n\nNarrowing over using as\nSuppose you have a function that takes a number\nfunction double(a: number) {\n    return a * 2;\n}\nAnd you have a variable that could be a number or a string\nfunction getNumberOrString(): number | string {\n    return Math.random() &gt; 0.5 ? 1 : \"1\";\n}\nconst a: number | string = getNumberOrString();\nTypescript will allow you to use as to assert the variable to a number (this is one of the ways that TypeScript is not sound)\nconst result: number = double(a as number);\nBut this not correct/sound at runtime!\nThe correct way to do this is to narrow the type with a check (if/else/early return).\nif (typeof a === \"number\") {\n    const result = double(a);\n}"
   },
   {
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "rss\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "journal/index.html",
     "href": "journal/index.html",
     "title": "Journal",
     "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\npython\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n\n\n\n\nNo matching items"
+    "text": "rss\n\n\n\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\npython\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n2 min\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n1 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "journal/2025-08-28.html",
@@ -130,6 +137,6 @@
     "href": "notes/index.html",
     "title": "Notes",
     "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nLinear Algebra\n\n\n\nmath\n\n\n\nNotes, formulas and proofs for me to reference later. This is an evolving document, so it might at times be incomplete\n\n\n\n\n\nAug 29, 2025\n\n4 min\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\nA few notes on Typescript for my future self.\n\n\n\n\n\nFeb 14, 2025\n\n2 min\n\n\n\n\nNo matching items"
+    "text": "rss\n\n\n\n\n\n\n\n\n\nLinear Algebra\n\n\n\nmath\n\n\n\nNotes, formulas and proofs for me to reference later. This is an evolving document, so it might at times be incomplete\n\n\n\n\n\nAug 29, 2025\n\n\n\n\n\n\n\nOn Typescript\n\n\n\ntypescript\n\n\n\nA few notes on Typescript for my future self.\n\n\n\n\n\nFeb 14, 2025\n\n\n\n\n\nNo matching items"
   }
 ]
