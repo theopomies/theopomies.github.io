@@ -118,7 +118,7 @@
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
 <section id="differential-calculus" class="level3">
 <h3 class="anchored" data-anchor-id="differential-calculus">Differential Calculus</h3>
-<p>As the name states, we analyze differences in the output(s) of a function based on differences in the input(s) <img src="https://latex.codecogs.com/png.latex?%20%5Cdfrac%7Bdy%7D%7Bdx%7D%20=%20%5Clim_%7Bh%20%5Crightarrow%20%5Cinfty%7D%20%5Cdfrac%7Bf(x%20+%20h)%20-%20f(x)%7D%7Bh%7D%20"></p>
+<p>As the name states, we analyze differences in the output(s) of a function based on differences in the input(s) <img src="https://latex.codecogs.com/png.latex?%20%5Cdfrac%7Bdy%7D%7Bdx%7D%20=%20%5Clim_%7Bh%20%5Crightarrow%200%7D%20%5Cdfrac%7Bf(x%20+%20h)%20-%20f(x)%7D%7Bh%7D%20"></p>
 <p>A function is said to be differentiable at <img src="https://latex.codecogs.com/png.latex?x"> if this limit exists, and differentiable on an interval if it exists at any <img src="https://latex.codecogs.com/png.latex?x"> in this interval.</p>
 <section id="common-derivatives" class="level4">
 <h4 class="anchored" data-anchor-id="common-derivatives">Common Derivatives</h4>
