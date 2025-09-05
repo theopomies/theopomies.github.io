@@ -1,0 +1,24 @@
+---
+title: Ray / Anyscale workshop with S2S
+description: An enlighting workshop to learn Ray with Robert Nishihara of Anyscale
+categories: [python, mle]
+date: 2025-09-05
+---
+
+### Going down the ray rabbit hole
+
+Today we had a workshop on [Ray](https://ray.io){target=_blank} x [Anyscale](https://anyscale.com){target=_blank} by [Robert Nishihara](https://x.com/robertnishihara){target=_blank} — co-founder and CEO of Anyscale, co-creator of Ray — himself!
+
+At first I thought this was just gonna be a cloud ad. Like "look this is our platform, here's how to use it, please do" (lol). I didn't know Ray, since I don't know much — yet — about distributed workloads.
+
+The workshop was nice, we covered Ray Data and Ray Train, their data and training libraries. These looked like powerful stuff, but I was still cautious about it, they looked like some frameworks that were too high level, too much abstraction for me, à la fast.ai (it's good, but too high level for me sometimes, I like the _from scratch_ feel of some other stuff, the tweakability).
+
+During the workshop someone asked about using Ray + vLLM (LLM inference engine). I thought "one's for training, the other for inference, I don't see the intersection here". Oh boy was I wrong. After seing the Anyscale employes answer, I realized I didn't fully grasp what Ray was and what it offered. So, naturally, I started digging. Know I know that Ray is fully OSS, it's a library for distributed pythonic applications. Ray Core is _just_ that, and that's already a lot, it allows us to create remote Tasks and Actors, very good parallel / distributed primitives. Then they built higher-level utilities above that, with Ray {Data, Train, Tune and Serve}.
+
+I had badly misjuged it, I feel like we're gonna become very close friends.
+
+Before I use a lib I like to know what it does and how it does it, but once I'll have built a minimal toy version, it's gonna be you and me buddy.
+
+### Lapace Expansion
+
+To finish the day, I wrote a quick Laplace Expansion function in DeepML.
