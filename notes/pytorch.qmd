@@ -12,14 +12,10 @@ categories: [python, mle]
 import torch
 ```
 
-## Definitions & Formulas
+## Functions / Methods / Classes
 
 ## Notes
 
-## Proofs
-
 Later!
 
-## Algorithms
-
-## Notation
+## Terminology

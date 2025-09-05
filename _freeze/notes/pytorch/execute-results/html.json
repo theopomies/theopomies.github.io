@@ -1,8 +1,8 @@
 {
-  "hash": "cc6e547e3e3e33d71bfeefe6177741d1",
+  "hash": "477a95adc8e211d122a81686381b5a6a",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: PyTorch\nauthor: Theo POMIES\ndate: 2025-09-02\ndate-modified: 2025-09-04\ndescription: torch cheatsheet, common methods or tricks.\ncategories: [python, mle]\n---\n\n\n\n## Definitions & Formulas\n\n## Notes\n\n## Proofs\n\nLater!\n\n## Algorithms\n\n## Notation\n\n",
+    "markdown": "---\ntitle: PyTorch\nauthor: Theo POMIES\ndate: 2025-09-02\ndate-modified: 2025-09-04\ndescription: torch cheatsheet, common methods or tricks.\ncategories: [python, mle]\n---\n\n\n\n## Functions / Methods / Classes\n\n## Notes\n\nLater!\n\n## Terminology\n\n",
     "supporting": [
       "pytorch_files"
     ],

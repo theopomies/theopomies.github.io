@@ -1,25 +1,26 @@
 ---
-title: Going through DDP with S2S 
-description: Quick evening study session on DDP with torch.distributed primitives
+title: Going through DDP with S2S
+description: Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives
 categories: [python, mle]
 date: 2025-09-04
 ---
 
-DDP -> parallelizing data
+### Finishing the preliminaries for D2L
 
-Types of parallelism
-DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)
+Well, finally I'm done with the "catching up" for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university,  I didn't _learn_ anything new here, but it's always good to refresh some knowledge, and re-derive formulas, to have them in mind and _grok_ or _accept_ them as true. Like the classic [Bayes Theorem](#todo), I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.
 
-Pipeline P -> layers on gpus so they run on a chain
+### Evening study session on DDP
 
-Tensor P (mostly intra-node) -> distributes a single matrix / splits a single layer
+We discussed the [different types of parallelism](/notes/distributed-training.qmd#algorithms-techniques) (for ML distributed training):
 
+* (Distributed) Data Parallelism (**DDP**): Each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients, perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
+* Pipeline Parallelism (**PP**): We split the model across different ranks without splitting the layers (so we split _along the layers_). That is _inter-layer_ parallelism. An exaggeration would be having a model with 2 hidden layers and 1 output layer split across 3 GPUs.
+* Tensor Parallelism (**TP**): We split the layers of the model across different ranks, that's _intra-layer_ parallelism. This could be useful if some layers are so large they don't even fit in a single device. To reduce overhead, it’s advisable that even if a layer is split across different _ranks_, all parts remain on the same _node_. (See [terminology](/notes/distributed-training.qmd#terminology))
 
-# DDP
+There's also
 
-n gpus = n replicants of the model
+* Expert Parallelism (**EP**): For Mixture-of-Experts (**MoE**) we can split the experts on different devices.
 
+We didn't discuss much this last one but I knew about it already and searched a bit to know more about it.
 
-_ notebook _
-
-Try to understand data sharding / sharded sampling (see torch / accelerate)
+Last but not least we discussed the issue of DataLoaders / Samplers, and the importance of data sharding. They are a mean of "splitting" efficiently our dataset so that each rank sees a different mini-batch of data. Also, each process only loads its _shard_ so it's more memory/communication efficient.

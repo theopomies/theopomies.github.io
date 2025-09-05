@@ -292,8 +292,10 @@ print(f"After: {tensors[2]}")
 
 Barrier (`torch.distributed.barrier(...)`) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of `.join()` for threads or processes)
 
-## Algorithms
+## Algorithms / Techniques
 ### DDP — Distributed Data Parallelism
+
+### Data Sharding
 
 ## Notes
 
