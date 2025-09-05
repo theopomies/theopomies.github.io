@@ -17,7 +17,7 @@ I also got my hands back into multivariate calculus and learning useful identiti
 
 Finally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using `torch.distributed`, we're not yet at the triton or CUDA level, but someday we'll be there, just watch).
 
-We went from the primitives — (i)send and (i)recv — to the collective operations — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.
+We went from the [primitives](/notes/distributed-training.qmd#basics-point-point) — (i)send and (i)recv — to the [collective operations](/notes/distributed-training.qmd#collective-operations) — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.
 
 I learned a few distributed training concepts, such as the _rank_.
 

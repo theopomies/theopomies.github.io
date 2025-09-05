@@ -2,7 +2,7 @@
 title: Distributed Training
 author: Theo POMIES
 date: 2025-09-02
-date-modified: 2025-09-04
+date-modified: 2025-09-05
 description: Distributed training study notes and algorithms.
 categories: [mle, python]
 ---
@@ -10,10 +10,300 @@ categories: [mle, python]
 ```{python}
 # | echo: false
 import torch
+import torch.distributed as dist
+
+rank = 0
 ```
 
+## Functions / Methods
+### Basics (Point-Point)
+`send` and `recv` to send or receive a tensor synchronously — from/to a single rank.
+
+And their async counterparts, `isend` and `irecv`.
+```{python}
+# | eval: false
+rank = dist.get_rank()
+tensor = torch.arange(3) if rank == 0 else torch.zeros(3)
+
+print(f"Before: {tensor}")
+
+if rank == 0:
+    request = dist.isend(tensor, 1)
+    ...
+    # can do something else, like more sends for example!
+    ...
+    request.wait() # now block until it's been fulfilled
+elif rank == 1:
+    dist.recv(tensor, 0) # recv is synchronous, so it will block until tensor is fully received
+
+print(f"After: {tensor}")
+```
+```{python}
+# | echo: false
+tensor = torch.arange(3)
+zeros = torch.zeros(3)
+
+print("========== rank 0 ==========")
+print(f"Before: {tensor}")
+print(f"After: {tensor}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {zeros}")
+print(f"After: {tensor}")
+```
+
+### Collective Operations
+
+Collective operations allow communication (data-transfer) from All->Point, Point->All and All->All.
+
+#### Point->All
+##### Broadcast
+
+Broadcast (`torch.distributed.broadcast(tensor, src, ...)`) allows a rank to _broadcast_ a tensor to the whole group.
+
+```{python}
+# | eval: false
+tensor = torch.arange(3) if rank == 0 else torch.zeros(3)
+
+print(f"Before: {tensor}")
+
+dist.broadcast(tensor, src=0)
+
+print(f"After: {tensor})
+```
+```{python}
+# | echo: false
+tensor = torch.arange(3)
+zeros = torch.zeros(3)
+
+print("========== rank 0 ==========")
+print(f"Before: {tensor}")
+print(f"After: {tensor}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {zeros}")
+print(f"After: {tensor}\n")
+
+print("========== rank 2 ==========")
+print(f"Before: {zeros}")
+print(f"After: {tensor}")
+```
+
+##### Scatter
+
+Scatter (`torch.distributed.scatter(tensor, scatter_list, src, ...)`) allows us to _scatter_ — split and broadcast different chunks of — a tensor from a rank to the whole group.
+
+```{python}
+# | eval: false
+tensor = torch.zeros(3)
+scatter_list = [torch.arange(3 * i, 3 * i + 3) if rank == 0 else torch.zeros(3) for i in range(world_size)]
+
+print(f"Scatter list: {scatter_list}")
+print(f"Before: {tensor}")
+
+dist.scatter(tensor, scatter_list, src=0)
+
+print(f"After: {tensor}")
+```
+```{python}
+# | echo: false
+tensor = torch.zeros(3)
+scatter_list = [torch.arange(3 * i, 3 * i + 3) for i in range(2)]
+scatter_list_zeros = [torch.zeros(3) for _ in range(2)]
+
+print("========== rank 0 ==========")
+print(f"Scatter list: {scatter_list}")
+print(f"Before: {zeros}")
+print(f"After: {scatter_list[0]}\n")
+
+print("========== rank 1 ==========")
+print(f"Scatter list: {scatter_list_zeros}")
+print(f"Before: {zeros}")
+print(f"After: {scatter_list[1]}")
+```
+
+#### All->Point
+##### Reduce
+
+Reduce (`torch.distributed.reduce(tensor, dst, op, ...)`) performs a reduction operation (N->1, eg. sum, max, min, prod, ...) and the `dst` rank receives the result.
+
+```{python}
+# | eval: false
+tensor = torch.arange(3) + rank * 3
+
+print(f"Before: {tensor}")
+
+dist.reduce(tensor, dst=0, op=dist.ReduceOp.SUM)
+
+print(f"After: {tensor}")
+```
+```{python}
+# | echo: false
+tensors = [ torch.arange(3) + rank * 3 for rank in range(2)]
+
+print("========== rank 0 ==========")
+print(f"Before: {tensors[0]}")
+print(f"After: {tensors[0] + tensors[1]}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {tensors[1]}")
+print(f"After: {tensors[1]}")
+```
+
+##### Gather
+
+Gather (`torch.distributed.gather(tensor, gather_list, dst, ...)`) _gathers_ — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.
+
+```{python}
+# | eval: false
+tensor = torch.arange(3) + rank * 3
+gather_list = [torch.zeros(3) for _ in range(world_size)]
+
+print(f"Before: {tensor}")
+print(f"Before: {gather_list}")
+
+dist.gather(tensor, gather_list, dst=0)
+
+print(f"After: {gather_list}")
+```
+```{python}
+# | echo: false
+tensors = [ torch.arange(3) + rank * 3 for rank in range(2)]
+gather_lists = [
+    [torch.arange(3) + rank * 3 for rank in range(2)],
+    [torch.zeros(3) for _ in range(2)],
+]
+
+print("========== rank 0 ==========")
+print(f"Before: {tensors[0]}")
+print(f"Before: {gather_lists[1]}")
+print(f"Before: {tensors[1]}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {gather_lists[1]}")
+print(f"After: {gather_lists[0]}")
+print(f"After: {gather_lists[1]}")
+```
+
+#### All->All
+##### All-Reduce
+
+All-Reduce (`torch.distributed.all_reduce(tensor, op, ...)`) performs a _reduction_ operation, like `reduce`, but every rank receives the result — rather than a single one with `reduce`. Think of it as `reduce` + `broadcast` — though it is optimized by techniques like ring-reduce.
+
+```{python}
+# | eval: false
+tensor = torch.arange(3) + rank * 3
+
+print(f"Before: {tensor}")
+
+dist.all_reduce(tensor, op=dist.ReduceOp.SUM)
+
+print(f"After: {tensor}")
+```
+```{python}
+# | echo: false
+tensors = [ torch.arange(3) + rank * 3 for rank in range(2)]
+
+print("========== rank 0 ==========")
+print(f"Before: {tensors[0]}")
+print(f"After: {tensors[0] + tensors[1]}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {tensors[1]}")
+print(f"After: {tensors[0] + tensors[1]}")
+```
+
+##### All-Gather
+
+All-Gather (`torch.distributed.all_gather(tensor, gather_list, ...)`) _gathers_ — pulls — a tensor, of the same size, from every rank and stores them in a list in _every_ rank. Think of it as running `gather` on all ranks.
+
+```{python}
+# | eval: false
+tensor = torch.arange(3) + rank * 3
+gather_list = [torch.zeros(3) for _ in range(world_size)]
+
+print(f"Before: {tensor}")
+print(f"Before: {gather_list}")
+
+dist.all_gather(tensor, gather_list)
+
+print(f"After: {gather_list}")
+```
+```{python}
+# | echo: false
+tensors = [torch.arange(3) + rank * 3 for rank in range(2)]
+gather_lists = [
+    [torch.arange(3) + rank * 3 for rank in range(2)],
+    [torch.zeros(3) for _ in range(2)],
+]
+
+print("========== rank 2 ==========")
+print(f"Before: {tensors[0]}")
+print(f"Before: {gather_lists[1]}")
+print(f"After: {gather_lists[0]}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {tensors[1]}")
+print(f"Before: {gather_lists[1]}")
+print(f"After: {gather_lists[0]}")
+```
+
+##### Reduce-Scatter
+
+Reduce-Scatter (`torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)`) performs a _reduction_ operation — like other `reduce` functions — and _scatters_ the resulting tensor. Think of it like `reduce` + `scatter`. Note: it needs `len(input_list) == world_size` and every tensor in `input_list` to have the same shape of `output_tensor`.
+
+```{python}
+# | eval: false
+tensor = torch.zeros(2)
+scatter_list = [torch.tensor([(rank + 1) * i for i in range(1, 3)]) ** (j + 1) for j in range(3)]
+
+print(f"Before: {tensor}")
+print(f"Before: {scatter_list}")
+
+dist.reduce_scatter(tensor, scatter_list, op=dist.ReduceOp.SUM)
+
+print(f"After: {tensor}")
+```
+```{python}
+# | echo: false
+world_size = 3
+zeros = torch.zeros(2)
+scatter_lists = [[torch.tensor([(rank + 1) * i for i in range(1, 3)]) ** (j + 1) for j in range(3)] for rank in range(world_size)]
+tensors = [sum(scatter_lists[i][j] for i in range(world_size)) for j in range(world_size)]
+
+print("========== rank 0 ==========")
+print(f"Before: {zeros}")
+print(f"Before: {scatter_lists[0]}")
+print(f"After: {tensors[0]}\n")
+
+print("========== rank 1 ==========")
+print(f"Before: {zeros}")
+print(f"Before: {scatter_lists[1]}")
+print(f"After: {tensors[1]}\n")
+
+print("========== rank 2 ==========")
+print(f"Before: {zeros}")
+print(f"Before: {scatter_lists[2]}")
+print(f"After: {tensors[2]}")
+```
+
+#### Other
+##### Barrier
+
+Barrier (`torch.distributed.barrier(...)`) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of `.join()` for threads or processes)
+
 ## Algorithms
+### DDP — Distributed Data Parallelism
 
 ## Notes
 
-## Notation
+## Terminology
+
+* device: Hardware unit — GPU `"cuda:0"`, CPU `"cpu"` etc. _that's where tensors and computations live_
+* node: Phyisical machine/server (or VPS whatever) that has 1+ devices
+* process: Python process/worker, executing a copy of the code/script — often on a single device (GPU)
+* rank: ID of a process — often that maps to a single device. _rank_ without qualifiers is _global rank_
+* world: Set of all processes part of our current distributed job
+* global rank, world rank: rank across all processes/nodes
+* local rank: rank within a single node (**node** _not_ group)
+* group: subset of processes (1+ nodes) that we've grouped for sub-communications. **note**: we still use _global_ rank for intra-group communication.
