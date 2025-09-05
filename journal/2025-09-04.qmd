@@ -1,7 +1,7 @@
 ---
 title: Going through DDP with S2S
 description: Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives
-categories: [python, mle]
+categories: [python, mle, math]
 date: 2025-09-04
 ---
 
