@@ -26,7 +26,7 @@
 <h3 class="anchored" data-anchor-id="basics-point-point">Basics (Point-Point)</h3>
 <p><code>send</code> and <code>recv</code> to send or receive a tensor synchronously — from/to a single rank.</p>
 <p>And their async counterparts, <code>isend</code> and <code>irecv</code>.</p>
-<div id="78ebb503" class="cell" data-execution_count="2">
+<div id="8593df02" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">rank <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> dist.get_rank()</span>
@@ -107,7 +107,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="eafe5fd3" class="cell" data-execution_count="3">
+<div id="3ba1b258" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0, 1, 2])
@@ -127,7 +127,7 @@ After: tensor([0, 1, 2])</code></pre>
 <section id="broadcast" class="level5">
 <h5 class="anchored" data-anchor-id="broadcast">Broadcast</h5>
 <p>Broadcast (<code>torch.distributed.broadcast(tensor, src, ...)</code>) allows a rank to <em>broadcast</em> a tensor to the whole group.</p>
-<div id="4b0ee3c8" class="cell" data-execution_count="4">
+<div id="0a181812" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -176,7 +176,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </div>
-<div id="ab21d400" class="cell" data-execution_count="5">
+<div id="6ea8dcd6" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0, 1, 2])
@@ -195,7 +195,7 @@ After: tensor([0, 1, 2])</code></pre>
 <section id="scatter" class="level5">
 <h5 class="anchored" data-anchor-id="scatter">Scatter</h5>
 <p>Scatter (<code>torch.distributed.scatter(tensor, scatter_list, src, ...)</code>) allows us to <em>scatter</em> — split and broadcast different chunks of — a tensor from a rank to the whole group.</p>
-<div id="3432fa2f" class="cell" data-execution_count="6">
+<div id="b238a03c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
@@ -278,7 +278,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="97de02cb" class="cell" data-execution_count="7">
+<div id="99807822" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Scatter list: [tensor([0, 1, 2]), tensor([3, 4, 5])]
@@ -298,7 +298,7 @@ After: tensor([3, 4, 5])</code></pre>
 <section id="reduce" class="level5">
 <h5 class="anchored" data-anchor-id="reduce">Reduce</h5>
 <p>Reduce (<code>torch.distributed.reduce(tensor, dst, op, ...)</code>) performs a reduction operation (N-&gt;1, eg. sum, max, min, prod, …) and the <code>dst</code> rank receives the result.</p>
-<div id="a51ff7d2" class="cell" data-execution_count="8">
+<div id="e7d500e1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -345,7 +345,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="ee695def" class="cell" data-execution_count="9">
+<div id="efcd1f90" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0, 1, 2])
@@ -360,7 +360,7 @@ After: tensor([3, 4, 5])</code></pre>
 <section id="gather" class="level5">
 <h5 class="anchored" data-anchor-id="gather">Gather</h5>
 <p>Gather (<code>torch.distributed.gather(tensor, gather_list, dst, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.</p>
-<div id="13820631" class="cell" data-execution_count="10">
+<div id="42deba3c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -427,7 +427,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="8114157f" class="cell" data-execution_count="11">
+<div id="ea058c9c" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0, 1, 2])
@@ -447,7 +447,7 @@ After: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]</code></pre>
 <section id="all-reduce" class="level5">
 <h5 class="anchored" data-anchor-id="all-reduce">All-Reduce</h5>
 <p>All-Reduce (<code>torch.distributed.all_reduce(tensor, op, ...)</code>) performs a <em>reduction</em> operation, like <code>reduce</code>, but every rank receives the result — rather than a single one with <code>reduce</code>. Think of it as <code>reduce</code> + <code>broadcast</code> — though it is optimized by techniques like ring-reduce.</p>
-<div id="e2ceab8a" class="cell" data-execution_count="12">
+<div id="c1aebfcb" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -488,7 +488,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="3226f02e" class="cell" data-execution_count="13">
+<div id="3786da5a" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0, 1, 2])
@@ -503,7 +503,7 @@ After: tensor([3, 5, 7])</code></pre>
 <section id="all-gather" class="level5">
 <h5 class="anchored" data-anchor-id="all-gather">All-Gather</h5>
 <p>All-Gather (<code>torch.distributed.all_gather(tensor, gather_list, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in <em>every</em> rank. Think of it as running <code>gather</code> on all ranks.</p>
-<div id="53408843" class="cell" data-execution_count="14">
+<div id="7297640c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -566,7 +566,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="f856bd17" class="cell" data-execution_count="15">
+<div id="16ac3afd" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 2 ==========
 Before: tensor([0, 1, 2])
@@ -583,7 +583,7 @@ After: [tensor([0, 1, 2]), tensor([3, 4, 5])]</code></pre>
 <section id="reduce-scatter" class="level5">
 <h5 class="anchored" data-anchor-id="reduce-scatter">Reduce-Scatter</h5>
 <p>Reduce-Scatter (<code>torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)</code>) performs a <em>reduction</em> operation — like other <code>reduce</code> functions — and <em>scatters</em> the resulting tensor. Think of it like <code>reduce</code> + <code>scatter</code>. Note: it needs <code>len(input_list) == world_size</code> and every tensor in <code>input_list</code> to have the same shape of <code>output_tensor</code>.</p>
-<div id="32eb9566" class="cell" data-execution_count="16">
+<div id="caa62ff2" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">tensor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
@@ -666,7 +666,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
-<div id="4762c726" class="cell" data-execution_count="17">
+<div id="dc834100" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-stdout">
 <pre><code>========== rank 0 ==========
 Before: tensor([0., 0.])
@@ -699,9 +699,71 @@ After: tensor([ 36, 288])</code></pre>
 <h2 class="anchored" data-anchor-id="algorithms-techniques">Algorithms / Techniques</h2>
 <section id="ddp-distributed-data-parallelism" class="level3">
 <h3 class="anchored" data-anchor-id="ddp-distributed-data-parallelism">DDP — Distributed Data Parallelism</h3>
+<p>Distributed Data Parallelism is a type of parallelism where each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients (<code>all_reduce</code>sum + division by world_size), perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</p>
+<p>Note: the difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.</p>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> SimpleDataParaellism():</span>
+<span id="cb17-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, model):</span>
+<span id="cb17-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model</span>
+<span id="cb17-4"></span>
+<span id="cb17-5">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.parameters():</span>
+<span id="cb17-6">            rank_0_params <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> param.data.clone()</span>
+<span id="cb17-7">            dist.broadcast(rank_0_params, src<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb17-8">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> torch.equal(param.data, rank_0_params), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Parameters mismatch at initialization"</span></span>
+<span id="cb17-9"></span>
+<span id="cb17-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> sync_grad(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb17-11">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.parameters():</span>
+<span id="cb17-12">            dist.all_reduce(param.grad, op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb17-13">            param.grad <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 </section>
 <section id="data-sharding" class="level3">
 <h3 class="anchored" data-anchor-id="data-sharding">Data Sharding</h3>
+<p>Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the <code>DataLoader</code> with <code>sampler=[instance of DistributedSampler]</code>.</p>
 </section>
 </section>
 <section id="notes" class="level2">
