@@ -17,8 +17,8 @@
   {
     "listing": "/notes/index.html",
     "items": [
-      "/notes/probability.html",
       "/notes/distributed-training.html",
+      "/notes/probability.html",
       "/notes/pytorch.html",
       "/notes/calculus.html",
       "/notes/linear-algebra.html",

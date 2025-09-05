@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -43,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d13f32de081ae9fa505d90b6b4a445a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-321b2c7f5bc1c6dc2367ebbe9b442756.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,9 +160,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#algorithms" id="toc-algorithms" class="nav-link active" data-scroll-target="#algorithms">Algorithms</a></li>
+  <li><a href="#functions-methods" id="toc-functions-methods" class="nav-link active" data-scroll-target="#functions-methods">Functions / Methods</a>
+  <ul class="collapse">
+  <li><a href="#basics-point-point" id="toc-basics-point-point" class="nav-link" data-scroll-target="#basics-point-point">Basics (Point-Point)</a></li>
+  <li><a href="#collective-operations" id="toc-collective-operations" class="nav-link" data-scroll-target="#collective-operations">Collective Operations</a></li>
+  </ul></li>
+  <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#ddp-distributed-data-parallelism" id="toc-ddp-distributed-data-parallelism" class="nav-link" data-scroll-target="#ddp-distributed-data-parallelism">DDP — Distributed Data Parallelism</a></li>
+  </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
-  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">Terminology</a></li>
   </ul>
 </nav>
     </div>
@@ -169,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 4, 2025</p>
+      <p class="date-modified">September 5, 2025</p>
     </div>
   </div>
     
@@ -180,14 +223,276 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="functions-methods" class="level2">
+<h2 class="anchored" data-anchor-id="functions-methods">Functions / Methods</h2>
+<section id="basics-point-point" class="level3">
+<h3 class="anchored" data-anchor-id="basics-point-point">Basics (Point-Point)</h3>
+<p><code>send</code> and <code>recv</code> to send or receive a tensor synchronously — from/to a single rank.</p>
+<p>And their async counterparts, <code>isend</code> and <code>irecv</code>.</p>
+<div id="2a3d05f7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> dist.get_rank()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> torch.zeros(<span class="dv">3</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    request <span class="op">=</span> dist.isend(tensor, <span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># can do something else, like more sends for example!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    request.wait() <span class="co"># now block until it's been fulfilled</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> rank <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    dist.recv(tensor, <span class="dv">0</span>) <span class="co"># recv is synchronous, so it will block until tensor is fully received</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b90d7071" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])</code></pre>
+</div>
+</div>
+</section>
+<section id="collective-operations" class="level3">
+<h3 class="anchored" data-anchor-id="collective-operations">Collective Operations</h3>
+<p>Collective operations allow communication (data-transfer) from All-&gt;Point, Point-&gt;All and All-&gt;All.</p>
+<section id="point-all" class="level4">
+<h4 class="anchored" data-anchor-id="point-all">Point-&gt;All</h4>
+<section id="broadcast" class="level5">
+<h5 class="anchored" data-anchor-id="broadcast">Broadcast</h5>
+<p>Broadcast (<code>torch.distributed.broadcast(tensor, src, ...)</code>) allows a rank to <em>broadcast</em> a tensor to the whole group.</p>
+<div id="4dd5dc50" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> torch.zeros(<span class="dv">3</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>dist.broadcast(tensor, src<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e7564d0d" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])
+
+========== rank 2 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])</code></pre>
+</div>
+</div>
+</section>
+<section id="scatter" class="level5">
+<h5 class="anchored" data-anchor-id="scatter">Scatter</h5>
+<p>Scatter (<code>torch.distributed.scatter(tensor, scatter_list, src, ...)</code>) allows us to <em>scatter</em> — split and broadcast different chunks of — a tensor from a rank to the whole group.</p>
+<div id="9abe4d4b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.zeros(<span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>scatter_list <span class="op">=</span> [torch.arange(<span class="dv">3</span> <span class="op">*</span> i, <span class="dv">3</span> <span class="op">*</span> i <span class="op">+</span> <span class="dv">3</span>) <span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> torch.zeros(<span class="dv">3</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(world_size)]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Scatter list: </span><span class="sc">{</span>scatter_list<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>dist.scatter(tensor, scatter_list, src<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1c01b5e5" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Scatter list: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Scatter list: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+Before: tensor([0., 0., 0.])
+After: tensor([3, 4, 5])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="all-point" class="level4">
+<h4 class="anchored" data-anchor-id="all-point">All-&gt;Point</h4>
+<section id="reduce" class="level5">
+<h5 class="anchored" data-anchor-id="reduce">Reduce</h5>
+<p>Reduce (<code>torch.distributed.reduce(tensor, dst, op, ...)</code>) performs a reduction operation (N-&gt;1, eg. sum, max, min, prod, …) and the <code>dst</code> rank receives the result.</p>
+<div id="1ab2bde2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="op">+</span> rank <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>dist.<span class="bu">reduce</span>(tensor, dst<span class="op">=</span><span class="dv">0</span>, op<span class="op">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4a4d0623" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([3, 5, 7])
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+After: tensor([3, 4, 5])</code></pre>
+</div>
+</div>
+</section>
+<section id="gather" class="level5">
+<h5 class="anchored" data-anchor-id="gather">Gather</h5>
+<p>Gather (<code>torch.distributed.gather(tensor, gather_list, dst, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.</p>
+<div id="a9af1ff1" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="op">+</span> rank <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gather_list <span class="op">=</span> [torch.zeros(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(world_size)]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>gather_list<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>dist.gather(tensor, gather_list, dst<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>gather_list<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7edbf95d" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+Before: tensor([3, 4, 5])
+
+========== rank 1 ==========
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+After: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="all-all" class="level4">
+<h4 class="anchored" data-anchor-id="all-all">All-&gt;All</h4>
+<section id="all-reduce" class="level5">
+<h5 class="anchored" data-anchor-id="all-reduce">All-Reduce</h5>
+<p>All-Reduce (<code>torch.distributed.all_reduce(tensor, op, ...)</code>) performs a <em>reduction</em> operation, like <code>reduce</code>, but every rank receives the result — rather than a single one with <code>reduce</code>. Think of it as <code>reduce</code> + <code>broadcast</code> — though it is optimized by techniques like ring-reduce.</p>
+<div id="0955c61b" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="op">+</span> rank <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>dist.all_reduce(tensor, op<span class="op">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="34095162" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([3, 5, 7])
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+After: tensor([3, 5, 7])</code></pre>
+</div>
+</div>
+</section>
+<section id="all-gather" class="level5">
+<h5 class="anchored" data-anchor-id="all-gather">All-Gather</h5>
+<p>All-Gather (<code>torch.distributed.all_gather(tensor, gather_list, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in <em>every</em> rank. Think of it as running <code>gather</code> on all ranks.</p>
+<div id="36a2cd16" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.arange(<span class="dv">3</span>) <span class="op">+</span> rank <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gather_list <span class="op">=</span> [torch.zeros(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(world_size)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>gather_list<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>dist.all_gather(tensor, gather_list)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>gather_list<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1482f65a" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 2 ==========
+Before: tensor([0, 1, 2])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]</code></pre>
+</div>
+</div>
+</section>
+<section id="reduce-scatter" class="level5">
+<h5 class="anchored" data-anchor-id="reduce-scatter">Reduce-Scatter</h5>
+<p>Reduce-Scatter (<code>torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)</code>) performs a <em>reduction</em> operation — like other <code>reduce</code> functions — and <em>scatters</em> the resulting tensor. Think of it like <code>reduce</code> + <code>scatter</code>. Note: it needs <code>len(input_list) == world_size</code> and every tensor in <code>input_list</code> to have the same shape of <code>output_tensor</code>.</p>
+<div id="3f698870" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> torch.zeros(<span class="dv">2</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>scatter_list <span class="op">=</span> [torch.tensor([(rank <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">3</span>)]) <span class="op">**</span> (j <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before: </span><span class="sc">{</span>scatter_list<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>dist.reduce_scatter(tensor, scatter_list, op<span class="op">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After: </span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1dce2ad9" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0., 0.])
+Before: [tensor([1, 2]), tensor([1, 4]), tensor([1, 8])]
+After: tensor([ 6, 12])
+
+========== rank 1 ==========
+Before: tensor([0., 0.])
+Before: [tensor([2, 4]), tensor([ 4, 16]), tensor([ 8, 64])]
+After: tensor([14, 56])
+
+========== rank 2 ==========
+Before: tensor([0., 0.])
+Before: [tensor([3, 6]), tensor([ 9, 36]), tensor([ 27, 216])]
+After: tensor([ 36, 288])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="other" class="level4">
+<h4 class="anchored" data-anchor-id="other">Other</h4>
+<section id="barrier" class="level5">
+<h5 class="anchored" data-anchor-id="barrier">Barrier</h5>
+<p>Barrier (<code>torch.distributed.barrier(...)</code>) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of <code>.join()</code> for threads or processes)</p>
+</section>
+</section>
+</section>
+</section>
 <section id="algorithms" class="level2">
 <h2 class="anchored" data-anchor-id="algorithms">Algorithms</h2>
+<section id="ddp-distributed-data-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="ddp-distributed-data-parallelism">DDP — Distributed Data Parallelism</h3>
+</section>
 </section>
 <section id="notes" class="level2">
 <h2 class="anchored" data-anchor-id="notes">Notes</h2>
 </section>
-<section id="notation" class="level2">
-<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<ul>
+<li>device: Hardware unit — GPU <code>"cuda:0"</code>, CPU <code>"cpu"</code> etc. <em>that’s where tensors and computations live</em></li>
+<li>node: Phyisical machine/server (or VPS whatever) that has 1+ devices</li>
+<li>process: Python process/worker, executing a copy of the code/script — often on a single device (GPU)</li>
+<li>rank: ID of a process — often that maps to a single device. <em>rank</em> without qualifiers is <em>global rank</em></li>
+<li>world: Set of all processes part of our current distributed job</li>
+<li>global rank, world rank: rank across all processes/nodes</li>
+<li>local rank: rank within a single node (<strong>node</strong> <em>not</em> group)</li>
+<li>group: subset of processes (1+ nodes) that we’ve grouped for sub-communications. <strong>note</strong>: we still use <em>global</em> rank for intra-group communication.</li>
+</ul>
 
 
 </section>

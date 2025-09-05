@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d13f32de081ae9fa505d90b6b4a445a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-321b2c7f5bc1c6dc2367ebbe9b442756.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -258,7 +258,7 @@ window.Quarto = {
 <p>If <span class="math inline">\(f(\mathbf{x}) = y\)</span>, a scalar, we collect/concatenate all the partial derivatives to obtain the <em>gradient</em> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span> <span class="math display">\[ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} \]</span></p>
 <section id="handy-rules" class="level4">
 <h4 class="anchored" data-anchor-id="handy-rules">Handy Rules</h4>
-<p>The follow rules come straight from D2L:</p>
+<p>The following rules come straight from D2L:</p>
 <ul>
 <li>For all <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> we have <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{A} \mathbf{x} = \mathbf{A}^\top\)</span> and <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A}  = \mathbf{A}\)</span>.</li>
 <li>For square matrices <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> we have that <span class="math inline">\(\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x}  = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}\)</span> and in particular <span class="math inline">\(\nabla_{\mathbf{x}} \|\mathbf{x} \|^2 = \nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2\mathbf{x}\)</span>.</li>
@@ -271,6 +271,7 @@ window.Quarto = {
 </section>
 <section id="notes" class="level2">
 <h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<p>Because of the definition of derivative as a rate of change, this is possible <span class="math inline">\(\dfrac{dy}{dx} = \dfrac{1}{\frac{dx}{dy}}\)</span></p>
 </section>
 <section id="proofs" class="level2">
 <h2 class="anchored" data-anchor-id="proofs">Proofs</h2>

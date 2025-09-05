@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d13f32de081ae9fa505d90b6b4a445a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-321b2c7f5bc1c6dc2367ebbe9b442756.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -205,7 +205,7 @@ window.Quarto = {
 <section id="distributed-training-s2s" class="level3">
 <h3 class="anchored" data-anchor-id="distributed-training-s2s">Distributed Training (S2S)</h3>
 <p>Finally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using <code>torch.distributed</code>, we’re not yet at the triton or CUDA level, but someday we’ll be there, just watch).</p>
-<p>We went from the primitives — (i)send and (i)recv — to the collective operations — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.</p>
+<p>We went from the <a href="../notes/distributed-training.html#basics-point-point">primitives</a> — (i)send and (i)recv — to the <a href="../notes/distributed-training.html#collective-operations">collective operations</a> — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.</p>
 <p>I learned a few distributed training concepts, such as the <em>rank</em>.</p>
 <p>I concluded the day by running my first notebooks accelerated by more than 1 GPU on <a href="https://www.modal.com" target="_blank">Modal</a>. I’d done some lightly GPU accelerated stuff on <a href="https://www.kaggle.com" target="_blank">Kaggle</a>, but now I could grasp how to do stuff with multiple GPUs.</p>
 
