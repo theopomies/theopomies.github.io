@@ -301,11 +301,11 @@ Barrier (`torch.distributed.barrier(...)`) synchronizes all ranks (processes), w
 
 ## Terminology
 
-* device: Hardware unit — GPU `"cuda:0"`, CPU `"cpu"` etc. _that's where tensors and computations live_
-* node: Phyisical machine/server (or VPS whatever) that has 1+ devices
-* process: Python process/worker, executing a copy of the code/script — often on a single device (GPU)
-* rank: ID of a process — often that maps to a single device. _rank_ without qualifiers is _global rank_
-* world: Set of all processes part of our current distributed job
-* global rank, world rank: rank across all processes/nodes
-* local rank: rank within a single node (**node** _not_ group)
-* group: subset of processes (1+ nodes) that we've grouped for sub-communications. **note**: we still use _global_ rank for intra-group communication.
+* **device**: Hardware unit — GPU `"cuda:0"`, CPU `"cpu"` etc. **that's where tensors and computations live**
+* **node**: Phyisical machine/server (or VPS whatever) that has 1+ devices
+* **process**: Python process/worker, executing a copy of the code/script — often on a single device (GPU)
+* **rank**: ID of a process — often that maps to a single device. **rank** without qualifiers is **global rank**
+* **world**: Set of all processes part of our current distributed job
+* **global** rank, world rank: rank across all processes/nodes. **note**: collective operations take the **global rank** (or just **rank**) as input for `src`/`dst`
+* **local rank**: rank within a single node (**node** _not_ group). **note**: `device` takes the **local rank** `"cuda:{local_rank}"`
+* **group**: subset of processes (1+ nodes) that we've grouped for sub-communications. **note**: we still use **global rank** for intra-group communication.
