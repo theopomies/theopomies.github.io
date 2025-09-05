@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2025-09-04">
-<meta name="description" content="Quick evening study session on DDP with torch.distributed primitives">
+<meta name="description" content="Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives">
 
 <title>Going through DDP with S2S – Theo Pomies</title>
 <style>
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta name="twitter:title" content="Going through DDP with S2S – Theo Pomies">
-<meta name="twitter:description" content="Quick evening study session on DDP with torch.distributed primitives">
+<meta name="twitter:description" content="Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -124,7 +124,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ddp" id="toc-ddp" class="nav-link active" data-scroll-target="#ddp">DDP</a></li>
+  <li><a href="#finishing-the-preliminaries-for-d2l" id="toc-finishing-the-preliminaries-for-d2l" class="nav-link active" data-scroll-target="#finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</a></li>
+  <li><a href="#evening-study-session-on-ddp" id="toc-evening-study-session-on-ddp" class="nav-link" data-scroll-target="#evening-study-session-on-ddp">Evening study session on DDP</a></li>
   </ul>
 </nav>
     </div>
@@ -142,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Quick evening study session on DDP with torch.distributed primitives
+    Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives
   </div>
 </div>
 
@@ -165,15 +166,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>DDP -&gt; parallelizing data</p>
-<p>Types of parallelism DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)</p>
-<p>Pipeline P -&gt; layers on gpus so they run on a chain</p>
-<p>Tensor P (mostly intra-node) -&gt; distributes a single matrix / splits a single layer</p>
-<section id="ddp" class="level1">
-<h1>DDP</h1>
-<p>n gpus = n replicants of the model</p>
-<p>_ notebook _</p>
-<p>Try to understand data sharding / sharded sampling (see torch / accelerate)</p>
+<section id="finishing-the-preliminaries-for-d2l" class="level3">
+<h3 class="anchored" data-anchor-id="finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</h3>
+<p>Well, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t <em>learn</em> anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and <em>grok</em> or <em>accept</em> them as true. Like the classic <a href="#todo">Bayes Theorem</a>, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.</p>
+</section>
+<section id="evening-study-session-on-ddp" class="level3">
+<h3 class="anchored" data-anchor-id="evening-study-session-on-ddp">Evening study session on DDP</h3>
+<p>We discussed the <a href="../notes/distributed-training.html#algorithms-techniques">different types of parallelism</a> (for ML distributed training):</p>
+<ul>
+<li>(Distributed) Data Parallelism (<strong>DDP</strong>): Each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients, perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</li>
+<li>Pipeline Parallelism (<strong>PP</strong>): We split the model across different ranks without splitting the layers (so we split <em>along the layers</em>). That is <em>inter-layer</em> parallelism. An exaggeration would be having a model with 2 hidden layers and 1 output layer split across 3 GPUs.</li>
+<li>Tensor Parallelism (<strong>TP</strong>): We split the layers of the model across different ranks, that’s <em>intra-layer</em> parallelism. This could be useful if some layers are so large they don’t even fit in a single device. To reduce overhead, it’s advisable that even if a layer is split across different <em>ranks</em>, all parts remain on the same <em>node</em>. (See <a href="../notes/distributed-training.html#terminology">terminology</a>)</li>
+</ul>
+<p>There’s also</p>
+<ul>
+<li>Expert Parallelism (<strong>EP</strong>): For Mixture-of-Experts (<strong>MoE</strong>) we can split the experts on different devices.</li>
+</ul>
+<p>We didn’t discuss much this last one but I knew about it already and searched a bit to know more about it.</p>
+<p>Last but not least we discussed the issue of DataLoaders / Samplers, and the importance of data sharding. They are a mean of “splitting” efficiently our dataset so that each rank sees a different mini-batch of data. Also, each process only loads its <em>shard</em> so it’s more memory/communication efficient.</p>
 
 
 </section>

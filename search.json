@@ -98,11 +98,11 @@
     "text": "send and recv to send or receive a tensor synchronously — from/to a single rank.\nAnd their async counterparts, isend and irecv.\n\nrank = dist.get_rank()\ntensor = torch.arange(3) if rank == 0 else torch.zeros(3)\n\nprint(f\"Before: {tensor}\")\n\nif rank == 0:\n    request = dist.isend(tensor, 1)\n    ...\n    # can do something else, like more sends for example!\n    ...\n    request.wait() # now block until it's been fulfilled\nelif rank == 1:\n    dist.recv(tensor, 0) # recv is synchronous, so it will block until tensor is fully received\n\nprint(f\"After: {tensor}\")\n\n\n\n========== rank 0 ==========\nBefore: tensor([0, 1, 2])\nAfter: tensor([0, 1, 2])\n\n========== rank 1 ==========\nBefore: tensor([0., 0., 0.])\nAfter: tensor([0, 1, 2])\n\n\n\n\n\nCollective operations allow communication (data-transfer) from All-&gt;Point, Point-&gt;All and All-&gt;All.\n\n\n\n\nBroadcast (torch.distributed.broadcast(tensor, src, ...)) allows a rank to broadcast a tensor to the whole group.\n\ntensor = torch.arange(3) if rank == 0 else torch.zeros(3)\n\nprint(f\"Before: {tensor}\")\n\ndist.broadcast(tensor, src=0)\n\nprint(f\"After: {tensor})\n\n\n\n========== rank 0 ==========\nBefore: tensor([0, 1, 2])\nAfter: tensor([0, 1, 2])\n\n========== rank 1 ==========\nBefore: tensor([0., 0., 0.])\nAfter: tensor([0, 1, 2])\n\n========== rank 2 ==========\nBefore: tensor([0., 0., 0.])\nAfter: tensor([0, 1, 2])\n\n\n\n\n\nScatter (torch.distributed.scatter(tensor, scatter_list, src, ...)) allows us to scatter — split and broadcast different chunks of — a tensor from a rank to the whole group.\n\ntensor = torch.zeros(3)\nscatter_list = [torch.arange(3 * i, 3 * i + 3) if rank == 0 else torch.zeros(3) for i in range(world_size)]\n\nprint(f\"Scatter list: {scatter_list}\")\nprint(f\"Before: {tensor}\")\n\ndist.scatter(tensor, scatter_list, src=0)\n\nprint(f\"After: {tensor}\")\n\n\n\n========== rank 0 ==========\nScatter list: [tensor([0, 1, 2]), tensor([3, 4, 5])]\nBefore: tensor([0., 0., 0.])\nAfter: tensor([0, 1, 2])\n\n========== rank 1 ==========\nScatter list: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\nBefore: tensor([0., 0., 0.])\nAfter: tensor([3, 4, 5])\n\n\n\n\n\n\n\n\nReduce (torch.distributed.reduce(tensor, dst, op, ...)) performs a reduction operation (N-&gt;1, eg. sum, max, min, prod, …) and the dst rank receives the result.\n\ntensor = torch.arange(3) + rank * 3\n\nprint(f\"Before: {tensor}\")\n\ndist.reduce(tensor, dst=0, op=dist.ReduceOp.SUM)\n\nprint(f\"After: {tensor}\")\n\n\n\n========== rank 0 ==========\nBefore: tensor([0, 1, 2])\nAfter: tensor([3, 5, 7])\n\n========== rank 1 ==========\nBefore: tensor([3, 4, 5])\nAfter: tensor([3, 4, 5])\n\n\n\n\n\nGather (torch.distributed.gather(tensor, gather_list, dst, ...)) gathers — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.\n\ntensor = torch.arange(3) + rank * 3\ngather_list = [torch.zeros(3) for _ in range(world_size)]\n\nprint(f\"Before: {tensor}\")\nprint(f\"Before: {gather_list}\")\n\ndist.gather(tensor, gather_list, dst=0)\n\nprint(f\"After: {gather_list}\")\n\n\n\n========== rank 0 ==========\nBefore: tensor([0, 1, 2])\nBefore: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\nBefore: tensor([3, 4, 5])\n\n========== rank 1 ==========\nBefore: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\nAfter: [tensor([0, 1, 2]), tensor([3, 4, 5])]\nAfter: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\n\n\n\n\n\n\n\n\nAll-Reduce (torch.distributed.all_reduce(tensor, op, ...)) performs a reduction operation, like reduce, but every rank receives the result — rather than a single one with reduce. Think of it as reduce + broadcast — though it is optimized by techniques like ring-reduce.\n\ntensor = torch.arange(3) + rank * 3\n\nprint(f\"Before: {tensor}\")\n\ndist.all_reduce(tensor, op=dist.ReduceOp.SUM)\n\nprint(f\"After: {tensor}\")\n\n\n\n========== rank 0 ==========\nBefore: tensor([0, 1, 2])\nAfter: tensor([3, 5, 7])\n\n========== rank 1 ==========\nBefore: tensor([3, 4, 5])\nAfter: tensor([3, 5, 7])\n\n\n\n\n\nAll-Gather (torch.distributed.all_gather(tensor, gather_list, ...)) gathers — pulls — a tensor, of the same size, from every rank and stores them in a list in every rank. Think of it as running gather on all ranks.\n\ntensor = torch.arange(3) + rank * 3\ngather_list = [torch.zeros(3) for _ in range(world_size)]\n\nprint(f\"Before: {tensor}\")\nprint(f\"Before: {gather_list}\")\n\ndist.all_gather(tensor, gather_list)\n\nprint(f\"After: {gather_list}\")\n\n\n\n========== rank 2 ==========\nBefore: tensor([0, 1, 2])\nBefore: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\nAfter: [tensor([0, 1, 2]), tensor([3, 4, 5])]\n\n========== rank 1 ==========\nBefore: tensor([3, 4, 5])\nBefore: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]\nAfter: [tensor([0, 1, 2]), tensor([3, 4, 5])]\n\n\n\n\n\nReduce-Scatter (torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)) performs a reduction operation — like other reduce functions — and scatters the resulting tensor. Think of it like reduce + scatter. Note: it needs len(input_list) == world_size and every tensor in input_list to have the same shape of output_tensor.\n\ntensor = torch.zeros(2)\nscatter_list = [torch.tensor([(rank + 1) * i for i in range(1, 3)]) ** (j + 1) for j in range(3)]\n\nprint(f\"Before: {tensor}\")\nprint(f\"Before: {scatter_list}\")\n\ndist.reduce_scatter(tensor, scatter_list, op=dist.ReduceOp.SUM)\n\nprint(f\"After: {tensor}\")\n\n\n\n========== rank 0 ==========\nBefore: tensor([0., 0.])\nBefore: [tensor([1, 2]), tensor([1, 4]), tensor([1, 8])]\nAfter: tensor([ 6, 12])\n\n========== rank 1 ==========\nBefore: tensor([0., 0.])\nBefore: [tensor([2, 4]), tensor([ 4, 16]), tensor([ 8, 64])]\nAfter: tensor([14, 56])\n\n========== rank 2 ==========\nBefore: tensor([0., 0.])\nBefore: [tensor([3, 6]), tensor([ 9, 36]), tensor([ 27, 216])]\nAfter: tensor([ 36, 288])\n\n\n\n\n\n\n\n\nBarrier (torch.distributed.barrier(...)) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of .join() for threads or processes)"
   },
   {
-    "objectID": "notes/distributed-training.html#algorithms",
-    "href": "notes/distributed-training.html#algorithms",
+    "objectID": "notes/distributed-training.html#algorithms-techniques",
+    "href": "notes/distributed-training.html#algorithms-techniques",
     "title": "Distributed Training",
-    "section": "Algorithms",
-    "text": "Algorithms\n\nDDP — Distributed Data Parallelism"
+    "section": "Algorithms / Techniques",
+    "text": "Algorithms / Techniques\n\nDDP — Distributed Data Parallelism\n\n\nData Sharding"
   },
   {
     "objectID": "notes/distributed-training.html#notes",
@@ -144,7 +144,7 @@
     "href": "journal/index.html",
     "title": "Journal",
     "section": "",
-    "text": "rss\n\n\n\n\n\n\n\n\n\nGoing through DDP with S2S\n\n\n\npython\n\nmle\n\n\n\nQuick evening study session on DDP with torch.distributed primitives\n\n\n\n\n\nSep 4, 2025\n\n1 min\n\n\n\n\n\n\nSome D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S\n\n\n\nmath\n\nmle\n\npython\n\n\n\nFinishing the preliminaries for D2L + questions surrounding distributed training at FAIR\n\n\n\n\n\nSep 3, 2025\n\n1 min\n\n\n\n\n\n\nStarting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)\n\n\n\nmath\n\npython\n\nmle\n\n\n\nLearning about distributed training on GPUs (S2S) and preliminaries for D2L\n\n\n\n\n\nSep 2, 2025\n\n1 min\n\n\n\n\n\n\nFinished reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\nLearning more about Linear Transformations, Eigen{vectors, values} and Diagonalization\n\n\n\n\n\nSep 1, 2025\n\n1 min\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n2 min\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n1 min\n\n\n\n\nNo matching items"
+    "text": "rss\n\n\n\n\n\n\n\n\n\nGoing through DDP with S2S\n\n\n\npython\n\nmle\n\n\n\nFinishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives\n\n\n\n\n\nSep 4, 2025\n\n2 min\n\n\n\n\n\n\nFireside chat QA with Yuxiang Wei from Meta FAIR with S2S\n\n\n\nmath\n\nmle\n\npython\n\n\n\nQuestions surrounding distributed training at FAIR\n\n\n\n\n\nSep 3, 2025\n\n1 min\n\n\n\n\n\n\nStarting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)\n\n\n\nmath\n\npython\n\nmle\n\n\n\nLearning about distributed training on GPUs (S2S) and preliminaries for D2L\n\n\n\n\n\nSep 2, 2025\n\n1 min\n\n\n\n\n\n\nFinished reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\nLearning more about Linear Transformations, Eigen{vectors, values} and Diagonalization\n\n\n\n\n\nSep 1, 2025\n\n1 min\n\n\n\n\n\n\nStarted reading The Manga Guide to Linear Algebra\n\n\n\nmath\n\n\n\n(Re-)Developping intuition around Linear Algebra\n\n\n\n\n\nAug 29, 2025\n\n2 min\n\n\n\n\n\n\nSetting up this blog!\n\n\n\npython\n\n\n\nToday I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process\n\n\n\n\n\nAug 28, 2025\n\n1 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "journal/2025-08-28.html",
@@ -165,7 +165,7 @@
     "href": "journal/2025-09-04.html",
     "title": "Going through DDP with S2S",
     "section": "",
-    "text": "DDP -&gt; parallelizing data\nTypes of parallelism DDP = Running the same model on multiple ranks, sending different mini-batch to different ranks, averaging gradients (all_reduce with sum then division by worldsize)\nPipeline P -&gt; layers on gpus so they run on a chain\nTensor P (mostly intra-node) -&gt; distributes a single matrix / splits a single layer\n\nDDP\nn gpus = n replicants of the model\n_ notebook _\nTry to understand data sharding / sharded sampling (see torch / accelerate)"
+    "text": "Finishing the preliminaries for D2L\nWell, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t learn anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and grok or accept them as true. Like the classic Bayes Theorem, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.\n\n\nEvening study session on DDP\nWe discussed the different types of parallelism (for ML distributed training):\n\n(Distributed) Data Parallelism (DDP): Each rank loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are replicants. Each rank then trains on a different mini-batch (hence the importance of data sharding). We then average the gradients, perform a step of gradient descent, rinse and repeat. If we can use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.\nPipeline Parallelism (PP): We split the model across different ranks without splitting the layers (so we split along the layers). That is inter-layer parallelism. An exaggeration would be having a model with 2 hidden layers and 1 output layer split across 3 GPUs.\nTensor Parallelism (TP): We split the layers of the model across different ranks, that’s intra-layer parallelism. This could be useful if some layers are so large they don’t even fit in a single device. To reduce overhead, it’s advisable that even if a layer is split across different ranks, all parts remain on the same node. (See terminology)\n\nThere’s also\n\nExpert Parallelism (EP): For Mixture-of-Experts (MoE) we can split the experts on different devices.\n\nWe didn’t discuss much this last one but I knew about it already and searched a bit to know more about it.\nLast but not least we discussed the issue of DataLoaders / Samplers, and the importance of data sharding. They are a mean of “splitting” efficiently our dataset so that each rank sees a different mini-batch of data. Also, each process only loads its shard so it’s more memory/communication efficient."
   },
   {
     "objectID": "journal/2025-09-01.html",
@@ -177,9 +177,9 @@
   {
     "objectID": "journal/2025-09-03.html",
     "href": "journal/2025-09-03.html",
-    "title": "Some D2L and a fireside chat QA with Yuxiang Wei from Meta FAIR with S2S",
+    "title": "Fireside chat QA with Yuxiang Wei from Meta FAIR with S2S",
     "section": "",
-    "text": "Some notes and answers by Yuxiang Wei here Probabilities on D2L"
+    "text": "Well today I woke up at 5am to go on-site at my startup in Paris (I live 500km away, in Bordeaux) and got home at around 7pm, so not much free time to study, so I just read a bit in the train and ML related stuff was just the evening fireside chat.\n\nFireside chat with Yuxiang Wei from Meta FAIR (S2S)\nAs part of the course (conference) Scratch To Scale, we have a lot of very qualified engineers and researchers from top labs / companies dedicating time for guest lectures or QA sessions.\nToday we had the chance to listen to Yuxiang Wei — of Meta FAIR, of the SWE-RL paper — and ask him loads of questions. We discussed topics such as {pre, mid, post}-training, training infrastructure, the advent of RL and its impacts on said infrastructure and more."
   },
   {
     "objectID": "journal/2025-09-02.html",
@@ -221,28 +221,14 @@
     "href": "notes/pytorch.html#notes",
     "title": "PyTorch",
     "section": "Notes",
-    "text": "Notes"
+    "text": "Notes\nLater!"
   },
   {
-    "objectID": "notes/pytorch.html#proofs",
-    "href": "notes/pytorch.html#proofs",
+    "objectID": "notes/pytorch.html#terminology",
+    "href": "notes/pytorch.html#terminology",
     "title": "PyTorch",
-    "section": "Proofs",
-    "text": "Proofs\nLater!"
-  },
-  {
-    "objectID": "notes/pytorch.html#algorithms",
-    "href": "notes/pytorch.html#algorithms",
-    "title": "PyTorch",
-    "section": "Algorithms",
-    "text": "Algorithms"
-  },
-  {
-    "objectID": "notes/pytorch.html#notation",
-    "href": "notes/pytorch.html#notation",
-    "title": "PyTorch",
-    "section": "Notation",
-    "text": "Notation"
+    "section": "Terminology",
+    "text": "Terminology"
   },
   {
     "objectID": "notes/linear-algebra.html",
