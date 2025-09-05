@@ -1,5 +1,5 @@
 ---
-title: Theo POMIES 
+title: Theo POMIES
 toc: false
 ---
 
@@ -17,9 +17,3 @@ My technical work usually revolves around:
 I’m now in the process of transitioning towards **machine learning engineering and applied research**. This blog is where I’ll share my journey — notes from my learning process, experiments, and articles about the concepts and techniques I find valuable along the way.
 
 It’s part notebook, part knowledge base, and part exploration. My goal is to document both the practice of building systems and the research side of AI that makes them possible.
-
-
-```{python}
-print("Hello, World!")  # Stdout = cyan
-"Hello, World!"  # Output display = primary
-```
