@@ -11,7 +11,7 @@
     "href": "index.html#transition-to-mle-applied-research",
     "title": "Theo POMIES",
     "section": "Transition to MLE & Applied Research",
-    "text": "Transition to MLE & Applied Research\nI’m now in the process of transitioning towards machine learning engineering and applied research. This blog is where I’ll share my journey — notes from my learning process, experiments, and articles about the concepts and techniques I find valuable along the way.\nIt’s part notebook, part knowledge base, and part exploration. My goal is to document both the practice of building systems and the research side of AI that makes them possible.\n\nprint(\"Hello, World!\")  # Stdout = cyan\n\"Hello, World!\"  # Output display = primary\n\nHello, World!\n\n\n'Hello, World!'"
+    "text": "Transition to MLE & Applied Research\nI’m now in the process of transitioning towards machine learning engineering and applied research. This blog is where I’ll share my journey — notes from my learning process, experiments, and articles about the concepts and techniques I find valuable along the way.\nIt’s part notebook, part knowledge base, and part exploration. My goal is to document both the practice of building systems and the research side of AI that makes them possible."
   },
   {
     "objectID": "notes/typescript.html",
