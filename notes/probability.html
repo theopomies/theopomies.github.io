@@ -222,7 +222,7 @@ window.Quarto = {
 <section id="outcomes-and-events" class="level3">
 <h3 class="anchored" data-anchor-id="outcomes-and-events">Outcomes and Events</h3>
 <p>When studying probability, we are performing experiments, random trials or observations. The set of all possible <em>outcomes</em> of this experiment is <span class="math inline">\(\mathcal{\Omega}\)</span> (or <span class="math inline">\(\mathcal{S}\)</span>). eg. When rolling a die, <span class="math inline">\(\mathcal{\Omega} = \{1,2,3,4,5,6\}\)</span>.</p>
-<p>We can group these outcomes into <em>events</em> — <span class="math inline">\(\mathcal{E} \subseteq \mathcal{\Omega}\)</span>. eg. The event <span class="math inline">\(\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}\)</span>. Whenever the outcome <span class="math inline">\(z\)</span> of the random experiment satisfies <span class="math inline">\(z \in \mathcal{E}\)</span>, the event <span class="math inline">\(\mathcal{E}\)</span> has occured. Multiple events can occur from the same outcome, say we have <span class="math inline">\(\mathcal{A} = \{3, 6\}\)</span> “the result is divisible by 3” and <span class="math inline">\(\mathcal{B} = \{2, 4, 6\}\)</span>. <span class="math inline">\(z = 6\)</span> satisfies both <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<p>We can group these outcomes into <em>events</em> — <span class="math inline">\(\mathcal{E} \subseteq \mathcal{\Omega}\)</span>. eg. The event <span class="math inline">\(\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}\)</span>. Whenever the outcome <span class="math inline">\(z\)</span> of the random experiment satisfies <span class="math inline">\(z \in \mathcal{E}\)</span>, the event <span class="math inline">\(\mathcal{E}\)</span> has occurred. Multiple events can occur from the same outcome, say we have <span class="math inline">\(\mathcal{A} = \{3, 6\}\)</span> “the result is divisible by 3” and <span class="math inline">\(\mathcal{B} = \{2, 4, 6\}\)</span>. <span class="math inline">\(z = 6\)</span> satisfies both <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span>.</p>
 </section>
 <section id="probability-function" class="level3">
 <h3 class="anchored" data-anchor-id="probability-function">Probability function</h3>
@@ -248,13 +248,13 @@ window.Quarto = {
 <p>The probability that <span class="math inline">\(X\)</span> takes <em>discrete</em> value <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(X = v\)</span>, is <span class="math inline">\(\operatorname{P}(X=v)\)</span>.</p>
 <p><span class="math inline">\(X = v\)</span> or <span class="math inline">\(X \geq v\)</span> are <strong>events</strong>.</p>
 <p>Random variables allow us to go from outcomes to values, like <span class="math inline">\(X(\omega) = \omega\)</span> the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
-<p>When <span class="math inline">\(X\)</span> is <em>continuous</em> it doesn’t make sens to have events like <span class="math inline">\(X = v\)</span>, rather we use <span class="math inline">\(v \leq X \leq w\)</span>. In this case we work with probability <strong>densities</strong>. An example would be the height of a population.</p>
-<p>We note <span class="math inline">\(\operatorname{P}(X)\)</span> the <strong>probability distribution</strong> of X.</p>
+<p>When <span class="math inline">\(X\)</span> is <em>continuous</em> it doesn’t make sense to have events like <span class="math inline">\(X = v\)</span> (and <span class="math inline">\(\operatorname{P}(X = v) = 0\)</span>), rather we use <span class="math inline">\(v \leq X \leq w\)</span> and probability <strong>densities</strong>. An example would be the height of a population.</p>
+<p>We note <span class="math inline">\(\operatorname{P}(X)\)</span> the <strong>probability distribution</strong> of X. (Abuse of notation: strictly <span class="math inline">\(P_X\)</span> is the distribution of <span class="math inline">\(X\)</span>, but we’ll often just write <span class="math inline">\(P(X)\)</span>)</p>
 <section id="multiple-random-variables" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
-<p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>).</p>
+<p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>). Equivalently it’s <span class="math inline">\(\operatorname{P}(\{A = a\} \cap \{B = b\})\)</span>, with an overloaded notation, the <strong>joint probability distribution</strong> becomes <span class="math inline">\(\operatorname{P}(A, B)\)</span></p>
 <p>Obviously <span class="math display">\[ \operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b) \]</span></p>
-<p>Also, <span class="math display">\[ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) \]</span></p>
+<p>Also, we can <strong>marginalize</strong> <span class="math display">\[ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) \]</span></p>
 <p>Because <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span> are events, <span class="math display">\[\begin{aligned}
 \operatorname{P}(A = a, B = b) &amp; = \operatorname{P}(A = a \mid B = b)\operatorname{P}(B = b) \\
 \iff \operatorname{P}(A = a \mid B = b) &amp; = \operatorname{P}(A = a, B = b)/\operatorname{P}(B = b)
@@ -268,12 +268,37 @@ window.Quarto = {
 <ul>
 <li>prior/hypothesis: our estimate or current belief about the probability of <span class="math inline">\(A\)</span></li>
 <li>observation/marginal likelihood/evidence: the evidence or observations we’ve made regarding <span class="math inline">\(B\)</span></li>
-<li>likelihood: a mesure of how compatible our hypothesis is with our observation</li>
+<li>likelihood: a measure of how compatible our hypothesis is with our observation</li>
 </ul>
 <p>A simplified version is <span class="math inline">\(\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)\)</span></p>
 </section>
 <section id="expectation-variance" class="level3">
 <h3 class="anchored" data-anchor-id="expectation-variance">Expectation &amp; Variance</h3>
+<section id="expectation" class="level4">
+<h4 class="anchored" data-anchor-id="expectation">Expectation</h4>
+<p>The <strong>expectation</strong> (or <strong>expected value</strong>) is the weighted average of the values of <span class="math inline">\(X\)</span>.</p>
+<p>Discrete case:</p>
+<p><span class="math display">\[ \operatorname{E}[X] = \operatorname{E}_{x \sim P}[X] = \sum_x x\operatorname{P}(X=x) \]</span></p>
+<p>Continuous case:</p>
+<p><span class="math display">\[\operatorname{E}[X] = \int_{-\infty}^{\infty} x f(x) \;dx \]</span></p>
+<p>To follow mathematical notation, sometimes we use <span class="math inline">\(\mu\)</span> to denote this average.</p>
+</section>
+<section id="variance" class="level4">
+<h4 class="anchored" data-anchor-id="variance">Variance</h4>
+<p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much do values vary relative to the expectation (average) on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
+<p><span class="math display">\[ \operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2 \]</span></p>
+<p>Because</p>
+<p><span class="math display">\[ \operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2 \]</span></p>
+</section>
+<section id="standard-deviation" class="level4">
+<h4 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h4>
+<p>Because the variance is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
+<p><span class="math display">\[ \operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)} \]</span></p>
+</section>
+<section id="covariance" class="level4">
+<h4 class="anchored" data-anchor-id="covariance">Covariance</h4>
+<p>TODO once I understand it fully enough to explain it.</p>
+</section>
 </section>
 </section>
 <section id="notes" class="level2">
@@ -292,11 +317,11 @@ window.Quarto = {
 <li><span class="math inline">\(\mathcal{X}\)</span>: a set</li>
 <li><span class="math inline">\(\{a, b, c\}\)</span>: a set, with its elements</li>
 <li><span class="math inline">\(\emptyset\)</span>: the empty set</li>
-<li><span class="math inline">\(\mathcal{A} \subset \mathcal{B}\)</span>, <span class="math inline">\(\mathcal{A} \subsetneq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a proper/strict subest of <span class="math inline">\(\mathcal{B}\)</span></li>
+<li><span class="math inline">\(\mathcal{A} \subset \mathcal{B}\)</span>, <span class="math inline">\(\mathcal{A} \subsetneq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a proper/strict subset of <span class="math inline">\(\mathcal{B}\)</span></li>
 <li><span class="math inline">\(\mathcal{A} \subseteq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a subest of <span class="math inline">\(\mathcal{B}\)</span></li>
 <li><span class="math inline">\(\mathcal{A} \cap \mathcal{B}\)</span>: the intersection of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>and</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
 <li><span class="math inline">\(\mathcal{A} \cup \mathcal{B}\)</span>: the union of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>or</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
-<li><span class="math inline">\(\mathcal{A} \setminus \mathcal{B}\)</span>: set substraction of <span class="math inline">\(\mathcal{B}\)</span> from <span class="math inline">\(\mathcal{A}\)</span>, elements from <span class="math inline">\(\mathcal{A}\)</span> but not in <span class="math inline">\(\mathcal{B}\)</span></li>
+<li><span class="math inline">\(\mathcal{A} \setminus \mathcal{B}\)</span>: set subtraction of <span class="math inline">\(\mathcal{B}\)</span> from <span class="math inline">\(\mathcal{A}\)</span>, elements from <span class="math inline">\(\mathcal{A}\)</span> but not in <span class="math inline">\(\mathcal{B}\)</span></li>
 <li><span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\mathcal{\Omega}\)</span>: the sample space / universe (the set of all possible outcomes)</li>
 <li><span class="math inline">\(|\mathcal{X}|\)</span>: the cardinality of set <span class="math inline">\(\mathcal{X}\)</span> (its number of events)</li>
 <li><span class="math inline">\(X\)</span>: a random variable</li>
@@ -307,15 +332,15 @@ window.Quarto = {
 <li><span class="math inline">\(\operatorname{P}(X)\)</span>: depending on the context, a probability distribution <em>or</em> the probability of any <span class="math inline">\(X=x\)</span>, meaning the formula is true for any value</li>
 <li><span class="math inline">\(\operatorname{P}(X=x)\)</span>: the probability assigned to the event where random variable <span class="math inline">\(X\)</span> takes value <span class="math inline">\(x\)</span></li>
 <li><span class="math inline">\(\operatorname{P}(X \mid Y)\)</span>: the conditional probability distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\cdot)\)</span>: a probability density function (PDF) associated with distribution <span class="math inline">\(P\)</span></li>
-<li><span class="math inline">\({E}[X]\)</span>: expectation of a random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\operatorname{p}(\cdot)\)</span>: a probability density function (PDF) associated with distribution <span class="math inline">\(P\)</span></li>
+<li><span class="math inline">\(\operatorname{E}[X]\)</span>: expectation of a random variable <span class="math inline">\(X\)</span></li>
 <li><span class="math inline">\(X \perp Y\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent</li>
 <li><span class="math inline">\(X \perp Y \mid Z\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are conditionally independent given <span class="math inline">\(Z\)</span></li>
 <li><span class="math inline">\(\sigma_X\)</span>: standard deviation of random variable <span class="math inline">\(X\)</span></li>
 <li><span class="math inline">\(\textrm{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
 <li><span class="math inline">\(\textrm{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(\rho(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
-<li><span class="math inline">\(H(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\operatorname{\rho}(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
+<li><span class="math inline">\(\operatorname{H}(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
 <li><span class="math inline">\(D_{\textrm{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
 </ul>
 

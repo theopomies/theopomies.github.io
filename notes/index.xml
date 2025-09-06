@@ -805,7 +805,7 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <section id="outcomes-and-events" class="level3">
 <h3 class="anchored" data-anchor-id="outcomes-and-events">Outcomes and Events</h3>
 <p>When studying probability, we are performing experiments, random trials or observations. The set of all possible <em>outcomes</em> of this experiment is <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7B%5COmega%7D"> (or <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BS%7D">). eg. When rolling a die, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7B%5COmega%7D%20=%20%5C%7B1,2,3,4,5,6%5C%7D">.</p>
-<p>We can group these outcomes into <em>events</em> — <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D%20%5Csubseteq%20%5Cmathcal%7B%5COmega%7D">. eg. The event <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D%20=%20%5C%7Bdie%20shows%20an%20even%20number%5C%7D%20=%20%5C%7B2,%204,%206%5C%7D">. Whenever the outcome <img src="https://latex.codecogs.com/png.latex?z"> of the random experiment satisfies <img src="https://latex.codecogs.com/png.latex?z%20%5Cin%20%5Cmathcal%7BE%7D">, the event <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D"> has occured. Multiple events can occur from the same outcome, say we have <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20=%20%5C%7B3,%206%5C%7D"> “the result is divisible by 3” and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D%20=%20%5C%7B2,%204,%206%5C%7D">. <img src="https://latex.codecogs.com/png.latex?z%20=%206"> satisfies both <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D">.</p>
+<p>We can group these outcomes into <em>events</em> — <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D%20%5Csubseteq%20%5Cmathcal%7B%5COmega%7D">. eg. The event <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D%20=%20%5C%7Bdie%20shows%20an%20even%20number%5C%7D%20=%20%5C%7B2,%204,%206%5C%7D">. Whenever the outcome <img src="https://latex.codecogs.com/png.latex?z"> of the random experiment satisfies <img src="https://latex.codecogs.com/png.latex?z%20%5Cin%20%5Cmathcal%7BE%7D">, the event <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BE%7D"> has occurred. Multiple events can occur from the same outcome, say we have <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20=%20%5C%7B3,%206%5C%7D"> “the result is divisible by 3” and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D%20=%20%5C%7B2,%204,%206%5C%7D">. <img src="https://latex.codecogs.com/png.latex?z%20=%206"> satisfies both <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D">.</p>
 </section>
 <section id="probability-function" class="level3">
 <h3 class="anchored" data-anchor-id="probability-function">Probability function</h3>
@@ -831,13 +831,13 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <p>The probability that <img src="https://latex.codecogs.com/png.latex?X"> takes <em>discrete</em> value <img src="https://latex.codecogs.com/png.latex?v">, denoted <img src="https://latex.codecogs.com/png.latex?X%20=%20v">, is <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X=v)">.</p>
 <p><img src="https://latex.codecogs.com/png.latex?X%20=%20v"> or <img src="https://latex.codecogs.com/png.latex?X%20%5Cgeq%20v"> are <strong>events</strong>.</p>
 <p>Random variables allow us to go from outcomes to values, like <img src="https://latex.codecogs.com/png.latex?X(%5Comega)%20=%20%5Comega"> the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
-<p>When <img src="https://latex.codecogs.com/png.latex?X"> is <em>continuous</em> it doesn’t make sens to have events like <img src="https://latex.codecogs.com/png.latex?X%20=%20v">, rather we use <img src="https://latex.codecogs.com/png.latex?v%20%5Cleq%20X%20%5Cleq%20w">. In this case we work with probability <strong>densities</strong>. An example would be the height of a population.</p>
-<p>We note <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X)"> the <strong>probability distribution</strong> of X.</p>
+<p>When <img src="https://latex.codecogs.com/png.latex?X"> is <em>continuous</em> it doesn’t make sense to have events like <img src="https://latex.codecogs.com/png.latex?X%20=%20v"> (and <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X%20=%20v)%20=%200">), rather we use <img src="https://latex.codecogs.com/png.latex?v%20%5Cleq%20X%20%5Cleq%20w"> and probability <strong>densities</strong>. An example would be the height of a population.</p>
+<p>We note <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X)"> the <strong>probability distribution</strong> of X. (Abuse of notation: strictly <img src="https://latex.codecogs.com/png.latex?P_X"> is the distribution of <img src="https://latex.codecogs.com/png.latex?X">, but we’ll often just write <img src="https://latex.codecogs.com/png.latex?P(X)">)</p>
 <section id="multiple-random-variables" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
-<p><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)"> is the <strong>joint probability</strong> of <img src="https://latex.codecogs.com/png.latex?A%20=%20a"> <strong>and</strong> <img src="https://latex.codecogs.com/png.latex?B%20=%20b"> (it’s the intersection of the events <img src="https://latex.codecogs.com/png.latex?A%20=%20a"> and <img src="https://latex.codecogs.com/png.latex?B%20=%20b">).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)"> is the <strong>joint probability</strong> of <img src="https://latex.codecogs.com/png.latex?A%20=%20a"> <strong>and</strong> <img src="https://latex.codecogs.com/png.latex?B%20=%20b"> (it’s the intersection of the events <img src="https://latex.codecogs.com/png.latex?A%20=%20a"> and <img src="https://latex.codecogs.com/png.latex?B%20=%20b">). Equivalently it’s <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(%5C%7BA%20=%20a%5C%7D%20%5Ccap%20%5C%7BB%20=%20b%5C%7D)">, with an overloaded notation, the <strong>joint probability distribution</strong> becomes <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(A,%20B)"></p>
 <p>Obviously <img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)%20%5Cleq%20%5Coperatorname%7BP%7D(A=a)%20%5Cquad%20%5Ctext%7Band%7D%20%5Cquad%20%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)%20%5Cleq%20%5Coperatorname%7BP%7D(B=b)%20"></p>
-<p>Also, <img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BP%7D(A%20=%20a)%20=%20%5Csum_v%20%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20v)%20"></p>
+<p>Also, we can <strong>marginalize</strong> <img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BP%7D(A%20=%20a)%20=%20%5Csum_v%20%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20v)%20"></p>
 <p>Because <img src="https://latex.codecogs.com/png.latex?A%20=%20a"> and <img src="https://latex.codecogs.com/png.latex?B%20=%20b"> are events, <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Baligned%7D%0A%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)%20&amp;%20=%20%5Coperatorname%7BP%7D(A%20=%20a%20%5Cmid%20B%20=%20b)%5Coperatorname%7BP%7D(B%20=%20b)%20%5C%5C%0A%5Ciff%20%5Coperatorname%7BP%7D(A%20=%20a%20%5Cmid%20B%20=%20b)%20&amp;%20=%20%5Coperatorname%7BP%7D(A%20=%20a,%20B%20=%20b)/%5Coperatorname%7BP%7D(B%20=%20b)%0A%5Cend%7Baligned%7D"></p>
 </section>
 </section>
@@ -848,12 +848,37 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <ul>
 <li>prior/hypothesis: our estimate or current belief about the probability of <img src="https://latex.codecogs.com/png.latex?A"></li>
 <li>observation/marginal likelihood/evidence: the evidence or observations we’ve made regarding <img src="https://latex.codecogs.com/png.latex?B"></li>
-<li>likelihood: a mesure of how compatible our hypothesis is with our observation</li>
+<li>likelihood: a measure of how compatible our hypothesis is with our observation</li>
 </ul>
 <p>A simplified version is <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(A%20%5Cmid%20B)%20%5Cpropto%20%5Coperatorname%7BP%7D(B%20%5Cmid%20A)%5Coperatorname%7BP%7D(A)"></p>
 </section>
 <section id="expectation-variance" class="level3">
 <h3 class="anchored" data-anchor-id="expectation-variance">Expectation &amp; Variance</h3>
+<section id="expectation" class="level4">
+<h4 class="anchored" data-anchor-id="expectation">Expectation</h4>
+<p>The <strong>expectation</strong> (or <strong>expected value</strong>) is the weighted average of the values of <img src="https://latex.codecogs.com/png.latex?X">.</p>
+<p>Discrete case:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BE%7D%5BX%5D%20=%20%5Coperatorname%7BE%7D_%7Bx%20%5Csim%20P%7D%5BX%5D%20=%20%5Csum_x%20x%5Coperatorname%7BP%7D(X=x)%20"></p>
+<p>Continuous case:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BE%7D%5BX%5D%20=%20%5Cint_%7B-%5Cinfty%7D%5E%7B%5Cinfty%7D%20x%20f(x)%20%5C;dx%20"></p>
+<p>To follow mathematical notation, sometimes we use <img src="https://latex.codecogs.com/png.latex?%5Cmu"> to denote this average.</p>
+</section>
+<section id="variance" class="level4">
+<h4 class="anchored" data-anchor-id="variance">Variance</h4>
+<p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much do values vary relative to the expectation (average) on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BVar%7D(X)%20=%20%5Coperatorname%7BE%7D%5B(X%20-%20%5Coperatorname%7BE%7D%5BX%5D)%5E2%5D%20=%20%5Coperatorname%7BE%7D%5BX%5E2%5D%20-%20(%5Coperatorname%7BE%7D%5BX%5D)%5E2%20"></p>
+<p>Because</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BE%7D%5BX%5E2%20-%202X%5Coperatorname%7BE%7D%5BX%5D%20+%20%5Coperatorname%7BE%7D%5BX%5D%5E2%5D%20=%20%5Coperatorname%7BE%7D%5BX%5E2%5D%20-%202(%5Coperatorname%7BE%7D%5BX%5D)%5E2%20+%20(%5Coperatorname%7BE%7D%5BX%5D)%5E2%20"></p>
+</section>
+<section id="standard-deviation" class="level4">
+<h4 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h4>
+<p>Because the variance is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Coperatorname%7BVar%7D(X)%20=%20%5Csigma%5E2_X%20%5Ciff%20%5Csigma_X%20=%20%5Csqrt%7B%5Coperatorname%7BVar%7D(X)%7D%20"></p>
+</section>
+<section id="covariance" class="level4">
+<h4 class="anchored" data-anchor-id="covariance">Covariance</h4>
+<p>TODO once I understand it fully enough to explain it.</p>
+</section>
 </section>
 </section>
 <section id="notes" class="level2">
@@ -872,11 +897,11 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BX%7D">: a set</li>
 <li><img src="https://latex.codecogs.com/png.latex?%5C%7Ba,%20b,%20c%5C%7D">: a set, with its elements</li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cemptyset">: the empty set</li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csubset%20%5Cmathcal%7BB%7D">, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csubsetneq%20%5Cmathcal%7BB%7D">: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> is a proper/strict subest of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csubset%20%5Cmathcal%7BB%7D">, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csubsetneq%20%5Cmathcal%7BB%7D">: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> is a proper/strict subset of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csubseteq%20%5Cmathcal%7BB%7D">: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> is a subest of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Ccap%20%5Cmathcal%7BB%7D">: the intersection of sets <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"> — “<img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> <strong>and</strong> <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D">”</li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Ccup%20%5Cmathcal%7BB%7D">: the union of sets <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"> — “<img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> <strong>or</strong> <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D">”</li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csetminus%20%5Cmathcal%7BB%7D">: set substraction of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"> from <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D">, elements from <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> but not in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D%20%5Csetminus%20%5Cmathcal%7BB%7D">: set subtraction of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"> from <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D">, elements from <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> but not in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BS%7D">, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7B%5COmega%7D">: the sample space / universe (the set of all possible outcomes)</li>
 <li><img src="https://latex.codecogs.com/png.latex?%7C%5Cmathcal%7BX%7D%7C">: the cardinality of set <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BX%7D"> (its number of events)</li>
 <li><img src="https://latex.codecogs.com/png.latex?X">: a random variable</li>
@@ -887,15 +912,15 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X)">: depending on the context, a probability distribution <em>or</em> the probability of any <img src="https://latex.codecogs.com/png.latex?X=x">, meaning the formula is true for any value</li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X=x)">: the probability assigned to the event where random variable <img src="https://latex.codecogs.com/png.latex?X"> takes value <img src="https://latex.codecogs.com/png.latex?x"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(X%20%5Cmid%20Y)">: the conditional probability distribution of <img src="https://latex.codecogs.com/png.latex?X"> given <img src="https://latex.codecogs.com/png.latex?Y"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BP%7D(%5Ccdot)">: a probability density function (PDF) associated with distribution <img src="https://latex.codecogs.com/png.latex?P"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%7BE%7D%5BX%5D">: expectation of a random variable <img src="https://latex.codecogs.com/png.latex?X"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bp%7D(%5Ccdot)">: a probability density function (PDF) associated with distribution <img src="https://latex.codecogs.com/png.latex?P"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BE%7D%5BX%5D">: expectation of a random variable <img src="https://latex.codecogs.com/png.latex?X"></li>
 <li><img src="https://latex.codecogs.com/png.latex?X%20%5Cperp%20Y">: random variables <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y"> are independent</li>
 <li><img src="https://latex.codecogs.com/png.latex?X%20%5Cperp%20Y%20%5Cmid%20Z">: random variables <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y"> are conditionally independent given <img src="https://latex.codecogs.com/png.latex?Z"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Csigma_X">: standard deviation of random variable <img src="https://latex.codecogs.com/png.latex?X"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Ctextrm%7BVar%7D(X)">: variance of random variable <img src="https://latex.codecogs.com/png.latex?X">, equal to <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2_X"></li>
 <li><img src="https://latex.codecogs.com/png.latex?%5Ctextrm%7BCov%7D(X,%20Y)">: covariance of random variables <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Crho(X,%20Y)">: the Pearson correlation coefficient between <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y">, equals <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Ctextrm%7BCov%7D(X,%20Y)%7D%7B%5Csigma_X%20%5Csigma_Y%7D"></li>
-<li><img src="https://latex.codecogs.com/png.latex?H(X)">: entropy of random variable <img src="https://latex.codecogs.com/png.latex?X"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7B%5Crho%7D(X,%20Y)">: the Pearson correlation coefficient between <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y">, equals <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Ctextrm%7BCov%7D(X,%20Y)%7D%7B%5Csigma_X%20%5Csigma_Y%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BH%7D(X)">: entropy of random variable <img src="https://latex.codecogs.com/png.latex?X"></li>
 <li><img src="https://latex.codecogs.com/png.latex?D_%7B%5Ctextrm%7BKL%7D%7D(P%5C%7CQ)">: the KL-divergence (or relative entropy) from distribution <img src="https://latex.codecogs.com/png.latex?Q"> to distribution <img src="https://latex.codecogs.com/png.latex?P"></li>
 </ul>
 
