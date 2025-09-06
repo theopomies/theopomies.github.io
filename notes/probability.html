@@ -8,9 +8,9 @@
 
 <meta name="author" content="Theo POMIES">
 <meta name="dcterms.date" content="2025-09-02">
-<meta name="description" content="All things regarding probability, Bayesian or frequentist.">
+<meta name="description" content="Small Probability &amp; Information Theory cheatsheet.">
 
-<title>Probability – Theo Pomies</title>
+<title>Probability and Information Theory – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,9 +72,38 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="Probability – Theo Pomies">
-<meta name="twitter:description" content="All things regarding probability, Bayesian or frequentist.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="Probability and Information Theory – Theo Pomies">
+<meta name="twitter:description" content="Small Probability &amp; Information Theory cheatsheet.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -125,7 +154,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a></li>
+  <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
+  <ul class="collapse">
+  <li><a href="#outcomes-and-events" id="toc-outcomes-and-events" class="nav-link" data-scroll-target="#outcomes-and-events">Outcomes and Events</a></li>
+  <li><a href="#probability-function" id="toc-probability-function" class="nav-link" data-scroll-target="#probability-function">Probability function</a></li>
+  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ Theorem</a></li>
+  <li><a href="#expectation-variance" id="toc-expectation-variance" class="nav-link" data-scroll-target="#expectation-variance">Expectation &amp; Variance</a></li>
+  </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a></li>
@@ -138,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability</h1>
+<h1 class="title">Probability and Information Theory</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
   </div>
@@ -146,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    All things regarding probability, Bayesian or frequentist.
+    Small Probability &amp; Information Theory cheatsheet.
   </div>
 </div>
 
@@ -183,6 +219,62 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="definitions-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
+<section id="outcomes-and-events" class="level3">
+<h3 class="anchored" data-anchor-id="outcomes-and-events">Outcomes and Events</h3>
+<p>When studying probability, we are performing experiments, random trials or observations. The set of all possible <em>outcomes</em> of this experiment is <span class="math inline">\(\mathcal{\Omega}\)</span> (or <span class="math inline">\(\mathcal{S}\)</span>). eg. When rolling a die, <span class="math inline">\(\mathcal{\Omega} = \{1,2,3,4,5,6\}\)</span>.</p>
+<p>We can group these outcomes into <em>events</em> — <span class="math inline">\(\mathcal{E} \subseteq \mathcal{\Omega}\)</span>. eg. The event <span class="math inline">\(\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}\)</span>. Whenever the outcome <span class="math inline">\(z\)</span> of the random experiment satisfies <span class="math inline">\(z \in \mathcal{E}\)</span>, the event <span class="math inline">\(\mathcal{E}\)</span> has occured. Multiple events can occur from the same outcome, say we have <span class="math inline">\(\mathcal{A} = \{3, 6\}\)</span> “the result is divisible by 3” and <span class="math inline">\(\mathcal{B} = \{2, 4, 6\}\)</span>. <span class="math inline">\(z = 6\)</span> satisfies both <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span>.</p>
+</section>
+<section id="probability-function" class="level3">
+<h3 class="anchored" data-anchor-id="probability-function">Probability function</h3>
+<p>The <strong>probability function</strong> maps events onto a real value <span class="math inline">\(P\colon \mathcal{E} \subseteq \mathcal{\Omega} \to [0, 1]\)</span>.</p>
+<p><span class="math inline">\(\operatorname{P}(\mathcal{E})\)</span> is the <em>probability associated with event <span class="math inline">\(\mathcal{E}\)</span></em>.</p>
+<section id="properties" class="level4">
+<h4 class="anchored" data-anchor-id="properties">Properties</h4>
+<ul>
+<li><span class="math inline">\(\operatorname{P}(\mathcal{E}) \geq 0\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\mathcal{\Omega}) = 1, \operatorname{P}(\mathcal{\emptyset}) = 0\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cup \mathcal{B}) = \operatorname{P}(\mathcal{A}) + \operatorname{P}(\mathcal{B}) - \operatorname{P}(\mathcal{A} \cap \mathcal{B})\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\bigcup_{i=1}^{\infty} \mathcal{A}_i) = \sum_{i=1}^{\infty} \operatorname{P}(\mathcal{A}_i), \quad \mathcal{A}_i \cap \mathcal{A}_j = \emptyset\: \text{for all}\: i \neq j\)</span> (= if all events <span class="math inline">\(\mathcal{A}_i\)</span> are <em>mutually exclusive</em>)</li>
+<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cap \mathcal{B}) = \operatorname{P}(\mathcal{A} \mid \mathcal{B})\operatorname{P}(\mathcal{B})\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cap \mathcal{B}) = \operatorname{P}(\mathcal{A})\operatorname{P}(\mathcal{B}) \iff \mathcal{A} \perp \mathcal{B}\)</span> (eg. 2 fair dice rolls)</li>
+<li><span class="math inline">\(\mathcal{A} \perp \mathcal{B} \iff \operatorname{P}(\mathcal{A} \mid \mathcal{B}) = \operatorname{P}(\mathcal{A})\)</span></li>
+</ul>
+</section>
+</section>
+<section id="random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="random-variables">Random Variables</h3>
+<p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> is a measurable function (mapping) <span class="math inline">\(X \colon \mathcal{\Omega} \to \mathcal{E}\)</span> from a sample space <span class="math inline">\(\mathcal{\Omega}\)</span> as a set of possible outcomes to a measurable space <span class="math inline">\(\mathcal{E}\)</span>.</p>
+<p>The probability that <span class="math inline">\(X\)</span> takes on a value in a measurable set <span class="math inline">\(\mathcal{S} \in \mathcal{E}\)</span> is written as <span class="math inline">\(\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})\)</span></p>
+<p>The probability that <span class="math inline">\(X\)</span> takes <em>discrete</em> value <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(X = v\)</span>, is <span class="math inline">\(\operatorname{P}(X=v)\)</span>.</p>
+<p><span class="math inline">\(X = v\)</span> or <span class="math inline">\(X \geq v\)</span> are <strong>events</strong>.</p>
+<p>Random variables allow us to go from outcomes to values, like <span class="math inline">\(X(\omega) = \omega\)</span> the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
+<p>When <span class="math inline">\(X\)</span> is <em>continuous</em> it doesn’t make sens to have events like <span class="math inline">\(X = v\)</span>, rather we use <span class="math inline">\(v \leq X \leq w\)</span>. In this case we work with probability <strong>densities</strong>. An example would be the height of a population.</p>
+<p>We note <span class="math inline">\(\operatorname{P}(X)\)</span> the <strong>probability distribution</strong> of X.</p>
+<section id="multiple-random-variables" class="level4">
+<h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
+<p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>).</p>
+<p>Obviously <span class="math display">\[ \operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b) \]</span></p>
+<p>Also, <span class="math display">\[ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) \]</span></p>
+<p>Because <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span> are events, <span class="math display">\[\begin{aligned}
+\operatorname{P}(A = a, B = b) &amp; = \operatorname{P}(A = a \mid B = b)\operatorname{P}(B = b) \\
+\iff \operatorname{P}(A = a \mid B = b) &amp; = \operatorname{P}(A = a, B = b)/\operatorname{P}(B = b)
+\end{aligned}\]</span></p>
+</section>
+</section>
+<section id="bayes-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="bayes-theorem">Bayes’ Theorem</h3>
+<p>From the properties and definitions above, we can derive the following formula</p>
+<p><span class="math display">\[ \overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfrac{\overbrace{\operatorname{P}(B \mid A)}^{\text{likelihood}}\overbrace{\operatorname{P}(A)}^{\text{prior}}}{\underbrace{\operatorname{P}(B)}_{\text{observation}}} \]</span></p>
+<ul>
+<li>prior/hypothesis: our estimate or current belief about the probability of <span class="math inline">\(A\)</span></li>
+<li>observation/marginal likelihood/evidence: the evidence or observations we’ve made regarding <span class="math inline">\(B\)</span></li>
+<li>likelihood: a mesure of how compatible our hypothesis is with our observation</li>
+</ul>
+<p>A simplified version is <span class="math inline">\(\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)\)</span></p>
+</section>
+<section id="expectation-variance" class="level3">
+<h3 class="anchored" data-anchor-id="expectation-variance">Expectation &amp; Variance</h3>
+</section>
 </section>
 <section id="notes" class="level2">
 <h2 class="anchored" data-anchor-id="notes">Notes</h2>
@@ -196,6 +288,36 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="notation" class="level2">
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<ul>
+<li><span class="math inline">\(\mathcal{X}\)</span>: a set</li>
+<li><span class="math inline">\(\{a, b, c\}\)</span>: a set, with its elements</li>
+<li><span class="math inline">\(\emptyset\)</span>: the empty set</li>
+<li><span class="math inline">\(\mathcal{A} \subset \mathcal{B}\)</span>, <span class="math inline">\(\mathcal{A} \subsetneq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a proper/strict subest of <span class="math inline">\(\mathcal{B}\)</span></li>
+<li><span class="math inline">\(\mathcal{A} \subseteq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a subest of <span class="math inline">\(\mathcal{B}\)</span></li>
+<li><span class="math inline">\(\mathcal{A} \cap \mathcal{B}\)</span>: the intersection of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>and</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
+<li><span class="math inline">\(\mathcal{A} \cup \mathcal{B}\)</span>: the union of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>or</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
+<li><span class="math inline">\(\mathcal{A} \setminus \mathcal{B}\)</span>: set substraction of <span class="math inline">\(\mathcal{B}\)</span> from <span class="math inline">\(\mathcal{A}\)</span>, elements from <span class="math inline">\(\mathcal{A}\)</span> but not in <span class="math inline">\(\mathcal{B}\)</span></li>
+<li><span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\mathcal{\Omega}\)</span>: the sample space / universe (the set of all possible outcomes)</li>
+<li><span class="math inline">\(|\mathcal{X}|\)</span>: the cardinality of set <span class="math inline">\(\mathcal{X}\)</span> (its number of events)</li>
+<li><span class="math inline">\(X\)</span>: a random variable</li>
+<li><span class="math inline">\(P\)</span>: a probability distribution</li>
+<li><span class="math inline">\(X \sim P\)</span>: the random variable <span class="math inline">\(X\)</span> follows the probability distribution <span class="math inline">\(P\)</span></li>
+<li><span class="math inline">\(a \propto b\)</span>: <span class="math inline">\(a\)</span> is proportional to <span class="math inline">\(b\)</span>, eg. <span class="math inline">\(a = kb\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\cdot)\)</span>: the probability function, maps events to their probability and random variables to their probability <em>distributions</em></li>
+<li><span class="math inline">\(\operatorname{P}(X)\)</span>: depending on the context, a probability distribution <em>or</em> the probability of any <span class="math inline">\(X=x\)</span>, meaning the formula is true for any value</li>
+<li><span class="math inline">\(\operatorname{P}(X=x)\)</span>: the probability assigned to the event where random variable <span class="math inline">\(X\)</span> takes value <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(X \mid Y)\)</span>: the conditional probability distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(\operatorname{P}(\cdot)\)</span>: a probability density function (PDF) associated with distribution <span class="math inline">\(P\)</span></li>
+<li><span class="math inline">\({E}[X]\)</span>: expectation of a random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(X \perp Y\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent</li>
+<li><span class="math inline">\(X \perp Y \mid Z\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are conditionally independent given <span class="math inline">\(Z\)</span></li>
+<li><span class="math inline">\(\sigma_X\)</span>: standard deviation of random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\textrm{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
+<li><span class="math inline">\(\textrm{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(\rho(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
+<li><span class="math inline">\(H(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(D_{\textrm{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
+</ul>
 
 
 </section>

@@ -51,7 +51,7 @@
 
 <section id="finishing-the-preliminaries-for-d2l" class="level3">
 <h3 class="anchored" data-anchor-id="finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</h3>
-<p>Well, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t <em>learn</em> anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and <em>grok</em> or <em>accept</em> them as true. Like the classic Bayes Theorem, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.</p>
+<p>Well, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t <em>learn</em> anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and <em>grok</em> or <em>accept</em> them as true. Like the classic <a href="../notes/probability.html#bayes-theorem">Bayes Theorem</a>, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.</p>
 </section>
 <section id="evening-study-session-on-ddp" class="level3">
 <h3 class="anchored" data-anchor-id="evening-study-session-on-ddp">Evening study session on DDP</h3>
