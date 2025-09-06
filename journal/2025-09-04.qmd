@@ -7,7 +7,7 @@ date: 2025-09-04
 
 ### Finishing the preliminaries for D2L
 
-Well, finally I'm done with the "catching up" for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university,  I didn't _learn_ anything new here, but it's always good to refresh some knowledge, and re-derive formulas, to have them in mind and _grok_ or _accept_ them as true. Like the classic [Bayes Theorem](#todo), I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.
+Well, finally I'm done with the "catching up" for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university,  I didn't _learn_ anything new here, but it's always good to refresh some knowledge, and re-derive formulas, to have them in mind and _grok_ or _accept_ them as true. Like the classic [Bayes Theorem](/notes/probability.qmd#bayes-theorem), I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.
 
 ### Evening study session on DDP
 

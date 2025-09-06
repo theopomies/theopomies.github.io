@@ -1,5 +1,5 @@
 ---
-title: Linear Algebra 
+title: Linear Algebra
 author: Theo POMIES
 date: 2025-08-29
 date-modified: 2025-09-04
@@ -148,4 +148,5 @@ Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})
 * $\mathbf{x}_{:,j}$: the $j^\textrm{th}$ column-vector of $\mathbf{X}$
 * $\operatorname{diag}(a_1, \dots, a_n)$: a diagonal matrix
 * $\mathbf{I}$: the indentity matrix
+* $(\cdot)^\top$: the transpose of a vector or matrix
 * $\mathbf{A}^{-1}$: the inverse of a matrix
