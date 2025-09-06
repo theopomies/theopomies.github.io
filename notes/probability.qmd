@@ -10,13 +10,15 @@ categories: [math]
 ```{python}
 # | echo: false
 import torch
+
+# TODO: Add torch examples!
 ```
 
 ## Definitions & Formulas
 ### Outcomes and Events
 When studying probability, we are performing experiments, random trials or observations. The set of all possible _outcomes_ of this experiment is $\mathcal{\Omega}$ (or $\mathcal{S}$). eg. When rolling a die, $\mathcal{\Omega} = \{1,2,3,4,5,6\}$.
 
-We can group these outcomes into _events_ — $\mathcal{E} \subseteq \mathcal{\Omega}$. eg. The event $\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}$. Whenever the outcome $z$ of the random experiment satisfies $z \in \mathcal{E}$, the event $\mathcal{E}$ has occured. Multiple events can occur from the same outcome, say we have $\mathcal{A} = \{3, 6\}$ "the result is divisible by 3" and $\mathcal{B} = \{2, 4, 6\}$. $z = 6$ satisfies both $\mathcal{A}$ and $\mathcal{B}$.
+We can group these outcomes into _events_ — $\mathcal{E} \subseteq \mathcal{\Omega}$. eg. The event $\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}$. Whenever the outcome $z$ of the random experiment satisfies $z \in \mathcal{E}$, the event $\mathcal{E}$ has occurred. Multiple events can occur from the same outcome, say we have $\mathcal{A} = \{3, 6\}$ "the result is divisible by 3" and $\mathcal{B} = \{2, 4, 6\}$. $z = 6$ satisfies both $\mathcal{A}$ and $\mathcal{B}$.
 
 ### Probability function
 
@@ -46,17 +48,17 @@ $X = v$ or $X \geq v$ are **events**.
 
 Random variables allow us to go from outcomes to values, like $X(\omega) = \omega$ the random variable that associates to each die its value (identity function). This is also an example of a _discrete_ random variable.
 
-When $X$ is _continuous_ it doesn't make sens to have events like $X = v$, rather we use $v \leq X \leq w$. In this case we work with probability **densities**. An example would be the height of a population.
+When $X$ is _continuous_ it doesn't make sense to have events like $X = v$ (and $\operatorname{P}(X = v) = 0$), rather we use $v \leq X \leq w$ and probability **densities**. An example would be the height of a population.
 
-We note $\operatorname{P}(X)$ the **probability distribution** of X.
+We note $\operatorname{P}(X)$ the **probability distribution** of X. (Abuse of notation: strictly $P_X$ is the distribution of $X$, but we’ll often just write $P(X)$)
 
 #### Multiple Random Variables
 
-$\operatorname{P}(A = a, B = b)$ is the **joint probability** of $A = a$ **and** $B = b$ (it's the intersection of the events $A = a$ and $B = b$).
+$\operatorname{P}(A = a, B = b)$ is the **joint probability** of $A = a$ **and** $B = b$ (it's the intersection of the events $A = a$ and $B = b$). Equivalently it's $\operatorname{P}(\{A = a\} \cap \{B = b\})$, with an overloaded notation, the **joint probability distribution** becomes $\operatorname{P}(A, B)$
 
 Obviously $$ \operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b) $$
 
-Also, $$ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) $$
+Also, we can **marginalize** $$ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) $$
 
 Because $A = a$ and $B = b$ are events,
 $$\begin{aligned}
@@ -72,11 +74,45 @@ $$ \overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfra
 
 * prior/hypothesis: our estimate or current belief about the probability of $A$
 * observation/marginal likelihood/evidence: the evidence or observations we've made regarding $B$
-* likelihood: a mesure of how compatible our hypothesis is with our observation
+* likelihood: a measure of how compatible our hypothesis is with our observation
 
 A simplified version is $\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)$
 
 ### Expectation & Variance
+#### Expectation
+
+The **expectation** (or **expected value**) is the weighted average of the values of $X$.
+
+Discrete case:
+
+$$ \operatorname{E}[X] = \operatorname{E}_{x \sim P}[X] = \sum_x x\operatorname{P}(X=x) $$
+
+Continuous case:
+
+$$\operatorname{E}[X] = \int_{-\infty}^{\infty} x f(x) \;dx $$
+
+To follow mathematical notation, sometimes we use $\mu$ to denote this average.
+
+#### Variance
+
+The **variance** is a measure of dispersion, it quantifies _how much do values vary relative to the expectation (average) on average_.
+The variance is the expectation of the squared difference between the values and the expected value.
+
+$$ \operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2 $$
+
+Because
+
+$$ \operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2 $$
+
+#### Standard deviation
+
+Because the variance is a squared difference, we can take its square root to get the **standard deviation** which has the benefit of being in the same unit as our random variable.
+
+$$ \operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)} $$
+
+#### Covariance
+
+TODO once I understand it fully enough to explain it.
 
 ## Notes
 
@@ -91,11 +127,11 @@ Later!
 * $\mathcal{X}$: a set
 * $\{a, b, c\}$: a set, with its elements
 * $\emptyset$: the empty set
-* $\mathcal{A} \subset \mathcal{B}$, $\mathcal{A} \subsetneq \mathcal{B}$: $\mathcal{A}$ is a proper/strict subest of $\mathcal{B}$
+* $\mathcal{A} \subset \mathcal{B}$, $\mathcal{A} \subsetneq \mathcal{B}$: $\mathcal{A}$ is a proper/strict subset of $\mathcal{B}$
 * $\mathcal{A} \subseteq \mathcal{B}$: $\mathcal{A}$ is a subest of $\mathcal{B}$
 * $\mathcal{A} \cap \mathcal{B}$: the intersection of sets $\mathcal{A}$ and $\mathcal{B}$ — "$\mathcal{A}$ **and** $\mathcal{B}$"
 * $\mathcal{A} \cup \mathcal{B}$: the union of sets $\mathcal{A}$ and $\mathcal{B}$ — "$\mathcal{A}$ **or** $\mathcal{B}$"
-* $\mathcal{A} \setminus \mathcal{B}$: set substraction of $\mathcal{B}$ from $\mathcal{A}$, elements from $\mathcal{A}$ but not in $\mathcal{B}$
+* $\mathcal{A} \setminus \mathcal{B}$: set subtraction of $\mathcal{B}$ from $\mathcal{A}$, elements from $\mathcal{A}$ but not in $\mathcal{B}$
 * $\mathcal{S}$, $\mathcal{\Omega}$: the sample space / universe (the set of all possible outcomes)
 * $|\mathcal{X}|$: the cardinality of set $\mathcal{X}$ (its number of events)
 * $X$: a random variable
@@ -106,13 +142,13 @@ Later!
 * $\operatorname{P}(X)$: depending on the context, a probability distribution _or_ the probability of any $X=x$, meaning the formula is true for any value
 * $\operatorname{P}(X=x)$: the probability assigned to the event where random variable $X$ takes value $x$
 * $\operatorname{P}(X \mid Y)$: the conditional probability distribution of $X$ given $Y$
-* $\operatorname{P}(\cdot)$: a probability density function (PDF) associated with distribution $P$
-* ${E}[X]$: expectation of a random variable $X$
+* $\operatorname{p}(\cdot)$: a probability density function (PDF) associated with distribution $P$
+* $\operatorname{E}[X]$: expectation of a random variable $X$
 * $X \perp Y$: random variables $X$ and $Y$ are independent
 * $X \perp Y \mid Z$: random variables  $X$  and  $Y$ are conditionally independent given $Z$
 * $\sigma_X$: standard deviation of random variable $X$
 * $\textrm{Var}(X)$: variance of random variable $X$, equal to $\sigma^2_X$
 * $\textrm{Cov}(X, Y)$: covariance of random variables $X$ and $Y$
-* $\rho(X, Y)$: the Pearson correlation coefficient between $X$ and $Y$, equals $\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}$
-* $H(X)$: entropy of random variable $X$
+* $\operatorname{\rho}(X, Y)$: the Pearson correlation coefficient between $X$ and $Y$, equals $\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}$
+* $\operatorname{H}(X)$: entropy of random variable $X$
 * $D_{\textrm{KL}}(P\|Q)$: the KL-divergence (or relative entropy) from distribution $Q$ to distribution $P$
