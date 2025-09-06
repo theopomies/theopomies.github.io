@@ -18,7 +18,7 @@ import torch
 ### Outcomes and Events
 When studying probability, we are performing experiments, random trials or observations. The set of all possible _outcomes_ of this experiment is $\mathcal{\Omega}$ (or $\mathcal{S}$). eg. When rolling a die, $\mathcal{\Omega} = \{1,2,3,4,5,6\}$.
 
-We can group these outcomes into _events_ — $\mathcal{E} \subseteq \mathcal{\Omega}$. eg. The event $\mathcal{E} = \{die shows an even number\} = \{2, 4, 6\}$. Whenever the outcome $z$ of the random experiment satisfies $z \in \mathcal{E}$, the event $\mathcal{E}$ has occurred. Multiple events can occur from the same outcome, say we have $\mathcal{A} = \{3, 6\}$ "the result is divisible by 3" and $\mathcal{B} = \{2, 4, 6\}$. $z = 6$ satisfies both $\mathcal{A}$ and $\mathcal{B}$.
+We can group these outcomes into _events_ — $\mathcal{E} \subseteq \mathcal{\Omega}$. eg. The event $\mathcal{E} = \{$die shows an even number$\} = \{2, 4, 6\}$. Whenever the outcome $z$ of the random experiment satisfies $z \in \mathcal{E}$, the event $\mathcal{E}$ has occurred. Multiple events can occur from the same outcome, say we have $\mathcal{A} = \{3, 6\}$ "the result is divisible by 3" and $\mathcal{B} = \{2, 4, 6\}$. $z = 6$ satisfies both $\mathcal{A}$ and $\mathcal{B}$.
 
 ### Probability function
 
