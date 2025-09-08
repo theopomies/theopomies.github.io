@@ -28,13 +28,14 @@ $$ \begin{aligned}
     \dfrac{d}{dx}x^n & = nx^{n - 1} && \text{for n} \neq 0 \\
     \dfrac{d}{dx}e^x & = e^x \\
     \dfrac{d}{dx}\ln x & = x^{-1} \\
+    \dfrac{d}{dx}a^x & = \ln(a)a^x \\
     \dfrac{d}{dx}\cos x & = -\sin x \\
     \dfrac{d}{dx}\sin x & = \cos x \\
 \end{aligned} $$
 
 From these it becomes trivial to derive $\tan$, $\sec$, $\csc$ and $\cot$.
 
-#### Derivation Rules 
+#### Derivation Rules
 Finally a composition of differentiable functions is also differentiable, so we have the following rules that allow us to derive almost any function:
 
 $$ \begin{aligned}
@@ -58,8 +59,8 @@ Very similar, but now our function takes a vector $\mathbf{x} \in \mathbb{R}^n$ 
 
 To paraphrase D2L because their explanation is perfect:
 
-Let $y = f(x_1, x_2, \ldots, x_n)$ be a function with $n$ variables. 
-The *partial derivative* of $y$ 
+Let $y = f(x_1, x_2, \ldots, x_n)$ be a function with $n$ variables.
+The *partial derivative* of $y$
 with respect to its $i^\textrm{th}$ parameter $x_i$ is
 
 $$ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.$$
@@ -72,7 +73,7 @@ $$ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial
 # TODO: Jacobian
 ```
 
-#### Handy Rules 
+#### Handy Rules
 
 The following rules come straight from D2L:
 
@@ -87,6 +88,87 @@ $$\frac{\partial y}{\partial x_{i}} = \frac{\partial y}{\partial u_{1}} \frac{\p
 where $\mathbf{A} \in \mathbb{R}^{n \times m}$ is a *matrix*
 that contains the derivative of vector $\mathbf{u}$
 with respect to vector $\mathbf{x}$.
+
+### Integrals
+
+Integrals are
+
+* a way to compute the **signed** area under a curve
+* antiderivatives
+* a way of adding up tiny bits
+
+$$ \int_a^b f(x)\,dx $$
+
+#### Intuition as sum of rectangles
+
+The integral
+$$\int_a^b f(x)\,dx$$
+is the *limit of sums of tiny rectangular areas*.
+
+If we cut the interval $[a,b]$ into $n$ equal chunks of width
+$$\Delta x = \frac{b-a}{n},$$
+then the total area is approximated by
+$$\sum_{k=1}^{n} f(a + k\Delta x)\,\Delta x.$$
+
+As we make the chunks thinner ($n \to \infty$, so $\Delta x \to 0$), this sum becomes exact:
+
+$$\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{k=1}^{n} f(a + k\Delta x)\,\Delta x.$$
+
+$\int_a^b f(x)\,dx$ is a **definite integral** of $f(x)$ from $[a,b]$.
+
+$\int f(x)\,dx$ is an **indefinite integral**.
+
+### Fundamental Theorem of Calculus
+
+The fundamental theorem of calculus links differentiation (derivatives) and integration (integrals).
+
+$$ \int_a^b f(x)\,dx = F(b) - F(a)$$
+
+Where
+
+$$ \dfrac{d}{dx}F(x) = f(x) $$
+
+#### Intuition
+
+Say we have a function $A(x)$ being the area under the curve of $f(x)$ between $0$ and $x$.
+
+to find the area under the curve between $x$ and $x+h$, we could compute
+$$ A(x+h) - A(x) \approx f(x)h $$
+$$ \iff \dfrac{A(x+h) - A(x)}{h} \approx f(x) $$
+$$ \iff \lim_{h \to 0} \dfrac{A(x+h) - A(x)}{h} = f(x) $$
+$$ \iff \dfrac{d}{dx}A(x) = f(x) $$
+
+#### dx
+$dx$ = the differential of $x$
+
+A single symbol that means “infinitesimal change in $x$.”
+
+In derivatives, it appears in a ratio ($dy/dx$). We are differentiating $f(x)$ **wrt $x$**.
+
+In integrals, it appears as a piece being added up ($f(x)\,dx$). We are integrating $f(x)$ **wrt $x$**.
+
+### L'Hôpital's Rule
+
+If $\lim_{x \to c} f(x) = \lim_{x \to c} g(x) = 0$ or $\pm \infty$, and $\lim_{x \to c} \dfrac{\frac{d}{dx}f(x)}{\frac{d}{dx}g(x)}$ exists, then
+
+$$\lim_{x \to c} \dfrac{f(x)}{g(x)} = \lim_{x \to c} \dfrac{\frac{d}{dx}f(x)}{\frac{d}{dx}g(x)}$$
+
+### Implicit Differentiation
+
+We can use
+$$a = b \implies \dfrac{d}{dx}a = \dfrac{d}{dx}b$$
+to compute derivatives of **relations** (linked variables eg. the equation for a circle centered at the origin and of radius 5: $x^2 + y^2 = 25$)
+
+Or even to compute the derivative of $ln(x)$:
+
+$$\begin{aligned}
+y = ln(x) & \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
+& \iff \dfrac{d}{dx} e^y = 1 \\
+& \iff e^y\dfrac{d}{dx}y = 1 \\
+& \iff \dfrac{d}{dx}y = \dfrac{1}{e^y} \\
+& \iff \dfrac{d}{dx}y = \dfrac{1}{e^{ln(x)}} \\
+& \iff \dfrac{d}{dx}y = \dfrac{1}{x}
+\end{aligned}$$
 
 ## Notes
 
