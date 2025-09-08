@@ -10,7 +10,30 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.7.34</generator>
-<lastBuildDate>Fri, 05 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 08 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Marimo Workshop + Integrals refresher</title>
+  <link>https://theopomies.com/journal/2025-09-08.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<ul>
+<li><p>binge essence of Calculus</p></li>
+<li><p>try to reallllllllly graps integrals, intuitions etc</p></li>
+<li><p>wrote in my notes</p></li>
+<li><p>marimo workshop</p></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-08.html</guid>
+  <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Ray / Anyscale workshop with S2S</title>
   <link>https://theopomies.com/journal/2025-09-05.html</link>

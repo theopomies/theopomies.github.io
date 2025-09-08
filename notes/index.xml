@@ -978,7 +978,7 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <section id="common-derivatives" class="level4">
 <h4 class="anchored" data-anchor-id="common-derivatives">Common Derivatives</h4>
 <p>From that we can get common derivatives</p>
-<p><img src="https://latex.codecogs.com/png.latex?%20%5Cbegin%7Baligned%7D%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7DC%20&amp;%20=%200%20&amp;&amp;%20%5Ctext%7Bfor%20any%20constant%20C%7D%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7Dx%5En%20&amp;%20=%20nx%5E%7Bn%20-%201%7D%20&amp;&amp;%20%5Ctext%7Bfor%20n%7D%20%5Cneq%200%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7De%5Ex%20&amp;%20=%20e%5Ex%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Cln%20x%20&amp;%20=%20x%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Ccos%20x%20&amp;%20=%20-%5Csin%20x%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Csin%20x%20&amp;%20=%20%5Ccos%20x%20%5C%5C%0A%5Cend%7Baligned%7D%20"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Cbegin%7Baligned%7D%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7DC%20&amp;%20=%200%20&amp;&amp;%20%5Ctext%7Bfor%20any%20constant%20C%7D%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7Dx%5En%20&amp;%20=%20nx%5E%7Bn%20-%201%7D%20&amp;&amp;%20%5Ctext%7Bfor%20n%7D%20%5Cneq%200%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7De%5Ex%20&amp;%20=%20e%5Ex%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Cln%20x%20&amp;%20=%20x%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7Da%5Ex%20&amp;%20=%20%5Cln(a)a%5Ex%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Ccos%20x%20&amp;%20=%20-%5Csin%20x%20%5C%5C%0A%20%20%20%20%5Cdfrac%7Bd%7D%7Bdx%7D%5Csin%20x%20&amp;%20=%20%5Ccos%20x%20%5C%5C%0A%5Cend%7Baligned%7D%20"></p>
 <p>From these it becomes trivial to derive <img src="https://latex.codecogs.com/png.latex?%5Ctan">, <img src="https://latex.codecogs.com/png.latex?%5Csec">, <img src="https://latex.codecogs.com/png.latex?%5Ccsc"> and <img src="https://latex.codecogs.com/png.latex?%5Ccot">.</p>
 </section>
 <section id="derivation-rules" class="level4">
@@ -1007,6 +1007,55 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20y%7D%7B%5Cpartial%20x_%7Bi%7D%7D%20=%20%5Cfrac%7B%5Cpartial%20y%7D%7B%5Cpartial%20u_%7B1%7D%7D%20%5Cfrac%7B%5Cpartial%20u_%7B1%7D%7D%7B%5Cpartial%20x_%7Bi%7D%7D%20+%20%5Cfrac%7B%5Cpartial%20y%7D%7B%5Cpartial%20u_%7B2%7D%7D%20%5Cfrac%7B%5Cpartial%20u_%7B2%7D%7D%7B%5Cpartial%20x_%7Bi%7D%7D%20+%20%5Cldots%20+%20%5Cfrac%7B%5Cpartial%20y%7D%7B%5Cpartial%20u_%7Bm%7D%7D%20%5Cfrac%7B%5Cpartial%20u_%7Bm%7D%7D%7B%5Cpartial%20x_%7Bi%7D%7D%20%5C%20%5Ctextrm%7B%20and%20so%20%7D%20%5C%20%5Cnabla_%7B%5Cmathbf%7Bx%7D%7D%20y%20=%20%20%5Cmathbf%7BA%7D%20%5Cnabla_%7B%5Cmathbf%7Bu%7D%7D%20y,"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bn%20%5Ctimes%20m%7D"> is a <em>matrix</em> that contains the derivative of vector <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bu%7D"> with respect to vector <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D">.</p>
 </section>
+</section>
+<section id="integrals" class="level3">
+<h3 class="anchored" data-anchor-id="integrals">Integrals</h3>
+<p>Integrals are</p>
+<ul>
+<li>a way to compute the <strong>signed</strong> area under a curve</li>
+<li>antiderivatives</li>
+<li>a way of adding up tiny bits</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Cint_a%5Eb%20f(x)%5C,dx%20"></p>
+<section id="intuition-as-sum-of-rectangles" class="level4">
+<h4 class="anchored" data-anchor-id="intuition-as-sum-of-rectangles">Intuition as sum of rectangles</h4>
+<p>The integral <img src="https://latex.codecogs.com/png.latex?%5Cint_a%5Eb%20f(x)%5C,dx"> is the <em>limit of sums of tiny rectangular areas</em>.</p>
+<p>If we cut the interval <img src="https://latex.codecogs.com/png.latex?%5Ba,b%5D"> into <img src="https://latex.codecogs.com/png.latex?n"> equal chunks of width <img src="https://latex.codecogs.com/png.latex?%5CDelta%20x%20=%20%5Cfrac%7Bb-a%7D%7Bn%7D,"> then the total area is approximated by <img src="https://latex.codecogs.com/png.latex?%5Csum_%7Bk=1%7D%5E%7Bn%7D%20f(a%20+%20k%5CDelta%20x)%5C,%5CDelta%20x."></p>
+<p>As we make the chunks thinner (<img src="https://latex.codecogs.com/png.latex?n%20%5Cto%20%5Cinfty">, so <img src="https://latex.codecogs.com/png.latex?%5CDelta%20x%20%5Cto%200">), this sum becomes exact:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cint_a%5Eb%20f(x)%5C,dx%20=%20%5Clim_%7Bn%5Cto%5Cinfty%7D%20%5Csum_%7Bk=1%7D%5E%7Bn%7D%20f(a%20+%20k%5CDelta%20x)%5C,%5CDelta%20x."></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cint_a%5Eb%20f(x)%5C,dx"> is a <strong>definite integral</strong> of <img src="https://latex.codecogs.com/png.latex?f(x)"> from <img src="https://latex.codecogs.com/png.latex?%5Ba,b%5D">.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cint%20f(x)%5C,dx"> is an <strong>indefinite integral</strong>.</p>
+</section>
+</section>
+<section id="fundamental-theorem-of-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="fundamental-theorem-of-calculus">Fundamental Theorem of Calculus</h3>
+<p>The fundamental theorem of calculus links differentiation (derivatives) and integration (integrals).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Cint_a%5Eb%20f(x)%5C,dx%20=%20F(b)%20-%20F(a)"></p>
+<p>Where</p>
+<p><img src="https://latex.codecogs.com/png.latex?%20%5Cdfrac%7Bd%7D%7Bdx%7DF(x)%20=%20f(x)%20"></p>
+<section id="intuition" class="level4">
+<h4 class="anchored" data-anchor-id="intuition">Intuition</h4>
+<p>Say we have a function <img src="https://latex.codecogs.com/png.latex?A(x)"> being the area under the curve of <img src="https://latex.codecogs.com/png.latex?f(x)"> between <img src="https://latex.codecogs.com/png.latex?0"> and <img src="https://latex.codecogs.com/png.latex?x">.</p>
+<p>to find the area under the curve between <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?x+h">, we could compute <img src="https://latex.codecogs.com/png.latex?%20A(x+h)%20-%20A(x)%20%5Capprox%20f(x)h%20"> <img src="https://latex.codecogs.com/png.latex?%20%5Ciff%20%5Cdfrac%7BA(x+h)%20-%20A(x)%7D%7Bh%7D%20%5Capprox%20f(x)%20"> <img src="https://latex.codecogs.com/png.latex?%20%5Ciff%20%5Clim_%7Bh%20%5Cto%200%7D%20%5Cdfrac%7BA(x+h)%20-%20A(x)%7D%7Bh%7D%20=%20f(x)%20"> <img src="https://latex.codecogs.com/png.latex?%20%5Ciff%20%5Cdfrac%7Bd%7D%7Bdx%7DA(x)%20=%20f(x)%20"></p>
+</section>
+<section id="dx" class="level4">
+<h4 class="anchored" data-anchor-id="dx">dx</h4>
+<p><img src="https://latex.codecogs.com/png.latex?dx"> = the differential of <img src="https://latex.codecogs.com/png.latex?x"></p>
+<p>A single symbol that means “infinitesimal change in <img src="https://latex.codecogs.com/png.latex?x">.”</p>
+<p>In derivatives, it appears in a ratio (<img src="https://latex.codecogs.com/png.latex?dy/dx">). We are differentiating <img src="https://latex.codecogs.com/png.latex?f(x)"> <strong>wrt <img src="https://latex.codecogs.com/png.latex?x"></strong>.</p>
+<p>In integrals, it appears as a piece being added up (<img src="https://latex.codecogs.com/png.latex?f(x)%5C,dx">). We are integrating <img src="https://latex.codecogs.com/png.latex?f(x)"> <strong>wrt <img src="https://latex.codecogs.com/png.latex?x"></strong>.</p>
+</section>
+</section>
+<section id="lhôpitals-rule" class="level3">
+<h3 class="anchored" data-anchor-id="lhôpitals-rule">L’Hôpital’s Rule</h3>
+<p>If <img src="https://latex.codecogs.com/png.latex?%5Clim_%7Bx%20%5Cto%20c%7D%20f(x)%20=%20%5Clim_%7Bx%20%5Cto%20c%7D%20g(x)%20=%200"> or <img src="https://latex.codecogs.com/png.latex?%5Cpm%20%5Cinfty">, and <img src="https://latex.codecogs.com/png.latex?%5Clim_%7Bx%20%5Cto%20c%7D%20%5Cdfrac%7B%5Cfrac%7Bd%7D%7Bdx%7Df(x)%7D%7B%5Cfrac%7Bd%7D%7Bdx%7Dg(x)%7D"> exists, then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Clim_%7Bx%20%5Cto%20c%7D%20%5Cdfrac%7Bf(x)%7D%7Bg(x)%7D%20=%20%5Clim_%7Bx%20%5Cto%20c%7D%20%5Cdfrac%7B%5Cfrac%7Bd%7D%7Bdx%7Df(x)%7D%7B%5Cfrac%7Bd%7D%7Bdx%7Dg(x)%7D"></p>
+</section>
+<section id="implicit-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="implicit-differentiation">Implicit Differentiation</h3>
+<p>We can use <img src="https://latex.codecogs.com/png.latex?a%20=%20b%20%5Cimplies%20%5Cdfrac%7Bd%7D%7Bdx%7Da%20=%20%5Cdfrac%7Bd%7D%7Bdx%7Db"> to compute derivatives of <strong>relations</strong> (linked variables eg. the equation for a circle centered at the origin and of radius 5: <img src="https://latex.codecogs.com/png.latex?x%5E2%20+%20y%5E2%20=%2025">)</p>
+<p>Or even to compute the derivative of <img src="https://latex.codecogs.com/png.latex?ln(x)">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Baligned%7D%0Ay%20=%20ln(x)%20&amp;%20%5Ciff%20e%5Ey%20=%20x%20%5Cimplies%20%5Cdfrac%7Bd%7D%7Bdx%7D%20e%5Ey%20=%20%5Cdfrac%7Bd%7D%7Bdx%7D%20x%20%5C%5C%0A&amp;%20%5Ciff%20%5Cdfrac%7Bd%7D%7Bdx%7D%20e%5Ey%20=%201%20%5C%5C%0A&amp;%20%5Ciff%20e%5Ey%5Cdfrac%7Bd%7D%7Bdx%7Dy%20=%201%20%5C%5C%0A&amp;%20%5Ciff%20%5Cdfrac%7Bd%7D%7Bdx%7Dy%20=%20%5Cdfrac%7B1%7D%7Be%5Ey%7D%20%5C%5C%0A&amp;%20%5Ciff%20%5Cdfrac%7Bd%7D%7Bdx%7Dy%20=%20%5Cdfrac%7B1%7D%7Be%5E%7Bln(x)%7D%7D%20%5C%5C%0A&amp;%20%5Ciff%20%5Cdfrac%7Bd%7D%7Bdx%7Dy%20=%20%5Cdfrac%7B1%7D%7Bx%7D%0A%5Cend%7Baligned%7D"></p>
 </section>
 </section>
 <section id="notes" class="level2">

@@ -158,6 +158,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#differential-calculus" id="toc-differential-calculus" class="nav-link" data-scroll-target="#differential-calculus">Differential Calculus</a></li>
   <li><a href="#multivariate-calculus" id="toc-multivariate-calculus" class="nav-link" data-scroll-target="#multivariate-calculus">Multivariate Calculus</a></li>
+  <li><a href="#integrals" id="toc-integrals" class="nav-link" data-scroll-target="#integrals">Integrals</a></li>
+  <li><a href="#fundamental-theorem-of-calculus" id="toc-fundamental-theorem-of-calculus" class="nav-link" data-scroll-target="#fundamental-theorem-of-calculus">Fundamental Theorem of Calculus</a></li>
+  <li><a href="#lhôpitals-rule" id="toc-lhôpitals-rule" class="nav-link" data-scroll-target="#lhôpitals-rule">L’Hôpital’s Rule</a></li>
+  <li><a href="#implicit-differentiation" id="toc-implicit-differentiation" class="nav-link" data-scroll-target="#implicit-differentiation">Implicit Differentiation</a></li>
   </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
@@ -227,6 +231,7 @@ window.Quarto = {
     \dfrac{d}{dx}x^n &amp; = nx^{n - 1} &amp;&amp; \text{for n} \neq 0 \\
     \dfrac{d}{dx}e^x &amp; = e^x \\
     \dfrac{d}{dx}\ln x &amp; = x^{-1} \\
+    \dfrac{d}{dx}a^x &amp; = \ln(a)a^x \\
     \dfrac{d}{dx}\cos x &amp; = -\sin x \\
     \dfrac{d}{dx}\sin x &amp; = \cos x \\
 \end{aligned} \]</span></p>
@@ -267,6 +272,62 @@ window.Quarto = {
 <p><span class="math display">\[\frac{\partial y}{\partial x_{i}} = \frac{\partial y}{\partial u_{1}} \frac{\partial u_{1}}{\partial x_{i}} + \frac{\partial y}{\partial u_{2}} \frac{\partial u_{2}}{\partial x_{i}} + \ldots + \frac{\partial y}{\partial u_{m}} \frac{\partial u_{m}}{\partial x_{i}} \ \textrm{ and so } \ \nabla_{\mathbf{x}} y =  \mathbf{A} \nabla_{\mathbf{u}} y,\]</span></p>
 <p>where <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{n \times m}\)</span> is a <em>matrix</em> that contains the derivative of vector <span class="math inline">\(\mathbf{u}\)</span> with respect to vector <span class="math inline">\(\mathbf{x}\)</span>.</p>
 </section>
+</section>
+<section id="integrals" class="level3">
+<h3 class="anchored" data-anchor-id="integrals">Integrals</h3>
+<p>Integrals are</p>
+<ul>
+<li>a way to compute the <strong>signed</strong> area under a curve</li>
+<li>antiderivatives</li>
+<li>a way of adding up tiny bits</li>
+</ul>
+<p><span class="math display">\[ \int_a^b f(x)\,dx \]</span></p>
+<section id="intuition-as-sum-of-rectangles" class="level4">
+<h4 class="anchored" data-anchor-id="intuition-as-sum-of-rectangles">Intuition as sum of rectangles</h4>
+<p>The integral <span class="math display">\[\int_a^b f(x)\,dx\]</span> is the <em>limit of sums of tiny rectangular areas</em>.</p>
+<p>If we cut the interval <span class="math inline">\([a,b]\)</span> into <span class="math inline">\(n\)</span> equal chunks of width <span class="math display">\[\Delta x = \frac{b-a}{n},\]</span> then the total area is approximated by <span class="math display">\[\sum_{k=1}^{n} f(a + k\Delta x)\,\Delta x.\]</span></p>
+<p>As we make the chunks thinner (<span class="math inline">\(n \to \infty\)</span>, so <span class="math inline">\(\Delta x \to 0\)</span>), this sum becomes exact:</p>
+<p><span class="math display">\[\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{k=1}^{n} f(a + k\Delta x)\,\Delta x.\]</span></p>
+<p><span class="math inline">\(\int_a^b f(x)\,dx\)</span> is a <strong>definite integral</strong> of <span class="math inline">\(f(x)\)</span> from <span class="math inline">\([a,b]\)</span>.</p>
+<p><span class="math inline">\(\int f(x)\,dx\)</span> is an <strong>indefinite integral</strong>.</p>
+</section>
+</section>
+<section id="fundamental-theorem-of-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="fundamental-theorem-of-calculus">Fundamental Theorem of Calculus</h3>
+<p>The fundamental theorem of calculus links differentiation (derivatives) and integration (integrals).</p>
+<p><span class="math display">\[ \int_a^b f(x)\,dx = F(b) - F(a)\]</span></p>
+<p>Where</p>
+<p><span class="math display">\[ \dfrac{d}{dx}F(x) = f(x) \]</span></p>
+<section id="intuition" class="level4">
+<h4 class="anchored" data-anchor-id="intuition">Intuition</h4>
+<p>Say we have a function <span class="math inline">\(A(x)\)</span> being the area under the curve of <span class="math inline">\(f(x)\)</span> between <span class="math inline">\(0\)</span> and <span class="math inline">\(x\)</span>.</p>
+<p>to find the area under the curve between <span class="math inline">\(x\)</span> and <span class="math inline">\(x+h\)</span>, we could compute <span class="math display">\[ A(x+h) - A(x) \approx f(x)h \]</span> <span class="math display">\[ \iff \dfrac{A(x+h) - A(x)}{h} \approx f(x) \]</span> <span class="math display">\[ \iff \lim_{h \to 0} \dfrac{A(x+h) - A(x)}{h} = f(x) \]</span> <span class="math display">\[ \iff \dfrac{d}{dx}A(x) = f(x) \]</span></p>
+</section>
+<section id="dx" class="level4">
+<h4 class="anchored" data-anchor-id="dx">dx</h4>
+<p><span class="math inline">\(dx\)</span> = the differential of <span class="math inline">\(x\)</span></p>
+<p>A single symbol that means “infinitesimal change in <span class="math inline">\(x\)</span>.”</p>
+<p>In derivatives, it appears in a ratio (<span class="math inline">\(dy/dx\)</span>). We are differentiating <span class="math inline">\(f(x)\)</span> <strong>wrt <span class="math inline">\(x\)</span></strong>.</p>
+<p>In integrals, it appears as a piece being added up (<span class="math inline">\(f(x)\,dx\)</span>). We are integrating <span class="math inline">\(f(x)\)</span> <strong>wrt <span class="math inline">\(x\)</span></strong>.</p>
+</section>
+</section>
+<section id="lhôpitals-rule" class="level3">
+<h3 class="anchored" data-anchor-id="lhôpitals-rule">L’Hôpital’s Rule</h3>
+<p>If <span class="math inline">\(\lim_{x \to c} f(x) = \lim_{x \to c} g(x) = 0\)</span> or <span class="math inline">\(\pm \infty\)</span>, and <span class="math inline">\(\lim_{x \to c} \dfrac{\frac{d}{dx}f(x)}{\frac{d}{dx}g(x)}\)</span> exists, then</p>
+<p><span class="math display">\[\lim_{x \to c} \dfrac{f(x)}{g(x)} = \lim_{x \to c} \dfrac{\frac{d}{dx}f(x)}{\frac{d}{dx}g(x)}\]</span></p>
+</section>
+<section id="implicit-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="implicit-differentiation">Implicit Differentiation</h3>
+<p>We can use <span class="math display">\[a = b \implies \dfrac{d}{dx}a = \dfrac{d}{dx}b\]</span> to compute derivatives of <strong>relations</strong> (linked variables eg. the equation for a circle centered at the origin and of radius 5: <span class="math inline">\(x^2 + y^2 = 25\)</span>)</p>
+<p>Or even to compute the derivative of <span class="math inline">\(ln(x)\)</span>:</p>
+<p><span class="math display">\[\begin{aligned}
+y = ln(x) &amp; \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
+&amp; \iff \dfrac{d}{dx} e^y = 1 \\
+&amp; \iff e^y\dfrac{d}{dx}y = 1 \\
+&amp; \iff \dfrac{d}{dx}y = \dfrac{1}{e^y} \\
+&amp; \iff \dfrac{d}{dx}y = \dfrac{1}{e^{ln(x)}} \\
+&amp; \iff \dfrac{d}{dx}y = \dfrac{1}{x}
+\end{aligned}\]</span></p>
 </section>
 </section>
 <section id="notes" class="level2">
