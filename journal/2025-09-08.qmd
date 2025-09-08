@@ -8,5 +8,6 @@ date: 2025-09-08
 - binge essence of Calculus
 - try to reallllllllly graps integrals, intuitions etc
 - wrote in my notes
+- 2nd "click" for LU decomposition
 
 - marimo workshop

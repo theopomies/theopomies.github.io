@@ -11,7 +11,6 @@ categories: [math]
 # | echo: false
 import torch
 
-# TODO: Elementary Matrix / Gaussian Elimination / Determinants of Elementary matrix
 # TODO: Linear Independence and Basis
 # TODO: subspace and dimensions
 # TODO: Rank
@@ -19,6 +18,9 @@ import torch
 ```
 
 ## Definitions & Formulas
+
+### Transpose
+$$ (\mathbf{A}^\top)_{i,j} = \mathbf{A}_{j,i}  $$
 
 ### Dot Product
 $$ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i $$
@@ -40,6 +42,13 @@ $$ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \su
 U, V = torch.arange(6).reshape(3, 2), torch.arange(6).reshape(2, 3)
 U @ V
 ```
+
+#### Properties
+
+* Non-commutativity: most of the time $\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}$
+* Distributivity: $\mathbf{A}(\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{B}\mathbf{C}$ and $(\mathbf{A} + \mathbf{B})\mathbf{C} = \mathbf{A}\mathbf{C} + \mathbf{B}\mathbf{C}$
+* Associativity: $\mathbf{A}(\mathbf{B}\mathbf{C}) = (\mathbf{A}\mathbf{B})\mathbf{C}$
+* Transpose: $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top\mathbf{A}^\top$
 
 ### Inverse of a Square Matrix
 $$ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} $$
@@ -79,6 +88,70 @@ Interstingly,
 
 $$ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^{-1} = \mathbf{A}^\top $$
 
+### Elementary Matrix
+
+An elementary matrix is a matrix obtained from the application of a [**single elementary row operation**](/notes/linear-algebra#elementary-matrix) to the identity matrix $\mathbf{I}$.
+
+Because of **associativity**, the product of an elementary matrix and another matrix is the same as applying the row operation to the other matrix.
+
+#### Scaling a row
+
+Multiplying row $i$ by $m$
+
+$$\mathbf{D}_i(m) = \operatorname{diag}(1, \dots, 1, d_i = m, 1, \dots, 1)$$
+
+##### Properties
+
+* $\mathbf{D}_i(m) = \mathbf{D}_i(\dfrac{1}{m})^{-1} = \mathbf{D}_i(m)^\top$
+* $\operatorname{det}(\mathbf{D}_i(m)) = m$ — obviously because it's a diagonal matrix full of $1$'s and a single $m$
+
+#### Adding a multiple of one row to another
+
+Adding $m$ times row $j$ to row $i$
+
+$$\mathbf{L}_{ij}(m) =
+\begin{bmatrix}
+1 &&&&&& \\
+& \ddots &&&&& \\
+&& 1 &&&& \\
+&&& \ddots &&& \\
+&& l_{i,j} = m && 1 && \\
+&&&&& \ddots & \\
+&&&&&& 1
+\end{bmatrix}$$
+
+##### Properties
+
+* $\mathbf{L}_{ij}(m)^{-1} = \mathbf{L}_{ij}(-m)$ — the inverse of adding a row multiple to another, is *subtracting* the same row multiple
+* $\mathbf{L}_{ij}(m)$ and $\mathbf{L}_{ij}(m)^{-1}$ are triangular matrices
+* So $\operatorname{det}(\mathbf{L}_{ij}(m)) = 1 \iff \operatorname{det}(\mathbf{L}_{ij}(m)\mathbf{A}) = \operatorname{det}(\mathbf{A})$
+
+#### Swapping (switching) rows
+
+Swapping rows $i$ and $j$
+
+$$\mathbf{T}_{ij} =
+\begin{bmatrix}
+1 &&&&&& \\
+& \ddots &&&&& \\
+&& 0 && t_{j,i} = 1 && \\
+&&& \ddots &&& \\
+&& t_{i,j} = 1 && 0 && \\
+&&&&& \ddots & \\
+&&&&&& 1
+\end{bmatrix}$$
+
+##### Properties
+
+* $\mathbf{T}_{ij}^\top = \mathbf{T}_{ij}^{-1} = \mathbf{T}_{ij}$
+* $\operatorname{det}(\mathbf{T}_{ij}) = -1\:^{(*)} \iff \operatorname{det}(\mathbf{T}_{ij}\mathbf{A}) = -\operatorname{det}(\mathbf{A})$
+
+$^{(*)}$ Consider that swapping two rows can be expressed as applying consecutive additions/subtractions as follows
+$$\begin{aligned}
+\mathbf{T}_{ij} & = \mathbf{D}_{i}(-1)\mathbf{L}_{ij}(-1)\mathbf{L}_{ji}(1)\mathbf{L}_{ij}(-1) \\
+\iff \operatorname{det}(\mathbf{T}_{ij}) & = \operatorname{det}(\mathbf{D}_{i}(-1)) \cdot \operatorname{det}(\mathbf{L}_{ij}(-1)) \cdot \operatorname{det}(\mathbf{L}_{ji}(1)) \cdot \operatorname{det}(\mathbf{L}_{ij}(-1)) \\
+\iff \operatorname{det}(\mathbf{T}_{ij}) & = -1 \\
+\end{aligned}$$
 
 ## Notes
 ### Vectors
@@ -105,11 +178,13 @@ Later!
 ## Algorithms
 ### Gaussian Elimination
 
-Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following operations:
+Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following **elementary row operations**:
 
-- Scaling a row
-- Swapping two rows
-- Adding a multiple of one row to another
+* Scaling a row: $\mathbf{R}_i \gets k\mathbf{R}_i$, where $k \neq 0$
+* Adding a multiple of one row to another: $\mathbf{R}_i \gets \mathbf{R}_i + k\mathbf{R}_j$, where $i \neq j$
+* Swapping two rows: $\mathbf{R}_i \leftrightarrow \mathbf{R}_j$
+
+### Laplace Expansion
 
 ### LU decomposition (or LU factorization)
 
@@ -117,23 +192,21 @@ Computing the determinant of a Matrix is not trivial at first glance.
 
 But consider the following facts:
 
-- we know how to easily compute the [determinant of a triangular matrix](/notes/linear-algebra.html#determinant-of-a-triangular-matrix)
 - we know how to easily compute the [determinant of a product of matrices](/notes/linear-algebra.html#basic-identities)
+- we know how to easily compute the [determinant of a elementary matrices](/notes/linear-algebra.html#elementary-matrices)
 
 Knowing that, we want to find a representation of our original matrix $\mathbf{A}$ that involves an Upper Triangular Matrix $\mathbf{U}$, and one or more other matrices whose determinant is known or trivial to compute,  as $\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}$
 
 To go from $\mathbf{A}$ to $\mathbf{U}$ we'll use [Gaussian Elimination](/notes/linear-algebra.html#gaussian-elimination), $\mathbf{P}$ tracks our permutations (row swaps) and $\mathbf{L}$ tracks our row operations (row additions).
 
-Now, because $\mathbf{P}$ is [orthogonal](/notes/linear-algebra.html#orthogonality) (yes, since its the identity matrix with row swaps, when performing $\mathbf{P}^\top\mathbf{P}$, the ones in the rows meet the ones in the columns at the diagonal, zeros everywhere else, so we get $\mathbf{P}^\top\mathbf{P} = \mathbf{I}$), we then have
+Now, because $\mathbf{P}$ is [orthogonal](/notes/linear-algebra.html#orthogonality), we have
 $$ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} $$
 
 Finally, this means that
 $$ \det(\mathbf{A}) = \det(\mathbf{P}^\top) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) = \det(\mathbf{P}) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) $$
 
-Now I'm not gonna prove that, but:
-
-- $\det(\mathbf{P}) = (-1)^{\#swaps}$
-- $\det(\mathbf{L}) = 1$ (because when adding rows, we never modify the original identity's diagonal, so the diagonal is full of ones, and since L is a Lower Triangular Matrix, the determinant is 1)
+* $\det(\mathbf{P}) = (-1)^{\#swaps}$
+* $\det(\mathbf{L}) = 1$ — product of "multiplied row additions" elementary matrices
 
 Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})$!
 
