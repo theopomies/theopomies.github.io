@@ -191,12 +191,14 @@ window.Quarto = {
   <ul>
   <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
   <ul class="collapse">
+  <li><a href="#transpose" id="toc-transpose" class="nav-link" data-scroll-target="#transpose">Transpose</a></li>
   <li><a href="#dot-product" id="toc-dot-product" class="nav-link" data-scroll-target="#dot-product">Dot Product</a></li>
   <li><a href="#matrix-vector-product" id="toc-matrix-vector-product" class="nav-link" data-scroll-target="#matrix-vector-product">Matrix-Vector Product</a></li>
   <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a></li>
   <li><a href="#inverse-of-a-square-matrix" id="toc-inverse-of-a-square-matrix" class="nav-link" data-scroll-target="#inverse-of-a-square-matrix">Inverse of a Square Matrix</a></li>
   <li><a href="#determinant-of-a-matrix" id="toc-determinant-of-a-matrix" class="nav-link" data-scroll-target="#determinant-of-a-matrix">Determinant of a Matrix</a></li>
   <li><a href="#orthogonality" id="toc-orthogonality" class="nav-link" data-scroll-target="#orthogonality">Orthogonality</a></li>
+  <li><a href="#elementary-matrix" id="toc-elementary-matrix" class="nav-link" data-scroll-target="#elementary-matrix">Elementary Matrix</a></li>
   </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
@@ -208,6 +210,7 @@ window.Quarto = {
   <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a>
   <ul class="collapse">
   <li><a href="#gaussian-elimination" id="toc-gaussian-elimination" class="nav-link" data-scroll-target="#gaussian-elimination">Gaussian Elimination</a></li>
+  <li><a href="#laplace-expansion" id="toc-laplace-expansion" class="nav-link" data-scroll-target="#laplace-expansion">Laplace Expansion</a></li>
   <li><a href="#lu-decomposition-or-lu-factorization" id="toc-lu-decomposition-or-lu-factorization" class="nav-link" data-scroll-target="#lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</a></li>
   </ul></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
@@ -264,13 +267,17 @@ window.Quarto = {
 
 <section id="definitions-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
+<section id="transpose" class="level3">
+<h3 class="anchored" data-anchor-id="transpose">Transpose</h3>
+<p><span class="math display">\[ (\mathbf{A}^\top)_{i,j} = \mathbf{A}_{j,i}  \]</span></p>
+</section>
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="6cee62b6" class="cell" data-execution_count="2">
+<div id="feae1e8a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="128">
 <pre><code>tensor(5)</code></pre>
 </div>
 </div>
@@ -278,10 +285,10 @@ window.Quarto = {
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="099b19f1" class="cell" data-execution_count="3">
+<div id="f0fb4b8a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="129">
 <pre><code>tensor([1, 3, 5])</code></pre>
 </div>
 </div>
@@ -289,25 +296,34 @@ window.Quarto = {
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="6f5e0dbf" class="cell" data-execution_count="4">
+<div id="4812c6d0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="130">
 <pre><code>tensor([[ 3,  4,  5],
         [ 9, 14, 19],
         [15, 24, 33]])</code></pre>
 </div>
 </div>
+<section id="properties" class="level4">
+<h4 class="anchored" data-anchor-id="properties">Properties</h4>
+<ul>
+<li>Non-commutativity: most of the time <span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span></li>
+<li>Distributivity: <span class="math inline">\(\mathbf{A}(\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{B}\mathbf{C}\)</span> and <span class="math inline">\((\mathbf{A} + \mathbf{B})\mathbf{C} = \mathbf{A}\mathbf{C} + \mathbf{B}\mathbf{C}\)</span></li>
+<li>Associativity: <span class="math inline">\(\mathbf{A}(\mathbf{B}\mathbf{C}) = (\mathbf{A}\mathbf{B})\mathbf{C}\)</span></li>
+<li>Transpose: <span class="math inline">\((\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top\mathbf{A}^\top\)</span></li>
+</ul>
+</section>
 </section>
 <section id="inverse-of-a-square-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="inverse-of-a-square-matrix">Inverse of a Square Matrix</h3>
 <p><span class="math display">\[ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} \]</span> Note: Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
-<div id="8d02d776" class="cell" data-execution_count="5">
+<div id="b4a54a72" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>torch.allclose(A <span class="op">@</span> A_i, I), torch.allclose(A_i <span class="op">@</span> A, I)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="131">
 <pre><code>(True, True)</code></pre>
 </div>
 </div>
@@ -321,12 +337,12 @@ window.Quarto = {
 <section id="determinant-of-diagonal-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-diagonal-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="a55a4288" class="cell" data-execution_count="6">
+<div id="77fbe668" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="132">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -334,10 +350,10 @@ window.Quarto = {
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><span class="math display">\[ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="fa2db803" class="cell" data-execution_count="7">
+<div id="a0f7eda9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="133">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -348,6 +364,71 @@ window.Quarto = {
 <p><span class="math display">\[ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^\top\mathbf{A} = \mathbf{I}\: (= \mathbf{A}\mathbf{A}^\top) \]</span></p>
 <p>Interstingly,</p>
 <p><span class="math display">\[ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^{-1} = \mathbf{A}^\top \]</span></p>
+</section>
+<section id="elementary-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="elementary-matrix">Elementary Matrix</h3>
+<p>An elementary matrix is a matrix obtained from the application of a <a href="../notes/linear-algebra#elementary-matrix"><strong>single elementary row operation</strong></a> to the identity matrix <span class="math inline">\(\mathbf{I}\)</span>.</p>
+<p>Because of <strong>associativity</strong>, the product of an elementary matrix and another matrix is the same as applying the row operation to the other matrix.</p>
+<section id="scaling-a-row" class="level4">
+<h4 class="anchored" data-anchor-id="scaling-a-row">Scaling a row</h4>
+<p>Multiplying row <span class="math inline">\(i\)</span> by <span class="math inline">\(m\)</span></p>
+<p><span class="math display">\[\mathbf{D}_i(m) = \operatorname{diag}(1, \dots, 1, d_i = m, 1, \dots, 1)\]</span></p>
+<section id="properties-1" class="level5">
+<h5 class="anchored" data-anchor-id="properties-1">Properties</h5>
+<ul>
+<li><span class="math inline">\(\mathbf{D}_i(m) = \mathbf{D}_i(\dfrac{1}{m})^{-1} = \mathbf{D}_i(m)^\top\)</span></li>
+<li><span class="math inline">\(\operatorname{det}(\mathbf{D}_i(m)) = m\)</span> — obviously because it’s a diagonal matrix full of <span class="math inline">\(1\)</span>’s and a single <span class="math inline">\(m\)</span></li>
+</ul>
+</section>
+</section>
+<section id="adding-a-multiple-of-one-row-to-another" class="level4">
+<h4 class="anchored" data-anchor-id="adding-a-multiple-of-one-row-to-another">Adding a multiple of one row to another</h4>
+<p>Adding <span class="math inline">\(m\)</span> times row <span class="math inline">\(j\)</span> to row <span class="math inline">\(i\)</span></p>
+<p><span class="math display">\[\mathbf{L}_{ij}(m) =
+\begin{bmatrix}
+1 &amp;&amp;&amp;&amp;&amp;&amp; \\
+&amp; \ddots &amp;&amp;&amp;&amp;&amp; \\
+&amp;&amp; 1 &amp;&amp;&amp;&amp; \\
+&amp;&amp;&amp; \ddots &amp;&amp;&amp; \\
+&amp;&amp; l_{i,j} = m &amp;&amp; 1 &amp;&amp; \\
+&amp;&amp;&amp;&amp;&amp; \ddots &amp; \\
+&amp;&amp;&amp;&amp;&amp;&amp; 1
+\end{bmatrix}\]</span></p>
+<section id="properties-2" class="level5">
+<h5 class="anchored" data-anchor-id="properties-2">Properties</h5>
+<ul>
+<li><span class="math inline">\(\mathbf{L}_{ij}(m)^{-1} = \mathbf{L}_{ij}(-m)\)</span> — the inverse of adding a row multiple to another, is <em>subtracting</em> the same row multiple</li>
+<li><span class="math inline">\(\mathbf{L}_{ij}(m)\)</span> and <span class="math inline">\(\mathbf{L}_{ij}(m)^{-1}\)</span> are triangular matrices</li>
+<li>So <span class="math inline">\(\operatorname{det}(\mathbf{L}_{ij}(m)) = 1 \iff \operatorname{det}(\mathbf{L}_{ij}(m)\mathbf{A}) = \operatorname{det}(\mathbf{A})\)</span></li>
+</ul>
+</section>
+</section>
+<section id="swapping-switching-rows" class="level4">
+<h4 class="anchored" data-anchor-id="swapping-switching-rows">Swapping (switching) rows</h4>
+<p>Swapping rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></p>
+<p><span class="math display">\[\mathbf{T}_{ij} =
+\begin{bmatrix}
+1 &amp;&amp;&amp;&amp;&amp;&amp; \\
+&amp; \ddots &amp;&amp;&amp;&amp;&amp; \\
+&amp;&amp; 0 &amp;&amp; t_{j,i} = 1 &amp;&amp; \\
+&amp;&amp;&amp; \ddots &amp;&amp;&amp; \\
+&amp;&amp; t_{i,j} = 1 &amp;&amp; 0 &amp;&amp; \\
+&amp;&amp;&amp;&amp;&amp; \ddots &amp; \\
+&amp;&amp;&amp;&amp;&amp;&amp; 1
+\end{bmatrix}\]</span></p>
+<section id="properties-3" class="level5">
+<h5 class="anchored" data-anchor-id="properties-3">Properties</h5>
+<ul>
+<li><span class="math inline">\(\mathbf{T}_{ij}^\top = \mathbf{T}_{ij}^{-1} = \mathbf{T}_{ij}\)</span></li>
+<li><span class="math inline">\(\operatorname{det}(\mathbf{T}_{ij}) = -1\:^{(*)} \iff \operatorname{det}(\mathbf{T}_{ij}\mathbf{A}) = -\operatorname{det}(\mathbf{A})\)</span></li>
+</ul>
+<p><span class="math inline">\(^{(*)}\)</span> Consider that swapping two rows can be expressed as applying consecutive additions/subtractions as follows <span class="math display">\[\begin{aligned}
+\mathbf{T}_{ij} &amp; = \mathbf{D}_{i}(-1)\mathbf{L}_{ij}(-1)\mathbf{L}_{ji}(1)\mathbf{L}_{ij}(-1) \\
+\iff \operatorname{det}(\mathbf{T}_{ij}) &amp; = \operatorname{det}(\mathbf{D}_{i}(-1)) \cdot \operatorname{det}(\mathbf{L}_{ij}(-1)) \cdot \operatorname{det}(\mathbf{L}_{ji}(1)) \cdot \operatorname{det}(\mathbf{L}_{ij}(-1)) \\
+\iff \operatorname{det}(\mathbf{T}_{ij}) &amp; = -1 \\
+\end{aligned}\]</span></p>
+</section>
+</section>
 </section>
 </section>
 <section id="notes" class="level2">
@@ -375,29 +456,31 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="algorithms">Algorithms</h2>
 <section id="gaussian-elimination" class="level3">
 <h3 class="anchored" data-anchor-id="gaussian-elimination">Gaussian Elimination</h3>
-<p>Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following operations:</p>
+<p>Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following <strong>elementary row operations</strong>:</p>
 <ul>
-<li>Scaling a row</li>
-<li>Swapping two rows</li>
-<li>Adding a multiple of one row to another</li>
+<li>Scaling a row: <span class="math inline">\(\mathbf{R}_i \gets k\mathbf{R}_i\)</span>, where <span class="math inline">\(k \neq 0\)</span></li>
+<li>Adding a multiple of one row to another: <span class="math inline">\(\mathbf{R}_i \gets \mathbf{R}_i + k\mathbf{R}_j\)</span>, where <span class="math inline">\(i \neq j\)</span></li>
+<li>Swapping two rows: <span class="math inline">\(\mathbf{R}_i \leftrightarrow \mathbf{R}_j\)</span></li>
 </ul>
+</section>
+<section id="laplace-expansion" class="level3">
+<h3 class="anchored" data-anchor-id="laplace-expansion">Laplace Expansion</h3>
 </section>
 <section id="lu-decomposition-or-lu-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</h3>
 <p>Computing the determinant of a Matrix is not trivial at first glance.</p>
 <p>But consider the following facts:</p>
 <ul>
-<li>we know how to easily compute the <a href="../notes/linear-algebra.html#determinant-of-a-triangular-matrix">determinant of a triangular matrix</a></li>
 <li>we know how to easily compute the <a href="../notes/linear-algebra.html#basic-identities">determinant of a product of matrices</a></li>
+<li>we know how to easily compute the <a href="../notes/linear-algebra.html#elementary-matrices">determinant of a elementary matrices</a></li>
 </ul>
 <p>Knowing that, we want to find a representation of our original matrix <span class="math inline">\(\mathbf{A}\)</span> that involves an Upper Triangular Matrix <span class="math inline">\(\mathbf{U}\)</span>, and one or more other matrices whose determinant is known or trivial to compute, as <span class="math inline">\(\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}\)</span></p>
 <p>To go from <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{U}\)</span> we’ll use <a href="../notes/linear-algebra.html#gaussian-elimination">Gaussian Elimination</a>, <span class="math inline">\(\mathbf{P}\)</span> tracks our permutations (row swaps) and <span class="math inline">\(\mathbf{L}\)</span> tracks our row operations (row additions).</p>
-<p>Now, because <span class="math inline">\(\mathbf{P}\)</span> is <a href="../notes/linear-algebra.html#orthogonality">orthogonal</a> (yes, since its the identity matrix with row swaps, when performing <span class="math inline">\(\mathbf{P}^\top\mathbf{P}\)</span>, the ones in the rows meet the ones in the columns at the diagonal, zeros everywhere else, so we get <span class="math inline">\(\mathbf{P}^\top\mathbf{P} = \mathbf{I}\)</span>), we then have <span class="math display">\[ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} \]</span></p>
+<p>Now, because <span class="math inline">\(\mathbf{P}\)</span> is <a href="../notes/linear-algebra.html#orthogonality">orthogonal</a>, we have <span class="math display">\[ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} \]</span></p>
 <p>Finally, this means that <span class="math display">\[ \det(\mathbf{A}) = \det(\mathbf{P}^\top) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) = \det(\mathbf{P}) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) \]</span></p>
-<p>Now I’m not gonna prove that, but:</p>
 <ul>
 <li><span class="math inline">\(\det(\mathbf{P}) = (-1)^{\#swaps}\)</span></li>
-<li><span class="math inline">\(\det(\mathbf{L}) = 1\)</span> (because when adding rows, we never modify the original identity’s diagonal, so the diagonal is full of ones, and since L is a Lower Triangular Matrix, the determinant is 1)</li>
+<li><span class="math inline">\(\det(\mathbf{L}) = 1\)</span> — product of “multiplied row additions” elementary matrices</li>
 </ul>
 <p>Now, if we just keep track of row swaps, we can easily compute <span class="math inline">\(\det(\mathbf{A})\)</span>!</p>
 </section>
