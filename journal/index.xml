@@ -19,19 +19,25 @@
 
 
 
-<ul>
-<li><p>binge essence of Calculus</p></li>
-<li><p>try to reallllllllly graps integrals, intuitions etc</p></li>
-<li><p>wrote in my notes</p></li>
-<li><p>2nd “click” for LU decomposition</p></li>
-<li><p>marimo workshop</p></li>
-</ul>
+<section id="binge-watched-essence-of-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="binge-watched-essence-of-calculus">Binge watched Essence of Calculus</h3>
+<p>After digging back into probabilities, I realized how important it was that I not only know <a href="../notes/calculus.html#integrals">integrals</a> and formulas, but also that I completely <em>grok</em> and am able to derive these formulas from first principles. So I re-watched the entire <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Essence of Calculus</a> series by the incredible <a href="https://www.youtube.com/@3blue1brown" target="_blank">3b1b / Grant Sanderson</a>.</p>
+<p>And grokking I did, between the videos and my old high-school and college lessons somewhere hidden deep inside my mind, I feel a renewed understanding of integration, so I wrote notes for the future me that will obviously forget again.</p>
+</section>
+<section id="some-more-linear-algebra" class="level3">
+<h3 class="anchored" data-anchor-id="some-more-linear-algebra">Some more Linear Algebra</h3>
+<p>Some research into the basics — first principles always wins — led me to learn about <a href="../notes/linear-algebra.html#elementary-matrix">Elementary Matrices</a>. I’d never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">LU decomposition</a> click even more.</p>
+</section>
+<section id="marimo-workshop" class="level3">
+<h3 class="anchored" data-anchor-id="marimo-workshop">Marimo Workshop</h3>
+<p>To finish off this awesome day of learning, we had a workshop with <a href="https://koaning.io/" target="_blank">Vincent Warmerdam</a> from the <a href="https://marimo.io" target="_blank">Marimo</a> team. I love marimo and I loved learning more about it’s capabilities and ways to hack (with / at) it.</p>
 
 
+</section>
 
  ]]></description>
   <category>python</category>
-  <category>mle</category>
+  <category>math</category>
   <guid>https://theopomies.com/journal/2025-09-08.html</guid>
   <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
 </item>
