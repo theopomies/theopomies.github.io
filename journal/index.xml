@@ -10,7 +10,50 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.7.34</generator>
-<lastBuildDate>Mon, 08 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 10 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>FP8 Training with Phuc Nguyen (HF)</title>
+  <link>https://theopomies.com/journal/2025-09-10.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Big day at work today, so I only got the time for the evening call and some time to re-read yesterday’s lecture (ZeRO/FSDP)</p>
+<section id="fp8" class="level3">
+<h3 class="anchored" data-anchor-id="fp8">FP8</h3>
+<p>Phuc gave us a nice presentation on how and why to train FP8 precision models. Why do it? To speed up training. Issues: the model diverges suuuuuper fast under full FP8 regime, need to be careful. Solution: mixed precision training. We then saw a quick overview of how frontier labs do it (DeepSeek, Meta etc) and frameworks for it (torch/oa, torchtitan)</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-10.html</guid>
+  <pubDate>Wed, 10 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>ZeRO / FSDP with Sylvain Gugger and Scott Mueller</title>
+  <link>https://theopomies.com/journal/2025-09-09.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="zero-fsdp" class="level3">
+<h3 class="anchored" data-anchor-id="zero-fsdp">ZeRO / FSDP</h3>
+<p>Tonight we had a superb lesson — very dense — by <a href="https://x.com/GuggerSylvain">Sylvain Gugger</a>{_target=blank} on ZeRO, followed by a code dive-in with Scott. Overall takeaway (more detailed in <a href="../notes/distributed-training.html#">my notes</a>): * adam is stateful: has states, so ~4x model size in total to store - ZeRO: <strong>Ze</strong>ro <strong>R</strong>edudency <strong>O</strong>ptimizer -&gt; sharding optimizer state: each gpu updates a subset of the models params then they share it all together all_gather - ZeRO2: Also sharding gradients - ZeRO3 == FSDP (PyTorch version): also sharding the model!</p>
+<p>ZeRO is NOT A PARALLELISM strategy, it’s a modeling one. Think parallelism = more throughput, modeling strategy <img src="https://latex.codecogs.com/png.latex?%5Capprox"> memory optimizations</p>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-09.html</guid>
+  <pubDate>Tue, 09 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Marimo Workshop + Integrals refresher</title>
   <link>https://theopomies.com/journal/2025-09-08.html</link>

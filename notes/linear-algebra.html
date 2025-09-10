@@ -191,6 +191,7 @@ window.Quarto = {
   <ul>
   <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
   <ul class="collapse">
+  <li><a href="#vector-space" id="toc-vector-space" class="nav-link" data-scroll-target="#vector-space">Vector Space</a></li>
   <li><a href="#transpose" id="toc-transpose" class="nav-link" data-scroll-target="#transpose">Transpose</a></li>
   <li><a href="#dot-product" id="toc-dot-product" class="nav-link" data-scroll-target="#dot-product">Dot Product</a></li>
   <li><a href="#matrix-vector-product" id="toc-matrix-vector-product" class="nav-link" data-scroll-target="#matrix-vector-product">Matrix-Vector Product</a></li>
@@ -199,12 +200,10 @@ window.Quarto = {
   <li><a href="#determinant-of-a-matrix" id="toc-determinant-of-a-matrix" class="nav-link" data-scroll-target="#determinant-of-a-matrix">Determinant of a Matrix</a></li>
   <li><a href="#orthogonality" id="toc-orthogonality" class="nav-link" data-scroll-target="#orthogonality">Orthogonality</a></li>
   <li><a href="#elementary-matrix" id="toc-elementary-matrix" class="nav-link" data-scroll-target="#elementary-matrix">Elementary Matrix</a></li>
-  </ul></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
-  <ul class="collapse">
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
-  <li><a href="#order-of-operations" id="toc-order-of-operations" class="nav-link" data-scroll-target="#order-of-operations">Order of operations</a></li>
-  <li><a href="#determinant" id="toc-determinant" class="nav-link" data-scroll-target="#determinant">Determinant</a></li>
+  <li><a href="#linear-dependence" id="toc-linear-dependence" class="nav-link" data-scroll-target="#linear-dependence">Linear Dependence</a></li>
+  <li><a href="#rank" id="toc-rank" class="nav-link" data-scroll-target="#rank">Rank</a></li>
+  <li><a href="#basis" id="toc-basis" class="nav-link" data-scroll-target="#basis">Basis</a></li>
+  <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension">Dimension</a></li>
   </ul></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a>
@@ -267,6 +266,35 @@ window.Quarto = {
 
 <section id="definitions-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
+<section id="vector-space" class="level3">
+<h3 class="anchored" data-anchor-id="vector-space">Vector Space</h3>
+<p>A <strong>vector space</strong> (over a field, like <span class="math inline">\(\mathbb{R}\)</span>, which provides the <strong>scalars</strong>) is a <strong>set</strong> of <strong>vectors</strong> equipped with <strong>vector addition</strong> and <strong>scalar multiplication</strong> that satisfies the following conditions:</p>
+<ol type="1">
+<li><strong>Closure under addition:</strong> <span class="math inline">\(u + v\)</span> is in the space for any <span class="math inline">\(u, v\)</span> in the space.</li>
+<li><strong>Closure under scalar multiplication:</strong> <span class="math inline">\(\alpha u\)</span> is in the space for any scalar <span class="math inline">\(\alpha\)</span>.</li>
+<li><strong>Associativity of addition:</strong> <span class="math inline">\(u + (v + w) = (u + v) + w\)</span>.</li>
+<li><strong>Commutativity of addition:</strong> <span class="math inline">\(u + v = v + u\)</span>.</li>
+<li><strong>Additive identity:</strong> there exists <span class="math inline">\(0\)</span> such that <span class="math inline">\(u + 0 = u\)</span>.</li>
+<li><strong>Additive inverse:</strong> for each <span class="math inline">\(u\)</span>, there exists <span class="math inline">\(-u\)</span> such that <span class="math inline">\(u + (-u) = 0\)</span>.</li>
+<li><strong>Compatibility of scalar multiplication:</strong> <span class="math inline">\(\alpha(\beta u) = (\alpha\beta) u\)</span>.</li>
+<li><strong>Identity of scalar multiplication:</strong> <span class="math inline">\(1 \cdot u = u\)</span>.</li>
+<li><strong>Distributivity over vector addition:</strong> <span class="math inline">\(\alpha(u + v) = \alpha u + \alpha v\)</span>.</li>
+<li><strong>Distributivity over scalar addition:</strong> <span class="math inline">\((\alpha + \beta)u = \alpha u + \beta u\)</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This might be useful later, but for all intents and purposes in these notes, the field will be <span class="math inline">\(\mathbb{R}\)</span>, vectors will be in <span class="math inline">\(\mathbb{R}^n\)</span>, and addition and scalar multiplication will be element-wise.</p>
+</div>
+</div>
+</section>
 <section id="transpose" class="level3">
 <h3 class="anchored" data-anchor-id="transpose">Transpose</h3>
 <p><span class="math display">\[ (\mathbf{A}^\top)_{i,j} = \mathbf{A}_{j,i}  \]</span></p>
@@ -274,32 +302,73 @@ window.Quarto = {
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="feae1e8a" class="cell" data-execution_count="2">
+<div id="add710b6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="128">
+<div class="cell-output cell-output-display" data-execution_count="492">
 <pre><code>tensor(5)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The dot product has a geometric meaning.</p>
+<p><span class="math display">\[\mathbf{v}\cdot\mathbf{w} = \|\mathbf{v}\|\|\mathbf{w}\|\cos{\theta}\]</span> <span class="math display">\[\iff \theta = \arccos\left(\frac{\mathbf{v}\cdot\mathbf{w}}{\|\mathbf{v}\|\|\mathbf{w}\|}\right).\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In linear algebra, vectors are column vectors by default, so <span class="math display">\[ \mathbf{u} \in \mathbb{R}^{n \times 1}, \quad \mathbf{u} = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix} \]</span></p>
+<p>It follows that when doing a Matrix-Vector product, the matrix is on the left <span class="math inline">\(\mathbf{A}\mathbf{u}\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="f0fb4b8a" class="cell" data-execution_count="3">
+<div id="f8b76625" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="129">
+<div class="cell-output cell-output-display" data-execution_count="493">
 <pre><code>tensor([1, 3, 5])</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When we say “we apply a linear transformation <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{B}\)</span>”, we mean <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="4812c6d0" class="cell" data-execution_count="4">
+<div id="cc762247" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="130">
+<div class="cell-output cell-output-display" data-execution_count="494">
 <pre><code>tensor([[ 3,  4,  5],
         [ 9, 14, 19],
         [15, 24, 33]])</code></pre>
@@ -317,19 +386,34 @@ window.Quarto = {
 </section>
 <section id="inverse-of-a-square-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="inverse-of-a-square-matrix">Inverse of a Square Matrix</h3>
-<p><span class="math display">\[ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} \]</span> Note: Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
-<div id="b4a54a72" class="cell" data-execution_count="5">
+<p><span class="math display">\[ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
+</div>
+</div>
+<div id="02525cce" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>torch.allclose(A <span class="op">@</span> A_i, I), torch.allclose(A_i <span class="op">@</span> A, I)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="131">
+<div class="cell-output cell-output-display" data-execution_count="495">
 <pre><code>(True, True)</code></pre>
 </div>
 </div>
 </section>
 <section id="determinant-of-a-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="determinant-of-a-matrix">Determinant of a Matrix</h3>
+<p>I think of the determinant of <span class="math inline">\(\mathbf{A}\)</span> as the scaling factor of the linear transformation represented by <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p>This explains why a matrix whose determinant is 0 is not invertible: it “collapses”, and two images might have the same original input <span class="math inline">\(\mathbf{x}\)</span></p>
 <section id="basic-identities" class="level4">
 <h4 class="anchored" data-anchor-id="basic-identities">Basic identities</h4>
 <p><span class="math display">\[ \det(\mathbf{A}^\top) = \det(\mathbf{A}) \]</span> <span class="math display">\[ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) \]</span></p>
@@ -337,12 +421,12 @@ window.Quarto = {
 <section id="determinant-of-diagonal-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-diagonal-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="77fbe668" class="cell" data-execution_count="6">
+<div id="8f6a8651" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="132">
+<div class="cell-output cell-output-display" data-execution_count="496">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -350,10 +434,10 @@ window.Quarto = {
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><span class="math display">\[ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="a0f7eda9" class="cell" data-execution_count="7">
+<div id="5f6cce9c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="133">
+<div class="cell-output cell-output-display" data-execution_count="497">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -430,22 +514,75 @@ window.Quarto = {
 </section>
 </section>
 </section>
+<section id="linear-dependence" class="level3">
+<h3 class="anchored" data-anchor-id="linear-dependence">Linear Dependence</h3>
+<p>We say of <span class="math inline">\(n\)</span> vectors — <span class="math inline">\(\mathbf{v}_1, \dots, \mathbf{v}_n\)</span> that they are <strong>linearly dependent</strong> if there exists scalars <span class="math inline">\(a_1, \dots, a_n\)</span> <strong>not all equal to 0</strong> satisfying <span class="math display">\[\sum_{i=0}^n a_i\mathbf{v}_i = 0\]</span></p>
+<p>If the only solution is <span class="math inline">\(a_i = 0\)</span> for <span class="math inline">\(i\)</span> in <span class="math inline">\(0, \dots, n\)</span>, they are <strong>linearly independent</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Linear dependence means that some vectors could be expressed as a weighted sum (<strong>linear combination</strong>) of others, hence carrying redudant information/operation.</p>
+</div>
+</div>
 </section>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
-<section id="vectors" class="level3">
-<h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
-<p>In linear algebra, vectors are column vectors by default, so <span class="math display">\[ \mathbf{u} \in \mathbb{R}^{n \times 1}, \quad \mathbf{u} = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix} \]</span></p>
-<p>It follows that when doing a Matrix-Vector product, the matrix is on the left <span class="math inline">\(\mathbf{A}\mathbf{u}\)</span>.</p>
+<section id="rank" class="level3">
+<h3 class="anchored" data-anchor-id="rank">Rank</h3>
+<p>The <strong>rank</strong> of a matrix is the size of the <strong>largest</strong> subset of linearly independent columns among its columns. Equivalently, it is the <strong>dimension of the column space</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This reflects that if some columns are linearly dependent, they are redundant: they do not contribute a new direction. Thus, the matrix can be expressed with fewer independent columns, and the image (output space) of the matrix has correspondingly fewer dimensions.</p>
+</div>
+</div>
 </section>
-<section id="order-of-operations" class="level3">
-<h3 class="anchored" data-anchor-id="order-of-operations">Order of operations</h3>
-<p>Similarly, when we say “we apply a linear transformation <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{B}\)</span>”, we mean <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>.</p>
+<section id="basis" class="level3">
+<h3 class="anchored" data-anchor-id="basis">Basis</h3>
+<p>A <strong>basis</strong> (not <em>the</em>, since a vector space can have many different bases) of a <a href="#vector-space"><strong>vector space</strong></a> is a linearly independent subset that <strong>spans</strong> the space.</p>
+<p>All bases of the same vector space have the same size = the <strong>dimension</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>That means: a basis is a set of vectors that you can combine (with weighted sums) to form <strong>any</strong> vector in the space — and none of them are redundant.</p>
+</div>
+</div>
 </section>
-<section id="determinant" class="level3">
-<h3 class="anchored" data-anchor-id="determinant">Determinant</h3>
-<p>I think of the determinant of <span class="math inline">\(\mathbf{A}\)</span> as the scaling factor of the linear transformation represented by <span class="math inline">\(\mathbf{A}\)</span>.</p>
-<p>This explains why a matrix whose determinant is 0 is not invertible: it “collapses”, and two images might have the same original input <span class="math inline">\(\mathbf{x}\)</span></p>
+<section id="dimension" class="level3">
+<h3 class="anchored" data-anchor-id="dimension">Dimension</h3>
+<p>The <strong>dimension</strong> of a vector space is the number of vectors in a basis of that space.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since every basis of a vector space has the same size, the dimension is well-defined. It tells you “how many independent directions” the space has.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="proofs" class="level2">
