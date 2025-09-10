@@ -1,0 +1,12 @@
+---
+title: FP8 Training with Phuc Nguyen (HF)
+description: "Evening guest speaker: FP8 Training with Phuc (S2S)"
+categories: [mle]
+date: 2025-09-10
+---
+
+Big day at work today, so I only got the time for the evening call and some time to re-read yesterday's lecture (ZeRO/FSDP)
+
+### FP8
+
+Phuc gave us a nice presentation on how and why to train FP8 precision models. Why do it? To speed up training. Issues: the model diverges suuuuuper fast under full FP8 regime, need to be careful. Solution: mixed precision training. We then saw a quick overview of how frontier labs do it (DeepSeek, Meta etc) and frameworks for it (torch/oa, torchtitan)

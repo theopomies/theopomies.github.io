@@ -2,7 +2,7 @@
 title: Distributed Training
 author: Theo POMIES
 date: 2025-09-02
-date-modified: 2025-09-05
+date-modified: 2025-09-10
 description: Distributed training study notes and algorithms.
 categories: [mle, python]
 ---
@@ -251,7 +251,11 @@ print(f"After: {gather_lists[0]}")
 
 ##### Reduce-Scatter
 
-Reduce-Scatter (`torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)`) performs a _reduction_ operation — like other `reduce` functions — and _scatters_ the resulting tensor. Think of it like `reduce` + `scatter`. Note: it needs `len(input_list) == world_size` and every tensor in `input_list` to have the same shape of `output_tensor`.
+Reduce-Scatter (`torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)`) performs a _reduction_ operation — like other `reduce` functions — and _scatters_ the resulting tensor. Think of it like `reduce` + `scatter`.
+
+:::{.callout-note}
+It needs `len(input_list) == world_size` and every tensor in `input_list` to have the same shape of `output_tensor`.
+:::
 
 ```{python}
 # | eval: false
@@ -294,11 +298,31 @@ print(f"After: {tensors[2]}")
 Barrier (`torch.distributed.barrier(...)`) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of `.join()` for threads or processes)
 
 ## Algorithms / Techniques
+### Types of parallelism
+
+The goal of parallelism is to maximize throughput / cluster utilization.
+
+* **Data Parallelism** (**DP**): Each rank has a replica of the model — they're **replicants** — and receives a different mini-batch. After [Gradient Accumulation] (optional), average the gradients (`all_reduce`).
+* **Pipeline Parallelism** (**PP**): The model is split along the layers. Each rank has 1+ layer of the model, and we orchestrate sequential forward/backward passes along the ranks. This is **inter-layer** parallelism.
+* **Tensor Parallelism** (**TP**): The model's layers are split across ranks. We need more complex orchestration since a single tensor's values are on different ranks. This is **intra-layer** parallelism.
+* **Expert Parallelism** (**EP**): A specific type of **TP** where we only split the experts of an **MoE** across ranks.
+
+::: {.callout-important}
+ZeRO/FSDP is not a **parallelism** strategy, but a **modelling** strategy.
+
+Parallelism = optimizing throughput
+Modelling $\approx$ optimizing memory
+
+Both can (and should) be combined.
+:::
+
 ### DDP — Distributed Data Parallelism
 
-Distributed Data Parallelism is a type of parallelism where each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients (`all_reduce`sum + division by world_size), perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
+Distributed Data Parallelism is a type of parallelism where each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients (`all_reduce` sum + division by world_size), perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
 
-Note: the difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.
+:::{.callout-note}
+The difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.
+:::
 
 ```python
 class SimpleDataParaellism():
@@ -319,6 +343,10 @@ class SimpleDataParaellism():
 ### Data Sharding
 
 Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the `DataLoader` with `sampler=[instance of DistributedSampler]`.
+
+### ZeRO
+
+**Ze**ro **R**edudency **O**ptimizer is a modeling strategy involving sharding states and parameters during training as a mean of optimizing peak memory. The core idea is that the states and/or parameters are sharded, retrieved only when necessary for some computation, updated information is shared, then anything we do not use anymore is discarded.
 
 ## Notes
 

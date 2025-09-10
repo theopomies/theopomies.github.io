@@ -1,0 +1,16 @@
+---
+title: ZeRO / FSDP with Sylvain Gugger and Scott Mueller
+description: Evening study session for Scratch To Scale (S2S)
+categories: [python, mle]
+date: 2025-09-09
+---
+
+### ZeRO / FSDP
+
+Tonight we had a superb lesson — very dense — by [Sylvain Gugger](https://x.com/GuggerSylvain){_target=blank} on ZeRO, followed by a code dive-in with Scott. Overall takeaway (more detailed in [my notes](/notes/distributed-training.qmd#)):
+* adam is stateful: has states, so ~4x model size in total to store
+- ZeRO: **Ze**ro **R**edudency **O**ptimizer -> sharding optimizer state: each gpu updates a subset of the models params then they share it all together all_gather
+- ZeRO2: Also sharding gradients
+- ZeRO3 == FSDP (PyTorch version): also sharding the model!
+
+ZeRO is NOT A PARALLELISM strategy, it's a modeling one. Think parallelism = more throughput, modeling strategy $\approx$ memory optimizations
