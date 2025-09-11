@@ -20,7 +20,6 @@
 
 
 
-
 <section id="functions-methods" class="level2">
 <h2 class="anchored" data-anchor-id="functions-methods">Functions / Methods</h2>
 <section id="basics-point-point" class="level3">
@@ -855,7 +854,6 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 
 
 
-
 <section id="definitions-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
 <section id="outcomes-and-events" class="level3">
@@ -997,7 +995,6 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
 
 
 
-
 <section id="functions-methods-classes" class="level2">
 <h2 class="anchored" data-anchor-id="functions-methods-classes">Functions / Methods / Classes</h2>
 </section>
@@ -1022,7 +1019,6 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
   <dc:creator>Theo POMIES</dc:creator>
   <link>https://theopomies.com/notes/calculus.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1148,7 +1144,6 @@ font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div>
   <dc:creator>Theo POMIES</dc:creator>
   <link>https://theopomies.com/notes/linear-algebra.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1619,7 +1614,6 @@ Note
   <dc:creator>Theo POMIES</dc:creator>
   <link>https://theopomies.com/notes/typescript.html</link>
   <description><![CDATA[ 
-
 
 
 
