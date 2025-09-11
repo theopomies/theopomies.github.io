@@ -107,8 +107,11 @@ $font-family-sans-serif:
     -apple-system,
     sans-serif;
 $font-family-monospace: "Geist Mono", monospace;
+$font: $font-family-sans-serif;
+$monofont: $font-family-monospace;
 
-$font-size-base: 16px;
+$fontsize: 16px;
+$font-size-base: $fontsize;
 $font-weight-base: 400;
 $line-height-base: 1.5;
 
@@ -228,6 +231,7 @@ $list-group-hover-bg: rgba($gray-800, 0.5);
    ========================================================================== */
 $code-color: $body-color;
 $code-bg: #13161c;
+$monobackgroundcolor: $code-bg;
 $code-border-color: $border-color;
 
 /*-- scss:rules --*/
@@ -239,8 +243,13 @@ $code-border-color: $border-color;
 /* ==========================================================================
    Inline code
    ========================================================================== */
+
+code:not(.sourceCode) {
+    background-color: $monobackgroundcolor !important;
+}
+
 .cell-output pre {
-    background-color: $code-bg;
+    background-color: $monobackgroundcolor;
     border-radius: $border-radius;
     border: 1px solid $border-color;
     color: $body-color;
@@ -311,6 +320,7 @@ code.sourceCode {
     margin-bottom: 0.5rem !important;
 }
 
-.sourceCode {
-    background-color: $code-bg !important;
+div.sourceCode {
+    background-color: $code-bg;
+    border: 1px solid $code-border-color;
 }

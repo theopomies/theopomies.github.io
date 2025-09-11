@@ -47,6 +47,10 @@ website:
 
 format:
   html:
-    theme: theopoimandres.scss
+    theme:
+      dark: theopoimandres.scss
+      light: [theopoimandres-light.scss, theopoimandres.scss]
     toc: true
-    highlight-style: theopoimandres.theme
+    highlight-style:
+      dark: theopoimandres.theme
+      light: theopoimandres-light.theme

@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "name": "theopoimandres-light",
+    "name": "theopoimandres",
     "author": "theopomies",
     "revision": 1,
     "license": "MIT"
   },
   "editor-colors": {
-    "BackgroundColor": "#14161B",
+    "BackgroundColor": "#252B37",
     "TextSelection": "#5DE4C7",
     "CurrentLine": "#303340",
     "LineNumbers": "#767C9D",
