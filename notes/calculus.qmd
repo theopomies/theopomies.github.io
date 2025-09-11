@@ -13,7 +13,7 @@ import torch
 ```
 
 ## Definitions & Formulas
-### Differential Calculus
+### Differentiation
 
 As the name states, we analyze differences in the output(s) of a function based on differences in the input(s)
 $$ \dfrac{dy}{dx} = \lim_{h \rightarrow 0} \dfrac{f(x + h) - f(x)}{h} $$

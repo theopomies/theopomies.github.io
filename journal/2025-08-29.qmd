@@ -15,7 +15,7 @@ It's pretty good if you want to quickly get up to speed, develop intuition, but 
 
 You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too "theorical", not concrete enough for me, I needed to _grok_ the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.
 
-Now that I've become a SWE, I've seen the practical uses of such Math, and I now find myself _needing_ more of it! So, step by step I'll try to go from intuition and basics (this book) -> implementing existing algorithms -> proofs and more advanced formulas and theorem (some other textbook like [Linear Algebra Done Right](https://linear.axler.net/LADR4e.pdf){target=_blank}) -> understanding ML architecture choices -> being able to invent/discover new arch and techniques? 
+Now that I've become a SWE, I've seen the practical uses of such Math, and I now find myself _needing_ more of it! So, step by step I'll try to go from intuition and basics (this book) -> implementing existing algorithms -> proofs and more advanced formulas and theorem (some other textbook like [Linear Algebra Done Right](https://linear.axler.net/LADR4e.pdf){target=_blank}) -> understanding ML architecture choices -> being able to invent/discover new arch and techniques?
 
 ### What I learned so far
 

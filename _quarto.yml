@@ -3,6 +3,10 @@ project:
   resources:
     - .well-known/*
 
+filters:
+  - quarto
+  - strip-xref-numbers.lua
+
 execute:
   freeze: auto
 
@@ -43,9 +47,14 @@ website:
 
 format:
   html:
-    theme: theopoimandres.scss
+    theme:
+      dark:
+        - theopoimandres.scss
+        - styles.scss
+      light:
+        - theopoimandres-light.scss
+        - styles.scss
     toc: true
-    highlight-style: theopoimandres.theme
-
-
-
+    highlight-style:
+      dark: theopoimandres.theme
+      light: theopoimandres-light.theme

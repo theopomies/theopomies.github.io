@@ -9,6 +9,6 @@ I had a lot of work to do for my day job, we are trying to build and commerciali
 
 ### Still, I did a _few_ things
 
-TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via [Gaussian Eliminination](/notes/linear-algebra.html#gaussian-elimination) — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!
+TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via [Gaussian Eliminination](/notes/linear-algebra.html#sec-gaussian-elimination) — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!
 
 I skimmed through the materials for [Scratch To Scale](https://maven.com/walk-with-code/scratch-to-scale){target=_blank}, the course I'm following by [Scott Mueller](https://x.com/thezachmueller){target=_blank}, beginning tomorrow.

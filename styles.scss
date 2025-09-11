@@ -1,0 +1,80 @@
+/*-- scss:rules --*/
+::selection {
+    background-color: #47a3f3;
+    color: #fefefe;
+}
+
+/* ==========================================================================
+   Inline code
+   ========================================================================== */
+.cell-output pre {
+    background-color: $code-bg;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    color: $body-color;
+    overflow-x: auto;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cell-output-stderr pre {
+    border-left: 1px solid $danger;
+}
+
+.cell-output-stdout pre {
+    border-left: 1px solid $cyan;
+}
+
+.cell-output-display pre {
+    border-left: 1px solid $primary;
+}
+
+a:not(.nav-link):not(.btn):not(.anchorjs-link) {
+    text-decoration: underline;
+    text-decoration-color: $gray-600;
+    text-underline-offset: 0.2em;
+}
+
+.quarto-listing a {
+    text-decoration: none !important;
+}
+
+nav .nav-link {
+    color: $body-color;
+    &:hover {
+        color: $body-color;
+    }
+}
+
+.listing-categories {
+    padding: 0.5rem 0;
+}
+
+code.sourceCode {
+    overflow-x: auto;
+}
+
+/* center it and keep full width on very small screens */
+.navbar-container.container-fluid {
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    max-width: 1200px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    @media (min-width: $breakpoint-lg) {
+        & .navbar-nav {
+            gap: 1.5rem;
+        }
+
+        & .nav-link {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+}
+
+.sourceCode.cell-code {
+    margin-bottom: 0.5rem !important;
+}

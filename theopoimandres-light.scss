@@ -79,8 +79,8 @@ $theme-colors: (
 /* ==========================================================================
    Body
    ========================================================================== */
-$body-bg: $black;
-$body-color: $gray-200;
+$body-bg: $white;
+$body-color: $gray-800;
 
 /* Links */
 $link-color: $body-color;
@@ -227,5 +227,13 @@ $list-group-hover-bg: rgba($gray-800, 0.5);
    Code
    ========================================================================== */
 $code-color: $body-color;
-$code-bg: #13161c;
+$code-bg: $gray-100;
 $code-border-color: $border-color;
+
+.listing-category {
+    border: 1px solid $gray-500 !important;
+}
+
+.sourceCode {
+   background-color: #252b37 !important;
+}

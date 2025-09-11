@@ -13,7 +13,7 @@ And grokking I did, between the videos and my old high-school and college lesson
 
 ### Some more Linear Algebra
 
-Some research into the basics — first principles always wins — led me to learn about [Elementary Matrices](/notes/linear-algebra.qmd#elementary-matrix). I'd never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like [LU decomposition](/notes/linear-algebra.qmd#lu-decomposition-or-lu-factorization) click even more.
+Some research into the basics — first principles always wins — led me to learn about [Elementary Matrices](/notes/linear-algebra.qmd#sec-elementary-matrix). I'd never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like [LU decomposition](/notes/linear-algebra.qmd#lu-decomposition-or-lu-factorization) click even more.
 
 ### Marimo Workshop
 
