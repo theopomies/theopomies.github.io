@@ -75,10 +75,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-321b2c7f5bc1c6dc2367ebbe9b442756.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-85f19028333f92b142890d1e87645615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1c31ef2846ef9da7da98fa878bef461c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,7 +144,167 @@ window.Quarto = {
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -176,6 +338,7 @@ window.Quarto = {
     <a href="https://x.com/theopomies" title="" class="quarto-navigation-tool px-1" aria-label="" target="_blank"><i class="bi bi-twitter-x"></i></a>
     <a href="https://github.com/theopomies" title="" class="quarto-navigation-tool px-1" aria-label="" target="_blank"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/in/theopomies/" title="" class="quarto-navigation-tool px-1" aria-label="" target="_blank"><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -191,24 +354,25 @@ window.Quarto = {
   <ul>
   <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
   <ul class="collapse">
-  <li><a href="#vector-space" id="toc-vector-space" class="nav-link" data-scroll-target="#vector-space">Vector Space</a></li>
+  <li><a href="#sec-vector-space" id="toc-sec-vector-space" class="nav-link" data-scroll-target="#sec-vector-space">Vector Space</a></li>
   <li><a href="#transpose" id="toc-transpose" class="nav-link" data-scroll-target="#transpose">Transpose</a></li>
   <li><a href="#dot-product" id="toc-dot-product" class="nav-link" data-scroll-target="#dot-product">Dot Product</a></li>
   <li><a href="#matrix-vector-product" id="toc-matrix-vector-product" class="nav-link" data-scroll-target="#matrix-vector-product">Matrix-Vector Product</a></li>
   <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a></li>
   <li><a href="#inverse-of-a-square-matrix" id="toc-inverse-of-a-square-matrix" class="nav-link" data-scroll-target="#inverse-of-a-square-matrix">Inverse of a Square Matrix</a></li>
   <li><a href="#determinant-of-a-matrix" id="toc-determinant-of-a-matrix" class="nav-link" data-scroll-target="#determinant-of-a-matrix">Determinant of a Matrix</a></li>
-  <li><a href="#orthogonality" id="toc-orthogonality" class="nav-link" data-scroll-target="#orthogonality">Orthogonality</a></li>
-  <li><a href="#elementary-matrix" id="toc-elementary-matrix" class="nav-link" data-scroll-target="#elementary-matrix">Elementary Matrix</a></li>
+  <li><a href="#sec-orthogonality" id="toc-sec-orthogonality" class="nav-link" data-scroll-target="#sec-orthogonality">Orthogonality</a></li>
+  <li><a href="#sec-elementary-matrix" id="toc-sec-elementary-matrix" class="nav-link" data-scroll-target="#sec-elementary-matrix">Elementary Matrix</a></li>
   <li><a href="#linear-dependence" id="toc-linear-dependence" class="nav-link" data-scroll-target="#linear-dependence">Linear Dependence</a></li>
   <li><a href="#rank" id="toc-rank" class="nav-link" data-scroll-target="#rank">Rank</a></li>
   <li><a href="#basis" id="toc-basis" class="nav-link" data-scroll-target="#basis">Basis</a></li>
   <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension">Dimension</a></li>
+  <li><a href="#eigendecomposition" id="toc-eigendecomposition" class="nav-link" data-scroll-target="#eigendecomposition">Eigendecomposition</a></li>
   </ul></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a>
   <ul class="collapse">
-  <li><a href="#gaussian-elimination" id="toc-gaussian-elimination" class="nav-link" data-scroll-target="#gaussian-elimination">Gaussian Elimination</a></li>
+  <li><a href="#sec-gaussian-elimination" id="toc-sec-gaussian-elimination" class="nav-link" data-scroll-target="#sec-gaussian-elimination">Gaussian Elimination</a></li>
   <li><a href="#laplace-expansion" id="toc-laplace-expansion" class="nav-link" data-scroll-target="#laplace-expansion">Laplace Expansion</a></li>
   <li><a href="#lu-decomposition-or-lu-factorization" id="toc-lu-decomposition-or-lu-factorization" class="nav-link" data-scroll-target="#lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</a></li>
   </ul></li>
@@ -218,6 +382,7 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -266,20 +431,20 @@ window.Quarto = {
 
 <section id="definitions-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
-<section id="vector-space" class="level3">
-<h3 class="anchored" data-anchor-id="vector-space">Vector Space</h3>
+<section id="sec-vector-space" class="level3">
+<h3 class="anchored" data-anchor-id="sec-vector-space">Vector Space</h3>
 <p>A <strong>vector space</strong> (over a field, like <span class="math inline">\(\mathbb{R}\)</span>, which provides the <strong>scalars</strong>) is a <strong>set</strong> of <strong>vectors</strong> equipped with <strong>vector addition</strong> and <strong>scalar multiplication</strong> that satisfies the following conditions:</p>
 <ol type="1">
-<li><strong>Closure under addition:</strong> <span class="math inline">\(u + v\)</span> is in the space for any <span class="math inline">\(u, v\)</span> in the space.</li>
-<li><strong>Closure under scalar multiplication:</strong> <span class="math inline">\(\alpha u\)</span> is in the space for any scalar <span class="math inline">\(\alpha\)</span>.</li>
-<li><strong>Associativity of addition:</strong> <span class="math inline">\(u + (v + w) = (u + v) + w\)</span>.</li>
-<li><strong>Commutativity of addition:</strong> <span class="math inline">\(u + v = v + u\)</span>.</li>
-<li><strong>Additive identity:</strong> there exists <span class="math inline">\(0\)</span> such that <span class="math inline">\(u + 0 = u\)</span>.</li>
-<li><strong>Additive inverse:</strong> for each <span class="math inline">\(u\)</span>, there exists <span class="math inline">\(-u\)</span> such that <span class="math inline">\(u + (-u) = 0\)</span>.</li>
-<li><strong>Compatibility of scalar multiplication:</strong> <span class="math inline">\(\alpha(\beta u) = (\alpha\beta) u\)</span>.</li>
-<li><strong>Identity of scalar multiplication:</strong> <span class="math inline">\(1 \cdot u = u\)</span>.</li>
-<li><strong>Distributivity over vector addition:</strong> <span class="math inline">\(\alpha(u + v) = \alpha u + \alpha v\)</span>.</li>
-<li><strong>Distributivity over scalar addition:</strong> <span class="math inline">\((\alpha + \beta)u = \alpha u + \beta u\)</span>.</li>
+<li><strong>Closure under addition:</strong> <span class="math inline">\(\mathbf{u} + \mathbf{v}\)</span> is in the space for any <span class="math inline">\(\mathbf{u}, \mathbf{v}\)</span> in the space.</li>
+<li><strong>Closure under scalar multiplication:</strong> <span class="math inline">\(\alpha \mathbf{u}\)</span> is in the space for any scalar <span class="math inline">\(\alpha\)</span>.</li>
+<li><strong>Associativity of addition:</strong> <span class="math inline">\(\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}\)</span>.</li>
+<li><strong>Commutativity of addition:</strong> <span class="math inline">\(\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}\)</span>.</li>
+<li><strong>Additive identity:</strong> there exists <span class="math inline">\(\mathbf{0}\)</span> such that <span class="math inline">\(\mathbf{u} + \mathbf{0} = \mathbf{u}\)</span>.</li>
+<li><strong>Additive inverse:</strong> for each <span class="math inline">\(\mathbf{u}\)</span>, there exists <span class="math inline">\(-\mathbf{u}\)</span> such that <span class="math inline">\(\mathbf{u} + (-\mathbf{u}) = \mathbf{0}\)</span>.</li>
+<li><strong>Compatibility of scalar multiplication:</strong> <span class="math inline">\(\alpha(\beta \mathbf{u}) = (\alpha\beta) \mathbf{u}\)</span>.</li>
+<li><strong>Identity of scalar multiplication:</strong> <span class="math inline">\(1 \cdot \mathbf{u} = \mathbf{u}\)</span>.</li>
+<li><strong>Distributivity over vector addition:</strong> <span class="math inline">\(\alpha(\mathbf{u} + \mathbf{v}) = \alpha \mathbf{u} + \alpha \mathbf{v}\)</span>.</li>
+<li><strong>Distributivity over scalar addition:</strong> <span class="math inline">\((\alpha + \beta)\mathbf{u} = \alpha \mathbf{u} + \beta \mathbf{u}\)</span>.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -302,10 +467,10 @@ Note
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="add710b6" class="cell" data-execution_count="2">
+<div id="29da284b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="492">
+<div class="cell-output cell-output-display" data-execution_count="79">
 <pre><code>tensor(5)</code></pre>
 </div>
 </div>
@@ -341,10 +506,10 @@ Note
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="f8b76625" class="cell" data-execution_count="3">
+<div id="f0e8dd77" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="493">
+<div class="cell-output cell-output-display" data-execution_count="80">
 <pre><code>tensor([1, 3, 5])</code></pre>
 </div>
 </div>
@@ -365,10 +530,10 @@ Note
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="cc762247" class="cell" data-execution_count="4">
+<div id="29291e7e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="494">
+<div class="cell-output cell-output-display" data-execution_count="81">
 <pre><code>tensor([[ 3,  4,  5],
         [ 9, 14, 19],
         [15, 24, 33]])</code></pre>
@@ -400,12 +565,12 @@ Note
 <p>Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
 </div>
 </div>
-<div id="02525cce" class="cell" data-execution_count="5">
+<div id="36d7e618" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>torch.allclose(A <span class="op">@</span> A_i, I), torch.allclose(A_i <span class="op">@</span> A, I)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="495">
+<div class="cell-output cell-output-display" data-execution_count="82">
 <pre><code>(True, True)</code></pre>
 </div>
 </div>
@@ -414,19 +579,19 @@ Note
 <h3 class="anchored" data-anchor-id="determinant-of-a-matrix">Determinant of a Matrix</h3>
 <p>I think of the determinant of <span class="math inline">\(\mathbf{A}\)</span> as the scaling factor of the linear transformation represented by <span class="math inline">\(\mathbf{A}\)</span>.</p>
 <p>This explains why a matrix whose determinant is 0 is not invertible: it “collapses”, and two images might have the same original input <span class="math inline">\(\mathbf{x}\)</span></p>
-<section id="basic-identities" class="level4">
-<h4 class="anchored" data-anchor-id="basic-identities">Basic identities</h4>
+<section id="sec-matrix-basic-identities" class="level4">
+<h4 class="anchored" data-anchor-id="sec-matrix-basic-identities">Basic identities</h4>
 <p><span class="math display">\[ \det(\mathbf{A}^\top) = \det(\mathbf{A}) \]</span> <span class="math display">\[ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) \]</span></p>
 </section>
 <section id="determinant-of-diagonal-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-diagonal-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="8f6a8651" class="cell" data-execution_count="6">
+<div id="de55ba43" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="496">
+<div class="cell-output cell-output-display" data-execution_count="83">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -434,24 +599,24 @@ Note
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><span class="math display">\[ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="5f6cce9c" class="cell" data-execution_count="7">
+<div id="b84cae4e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="497">
+<div class="cell-output cell-output-display" data-execution_count="84">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="orthogonality" class="level3">
-<h3 class="anchored" data-anchor-id="orthogonality">Orthogonality</h3>
+<section id="sec-orthogonality" class="level3">
+<h3 class="anchored" data-anchor-id="sec-orthogonality">Orthogonality</h3>
 <p><span class="math display">\[ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^\top\mathbf{A} = \mathbf{I}\: (= \mathbf{A}\mathbf{A}^\top) \]</span></p>
 <p>Interstingly,</p>
 <p><span class="math display">\[ \mathbf{A} \, \textnormal{is orthogonal} \iff \mathbf{A}^{-1} = \mathbf{A}^\top \]</span></p>
 </section>
-<section id="elementary-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="elementary-matrix">Elementary Matrix</h3>
-<p>An elementary matrix is a matrix obtained from the application of a <a href="../notes/linear-algebra#elementary-matrix"><strong>single elementary row operation</strong></a> to the identity matrix <span class="math inline">\(\mathbf{I}\)</span>.</p>
+<section id="sec-elementary-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="sec-elementary-matrix">Elementary Matrix</h3>
+<p>An elementary matrix is a matrix obtained from the application of a <strong>single elementary row operation</strong> to the identity matrix <span class="math inline">\(\mathbf{I}\)</span>.</p>
 <p>Because of <strong>associativity</strong>, the product of an elementary matrix and another matrix is the same as applying the row operation to the other matrix.</p>
 <section id="scaling-a-row" class="level4">
 <h4 class="anchored" data-anchor-id="scaling-a-row">Scaling a row</h4>
@@ -551,7 +716,7 @@ Note
 </section>
 <section id="basis" class="level3">
 <h3 class="anchored" data-anchor-id="basis">Basis</h3>
-<p>A <strong>basis</strong> (not <em>the</em>, since a vector space can have many different bases) of a <a href="#vector-space"><strong>vector space</strong></a> is a linearly independent subset that <strong>spans</strong> the space.</p>
+<p>A <strong>basis</strong> (not <em>the</em>, since a vector space can have many different bases) of a <strong><a href="#sec-vector-space" class="quarto-xref">vector space</a></strong> is a linearly independent subset that <strong>spans</strong> the space.</p>
 <p>All bases of the same vector space have the same size = the <strong>dimension</strong></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -584,6 +749,15 @@ Note
 </div>
 </div>
 </section>
+<section id="eigendecomposition" class="level3">
+<h3 class="anchored" data-anchor-id="eigendecomposition">Eigendecomposition</h3>
+<p>An <strong>eigenvector</strong> is a vector whose direction (eg. “line”) is unchanged by a linear transformation (represented by a matrix). That means that when applying the linear transformation <span class="math inline">\(\mathbf{A}\)</span> to an eigeinvector <span class="math inline">\(\mathbf{v}\)</span> it simply gets scaled by a constant scalar factor, the <strong>eigenvalue</strong> <span class="math inline">\(\lambda\)</span>. Represented by this <strong>eigenequation</strong>. <span id="eq-eigenequation"><span class="math display">\[\begin{aligned}
+\mathbf{A}\mathbf{v} &amp; = \lambda\mathbf{v} \\
+\iff (\mathbf{A} - \lambda\mathbf{I})\mathbf{v} &amp; = \mathbf{0} \label{eq:1}
+\end{aligned} \tag{1}\]</span></span></p>
+<p>This <a href="#eq-eigenequation" class="quarto-xref">equation&nbsp;1</a> has a non-zero solution <span class="math inline">\(\mathbf{v}\)</span> only if <span class="math inline">\(\operatorname{det}(\mathbf{A} - \lambda\mathbf{I}) = 0\)</span> — called the <strong>characteristic equation</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The non-zero values of <span class="math inline">\(\lambda\)</span> that satisfy this equation are the <strong>egeinvalues</strong> of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p>The <strong>eigenvectors</strong> <span class="math inline">\(\mathbf{v}_{\lambda=n}\)</span> corresponding to each eigenvalue can be found by plugging the values of <span class="math inline">\(\lambda\)</span> in <a href="#eq-eigenequation" class="quarto-xref">equation&nbsp;1</a>.</p>
+</section>
 </section>
 <section id="proofs" class="level2">
 <h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
@@ -591,8 +765,8 @@ Note
 </section>
 <section id="algorithms" class="level2">
 <h2 class="anchored" data-anchor-id="algorithms">Algorithms</h2>
-<section id="gaussian-elimination" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-elimination">Gaussian Elimination</h3>
+<section id="sec-gaussian-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="sec-gaussian-elimination">Gaussian Elimination</h3>
 <p>Gaussian elimination — or row reduction – is an algorithm for solving systems of linear equations, based on the following <strong>elementary row operations</strong>:</p>
 <ul>
 <li>Scaling a row: <span class="math inline">\(\mathbf{R}_i \gets k\mathbf{R}_i\)</span>, where <span class="math inline">\(k \neq 0\)</span></li>
@@ -606,14 +780,10 @@ Note
 <section id="lu-decomposition-or-lu-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</h3>
 <p>Computing the determinant of a Matrix is not trivial at first glance.</p>
-<p>But consider the following facts:</p>
-<ul>
-<li>we know how to easily compute the <a href="../notes/linear-algebra.html#basic-identities">determinant of a product of matrices</a></li>
-<li>we know how to easily compute the <a href="../notes/linear-algebra.html#elementary-matrices">determinant of a elementary matrices</a></li>
-</ul>
+<p>We know how to easily compute: - the <a href="#sec-matrix-basic-identities" class="quarto-xref">determinant of a product of matrices</a> - the <a href="#sec-elementary-matrix" class="quarto-xref">determinant of a elementary matrices</a></p>
 <p>Knowing that, we want to find a representation of our original matrix <span class="math inline">\(\mathbf{A}\)</span> that involves an Upper Triangular Matrix <span class="math inline">\(\mathbf{U}\)</span>, and one or more other matrices whose determinant is known or trivial to compute, as <span class="math inline">\(\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}\)</span></p>
-<p>To go from <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{U}\)</span> we’ll use <a href="../notes/linear-algebra.html#gaussian-elimination">Gaussian Elimination</a>, <span class="math inline">\(\mathbf{P}\)</span> tracks our permutations (row swaps) and <span class="math inline">\(\mathbf{L}\)</span> tracks our row operations (row additions).</p>
-<p>Now, because <span class="math inline">\(\mathbf{P}\)</span> is <a href="../notes/linear-algebra.html#orthogonality">orthogonal</a>, we have <span class="math display">\[ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} \]</span></p>
+<p>To go from <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{U}\)</span> we’ll use <a href="#sec-gaussian-elimination" class="quarto-xref">Gaussian Elimination</a>, <span class="math inline">\(\mathbf{P}\)</span> tracks our permutations (row swaps) and <span class="math inline">\(\mathbf{L}\)</span> tracks our row operations (row additions).</p>
+<p>Now, because <span class="math inline">\(\mathbf{P}\)</span> is <a href="#sec-orthogonality" class="quarto-xref">orthogonal</a>, we have <span class="math display">\[ \mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U} \implies \mathbf{A} = \mathbf{P}^{-1}\mathbf{L}\mathbf{U} = \mathbf{P}^\top\mathbf{L}\mathbf{U} \]</span></p>
 <p>Finally, this means that <span class="math display">\[ \det(\mathbf{A}) = \det(\mathbf{P}^\top) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) = \det(\mathbf{P}) \cdot \det(\mathbf{L}) \cdot \det(\mathbf{U}) \]</span></p>
 <ul>
 <li><span class="math inline">\(\det(\mathbf{P}) = (-1)^{\#swaps}\)</span></li>
@@ -634,6 +804,7 @@ Note
 <li><span class="math inline">\(\mathbf{x}_{:,j}\)</span>: the <span class="math inline">\(j^\textrm{th}\)</span> column-vector of <span class="math inline">\(\mathbf{X}\)</span></li>
 <li><span class="math inline">\(\operatorname{diag}(a_1, \dots, a_n)\)</span>: a diagonal matrix</li>
 <li><span class="math inline">\(\mathbf{I}\)</span>: the indentity matrix</li>
+<li><span class="math inline">\(\mathbf{0}\)</span>: the zero vector / zero matrix — depending on context</li>
 <li><span class="math inline">\((\cdot)^\top\)</span>: the transpose of a vector or matrix</li>
 <li><span class="math inline">\(\mathbf{A}^{-1}\)</span>: the inverse of a matrix</li>
 </ul>
@@ -644,6 +815,19 @@ Note
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

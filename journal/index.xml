@@ -19,6 +19,7 @@
 
 
 
+
 <p>Big day at work today, so I only got the time for the evening call and some time to re-read yesterday’s lecture (ZeRO/FSDP)</p>
 <section id="fp8" class="level3">
 <h3 class="anchored" data-anchor-id="fp8">FP8</h3>
@@ -36,6 +37,7 @@
   <title>ZeRO / FSDP with Sylvain Gugger and Scott Mueller</title>
   <link>https://theopomies.com/journal/2025-09-09.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -62,6 +64,7 @@
 
 
 
+
 <section id="binge-watched-essence-of-calculus" class="level3">
 <h3 class="anchored" data-anchor-id="binge-watched-essence-of-calculus">Binge watched Essence of Calculus</h3>
 <p>After digging back into probabilities, I realized how important it was that I not only know <a href="../notes/calculus.html#integrals">integrals</a> and formulas, but also that I completely <em>grok</em> and am able to derive these formulas from first principles. So I re-watched the entire <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Essence of Calculus</a> series by the incredible <a href="https://www.youtube.com/@3blue1brown" target="_blank">3b1b / Grant Sanderson</a>.</p>
@@ -69,7 +72,7 @@
 </section>
 <section id="some-more-linear-algebra" class="level3">
 <h3 class="anchored" data-anchor-id="some-more-linear-algebra">Some more Linear Algebra</h3>
-<p>Some research into the basics — first principles always wins — led me to learn about <a href="../notes/linear-algebra.html#elementary-matrix">Elementary Matrices</a>. I’d never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">LU decomposition</a> click even more.</p>
+<p>Some research into the basics — first principles always wins — led me to learn about <a href="../notes/linear-algebra.html#sec-elementary-matrix">Elementary Matrices</a>. I’d never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">LU decomposition</a> click even more.</p>
 </section>
 <section id="marimo-workshop" class="level3">
 <h3 class="anchored" data-anchor-id="marimo-workshop">Marimo Workshop</h3>
@@ -88,6 +91,7 @@
   <title>Ray / Anyscale workshop with S2S</title>
   <link>https://theopomies.com/journal/2025-09-05.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -118,6 +122,7 @@
   <title>Going through DDP with S2S</title>
   <link>https://theopomies.com/journal/2025-09-04.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -159,6 +164,7 @@
 
 
 
+
 <p>Well today I woke up at 5am to go on-site at my startup in Paris (I live 500km away, in Bordeaux) and got home at around 7pm, so not much free time to study, so I just read a bit in the train and ML related stuff was just the evening fireside chat.</p>
 <section id="fireside-chat-with-yuxiang-wei-from-meta-fair-s2s" class="level3">
 <h3 class="anchored" data-anchor-id="fireside-chat-with-yuxiang-wei-from-meta-fair-s2s">Fireside chat with Yuxiang Wei from Meta FAIR (S2S)</h3>
@@ -178,6 +184,7 @@
   <title>Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)</title>
   <link>https://theopomies.com/journal/2025-09-02.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -213,10 +220,11 @@
 
 
 
+
 <p>I had a lot of work to do for my day job, we are trying to build and commercialize V2 of <a href="https://www.kivala.fr" target="_blank">our intercom system</a>, and I was faced with technical difficulties that left me very little time to work on math / ML. I still found the time to finish The Manga Guide to Linear Algebra, and learned a few important concepts and techniques!</p>
 <section id="still-i-did-a-few-things" class="level3">
 <h3 class="anchored" data-anchor-id="still-i-did-a-few-things">Still, I did a <em>few</em> things</h3>
-<p>TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via <a href="../notes/linear-algebra.html#gaussian-elimination">Gaussian Eliminination</a> — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!</p>
+<p>TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via <a href="../notes/linear-algebra.html#sec-gaussian-elimination">Gaussian Eliminination</a> — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!</p>
 <p>I skimmed through the materials for <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale</a>, the course I’m following by <a href="https://x.com/thezachmueller" target="_blank">Scott Mueller</a>, beginning tomorrow.</p>
 
 
@@ -231,6 +239,7 @@
   <title>Started reading The Manga Guide to Linear Algebra</title>
   <link>https://theopomies.com/journal/2025-08-29.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -264,6 +273,7 @@
   <title>Setting up this blog!</title>
   <link>https://theopomies.com/journal/2025-08-28.html</link>
   <description><![CDATA[ 
+
 
 
 
