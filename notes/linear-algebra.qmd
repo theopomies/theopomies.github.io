@@ -322,3 +322,4 @@ Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})
 * $\mathbf{0}$: the zero vector / zero matrix — depending on context
 * $(\cdot)^\top$: the transpose of a vector or matrix
 * $\mathbf{A}^{-1}$: the inverse of a matrix
+* $[\cdot, \cdot]$: concatenation

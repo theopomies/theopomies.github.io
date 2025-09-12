@@ -1,0 +1,12 @@
+---
+title: Writing triton kernels with Daniel Han from Unsloth + linear algebra
+description: A guest speaker session with Daniel Han on writig triton kernel (S2S), a light mode to this website and new linear algebra notes
+categories: [mle, math]
+date: 2025-09-11
+---
+
+### Linear algebra notes
+
+### Daniel Han
+
+### Light mode

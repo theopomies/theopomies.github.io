@@ -53,25 +53,36 @@ $$ \begin{aligned}
     \dfrac{dy}{dx}\dfrac{1}{f(x)} & = -\dfrac{\frac{d}{dx}f(x)}{f(x)^2} && \text{Reciprocal rule} \\
 \end{aligned} $$
 
-### Multivariate Calculus
+::: {.callout-note}
+Because of the definition of derivative as a rate of change, this is possible $\dfrac{dy}{dx} = \dfrac{1}{\frac{dx}{dy}}$
+:::
 
-Very similar, but now our function takes a vector $\mathbf{x} \in \mathbb{R}^n$ as input and returns a scalar $y \in \mathbb{R}$ — or even a vector $\mathbf{y} \in \mathbb{R}^m$.
+### Multivariate Calculus
+#### Gradient {#sec-gradient}
+Very similar to univariate calculus, but now our function takes a vector $\mathbf{x} \in \mathbb{R}^n$ as input and returns a scalar $y \in \mathbb{R}$.
 
 To paraphrase D2L because their explanation is perfect:
 
 Let $y = f(x_1, x_2, \ldots, x_n)$ be a function with $n$ variables.
-The *partial derivative* of $y$
-with respect to its $i^\textrm{th}$ parameter $x_i$ is
+The **partial derivative** of $y$ with respect to its $i^\textrm{th}$ parameter $x_i$ is
 
 $$ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.$$
 
-If $f(\mathbf{x}) = y$, a scalar, we collect/concatenate all the partial derivatives to obtain the _gradient_ of $y$ with respect to $\mathbf{x}$
-$$ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} $$
+For $f \colon \mathbb{R}^n \to \mathbb{R}$, we collect/concatenate all the partial derivatives to obtain the **gradient** of the output $y = f(\mathbf{x})$ with respect to the input $\mathbf{x}$
+$$ \nabla_{\mathbf{x}}f(\mathbf{x}) = \nabla_{\mathbf{x}}y =\begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} $$
+sometimes written $\nabla f(\mathbf{x})$ or $\nabla y$ when not ambiguous.
 
-```{python}
-#| echo: false
-# TODO: Jacobian
-```
+#### Jacobian
+The **Jacobian** $\mathbf{J} \in \mathbb{R}^{m \times n}$ is a generalization of the [gradient @sec-gradient] to $\mathbf{y} = f(\mathbf{x})$ with $f \colon \mathbb{R}^n \to \mathbb{R}^m$, where $j_{i,j} = \dfrac{\partial y_i}{\partial\mathbf{x}_j}$, $\mathbf{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n$ and $\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix} \in \mathbb{R}^m$.
+
+Explicitly
+$$ \displaystyle{ \mathbf{J} = \begin{bmatrix} \dfrac{\partial \mathbf{y}}{\partial x_{1}} & \cdots & \dfrac{\partial \mathbf{y}}{\partial x_{n}} \end{bmatrix}
+= \begin{bmatrix} \nabla^{\top}y_{1} \\ \vdots \\ \nabla^{\top}y_{m} \end{bmatrix}
+= \begin{bmatrix}
+\dfrac{\partial y_{1}}{\partial x_{1}} & \cdots & \dfrac{\partial y_{1}}{\partial x_{n}} \\
+\vdots & \ddots & \vdots \\
+\dfrac{\partial y_{m}}{\partial x_{1}} & \cdots & \dfrac{\partial y_{m}}{\partial x_{n}}
+\end{bmatrix}} $$
 
 #### Handy Rules
 
@@ -143,7 +154,7 @@ $dx$ = the differential of $x$
 
 A single symbol that means “infinitesimal change in $x$.”
 
-In derivatives, it appears in a ratio ($dy/dx$). We are differentiating $f(x)$ **wrt $x$**.
+In derivatives, it appears in a ratio ($\dfrac{dy}{dx}$). We are differentiating $f(x)$ **wrt $x$**.
 
 In integrals, it appears as a piece being added up ($f(x)\,dx$). We are integrating $f(x)$ **wrt $x$**.
 
@@ -170,10 +181,6 @@ y = ln(x) & \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
 & \iff \dfrac{d}{dx}y = \dfrac{1}{x}
 \end{aligned}$$
 
-## Notes
-
-Because of the definition of derivative as a rate of change, this is possible $\dfrac{dy}{dx} = \dfrac{1}{\frac{dx}{dy}}$
-
 ## Proofs
 
 Later!
@@ -184,5 +191,6 @@ Later!
 * $\dfrac{dy}{dx}$: derivative of $y$ with respect to $x$
 * $\dfrac{\partial y}{\partial x}$: partial derivative of $y$ with respect to $x$
 * $\nabla_{\mathbf{x}} y$: gradient of $y$ with respect to $\mathbf{x}$
+* $\mathbf{J}_f (\mathbf{x}), \dfrac{\partial \mathbf{y}}{\partial \mathbf{x}}$: Jacobian of $\mathbf{y} = f(\mathbf{x})$ with respect to $\mathbf{x}$
 * $\int_a^b f(x) \;dx$: definite integral of $f$ from $a$ to $b$ with respect to $x$
 * $\int f(x) \;dx$: indefinite integral of $f$ with respect to $x$
