@@ -94,7 +94,7 @@ I = torch.eye(3, dtype=torch.double)
 torch.allclose(A @ A_i, I), torch.allclose(A_i @ A, I)
 ```
 
-### Determinant of a Matrix
+### Determinant of a Matrix {#sec-determinant}
 I think of the determinant of $\mathbf{A}$ as the scaling factor of the linear transformation represented by $\mathbf{A}$.
 
 This explains why a matrix whose determinant is 0 is not invertible: it "collapses", and two images might have the same original input $\mathbf{x}$
@@ -258,8 +258,9 @@ Gaussian elimination — or row reduction – is an algorithm for solving system
 Computing the determinant of a Matrix is not trivial at first glance.
 
 We know how to easily compute:
-- the [determinant of a product of matrices @sec-matrix-basic-identities]
-- the [determinant of a elementary matrices @sec-elementary-matrix]
+
+* the [determinant of a product of matrices @sec-determinant]
+* the [determinant of a elementary matrices @sec-elementary-matrix]
 
 Knowing that, we want to find a representation of our original matrix $\mathbf{A}$ that involves an Upper Triangular Matrix $\mathbf{U}$, and one or more other matrices whose determinant is known or trivial to compute,  as $\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}$
 
