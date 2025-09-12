@@ -50,8 +50,6 @@ $$\iff \theta = \arccos\left(\frac{\mathbf{v}\cdot\mathbf{w}}{\|\mathbf{v}\|\|\m
 ::: {.callout-note}
 In linear algebra, vectors are column vectors by default, so
 $$ \mathbf{u} \in \mathbb{R}^{n \times 1}, \quad \mathbf{u} = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix} $$
-
-It follows that when doing a Matrix-Vector product, the matrix is on the left $\mathbf{A}\mathbf{u}$.
 :::
 
 ### Matrix-Vector Product
@@ -62,7 +60,7 @@ A @ u
 ```
 
 ::: {.callout-note}
-When we say "we apply a linear transformation $\mathbf{A}$ to $\mathbf{B}$", we mean $\mathbf{A}\mathbf{B}$.
+When we say "we apply a linear transformation $\mathbf{A}$ to $\mathbf{v}$", we mean $\mathbf{A}\mathbf{v}$.
 :::
 
 
@@ -99,11 +97,12 @@ I think of the determinant of $\mathbf{A}$ as the scaling factor of the linear t
 
 This explains why a matrix whose determinant is 0 is not invertible: it "collapses", and two images might have the same original input $\mathbf{x}$
 
-#### Basic identities {#sec-matrix-basic-identities}
+#### Basic identities {#sec-det-identities}
 $$ \det(\mathbf{A}^\top) = \det(\mathbf{A}) $$
 $$ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) $$
+$$ \det(\mathbf{A}^{-1}) = \dfrac{1}{\det(\mathbf{A})} \iff \det(\mathbf{A}) \neq 0 $$
 
-#### Determinant of Diagonal Matrix
+#### Determinant of Diagonal Matrix {#sec-det-diag-matrix}
 $$ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i $$
 ```{python}
 # using I as a mask
@@ -113,7 +112,7 @@ torch.det(A), torch.det(A) == torch.diag(A).prod()
 ```
 
 #### Determinant of a Triangular Matrix
-$$ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} $$
+$$ \det(T) = \prod_{i} t_{i,i}, \quad \text{where $T$ is triangular} $$
 ```{python}
 A = torch.triu(torch.arange(1, 10, dtype=torch.float32).reshape(3, 3))
 torch.det(A), torch.det(A) == torch.diag(A).prod()
@@ -193,7 +192,7 @@ $$\begin{aligned}
 
 ### Linear Dependence
 We say of $n$ vectors — $\mathbf{v}_1, \dots, \mathbf{v}_n$ that they are **linearly dependent** if there exists scalars $a_1, \dots, a_n$ **not all equal to 0** satisfying
-$$\sum_{i=0}^n a_i\mathbf{v}_i = 0$$
+$$\sum_{i=1}^n a_i\mathbf{v}_i = 0$$
 
 If the only solution is $a_i = 0$ for $i$ in $0, \dots, n$, they are **linearly independent**.
 
@@ -228,15 +227,45 @@ It tells you “how many independent directions” the space has.
 :::
 
 ### Eigendecomposition
+#### Eigen{vectors, values} {#sec-eigenv}
 An **eigenvector** is a vector whose direction (eg. "line") is unchanged by a linear transformation (represented by a matrix). That means that when applying the linear transformation $\mathbf{A}$ to an eigeinvector $\mathbf{v}$ it simply gets scaled by a constant scalar factor, the **eigenvalue** $\lambda$. Represented by this **eigenequation**.
 $$\begin{aligned}
 \mathbf{A}\mathbf{v} & = \lambda\mathbf{v} \\
 \iff (\mathbf{A} - \lambda\mathbf{I})\mathbf{v} & = \mathbf{0} \label{eq:1}
 \end{aligned}$$ {#eq-eigenequation}
 
-This [equation @eq-eigenequation] has a non-zero solution $\mathbf{v}$ only if $\operatorname{det}(\mathbf{A} - \lambda\mathbf{I}) = 0$ — called the **characteristic equation** of $\mathbf{A}$. The non-zero values of $\lambda$ that satisfy this equation are the **egeinvalues** of $\mathbf{A}$.
+This [equation @eq-eigenequation] has a non-zero solution $\mathbf{v}$ only if $\operatorname{det}(\mathbf{A} - \lambda\mathbf{I}) = 0$ — called the **characteristic equation** of $\mathbf{A}$. The values of $\lambda$ that satisfy this equation are the **egeinvalues** of $\mathbf{A}$.
 
 The **eigenvectors** $\mathbf{v}_{\lambda=n}$ corresponding to each eigenvalue can be found by plugging the values of $\lambda$ in [equation @eq-eigenequation].
+
+#### Decomposing matrices
+By definition of [eigenvectors @sec-eigenv], for a square matrix $\mathbf{A}$, if it has a full set of linearly independent eigenvectors (ie. it's **diagonalizable**), we have
+
+$$ \mathbf{A}\mathbf{V} = \mathbf{V}\mathbf{\Lambda} $$
+
+where $\mathbf{V}$ a matrix whose columns are the the eigenvectors of $\mathbf{A}$, and $\mathbf{\Lambda}$ the diagonal of associated eigenvalues.
+
+Because $\mathbf{V}$ is invertible, we can multiply $\mathbf{V}^{-1}$ by both sides:
+
+$$ \mathbf{A} = \mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1} $$
+
+##### Properties and uses
+
+$$ \mathbf{A}^n = \overbrace{\mathbf{A}\dots\mathbf{A}}^{\text{n times}} = \overbrace{(\mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1})\dots(\mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1})}^{\text{n times}} = \mathbf{V}\overbrace{\mathbf{\Lambda}\dots\mathbf{\Lambda}}^{\text{n times}}\mathbf{V}^{-1} = \mathbf{V}\mathbf{\Lambda}^n\mathbf{V}^{-1}$$
+
+For negative powers:
+$$\mathbf{A}^{-1} = \mathbf{V}\mathbf{\Lambda}^{-1}\mathbf{V}^{-1}$$
+
+as long as all diagonal entry $\lambda_{i,i}$ (ie. eigenvalues) are non-zero. Since
+$$\begin{aligned}
+\det(\mathbf{A}) & = \det(\mathbf{V})\cdot\det(\mathbf{\Lambda})\cdot\det(\mathbf{V}^{-1}) \\
+& = \det(\mathbf{V})\cdot\det(\mathbf{\Lambda})\cdot\dfrac{1}{\det(\mathbf{V})} \\
+& = \det(\mathbf{\Lambda}) = \prod_{i=1}^n \lambda_i
+\end{aligned}$$
+
+(see [determinant identities @sec-det-identities] and [determinant of diagonal matrix @sec-det-diag-matrix])
+
+This reflects that a matrix is invertible if its determinant is 0.
 
 ## Proofs
 
@@ -252,6 +281,8 @@ Gaussian elimination — or row reduction – is an algorithm for solving system
 * Swapping two rows: $\mathbf{R}_i \leftrightarrow \mathbf{R}_j$
 
 ### Laplace Expansion
+
+todo
 
 ### LU decomposition (or LU factorization)
 
