@@ -476,7 +476,7 @@ Note
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="d3391a13" class="cell" data-execution_count="2">
+<div id="131546be" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -508,14 +508,13 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>In linear algebra, vectors are column vectors by default, so <span class="math display">\[ \mathbf{u} \in \mathbb{R}^{n \times 1}, \quad \mathbf{u} = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix} \]</span></p>
-<p>It follows that when doing a Matrix-Vector product, the matrix is on the left <span class="math inline">\(\mathbf{A}\mathbf{u}\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="a908b389" class="cell" data-execution_count="3">
+<div id="b71086f6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -532,14 +531,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When we say “we apply a linear transformation <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{B}\)</span>”, we mean <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>.</p>
+<p>When we say “we apply a linear transformation <span class="math inline">\(\mathbf{A}\)</span> to <span class="math inline">\(\mathbf{v}\)</span>”, we mean <span class="math inline">\(\mathbf{A}\mathbf{v}\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="9c50e045" class="cell" data-execution_count="4">
+<div id="3f7c315d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -574,7 +573,7 @@ Note
 <p>Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
 </div>
 </div>
-<div id="62b02a2e" class="cell" data-execution_count="5">
+<div id="c466a8d6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
@@ -588,14 +587,14 @@ Note
 <h3 class="anchored" data-anchor-id="sec-determinant">Determinant of a Matrix</h3>
 <p>I think of the determinant of <span class="math inline">\(\mathbf{A}\)</span> as the scaling factor of the linear transformation represented by <span class="math inline">\(\mathbf{A}\)</span>.</p>
 <p>This explains why a matrix whose determinant is 0 is not invertible: it “collapses”, and two images might have the same original input <span class="math inline">\(\mathbf{x}\)</span></p>
-<section id="sec-matrix-basic-identities" class="level4">
-<h4 class="anchored" data-anchor-id="sec-matrix-basic-identities">Basic identities</h4>
-<p><span class="math display">\[ \det(\mathbf{A}^\top) = \det(\mathbf{A}) \]</span> <span class="math display">\[ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) \]</span></p>
+<section id="sec-det-identities" class="level4">
+<h4 class="anchored" data-anchor-id="sec-det-identities">Basic identities</h4>
+<p><span class="math display">\[ \det(\mathbf{A}^\top) = \det(\mathbf{A}) \]</span> <span class="math display">\[ \det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}) \]</span> <span class="math display">\[ \det(\mathbf{A}^{-1}) = \dfrac{1}{\det(\mathbf{A})} \iff \det(\mathbf{A}) \neq 0 \]</span></p>
 </section>
-<section id="determinant-of-diagonal-matrix" class="level4">
-<h4 class="anchored" data-anchor-id="determinant-of-diagonal-matrix">Determinant of Diagonal Matrix</h4>
+<section id="sec-det-diag-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="sec-det-diag-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="a39e24bb" class="cell" data-execution_count="6">
+<div id="f7bade83" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
@@ -607,8 +606,8 @@ Note
 </section>
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
-<p><span class="math display">\[ \det(T) = \prod_{i} t_{ii}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="4a50b3ab" class="cell" data-execution_count="7">
+<p><span class="math display">\[ \det(T) = \prod_{i} t_{i,i}, \quad \text{where $T$ is triangular} \]</span></p>
+<div id="020cc350" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -690,7 +689,7 @@ Note
 </section>
 <section id="linear-dependence" class="level3">
 <h3 class="anchored" data-anchor-id="linear-dependence">Linear Dependence</h3>
-<p>We say of <span class="math inline">\(n\)</span> vectors — <span class="math inline">\(\mathbf{v}_1, \dots, \mathbf{v}_n\)</span> that they are <strong>linearly dependent</strong> if there exists scalars <span class="math inline">\(a_1, \dots, a_n\)</span> <strong>not all equal to 0</strong> satisfying <span class="math display">\[\sum_{i=0}^n a_i\mathbf{v}_i = 0\]</span></p>
+<p>We say of <span class="math inline">\(n\)</span> vectors — <span class="math inline">\(\mathbf{v}_1, \dots, \mathbf{v}_n\)</span> that they are <strong>linearly dependent</strong> if there exists scalars <span class="math inline">\(a_1, \dots, a_n\)</span> <strong>not all equal to 0</strong> satisfying <span class="math display">\[\sum_{i=1}^n a_i\mathbf{v}_i = 0\]</span></p>
 <p>If the only solution is <span class="math inline">\(a_i = 0\)</span> for <span class="math inline">\(i\)</span> in <span class="math inline">\(0, \dots, n\)</span>, they are <strong>linearly independent</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -760,12 +759,35 @@ Note
 </section>
 <section id="eigendecomposition" class="level3">
 <h3 class="anchored" data-anchor-id="eigendecomposition">Eigendecomposition</h3>
+<section id="sec-eigenv" class="level4">
+<h4 class="anchored" data-anchor-id="sec-eigenv">Eigen{vectors, values}</h4>
 <p>An <strong>eigenvector</strong> is a vector whose direction (eg. “line”) is unchanged by a linear transformation (represented by a matrix). That means that when applying the linear transformation <span class="math inline">\(\mathbf{A}\)</span> to an eigeinvector <span class="math inline">\(\mathbf{v}\)</span> it simply gets scaled by a constant scalar factor, the <strong>eigenvalue</strong> <span class="math inline">\(\lambda\)</span>. Represented by this <strong>eigenequation</strong>. <span id="eq-eigenequation"><span class="math display">\[\begin{aligned}
 \mathbf{A}\mathbf{v} &amp; = \lambda\mathbf{v} \\
 \iff (\mathbf{A} - \lambda\mathbf{I})\mathbf{v} &amp; = \mathbf{0} \label{eq:1}
 \end{aligned} \tag{1}\]</span></span></p>
-<p>This <a href="#eq-eigenequation" class="quarto-xref">equation&nbsp;1</a> has a non-zero solution <span class="math inline">\(\mathbf{v}\)</span> only if <span class="math inline">\(\operatorname{det}(\mathbf{A} - \lambda\mathbf{I}) = 0\)</span> — called the <strong>characteristic equation</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The non-zero values of <span class="math inline">\(\lambda\)</span> that satisfy this equation are the <strong>egeinvalues</strong> of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p>This <a href="#eq-eigenequation" class="quarto-xref">equation&nbsp;1</a> has a non-zero solution <span class="math inline">\(\mathbf{v}\)</span> only if <span class="math inline">\(\operatorname{det}(\mathbf{A} - \lambda\mathbf{I}) = 0\)</span> — called the <strong>characteristic equation</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The values of <span class="math inline">\(\lambda\)</span> that satisfy this equation are the <strong>egeinvalues</strong> of <span class="math inline">\(\mathbf{A}\)</span>.</p>
 <p>The <strong>eigenvectors</strong> <span class="math inline">\(\mathbf{v}_{\lambda=n}\)</span> corresponding to each eigenvalue can be found by plugging the values of <span class="math inline">\(\lambda\)</span> in <a href="#eq-eigenequation" class="quarto-xref">equation&nbsp;1</a>.</p>
+</section>
+<section id="decomposing-matrices" class="level4">
+<h4 class="anchored" data-anchor-id="decomposing-matrices">Decomposing matrices</h4>
+<p>By definition of <a href="#sec-eigenv" class="quarto-xref">eigenvectors</a>, for a square matrix <span class="math inline">\(\mathbf{A}\)</span>, if it has a full set of linearly independent eigenvectors (ie. it’s <strong>diagonalizable</strong>), we have</p>
+<p><span class="math display">\[ \mathbf{A}\mathbf{V} = \mathbf{V}\mathbf{\Lambda} \]</span></p>
+<p>where <span class="math inline">\(\mathbf{V}\)</span> a matrix whose columns are the the eigenvectors of <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{\Lambda}\)</span> the diagonal of associated eigenvalues.</p>
+<p>Because <span class="math inline">\(\mathbf{V}\)</span> is invertible, we can multiply <span class="math inline">\(\mathbf{V}^{-1}\)</span> by both sides:</p>
+<p><span class="math display">\[ \mathbf{A} = \mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1} \]</span></p>
+<section id="properties-and-uses" class="level5">
+<h5 class="anchored" data-anchor-id="properties-and-uses">Properties and uses</h5>
+<p><span class="math display">\[ \mathbf{A}^n = \overbrace{\mathbf{A}\dots\mathbf{A}}^{\text{n times}} = \overbrace{(\mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1})\dots(\mathbf{V}\mathbf{\Lambda}\mathbf{V}^{-1})}^{\text{n times}} = \mathbf{V}\overbrace{\mathbf{\Lambda}\dots\mathbf{\Lambda}}^{\text{n times}}\mathbf{V}^{-1} = \mathbf{V}\mathbf{\Lambda}^n\mathbf{V}^{-1}\]</span></p>
+<p>For negative powers: <span class="math display">\[\mathbf{A}^{-1} = \mathbf{V}\mathbf{\Lambda}^{-1}\mathbf{V}^{-1}\]</span></p>
+<p>as long as all diagonal entry <span class="math inline">\(\lambda_{i,i}\)</span> (ie. eigenvalues) are non-zero. Since <span class="math display">\[\begin{aligned}
+\det(\mathbf{A}) &amp; = \det(\mathbf{V})\cdot\det(\mathbf{\Lambda})\cdot\det(\mathbf{V}^{-1}) \\
+&amp; = \det(\mathbf{V})\cdot\det(\mathbf{\Lambda})\cdot\dfrac{1}{\det(\mathbf{V})} \\
+&amp; = \det(\mathbf{\Lambda}) = \prod_{i=1}^n \lambda_i
+\end{aligned}\]</span></p>
+<p>(see <a href="#sec-det-identities" class="quarto-xref">determinant identities</a> and <a href="#sec-det-diag-matrix" class="quarto-xref">determinant of diagonal matrix</a>)</p>
+<p>This reflects that a matrix is invertible if its determinant is 0.</p>
+</section>
+</section>
 </section>
 </section>
 <section id="proofs" class="level2">
@@ -785,6 +807,7 @@ Note
 </section>
 <section id="laplace-expansion" class="level3">
 <h3 class="anchored" data-anchor-id="laplace-expansion">Laplace Expansion</h3>
+<p>todo</p>
 </section>
 <section id="lu-decomposition-or-lu-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</h3>
