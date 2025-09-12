@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,16 +36,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-069731688d647e043f82614f7c622cd8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a09ea5eb7fa0222089aa03982329fa56.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-77c814f9100e929b831ea24ac32c33bf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0a84ce8460878e462f550f38d2bc1114.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +118,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -313,6 +314,10 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+  </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -388,7 +393,57 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWxl" data-listing-date-sort="1757462400000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="83">
+<div class="quarto-post image-right" data-index="0" data-categories="bWxlJTJDbWF0aA==" data-listing-date-sort="1757635200000" data-listing-file-modified-sort="1757689904420" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../journal/2025-09-12.html" class="no-external">Finished eigendecomposition notes + ?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
+
+</div>
+<div class="delink listing-description"><a href="../journal/2025-09-12.html" class="no-external">
+<p>none</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../journal/2025-09-12.html" class="no-external">
+<div class="listing-date">
+Sep 12, 2025
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="bWxlJTJDbWF0aA==" data-listing-date-sort="1757548800000" data-listing-file-modified-sort="1757689904420" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../journal/2025-09-11.html" class="no-external">Writing triton kernels with Daniel Han from Unsloth + linear algebra</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
+
+</div>
+<div class="delink listing-description"><a href="../journal/2025-09-11.html" class="no-external">
+<p>A guest speaker session with Daniel Han on writig triton kernel (S2S), a light mode to this website and new linear algebra notes</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../journal/2025-09-11.html" class="no-external">
+<div class="listing-date">
+Sep 11, 2025
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="bWxl" data-listing-date-sort="1757462400000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="83">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-10.html" class="no-external">FP8 Training with Phuc Nguyen (HF)</a>
@@ -411,7 +466,7 @@ Sep 10, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757376000000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
+<div class="quarto-post image-right" data-index="3" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757376000000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-09.html" class="no-external">ZeRO / FSDP with Sylvain Gugger and Scott Mueller</a>
@@ -436,7 +491,7 @@ Sep 9, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="cHl0aG9uJTJDbWF0aA==" data-listing-date-sort="1757289600000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="184">
+<div class="quarto-post image-right" data-index="4" data-categories="cHl0aG9uJTJDbWF0aA==" data-listing-date-sort="1757289600000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="184">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-08.html" class="no-external">Marimo Workshop + Integrals refresher</a>
@@ -461,7 +516,7 @@ Sep 8, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757030400000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="298">
+<div class="quarto-post image-right" data-index="5" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757030400000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="298">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-05.html" class="no-external">Ray / Anyscale workshop with S2S</a>
@@ -486,7 +541,7 @@ Sep 5, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="cHl0aG9uJTJDbWxlJTJDbWF0aA==" data-listing-date-sort="1756944000000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
+<div class="quarto-post image-right" data-index="6" data-categories="cHl0aG9uJTJDbWxlJTJDbWF0aA==" data-listing-date-sort="1756944000000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-04.html" class="no-external">Going through DDP with S2S</a>
@@ -513,7 +568,7 @@ Sep 4, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1756857600000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="130">
+<div class="quarto-post image-right" data-index="7" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1756857600000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="130">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-03.html" class="no-external">Fireside chat QA with Yuxiang Wei from Meta FAIR with S2S</a>
@@ -538,7 +593,7 @@ Sep 3, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWF0aCUyQ3B5dGhvbiUyQ21sZQ==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="194">
+<div class="quarto-post image-right" data-index="8" data-categories="bWF0aCUyQ3B5dGhvbiUyQ21sZQ==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="194">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-02.html" class="no-external">Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)</a>
@@ -565,7 +620,7 @@ Sep 2, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWF0aA==" data-listing-date-sort="1756684800000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="122">
+<div class="quarto-post image-right" data-index="9" data-categories="bWF0aA==" data-listing-date-sort="1756684800000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="122">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-09-01.html" class="no-external">Finished reading The Manga Guide to Linear Algebra</a>
@@ -588,7 +643,7 @@ Sep 1, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
+<div class="quarto-post image-right" data-index="10" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-08-29.html" class="no-external">Started reading The Manga Guide to Linear Algebra</a>
@@ -611,7 +666,7 @@ Aug 29, 2025
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="cHl0aG9u" data-listing-date-sort="1756339200000" data-listing-file-modified-sort="1757682213586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="139">
+<div class="quarto-post image-right" data-index="11" data-categories="cHl0aG9u" data-listing-date-sort="1756339200000" data-listing-file-modified-sort="1757689904419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="139">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../journal/2025-08-28.html" class="no-external">Setting up this blog!</a>
@@ -701,13 +756,14 @@ Aug 28, 2025
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

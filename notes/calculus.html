@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,16 +36,17 @@ ul.task-list li input[type="checkbox"] {
 <link href="../img/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4cb3a800a109e028e3f1b7035d2eeba0.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-069731688d647e043f82614f7c622cd8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a09ea5eb7fa0222089aa03982329fa56.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-77c814f9100e929b831ea24ac32c33bf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0a84ce8460878e462f550f38d2bc1114.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -88,7 +89,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -284,6 +285,10 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+  </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -335,7 +340,6 @@ window.Quarto = {
   <li><a href="#lhôpitals-rule" id="toc-lhôpitals-rule" class="nav-link" data-scroll-target="#lhôpitals-rule">L’Hôpital’s Rule</a></li>
   <li><a href="#implicit-differentiation" id="toc-implicit-differentiation" class="nav-link" data-scroll-target="#implicit-differentiation">Implicit Differentiation</a></li>
   </ul></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
   </ul>
@@ -425,15 +429,42 @@ window.Quarto = {
     \dfrac{d}{dx}f(x)^n &amp; = nf(x)^{n-1}\dfrac{d}{dx}f(x) &amp;&amp; \text{Power rule} \\
     \dfrac{dy}{dx}\dfrac{1}{f(x)} &amp; = -\dfrac{\frac{d}{dx}f(x)}{f(x)^2} &amp;&amp; \text{Reciprocal rule} \\
 \end{aligned} \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because of the definition of derivative as a rate of change, this is possible <span class="math inline">\(\dfrac{dy}{dx} = \dfrac{1}{\frac{dx}{dy}}\)</span></p>
+</div>
+</div>
 </section>
 </section>
 <section id="multivariate-calculus" class="level3">
 <h3 class="anchored" data-anchor-id="multivariate-calculus">Multivariate Calculus</h3>
-<p>Very similar, but now our function takes a vector <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> as input and returns a scalar <span class="math inline">\(y \in \mathbb{R}\)</span> — or even a vector <span class="math inline">\(\mathbf{y} \in \mathbb{R}^m\)</span>.</p>
+<section id="sec-gradient" class="level4">
+<h4 class="anchored" data-anchor-id="sec-gradient">Gradient</h4>
+<p>Very similar to univariate calculus, but now our function takes a vector <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> as input and returns a scalar <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
 <p>To paraphrase D2L because their explanation is perfect:</p>
-<p>Let <span class="math inline">\(y = f(x_1, x_2, \ldots, x_n)\)</span> be a function with <span class="math inline">\(n\)</span> variables. The <em>partial derivative</em> of <span class="math inline">\(y\)</span> with respect to its <span class="math inline">\(i^\textrm{th}\)</span> parameter <span class="math inline">\(x_i\)</span> is</p>
+<p>Let <span class="math inline">\(y = f(x_1, x_2, \ldots, x_n)\)</span> be a function with <span class="math inline">\(n\)</span> variables. The <strong>partial derivative</strong> of <span class="math inline">\(y\)</span> with respect to its <span class="math inline">\(i^\textrm{th}\)</span> parameter <span class="math inline">\(x_i\)</span> is</p>
 <p><span class="math display">\[ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.\]</span></p>
-<p>If <span class="math inline">\(f(\mathbf{x}) = y\)</span>, a scalar, we collect/concatenate all the partial derivatives to obtain the <em>gradient</em> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span> <span class="math display">\[ \nabla_{\mathbf{x}}f(\mathbf{x}) = \begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} \]</span></p>
+<p>For <span class="math inline">\(f \colon \mathbb{R}^n \to \mathbb{R}\)</span>, we collect/concatenate all the partial derivatives to obtain the <strong>gradient</strong> of the output <span class="math inline">\(y = f(\mathbf{x})\)</span> with respect to the input <span class="math inline">\(\mathbf{x}\)</span> <span class="math display">\[ \nabla_{\mathbf{x}}f(\mathbf{x}) = \nabla_{\mathbf{x}}y =\begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} \]</span> sometimes written <span class="math inline">\(\nabla f(\mathbf{x})\)</span> or <span class="math inline">\(\nabla y\)</span> when not ambiguous.</p>
+</section>
+<section id="jacobian" class="level4">
+<h4 class="anchored" data-anchor-id="jacobian">Jacobian</h4>
+<p>The <strong>Jacobian</strong> <span class="math inline">\(\mathbf{J} \in \mathbb{R}^{m \times n}\)</span> is a generalization of the <a href="#sec-gradient" class="quarto-xref">gradient</a> to <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span> with <span class="math inline">\(f \colon \mathbb{R}^n \to \mathbb{R}^m\)</span>, where <span class="math inline">\(j_{i,j} = \dfrac{\partial y_i}{\partial\mathbf{x}_j}\)</span>, <span class="math inline">\(\mathbf{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n\)</span> and <span class="math inline">\(\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix} \in \mathbb{R}^m\)</span>.</p>
+<p>Explicitly <span class="math display">\[ \displaystyle{ \mathbf{J} = \begin{bmatrix} \dfrac{\partial \mathbf{y}}{\partial x_{1}} &amp; \cdots &amp; \dfrac{\partial \mathbf{y}}{\partial x_{n}} \end{bmatrix}
+= \begin{bmatrix} \nabla^{\top}y_{1} \\ \vdots \\ \nabla^{\top}y_{m} \end{bmatrix}
+= \begin{bmatrix}
+\dfrac{\partial y_{1}}{\partial x_{1}} &amp; \cdots &amp; \dfrac{\partial y_{1}}{\partial x_{n}} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\dfrac{\partial y_{m}}{\partial x_{1}} &amp; \cdots &amp; \dfrac{\partial y_{m}}{\partial x_{n}}
+\end{bmatrix}} \]</span></p>
+</section>
 <section id="handy-rules" class="level4">
 <h4 class="anchored" data-anchor-id="handy-rules">Handy Rules</h4>
 <p>The following rules come straight from D2L:</p>
@@ -480,7 +511,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="dx">dx</h4>
 <p><span class="math inline">\(dx\)</span> = the differential of <span class="math inline">\(x\)</span></p>
 <p>A single symbol that means “infinitesimal change in <span class="math inline">\(x\)</span>.”</p>
-<p>In derivatives, it appears in a ratio (<span class="math inline">\(dy/dx\)</span>). We are differentiating <span class="math inline">\(f(x)\)</span> <strong>wrt <span class="math inline">\(x\)</span></strong>.</p>
+<p>In derivatives, it appears in a ratio (<span class="math inline">\(\dfrac{dy}{dx}\)</span>). We are differentiating <span class="math inline">\(f(x)\)</span> <strong>wrt <span class="math inline">\(x\)</span></strong>.</p>
 <p>In integrals, it appears as a piece being added up (<span class="math inline">\(f(x)\,dx\)</span>). We are integrating <span class="math inline">\(f(x)\)</span> <strong>wrt <span class="math inline">\(x\)</span></strong>.</p>
 </section>
 </section>
@@ -503,10 +534,6 @@ y = ln(x) &amp; \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
 \end{aligned}\]</span></p>
 </section>
 </section>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
-<p>Because of the definition of derivative as a rate of change, this is possible <span class="math inline">\(\dfrac{dy}{dx} = \dfrac{1}{\frac{dx}{dy}}\)</span></p>
-</section>
 <section id="proofs" class="level2">
 <h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
 <p>Later!</p>
@@ -518,6 +545,7 @@ y = ln(x) &amp; \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
 <li><span class="math inline">\(\dfrac{dy}{dx}\)</span>: derivative of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span></li>
 <li><span class="math inline">\(\dfrac{\partial y}{\partial x}\)</span>: partial derivative of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span></li>
 <li><span class="math inline">\(\nabla_{\mathbf{x}} y\)</span>: gradient of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span></li>
+<li><span class="math inline">\(\mathbf{J}_f (\mathbf{x}), \dfrac{\partial \mathbf{y}}{\partial \mathbf{x}}\)</span>: Jacobian of <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span></li>
 <li><span class="math inline">\(\int_a^b f(x) \;dx\)</span>: definite integral of <span class="math inline">\(f\)</span> from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> with respect to <span class="math inline">\(x\)</span></li>
 <li><span class="math inline">\(\int f(x) \;dx\)</span>: indefinite integral of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x\)</span></li>
 </ul>
@@ -590,13 +618,14 @@ y = ln(x) &amp; \iff e^y = x \implies \dfrac{d}{dx} e^y = \dfrac{d}{dx} x \\
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

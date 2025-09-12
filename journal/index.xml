@@ -9,8 +9,56 @@
 <link>https://theopomies.com/journal/</link>
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
-<generator>quarto-1.7.34</generator>
-<lastBuildDate>Wed, 10 Sep 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.24</generator>
+<lastBuildDate>Fri, 12 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Finished eigendecomposition notes + ?</title>
+  <link>https://theopomies.com/journal/2025-09-12.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="todo" class="level3">
+
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>math</category>
+  <guid>https://theopomies.com/journal/2025-09-12.html</guid>
+  <pubDate>Fri, 12 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Writing triton kernels with Daniel Han from Unsloth + linear algebra</title>
+  <link>https://theopomies.com/journal/2025-09-11.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="linear-algebra-notes" class="level3">
+
+</section>
+<section id="daniel-han" class="level3">
+<h3 class="anchored" data-anchor-id="daniel-han">Daniel Han</h3>
+</section>
+<section id="light-mode" class="level3">
+<h3 class="anchored" data-anchor-id="light-mode">Light mode</h3>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>math</category>
+  <guid>https://theopomies.com/journal/2025-09-11.html</guid>
+  <pubDate>Thu, 11 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>FP8 Training with Phuc Nguyen (HF)</title>
   <link>https://theopomies.com/journal/2025-09-10.html</link>

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-09-04">
-<meta name="description" content="Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives">
+<meta name="dcterms.date" content="2025-09-12">
+<meta name="description" content="none">
 
-<title>Going through DDP with S2S – Theo Pomies</title>
+<title>Finished eigendecomposition notes + ? – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,8 +75,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta name="twitter:title" content="Going through DDP with S2S – Theo Pomies">
-<meta name="twitter:description" content="Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives">
+<meta name="twitter:title" content="Finished eigendecomposition notes + ? – Theo Pomies">
+<meta name="twitter:description" content="none">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -301,8 +301,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#finishing-the-preliminaries-for-d2l" id="toc-finishing-the-preliminaries-for-d2l" class="nav-link active" data-scroll-target="#finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</a></li>
-  <li><a href="#evening-study-session-on-ddp" id="toc-evening-study-session-on-ddp" class="nav-link" data-scroll-target="#evening-study-session-on-ddp">Evening study session on DDP</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link active" data-scroll-target="#todo">TODO</a></li>
   </ul>
 </nav>
     </div>
@@ -312,9 +311,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Going through DDP with S2S</h1>
+<h1 class="title">Finished eigendecomposition notes + ?</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">python</div>
     <div class="quarto-category">mle</div>
     <div class="quarto-category">math</div>
   </div>
@@ -322,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives
+    none
   </div>
 </div>
 
@@ -333,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2025</p>
+      <p class="date">September 12, 2025</p>
     </div>
   </div>
   
@@ -345,24 +343,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="finishing-the-preliminaries-for-d2l" class="level3">
-<h3 class="anchored" data-anchor-id="finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</h3>
-<p>Well, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t <em>learn</em> anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and <em>grok</em> or <em>accept</em> them as true. Like the classic <a href="../notes/probability.html#bayes-theorem">Bayes Theorem</a>, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.</p>
-</section>
-<section id="evening-study-session-on-ddp" class="level3">
-<h3 class="anchored" data-anchor-id="evening-study-session-on-ddp">Evening study session on DDP</h3>
-<p>We discussed the <a href="../notes/distributed-training.html#algorithms-techniques">different types of parallelism</a> (for ML distributed training):</p>
-<ul>
-<li>(Distributed) Data Parallelism (<strong>DDP</strong>): Each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients, perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</li>
-<li>Pipeline Parallelism (<strong>PP</strong>): We split the model across different ranks without splitting the layers (so we split <em>along the layers</em>). That is <em>inter-layer</em> parallelism. An exaggeration would be having a model with 2 hidden layers and 1 output layer split across 3 GPUs.</li>
-<li>Tensor Parallelism (<strong>TP</strong>): We split the layers of the model across different ranks, that’s <em>intra-layer</em> parallelism. This could be useful if some layers are so large they don’t even fit in a single device. To reduce overhead, it’s advisable that even if a layer is split across different <em>ranks</em>, all parts remain on the same <em>node</em>. (See <a href="../notes/distributed-training.html#terminology">terminology</a>)</li>
-</ul>
-<p>There’s also</p>
-<ul>
-<li>Expert Parallelism (<strong>EP</strong>): For Mixture-of-Experts (<strong>MoE</strong>) we can split the experts on different devices.</li>
-</ul>
-<p>We didn’t discuss much this last one but I knew about it already and searched a bit to know more about it.</p>
-<p>Last but not least we discussed the issue of DataLoaders / Samplers, and the importance of data sharding. They are a mean of “splitting” efficiently our dataset so that each rank sees a different mini-batch of data. Also, each process only loads its <em>shard</em> so it’s more memory/communication efficient.</p>
+<section id="todo" class="level3">
+<h3 class="anchored" data-anchor-id="todo">TODO</h3>
 
 
 </section>
