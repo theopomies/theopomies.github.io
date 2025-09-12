@@ -1191,7 +1191,7 @@ Note
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%20%5Cmathbf%7Bu%7D%20%5Ccdot%20%5Cmathbf%7Bv%7D%20=%20%5Csum_%7Bi%7D%20u_i%20v_i%20"></p>
-<div id="29da284b" class="cell" data-execution_count="2">
+<div id="d3391a13" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">u, v <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -1204,7 +1204,7 @@ font-style: inherit;"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2">torch.dot(u, v)  <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># u @ v</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>tensor(5)</code></pre>
 </div>
 </div>
@@ -1240,7 +1240,7 @@ Note
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%20(%5Cmathbf%7BA%7D%5Cmathbf%7Bu%7D)_%7Bi%7D%20=%20%5Cmathbf%7Ba%7D_%7Bi,:%7D%20%5Ccdot%20%5Cmathbf%7Bu%7D%20=%20%5Csum_%7Bj%7D%20a_%7Bi,j%7D%20u_j%20%20"></p>
-<div id="f0e8dd77" class="cell" data-execution_count="3">
+<div id="a908b389" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">A, u <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -1255,7 +1255,7 @@ font-style: inherit;">2</span>)</span>
 <span id="cb3-2">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">@</span> u</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>tensor([1, 3, 5])</code></pre>
 </div>
 </div>
@@ -1276,7 +1276,7 @@ Note
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%20(%5Cmathbf%7BA%7D%5Cmathbf%7BB%7D)_%7Bi,j%7D%20=%20%5Cmathbf%7Ba%7D_%7Bi,:%7D%20%5Ccdot%20%5Cmathbf%7Bb%7D_%7B:,%20j%7D%20=%20%5Csum_%7Bk%7D%20a_%7Bi,k%7D%20b_%7Bk,j%7D%20"></p>
-<div id="29291e7e" class="cell" data-execution_count="4">
+<div id="9c50e045" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">U, V <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
@@ -1295,7 +1295,7 @@ font-style: inherit;">3</span>)</span>
 <span id="cb5-2">U <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">@</span> V</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="81">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>tensor([[ 3,  4,  5],
         [ 9, 14, 19],
         [15, 24, 33]])</code></pre>
@@ -1327,7 +1327,7 @@ Note
 <p>Might not exist if <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D"> is not invertible, that is <img src="https://latex.codecogs.com/png.latex?%5Cdet(%5Cmathbf%7BA%7D)%20=%200"></p>
 </div>
 </div>
-<div id="36d7e618" class="cell" data-execution_count="5">
+<div id="62b02a2e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.randn(<span class="dv" style="color: #AD0000;
@@ -1352,13 +1352,13 @@ background-color: null;
 font-style: inherit;">@</span> A_i, I), torch.allclose(A_i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">@</span> A, I)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="82">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(True, True)</code></pre>
 </div>
 </div>
 </section>
-<section id="determinant-of-a-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="determinant-of-a-matrix">Determinant of a Matrix</h3>
+<section id="sec-determinant" class="level3">
+<h3 class="anchored" data-anchor-id="sec-determinant">Determinant of a Matrix</h3>
 <p>I think of the determinant of <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D"> as the scaling factor of the linear transformation represented by <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D">.</p>
 <p>This explains why a matrix whose determinant is 0 is not invertible: it “collapses”, and two images might have the same original input <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D"></p>
 <section id="sec-matrix-basic-identities" class="level4">
@@ -1368,7 +1368,7 @@ font-style: inherit;">@</span> A, I)</span></code></pre></div>
 <section id="determinant-of-diagonal-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-diagonal-matrix">Determinant of Diagonal Matrix</h4>
 <p><img src="https://latex.codecogs.com/png.latex?%20A%20=%20%5Coperatorname%7Bdiag%7D(a_1,%20%5Cdots,%20a_n),%20%5Cquad%20%5Cdet(A)%20=%20%5Cprod_%7Bi=1%7D%5En%20a_i%20"></p>
-<div id="de55ba43" class="cell" data-execution_count="6">
+<div id="a39e24bb" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># using I as a mask</span></span>
@@ -1399,7 +1399,7 @@ font-style: inherit;"># A = diag(1, 5, 9)</span></span>
 <span id="cb9-4">torch.det(A), torch.det(A) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> torch.diag(A).prod()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="83">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -1407,7 +1407,7 @@ font-style: inherit;">==</span> torch.diag(A).prod()</span></code></pre></div>
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><img src="https://latex.codecogs.com/png.latex?%20%5Cdet(T)%20=%20%5Cprod_%7Bi%7D%20t_%7Bii%7D,%20%5Cquad%20%5Ctext%7Bwhere%20$T$%20is%20triangular%7D%20"></p>
-<div id="b84cae4e" class="cell" data-execution_count="7">
+<div id="4a50b3ab" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">A <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> torch.triu(torch.arange(<span class="dv" style="color: #AD0000;
@@ -1424,7 +1424,7 @@ font-style: inherit;">3</span>))</span>
 <span id="cb11-2">torch.det(A), torch.det(A) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> torch.diag(A).prod()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="84">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -1577,7 +1577,11 @@ Note
 <section id="lu-decomposition-or-lu-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="lu-decomposition-or-lu-factorization">LU decomposition (or LU factorization)</h3>
 <p>Computing the determinant of a Matrix is not trivial at first glance.</p>
-<p>We know how to easily compute: - the determinant of a product of matrices - the determinant of a elementary matrices</p>
+<p>We know how to easily compute:</p>
+<ul>
+<li>the determinant of a product of matrices</li>
+<li>the determinant of a elementary matrices</li>
+</ul>
 <p>Knowing that, we want to find a representation of our original matrix <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D"> that involves an Upper Triangular Matrix <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BU%7D">, and one or more other matrices whose determinant is known or trivial to compute, as <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BP%7D%5Cmathbf%7BA%7D%20=%20%5Cmathbf%7BL%7D%5Cmathbf%7BU%7D"></p>
 <p>To go from <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BA%7D"> to <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BU%7D"> we’ll use Gaussian Elimination, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BP%7D"> tracks our permutations (row swaps) and <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BL%7D"> tracks our row operations (row additions).</p>
 <p>Now, because <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BP%7D"> is orthogonal, we have <img src="https://latex.codecogs.com/png.latex?%20%5Cmathbf%7BP%7D%5Cmathbf%7BA%7D%20=%20%5Cmathbf%7BL%7D%5Cmathbf%7BU%7D%20%5Cimplies%20%5Cmathbf%7BA%7D%20=%20%5Cmathbf%7BP%7D%5E%7B-1%7D%5Cmathbf%7BL%7D%5Cmathbf%7BU%7D%20=%20%5Cmathbf%7BP%7D%5E%5Ctop%5Cmathbf%7BL%7D%5Cmathbf%7BU%7D%20"></p>
