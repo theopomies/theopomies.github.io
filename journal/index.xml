@@ -12,7 +12,7 @@
 <generator>quarto-1.8.24</generator>
 <lastBuildDate>Sat, 13 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Connectionism and review of Daniel Han’s lecture</title>
+  <title>Connectionism and Cursor articles</title>
   <link>https://theopomies.com/journal/2025-09-13.html</link>
   <description><![CDATA[ 
 
@@ -20,11 +20,20 @@
 
 
 
+<p>Today is the Lord’s day so I try not to do heavy work, and only personal stuff, nothing regular job related. That was the perfect occasion to read two articles from my reading list.</p>
 <section id="connectionism---defeating-nondeterminism-in-llm-inference" class="level3">
-
+<h3 class="anchored" data-anchor-id="connectionism---defeating-nondeterminism-in-llm-inference">Connectionism - Defeating Nondeterminism in LLM Inference</h3>
+<p>Thinking Machines, <a href="https://x.com/miramurati" target="_blank">Mira Muramati</a>’s very well funded superintelligence lab started their blog with <a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/" target="_blank">their first article</a> by <a href="https://x.com/cHHillee" target="_blank">Horace He</a> tackling (non-)determinism — ie. reproducibility — in current LLMs. The root cause is the non-associative nature of floating-point arithmetic — eg. <img src="https://latex.codecogs.com/png.latex?(x%20+%20y)%20+%20z%20%5Cneq%20x%20+%20(y%20+%20z)">.</p>
+<p>This issue arises because of two main components of our inference systems:</p>
+<ul>
+<li><strong>Concurrency</strong>: the order in which threads finish has repercussions on the order of operations. They note that this is minimal and steps to avoid it are known and good eng. implement them</li>
+<li><strong>Non batch-invariant kernels</strong>: some kernels implementations vary depending on batch size, and at inference we the users have no control over the actual batch size being fed to the LLM, we are pooled with other users. This can be solved by implementing batch-invariant kernels, notably for RMSNorm, Matmul and Attention, but requires engineering efforts.</li>
+</ul>
 </section>
-<section id="daniel-hans-triton-kernels-lecture" class="level3">
-<h3 class="anchored" data-anchor-id="daniel-hans-triton-kernels-lecture">Daniel Han’s Triton Kernels lecture</h3>
+<section id="cursor-tab-online-rl-article" class="level3">
+<h3 class="anchored" data-anchor-id="cursor-tab-online-rl-article">Cursor Tab online RL article</h3>
+<p>Cursor recently released an interesting <a href="https://cursor.com/blog/tab-rl" target="_blank">article</a> where they announce the release of their updated tab completion model, Cursor Tab, with improved acceptance rate <strong>and</strong> suggestion rate — sometimes not suggesting anything is the right suggestion.</p>
+<p>They explain the way they perform online on-policy RL, with rolling releases of the model every 1.5-2h — this is required because in order to have on-policy RL, the rewards collected must come from the current policy, the most recently updated one. They are aiming for even faster release/training cycle. Is this a way to have continual learning?</p>
 
 
 </section>

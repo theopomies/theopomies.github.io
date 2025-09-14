@@ -432,7 +432,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 4, 2025</p>
+      <p class="date-modified">September 12, 2025</p>
     </div>
   </div>
     
@@ -481,7 +481,7 @@ Note
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="e7b553f6" class="cell" data-execution_count="2">
+<div id="52b96b83" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -519,7 +519,7 @@ Note
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="ff10d6f4" class="cell" data-execution_count="3">
+<div id="2e27e61f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -543,7 +543,7 @@ Note
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="e027aba4" class="cell" data-execution_count="4">
+<div id="70cad559" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -578,7 +578,7 @@ Note
 <p>Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
 </div>
 </div>
-<div id="baa9e49e" class="cell" data-execution_count="5">
+<div id="c47d1490" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
@@ -599,7 +599,7 @@ Note
 <section id="sec-det-diag-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="sec-det-diag-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="e7421b67" class="cell" data-execution_count="6">
+<div id="8368c872" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
@@ -612,7 +612,7 @@ Note
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><span class="math display">\[ \det(T) = \prod_{i} t_{i,i}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="7af7c37d" class="cell" data-execution_count="7">
+<div id="5c4edd99" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">

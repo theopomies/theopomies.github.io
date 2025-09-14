@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2025-09-13">
-<meta name="description" content="Read thinking machines’s first blog article + reviewing the Triton Kernels lesson">
+<meta name="description" content="Read Thinking Machines’s first blog article + cursor’s article on online RL training for Cursor Tab">
 
-<title>Connectionism and review of Daniel Han’s lecture – Theo Pomies</title>
+<title>Connectionism and Cursor articles – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,9 +74,38 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="Connectionism and review of Daniel Han’s lecture – Theo Pomies">
-<meta name="twitter:description" content="Read thinking machines’s first blog article + reviewing the Triton Kernels lesson">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="Connectionism and Cursor articles – Theo Pomies">
+<meta name="twitter:description" content="Read Thinking Machines’s first blog article + cursor’s article on online RL training for Cursor Tab">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -302,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#connectionism---defeating-nondeterminism-in-llm-inference" id="toc-connectionism---defeating-nondeterminism-in-llm-inference" class="nav-link active" data-scroll-target="#connectionism---defeating-nondeterminism-in-llm-inference">Connectionism - Defeating Nondeterminism in LLM Inference</a></li>
-  <li><a href="#daniel-hans-triton-kernels-lecture" id="toc-daniel-hans-triton-kernels-lecture" class="nav-link" data-scroll-target="#daniel-hans-triton-kernels-lecture">Daniel Han’s Triton Kernels lecture</a></li>
+  <li><a href="#cursor-tab-online-rl-article" id="toc-cursor-tab-online-rl-article" class="nav-link" data-scroll-target="#cursor-tab-online-rl-article">Cursor Tab online RL article</a></li>
   </ul>
 </nav>
     </div>
@@ -312,7 +341,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Connectionism and review of Daniel Han’s lecture</h1>
+<h1 class="title">Connectionism and Cursor articles</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">mle</div>
@@ -321,7 +350,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Read thinking machines’s first blog article + reviewing the Triton Kernels lesson
+    Read Thinking Machines’s first blog article + cursor’s article on online RL training for Cursor Tab
   </div>
 </div>
 
@@ -344,11 +373,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Today is the Lord’s day so I try not to do heavy work, and only personal stuff, nothing regular job related. That was the perfect occasion to read two articles from my reading list.</p>
 <section id="connectionism---defeating-nondeterminism-in-llm-inference" class="level3">
 <h3 class="anchored" data-anchor-id="connectionism---defeating-nondeterminism-in-llm-inference">Connectionism - Defeating Nondeterminism in LLM Inference</h3>
+<p>Thinking Machines, <a href="https://x.com/miramurati" target="_blank">Mira Muramati</a>’s very well funded superintelligence lab started their blog with <a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/" target="_blank">their first article</a> by <a href="https://x.com/cHHillee" target="_blank">Horace He</a> tackling (non-)determinism — ie. reproducibility — in current LLMs. The root cause is the non-associative nature of floating-point arithmetic — eg. <span class="math inline">\((x + y) + z \neq x + (y + z)\)</span>.</p>
+<p>This issue arises because of two main components of our inference systems:</p>
+<ul>
+<li><strong>Concurrency</strong>: the order in which threads finish has repercussions on the order of operations. They note that this is minimal and steps to avoid it are known and good eng. implement them</li>
+<li><strong>Non batch-invariant kernels</strong>: some kernels implementations vary depending on batch size, and at inference we the users have no control over the actual batch size being fed to the LLM, we are pooled with other users. This can be solved by implementing batch-invariant kernels, notably for RMSNorm, Matmul and Attention, but requires engineering efforts.</li>
+</ul>
 </section>
-<section id="daniel-hans-triton-kernels-lecture" class="level3">
-<h3 class="anchored" data-anchor-id="daniel-hans-triton-kernels-lecture">Daniel Han’s Triton Kernels lecture</h3>
+<section id="cursor-tab-online-rl-article" class="level3">
+<h3 class="anchored" data-anchor-id="cursor-tab-online-rl-article">Cursor Tab online RL article</h3>
+<p>Cursor recently released an interesting <a href="https://cursor.com/blog/tab-rl" target="_blank">article</a> where they announce the release of their updated tab completion model, Cursor Tab, with improved acceptance rate <strong>and</strong> suggestion rate — sometimes not suggesting anything is the right suggestion.</p>
+<p>They explain the way they perform online on-policy RL, with rolling releases of the model every 1.5-2h — this is required because in order to have on-policy RL, the rewards collected must come from the current policy, the most recently updated one. They are aiming for even faster release/training cycle. Is this a way to have continual learning?</p>
 
 
 </section>
