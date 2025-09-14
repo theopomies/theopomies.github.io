@@ -10,9 +10,33 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Fri, 12 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 13 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Finished eigendecomposition notes + ?</title>
+  <title>Connectionism and review of Daniel Han’s lecture</title>
+  <link>https://theopomies.com/journal/2025-09-13.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="connectionism---defeating-nondeterminism-in-llm-inference" class="level3">
+
+</section>
+<section id="daniel-hans-triton-kernels-lecture" class="level3">
+<h3 class="anchored" data-anchor-id="daniel-hans-triton-kernels-lecture">Daniel Han’s Triton Kernels lecture</h3>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-13.html</guid>
+  <pubDate>Sat, 13 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Finished eigendecomposition notes + Jacobian</title>
   <link>https://theopomies.com/journal/2025-09-12.html</link>
   <description><![CDATA[ 
 
@@ -20,14 +44,18 @@
 
 
 
-<section id="todo" class="level3">
-
+<section id="eigendecomposition" class="level3">
+<h3 class="anchored" data-anchor-id="eigendecomposition">Eigendecomposition</h3>
+<p>I had learned about diagonalization/decomposition using <a href="../notes/linear-algebra.html#sec-eigenv">eigenvectors and eigenvalues</a> in The Manga Guide to Linear Algebra. Now reading more about it in the appendix of D2L, I felt ready to write my notes about them, and after doing a little more research that’s what I did, and I feel I’ve got a strong grasp on the subject.</p>
+</section>
+<section id="jacobian" class="level3">
+<h3 class="anchored" data-anchor-id="jacobian">Jacobian</h3>
+<p>With the little free time I still had in this (once again) busy day, I wrote my notes on the <a href="../notes/calculus.html#sec-jacobian">Jacobian</a>, a generalization of the <a href="../notes/calculus.html#sec-gradient">gradient</a> to functions with vector inputs <strong>and</strong> outputs.</p>
 
 
 </section>
 
  ]]></description>
-  <category>mle</category>
   <category>math</category>
   <guid>https://theopomies.com/journal/2025-09-12.html</guid>
   <pubDate>Fri, 12 Sep 2025 00:00:00 GMT</pubDate>
@@ -42,13 +70,16 @@
 
 
 <section id="linear-algebra-notes" class="level3">
-
+<h3 class="anchored" data-anchor-id="linear-algebra-notes">Linear algebra notes</h3>
+<p>Today I wrote some more linear algebra notes, on <a href="../notes/linear-algebra.html#sec-linear-dependence">linear dependence</a>, <a href="../notes/linear-algebra.html#sec-rank">rank</a>, <a href="../notes/linear-algebra.html#sec-basis">basis</a> and <a href="../notes/linear-algebra.html#sec-dimension">dimension</a>. In the process I also wrote about <a href="../notes/linear-algebra.html#sec-vector-space">vector spaces</a>. I really begin to feel the value of these notes, both as an external memory to refer to later, but also as a learning process allowing me to really understand to summarize and re-explain.</p>
 </section>
 <section id="daniel-han" class="level3">
 <h3 class="anchored" data-anchor-id="daniel-han">Daniel Han</h3>
+<p>As part of S2S we had a guest lecture by <a href="https://x.com/danielhanchen" target="_blank">Daniel Han</a> from <a href="https://unsloth.ai" target="_blank">Unsloth</a> on <a href="https://triton-lang.org/main/index.html" target="_blank">Triton</a> and custom kernels. It was super interesting because it was working from first principles, and that’s the way I work. Instead of diving into triton’s DSL etc, he took a pen and a stack of paper and wrote neural network graphs of computations, deriving them by hand and explaining how custom training kernels were written as a way to speed-up backprop by using derivation tricks, using our knowledge of calculus, caching computations and results to achieve a better result than a <code>torch.compile</code> or autograd.</p>
 </section>
 <section id="light-mode" class="level3">
 <h3 class="anchored" data-anchor-id="light-mode">Light mode</h3>
+<p>I also took way too much time to get an OK-tier light mode for this website.</p>
 
 
 </section>

@@ -454,8 +454,8 @@ Note
 <p><span class="math display">\[ \dfrac{\partial y}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots, x_{i-1}, x_i+h, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{h}.\]</span></p>
 <p>For <span class="math inline">\(f \colon \mathbb{R}^n \to \mathbb{R}\)</span>, we collect/concatenate all the partial derivatives to obtain the <strong>gradient</strong> of the output <span class="math inline">\(y = f(\mathbf{x})\)</span> with respect to the input <span class="math inline">\(\mathbf{x}\)</span> <span class="math display">\[ \nabla_{\mathbf{x}}f(\mathbf{x}) = \nabla_{\mathbf{x}}y =\begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} \]</span> sometimes written <span class="math inline">\(\nabla f(\mathbf{x})\)</span> or <span class="math inline">\(\nabla y\)</span> when not ambiguous.</p>
 </section>
-<section id="jacobian" class="level4">
-<h4 class="anchored" data-anchor-id="jacobian">Jacobian</h4>
+<section id="sec-jacobian" class="level4">
+<h4 class="anchored" data-anchor-id="sec-jacobian">Jacobian</h4>
 <p>The <strong>Jacobian</strong> <span class="math inline">\(\mathbf{J} \in \mathbb{R}^{m \times n}\)</span> is a generalization of the <a href="#sec-gradient" class="quarto-xref">gradient</a> to <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span> with <span class="math inline">\(f \colon \mathbb{R}^n \to \mathbb{R}^m\)</span>, where <span class="math inline">\(j_{i,j} = \dfrac{\partial y_i}{\partial\mathbf{x}_j}\)</span>, <span class="math inline">\(\mathbf{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n\)</span> and <span class="math inline">\(\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix} \in \mathbb{R}^m\)</span>.</p>
 <p>Explicitly <span class="math display">\[ \displaystyle{ \mathbf{J} = \begin{bmatrix} \dfrac{\partial \mathbf{y}}{\partial x_{1}} &amp; \cdots &amp; \dfrac{\partial \mathbf{y}}{\partial x_{n}} \end{bmatrix}
 = \begin{bmatrix} \nabla^{\top}y_{1} \\ \vdots \\ \nabla^{\top}y_{m} \end{bmatrix}

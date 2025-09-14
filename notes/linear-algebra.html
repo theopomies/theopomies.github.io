@@ -377,10 +377,10 @@ window.Quarto = {
   <li><a href="#sec-determinant" id="toc-sec-determinant" class="nav-link" data-scroll-target="#sec-determinant">Determinant of a Matrix</a></li>
   <li><a href="#sec-orthogonality" id="toc-sec-orthogonality" class="nav-link" data-scroll-target="#sec-orthogonality">Orthogonality</a></li>
   <li><a href="#sec-elementary-matrix" id="toc-sec-elementary-matrix" class="nav-link" data-scroll-target="#sec-elementary-matrix">Elementary Matrix</a></li>
-  <li><a href="#linear-dependence" id="toc-linear-dependence" class="nav-link" data-scroll-target="#linear-dependence">Linear Dependence</a></li>
-  <li><a href="#rank" id="toc-rank" class="nav-link" data-scroll-target="#rank">Rank</a></li>
-  <li><a href="#basis" id="toc-basis" class="nav-link" data-scroll-target="#basis">Basis</a></li>
-  <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension">Dimension</a></li>
+  <li><a href="#sec-linear-dependence" id="toc-sec-linear-dependence" class="nav-link" data-scroll-target="#sec-linear-dependence">Linear Dependence</a></li>
+  <li><a href="#sec-rank" id="toc-sec-rank" class="nav-link" data-scroll-target="#sec-rank">Rank</a></li>
+  <li><a href="#sec-basis" id="toc-sec-basis" class="nav-link" data-scroll-target="#sec-basis">Basis</a></li>
+  <li><a href="#sec-dimension" id="toc-sec-dimension" class="nav-link" data-scroll-target="#sec-dimension">Dimension</a></li>
   <li><a href="#eigendecomposition" id="toc-eigendecomposition" class="nav-link" data-scroll-target="#eigendecomposition">Eigendecomposition</a></li>
   </ul></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
@@ -481,10 +481,10 @@ Note
 <section id="dot-product" class="level3">
 <h3 class="anchored" data-anchor-id="dot-product">Dot Product</h3>
 <p><span class="math display">\[ \mathbf{u} \cdot \mathbf{v} = \sum_{i} u_i v_i \]</span></p>
-<div id="1621e928" class="cell" data-execution_count="2">
+<div id="e7b553f6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>u, v <span class="op">=</span> torch.arange(<span class="dv">3</span>), torch.arange(<span class="dv">3</span>)  <span class="co"># torch.tensor([0, 1, 2])</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>torch.dot(u, v)  <span class="co"># u @ v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>tensor(5)</code></pre>
 </div>
 </div>
@@ -519,10 +519,10 @@ Note
 <section id="matrix-vector-product" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-vector-product">Matrix-Vector Product</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{u})_{i} = \mathbf{a}_{i,:} \cdot \mathbf{u} = \sum_{j} a_{i,j} u_j  \]</span></p>
-<div id="2aa4e309" class="cell" data-execution_count="3">
+<div id="ff10d6f4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A, u <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> u</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>tensor([1, 3, 5])</code></pre>
 </div>
 </div>
@@ -543,10 +543,10 @@ Note
 <section id="matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
 <p><span class="math display">\[ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} \]</span></p>
-<div id="3f675700" class="cell" data-execution_count="4">
+<div id="e027aba4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, V <span class="op">=</span> torch.arange(<span class="dv">6</span>).reshape(<span class="dv">3</span>, <span class="dv">2</span>), torch.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> V</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>tensor([[ 3,  4,  5],
         [ 9, 14, 19],
         [15, 24, 33]])</code></pre>
@@ -578,12 +578,12 @@ Note
 <p>Might not exist if <span class="math inline">\(\mathbf{A}\)</span> is not invertible, that is <span class="math inline">\(\det(\mathbf{A}) = 0\)</span></p>
 </div>
 </div>
-<div id="2b371c7f" class="cell" data-execution_count="5">
+<div id="baa9e49e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.randn(<span class="dv">3</span>, <span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_i <span class="op">=</span> A.inverse()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.double)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>torch.allclose(A <span class="op">@</span> A_i, I), torch.allclose(A_i <span class="op">@</span> A, I)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(True, True)</code></pre>
 </div>
 </div>
@@ -599,12 +599,12 @@ Note
 <section id="sec-det-diag-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="sec-det-diag-matrix">Determinant of Diagonal Matrix</h4>
 <p><span class="math display">\[ A = \operatorname{diag}(a_1, \dots, a_n), \quad \det(A) = \prod_{i=1}^n a_i \]</span></p>
-<div id="b27908bb" class="cell" data-execution_count="6">
+<div id="e7421b67" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using I as a mask</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> torch.eye(<span class="dv">3</span>, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>) <span class="op">*</span> I  <span class="co"># A = diag(1, 5, 9)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -612,10 +612,10 @@ Note
 <section id="determinant-of-a-triangular-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="determinant-of-a-triangular-matrix">Determinant of a Triangular Matrix</h4>
 <p><span class="math display">\[ \det(T) = \prod_{i} t_{i,i}, \quad \text{where $T$ is triangular} \]</span></p>
-<div id="65ee9cc4" class="cell" data-execution_count="7">
+<div id="7af7c37d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> torch.triu(torch.arange(<span class="dv">1</span>, <span class="dv">10</span>, dtype<span class="op">=</span>torch.float32).reshape(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>torch.det(A), torch.det(A) <span class="op">==</span> torch.diag(A).prod()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>(tensor(45.), tensor(True))</code></pre>
 </div>
 </div>
@@ -692,8 +692,8 @@ Note
 </section>
 </section>
 </section>
-<section id="linear-dependence" class="level3">
-<h3 class="anchored" data-anchor-id="linear-dependence">Linear Dependence</h3>
+<section id="sec-linear-dependence" class="level3">
+<h3 class="anchored" data-anchor-id="sec-linear-dependence">Linear Dependence</h3>
 <p>We say of <span class="math inline">\(n\)</span> vectors — <span class="math inline">\(\mathbf{v}_1, \dots, \mathbf{v}_n\)</span> that they are <strong>linearly dependent</strong> if there exists scalars <span class="math inline">\(a_1, \dots, a_n\)</span> <strong>not all equal to 0</strong> satisfying <span class="math display">\[\sum_{i=1}^n a_i\mathbf{v}_i = 0\]</span></p>
 <p>If the only solution is <span class="math inline">\(a_i = 0\)</span> for <span class="math inline">\(i\)</span> in <span class="math inline">\(0, \dots, n\)</span>, they are <strong>linearly independent</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -710,8 +710,8 @@ Note
 </div>
 </div>
 </section>
-<section id="rank" class="level3">
-<h3 class="anchored" data-anchor-id="rank">Rank</h3>
+<section id="sec-rank" class="level3">
+<h3 class="anchored" data-anchor-id="sec-rank">Rank</h3>
 <p>The <strong>rank</strong> of a matrix is the size of the <strong>largest</strong> subset of linearly independent columns among its columns. Equivalently, it is the <strong>dimension of the column space</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -727,10 +727,10 @@ Note
 </div>
 </div>
 </section>
-<section id="basis" class="level3">
-<h3 class="anchored" data-anchor-id="basis">Basis</h3>
+<section id="sec-basis" class="level3">
+<h3 class="anchored" data-anchor-id="sec-basis">Basis</h3>
 <p>A <strong>basis</strong> (not <em>the</em>, since a vector space can have many different bases) of a <strong><a href="#sec-vector-space" class="quarto-xref">vector space</a></strong> is a linearly independent subset that <strong>spans</strong> the space.</p>
-<p>All bases of the same vector space have the same size = the <strong>dimension</strong></p>
+<p>All bases of the same vector space have the same size = the <a href="#sec-dimension" class="quarto-xref">dimension</a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -745,8 +745,8 @@ Note
 </div>
 </div>
 </section>
-<section id="dimension" class="level3">
-<h3 class="anchored" data-anchor-id="dimension">Dimension</h3>
+<section id="sec-dimension" class="level3">
+<h3 class="anchored" data-anchor-id="sec-dimension">Dimension</h3>
 <p>The <strong>dimension</strong> of a vector space is the number of vectors in a basis of that space.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
