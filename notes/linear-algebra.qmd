@@ -2,7 +2,7 @@
 title: Linear Algebra
 author: Theo POMIES
 date: 2025-08-29
-date-modified: 2025-09-04
+date-modified: 2025-09-12
 description: All things Linear Algebra, matrices, vectors etc.
 categories: [math]
 ---

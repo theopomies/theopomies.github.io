@@ -1,10 +1,23 @@
 ---
-title: Connectionism and review of Daniel Han's lecture
-description: Read thinking machines's first blog article + reviewing the Triton Kernels lesson
+title: Connectionism and Cursor articles
+description: Read Thinking Machines's first blog article + cursor's article on online RL training for Cursor Tab
 categories: [math, mle]
 date: 2025-09-13
 ---
 
+Today is the Lord's day so I try not to do heavy work, and only personal stuff, nothing regular job related. That was the perfect occasion to read two articles from my reading list.
+
 ### Connectionism - Defeating Nondeterminism in LLM Inference
 
-### Daniel Han's Triton Kernels lecture
+Thinking Machines, [Mira Muramati](https://x.com/miramurati){target=_blank}'s very well funded superintelligence lab started their blog with [their first article](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/){target=_blank} by [Horace He](https://x.com/cHHillee){target=_blank} tackling (non-)determinism — ie. reproducibility — in current LLMs. The root cause is the non-associative nature of floating-point arithmetic — eg. $(x + y) + z \neq x + (y + z)$.
+
+This issue arises because of two main components of our inference systems:
+
+* **Concurrency**: the order in which threads finish has repercussions on the order of operations. They note that this is minimal and steps to avoid it are known and good eng. implement them
+* **Non batch-invariant kernels**: some kernels implementations vary depending on batch size, and at inference we the users have no control over the actual batch size being fed to the LLM, we are pooled with other users. This can be solved by implementing batch-invariant kernels, notably for RMSNorm, Matmul and Attention, but requires engineering efforts.
+
+### Cursor Tab online RL article
+
+Cursor recently released an interesting [article](https://cursor.com/blog/tab-rl){target=_blank} where they announce the release of their updated tab completion model, Cursor Tab, with improved acceptance rate **and** suggestion rate — sometimes not suggesting anything is the right suggestion.
+
+They explain the way they perform online on-policy RL, with rolling releases of the model every 1.5-2h — this is required because in order to have on-policy RL, the rewards collected must come from the current policy, the most recently updated one. They are aiming for even faster release/training cycle. Is this a way to have continual learning?

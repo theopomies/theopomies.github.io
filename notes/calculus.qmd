@@ -2,7 +2,7 @@
 title: Calculus
 author: Theo POMIES
 date: 2025-09-02
-date-modified: 2025-09-04
+date-modified: 2025-09-12
 description: All things calculus, differential or integral.
 categories: [math]
 ---
