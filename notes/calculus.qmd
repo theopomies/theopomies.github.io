@@ -72,7 +72,7 @@ For $f \colon \mathbb{R}^n \to \mathbb{R}$, we collect/concatenate all the parti
 $$ \nabla_{\mathbf{x}}f(\mathbf{x}) = \nabla_{\mathbf{x}}y =\begin{bmatrix} \frac{\partial y}{\partial x_1} \\ \vdots \\ \frac{\partial y}{\partial x_n} \end{bmatrix} $$
 sometimes written $\nabla f(\mathbf{x})$ or $\nabla y$ when not ambiguous.
 
-#### Jacobian
+#### Jacobian {#sec-jacobian}
 The **Jacobian** $\mathbf{J} \in \mathbb{R}^{m \times n}$ is a generalization of the [gradient @sec-gradient] to $\mathbf{y} = f(\mathbf{x})$ with $f \colon \mathbb{R}^n \to \mathbb{R}^m$, where $j_{i,j} = \dfrac{\partial y_i}{\partial\mathbf{x}_j}$, $\mathbf{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n$ and $\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix} \in \mathbb{R}^m$.
 
 Explicitly

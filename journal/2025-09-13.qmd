@@ -1,0 +1,10 @@
+---
+title: Connectionism and review of Daniel Han's lecture
+description: Read thinking machines's first blog article + reviewing the Triton Kernels lesson
+categories: [math, mle]
+date: 2025-09-13
+---
+
+### Connectionism - Defeating Nondeterminism in LLM Inference
+
+### Daniel Han's Triton Kernels lecture

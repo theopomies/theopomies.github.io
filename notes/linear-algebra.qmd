@@ -190,7 +190,7 @@ $$\begin{aligned}
 \iff \operatorname{det}(\mathbf{T}_{ij}) & = -1 \\
 \end{aligned}$$
 
-### Linear Dependence
+### Linear Dependence {#sec-linear-dependence}
 We say of $n$ vectors — $\mathbf{v}_1, \dots, \mathbf{v}_n$ that they are **linearly dependent** if there exists scalars $a_1, \dots, a_n$ **not all equal to 0** satisfying
 $$\sum_{i=1}^n a_i\mathbf{v}_i = 0$$
 
@@ -200,7 +200,7 @@ If the only solution is $a_i = 0$ for $i$ in $0, \dots, n$, they are **linearly 
 Linear dependence means that some vectors could be expressed as a weighted sum (**linear combination**) of others, hence carrying redudant information/operation.
 :::
 
-### Rank
+### Rank {#sec-rank}
 The **rank** of a matrix is the size of the **largest** subset of linearly independent columns among its columns.
 Equivalently, it is the **dimension of the column space**.
 
@@ -209,16 +209,16 @@ This reflects that if some columns are linearly dependent, they are redundant: t
 Thus, the matrix can be expressed with fewer independent columns, and the image (output space) of the matrix has correspondingly fewer dimensions.
 :::
 
-### Basis
+### Basis {#sec-basis}
 A **basis** (not *the*, since a vector space can have many different bases) of a **[vector space @sec-vector-space]** is a linearly independent subset that **spans** the space.
 
-All bases of the same vector space have the same size = the **dimension**
+All bases of the same vector space have the same size = the [dimension @sec-dimension]
 
 ::: {.callout-note}
 That means: a basis is a set of vectors that you can combine (with weighted sums) to form **any** vector in the space — and none of them are redundant.
 :::
 
-### Dimension
+### Dimension {#sec-dimension}
 The **dimension** of a vector space is the number of vectors in a basis of that space.
 
 ::: {.callout-note}

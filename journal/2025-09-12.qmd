@@ -1,8 +1,14 @@
 ---
-title: Finished eigendecomposition notes + ?
-description: "none"
-categories: [mle, math]
+title: Finished eigendecomposition notes + Jacobian
+description: Wrote some notes on eigendecomposition and the Jacobian matrix
+categories: [math]
 date: 2025-09-12
 ---
 
-### TODO
+### Eigendecomposition
+
+I had learned about diagonalization/decomposition using [eigenvectors and eigenvalues](/notes/linear-algebra.qmd#sec-eigenv) in The Manga Guide to Linear Algebra. Now reading more about it in the appendix of D2L, I felt ready to write my notes about them, and after doing a little more research that's what I did, and I feel I've got a strong grasp on the subject.
+
+### Jacobian
+
+With the little free time I still had in this (once again) busy day, I wrote my notes on the [Jacobian](/notes/calculus.qmd#sec-jacobian), a generalization of the [gradient](/notes/calculus.qmd#sec-gradient) to functions with vector inputs **and** outputs.
