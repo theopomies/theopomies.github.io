@@ -11,7 +11,7 @@ I wanted to briefly review Daniel's lecture from last week on Triton kernels fro
 
 ### Backprop ninja
 
-This reminded me of [this lecture](https://www.youtube.com/watch?v=q8SA3rM6ckI){target=_blank} by [Andrej Karpaty](https://x.com/karpathy){target=_blank} in his [NN Zero To Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ){target=_blank} series on youtube. So of course, just for practice and to get a stronger grasp on backprop, I did the exercises, implemented the entire backprop by hand (and Apple Pen + iPad). As a first principled kind of guy, there's nothing better than going this low, understanding where the $\mathbf{W}^\top$ comes from in the derivatives by writing dot product and **seeing** the pattern emerge.
+This reminded me of [this lecture](https://www.youtube.com/watch?v=q8SA3rM6ckI){target=_blank} by [Andrej Karpaty](https://x.com/karpathy){target=_blank} in his [NN Zero To Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ){target=_blank} series on youtube. So of course, just for practice and to get a stronger grasp on backprop, I did the exercises, implemented the entire backprop by hand (and Apple Pen + iPad). As a first principled kind of guy, there's nothing better than going this low, understanding where the $\mathbf{W}^\top$ comes from in the derivatives by writing all the dot products and derivating the loss wrt the inputs/weights and **seeing** the pattern emerge.
 
 I went through the playlist 2 years ago already, in my first wave of interest for ML, and it's been good getting back in the game. I'm feeling nostalgic, I miss the good parts about living in New York and being locked in.
 
