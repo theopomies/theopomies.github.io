@@ -10,7 +10,39 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Sat, 13 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 15 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Reviewing Daniel Han’s guest lecture + Backprop Ninja</title>
+  <link>https://theopomies.com/journal/2025-09-15.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="daniels-triton-kernels-lecture" class="level3">
+<h3 class="anchored" data-anchor-id="daniels-triton-kernels-lecture">Daniel’s Triton Kernels lecture</h3>
+<p>I wanted to briefly review Daniel’s lecture from last week on Triton kernels from first principles, going through simplifying derivatives for LLM blocks and using calculus tricks to write custom backprop kernels in triton rather than letting the autograd to its magic.</p>
+</section>
+<section id="backprop-ninja" class="level3">
+<h3 class="anchored" data-anchor-id="backprop-ninja">Backprop ninja</h3>
+<p>This reminded me of <a href="https://www.youtube.com/watch?v=q8SA3rM6ckI" target="_blank">this lecture</a> by <a href="https://x.com/karpathy" target="_blank">Andrej Karpaty</a> in his <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank">NN Zero To Hero</a> series on youtube. So of course, just for practice and to get a stronger grasp on backprop, I did the exercises, implemented the entire backprop by hand (and Apple Pen + iPad). As a first principled kind of guy, there’s nothing better than going this low, understanding where the <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BW%7D%5E%5Ctop"> comes from in the derivatives by writing dot product and <strong>seeing</strong> the pattern emerge.</p>
+<p>I went through the playlist 2 years ago already, in my first wave of interest for ML, and it’s been good getting back in the game. I’m feeling nostalgic, I miss the good parts about living in New York and being locked in.</p>
+</section>
+<section id="misc" class="level3">
+<h3 class="anchored" data-anchor-id="misc">Misc</h3>
+<p>I saw the leaks for the incoming Meta Connect keynote, about the new Meta x {RayBan, Oakley}, and I can’t wait for us to enter in the era of <strong>good</strong> AR glasses and embedded AI assistants! This reminds me of a theory I saw on X that the iPhone 17 Air serves many very interesting purposes to Apple, the first being for “fashion” and taking this customer base away from the Pros, but also this is a crash test on miniaturization, and it will finance the progress and experiments towards including this kind of tech in Apple’s own AR glasses, or even using the thinness for foldable phones.</p>
+<p>Good time to be optimist about tech.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <category>mle</category>
+  <guid>https://theopomies.com/journal/2025-09-15.html</guid>
+  <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Connectionism and Cursor articles</title>
   <link>https://theopomies.com/journal/2025-09-13.html</link>
