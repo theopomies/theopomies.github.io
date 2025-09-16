@@ -40,17 +40,27 @@ $\operatorname{P}(\mathcal{E})$ is the _probability associated with event $\math
 
 A **random variable**  $X$ is a measurable function (mapping) $X \colon \mathcal{\Omega} \to \mathcal{E}$ from a sample space $\mathcal{\Omega}$ as a set of possible outcomes to a measurable space $\mathcal{E}$.
 
-The probability that $X$ takes on a value in a measurable set $\mathcal{S} \in \mathcal{E}$ is written as $\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})$
+The probability that $X$ takes on a value in a measurable set $\mathcal{S} \in \mathcal{E}$ is written as
+$$
+\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})
+$$
 
-The probability that $X$ takes _discrete_ value $v$, denoted $X = v$, is $\operatorname{P}(X=v)$.
+The probability that $X$ takes a _discrete_ value $v$, denoted $X = v$, is $\operatorname{P}(X=v)$.
 
-$X = v$ or $X \geq v$ are **events**.
+Expressions like $X = v$ or $X \geq v$ define **events**, i.e., subsets of $\Omega$ whose probability can be measured.
 
-Random variables allow us to go from outcomes to values, like $X(\omega) = \omega$ the random variable that associates to each die its value (identity function). This is also an example of a _discrete_ random variable.
+Random variables allow us to go from outcomes to values, like $X(\omega) = \omega$, the random variable that associates to each die its value (identity function). This is also an example of a _discrete_ random variable.
 
-When $X$ is _continuous_ it doesn't make sense to have events like $X = v$ (and $\operatorname{P}(X = v) = 0$), rather we use $v \leq X \leq w$ and probability **densities**. An example would be the height of a population.
+When $X$ is _continuous_, it doesn't make sense to have events like $X = v$ (and $\operatorname{P}(X = v) = 0$); rather we use $v \leq X \leq w$ and probability **densities**. An example would be the height of a population. Probabilities are described via a **probability density function** $p_X(x)$, with
+$$
+\operatorname{P}(v \le X \le w) = \int_v^w p_X(x)\,dx
+$$
 
-We note $\operatorname{P}(X)$ the **probability distribution** of X. (Abuse of notation: strictly $P_X$ is the distribution of $X$, but we’ll often just write $P(X)$)
+We denote the probability distribution of $X$ as $\operatorname{P}(X)$ (strictly speaking $P_X$, but we often write $P(X)$ for convenience).
+
+:::{.callout-note}
+When the measurable space $\mathcal{E}$ is multi-dimensional, like $\mathbb{R}^m$, we call the random variable $\mathbf{X} \in \mathbb{R}^m$ a **random vector**.
+:::
 
 #### Multiple Random Variables
 
