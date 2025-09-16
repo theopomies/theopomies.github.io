@@ -63,7 +63,6 @@ A @ u
 When we say "we apply a linear transformation $\mathbf{A}$ to $\mathbf{v}$", we mean $\mathbf{A}\mathbf{v}$.
 :::
 
-
 ### Matrix Multiplication
 $$ (\mathbf{A}\mathbf{B})_{i,j} = \mathbf{a}_{i,:} \cdot \mathbf{b}_{:, j} = \sum_{k} a_{i,k} b_{k,j} $$
 ```{python}
@@ -77,6 +76,25 @@ U @ V
 * Distributivity: $\mathbf{A}(\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{B}\mathbf{C}$ and $(\mathbf{A} + \mathbf{B})\mathbf{C} = \mathbf{A}\mathbf{C} + \mathbf{B}\mathbf{C}$
 * Associativity: $\mathbf{A}(\mathbf{B}\mathbf{C}) = (\mathbf{A}\mathbf{B})\mathbf{C}$
 * Transpose: $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top\mathbf{A}^\top$
+
+### Outer Product {#sec-outer-product}
+$$ \mathbf{u} \otimes \mathbf{v}
+= \begin{bmatrix}
+u_1v_1 & u_1v_2 & \dots & u_1v_n \\
+u_2v_1 & u_2v_2 & \dots & u_2v_n \\
+\vdots & \vdots & \ddots & \vdots \\
+u_mv_1 & u_mv_2 & \dots & u_mv_n \\
+\end{bmatrix}
+= \mathbf{u}\mathbf{v}^\top$$
+
+```{python}
+u, v = torch.arange(3), torch.arange(3)
+torch.outer(u, v), torch.all(torch.outer(u, v) == u.reshape(3, 1) @ v.reshape(1, 3))
+```
+
+:::{.callout-note}
+The outer product of two column vectors is the matrix whose entries are all products of an element in the first vector with an element in the second vector.
+:::
 
 ### Inverse of a Square Matrix
 $$ \mathbf{A}\mathbf{A}^{-1} = \mathbf{A}^{-1}\mathbf{A} = \mathbf{I},\quad \mathbf{A} \in \mathbb{R}^{n \times n} $$
@@ -323,3 +341,5 @@ Now, if we just keep track of row swaps, we can easily compute $\det(\mathbf{A})
 * $(\cdot)^\top$: the transpose of a vector or matrix
 * $\mathbf{A}^{-1}$: the inverse of a matrix
 * $[\cdot, \cdot]$: concatenation
+* $\odot$: Hadamard (elementwise) product
+* $\otimes$: Outer product
