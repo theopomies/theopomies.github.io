@@ -335,13 +335,14 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#outcomes-and-events" id="toc-outcomes-and-events" class="nav-link" data-scroll-target="#outcomes-and-events">Outcomes and Events</a></li>
   <li><a href="#probability-function" id="toc-probability-function" class="nav-link" data-scroll-target="#probability-function">Probability function</a></li>
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#sec-random-variables" id="toc-sec-random-variables" class="nav-link" data-scroll-target="#sec-random-variables">Random Variables</a></li>
   <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ Theorem</a></li>
-  <li><a href="#expectation-variance" id="toc-expectation-variance" class="nav-link" data-scroll-target="#expectation-variance">Expectation &amp; Variance</a></li>
+  <li><a href="#expectation" id="toc-expectation" class="nav-link" data-scroll-target="#expectation">Expectation</a></li>
+  <li><a href="#sec-variance" id="toc-sec-variance" class="nav-link" data-scroll-target="#sec-variance">Variance</a></li>
+  <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard deviation</a></li>
+  <li><a href="#sec-covariance" id="toc-sec-covariance" class="nav-link" data-scroll-target="#sec-covariance">Covariance</a></li>
   </ul></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
-  <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
   </ul>
 </nav>
@@ -419,15 +420,32 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="random-variables" class="level3">
-<h3 class="anchored" data-anchor-id="random-variables">Random Variables</h3>
+<section id="sec-random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="sec-random-variables">Random Variables</h3>
 <p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> is a measurable function (mapping) <span class="math inline">\(X \colon \mathcal{\Omega} \to \mathcal{E}\)</span> from a sample space <span class="math inline">\(\mathcal{\Omega}\)</span> as a set of possible outcomes to a measurable space <span class="math inline">\(\mathcal{E}\)</span>.</p>
-<p>The probability that <span class="math inline">\(X\)</span> takes on a value in a measurable set <span class="math inline">\(\mathcal{S} \in \mathcal{E}\)</span> is written as <span class="math inline">\(\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})\)</span></p>
-<p>The probability that <span class="math inline">\(X\)</span> takes <em>discrete</em> value <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(X = v\)</span>, is <span class="math inline">\(\operatorname{P}(X=v)\)</span>.</p>
-<p><span class="math inline">\(X = v\)</span> or <span class="math inline">\(X \geq v\)</span> are <strong>events</strong>.</p>
-<p>Random variables allow us to go from outcomes to values, like <span class="math inline">\(X(\omega) = \omega\)</span> the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
-<p>When <span class="math inline">\(X\)</span> is <em>continuous</em> it doesn’t make sense to have events like <span class="math inline">\(X = v\)</span> (and <span class="math inline">\(\operatorname{P}(X = v) = 0\)</span>), rather we use <span class="math inline">\(v \leq X \leq w\)</span> and probability <strong>densities</strong>. An example would be the height of a population.</p>
-<p>We note <span class="math inline">\(\operatorname{P}(X)\)</span> the <strong>probability distribution</strong> of X. (Abuse of notation: strictly <span class="math inline">\(P_X\)</span> is the distribution of <span class="math inline">\(X\)</span>, but we’ll often just write <span class="math inline">\(P(X)\)</span>)</p>
+<p>The probability that <span class="math inline">\(X\)</span> takes on a value in a measurable set <span class="math inline">\(\mathcal{S} \in \mathcal{E}\)</span> is written as <span class="math display">\[
+\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})
+\]</span></p>
+<p>The probability that <span class="math inline">\(X\)</span> takes a <em>discrete</em> value <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(X = v\)</span>, is <span class="math inline">\(\operatorname{P}(X=v)\)</span>.</p>
+<p>Expressions like <span class="math inline">\(X = v\)</span> or <span class="math inline">\(X \geq v\)</span> define <strong>events</strong>, i.e., subsets of <span class="math inline">\(\Omega\)</span> whose probability can be measured.</p>
+<p>Random variables allow us to go from outcomes to values, like <span class="math inline">\(X(\omega) = \omega\)</span>, the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
+<p>When <span class="math inline">\(X\)</span> is <em>continuous</em>, it doesn’t make sense to have events like <span class="math inline">\(X = v\)</span> (and <span class="math inline">\(\operatorname{P}(X = v) = 0\)</span>); rather we use <span class="math inline">\(v \leq X \leq w\)</span> and probability <strong>densities</strong>. An example would be the height of a population. Probabilities are described via a <strong>probability density function</strong> <span class="math inline">\(p_X(x)\)</span>, with <span class="math display">\[
+\operatorname{P}(v \le X \le w) = \int_v^w p_X(x)\,dx
+\]</span></p>
+<p>We denote the probability distribution of <span class="math inline">\(X\)</span> as <span class="math inline">\(\operatorname{P}(X)\)</span> (strictly speaking <span class="math inline">\(P_X\)</span>, but we often write <span class="math inline">\(P(X)\)</span> for convenience).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When the measurable space <span class="math inline">\(\mathcal{E}\)</span> is multi-dimensional, like <span class="math inline">\(\mathbb{R}^m\)</span>, we call the random variable <span class="math inline">\(\mathbf{X} \in \mathbb{R}^m\)</span> a <strong>random vector</strong>.</p>
+</div>
+</div>
 <section id="multiple-random-variables" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
 <p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>). Equivalently it’s <span class="math inline">\(\operatorname{P}(\{A = a\} \cap \{B = b\})\)</span>, with an overloaded notation, the <strong>joint probability distribution</strong> becomes <span class="math inline">\(\operatorname{P}(A, B)\)</span></p>
@@ -450,44 +468,116 @@ window.Quarto = {
 </ul>
 <p>A simplified version is <span class="math inline">\(\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)\)</span></p>
 </section>
-<section id="expectation-variance" class="level3">
-<h3 class="anchored" data-anchor-id="expectation-variance">Expectation &amp; Variance</h3>
-<section id="expectation" class="level4">
-<h4 class="anchored" data-anchor-id="expectation">Expectation</h4>
+<section id="expectation" class="level3">
+<h3 class="anchored" data-anchor-id="expectation">Expectation</h3>
 <p>The <strong>expectation</strong> (or <strong>expected value</strong>) is the weighted average of the values of <span class="math inline">\(X\)</span>.</p>
 <p>Discrete case:</p>
-<p><span class="math display">\[ \operatorname{E}[X] = \operatorname{E}_{x \sim P}[X] = \sum_x x\operatorname{P}(X=x) \]</span></p>
+<p><span class="math display">\[ \operatorname{E}[X] = \operatorname{E}_{X \sim P}[X] = \sum_x x\operatorname{P}(X=x) \]</span></p>
 <p>Continuous case:</p>
 <p><span class="math display">\[\operatorname{E}[X] = \int_{-\infty}^{\infty} x f(x) \;dx \]</span></p>
 <p>To follow mathematical notation, sometimes we use <span class="math inline">\(\mu\)</span> to denote this average.</p>
+<section id="properties-1" class="level4">
+<h4 class="anchored" data-anchor-id="properties-1">Properties</h4>
+<!--- TODO --->
 </section>
-<section id="variance" class="level4">
-<h4 class="anchored" data-anchor-id="variance">Variance</h4>
-<p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much do values vary relative to the expectation (average) on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
+<section id="expectation-of-a-random-vector" class="level4">
+<h4 class="anchored" data-anchor-id="expectation-of-a-random-vector">Expectation of a Random Vector</h4>
+<p>For a vector-valued random variable — ie. the <strong>random vector</strong> <span class="math inline">\(\mathbf{X} \in \mathbb{R}^n\)</span>, we have <span class="math inline">\(\mathbf{\mu} = \operatorname{E}_{\mathbf{X} \sim P}[\mathbf{X}]\)</span> with <span class="math inline">\(\mu_i = \operatorname{E}_{\mathbf{X} \sim P}[x_i]\)</span> — the expectation of <span class="math inline">\(\mathbf{X}\)</span> is a vector of the expectations of each element <span class="math inline">\(x_i\)</span> of <span class="math inline">\(\mathbf{X}\)</span>.</p>
+</section>
+</section>
+<section id="sec-variance" class="level3">
+<h3 class="anchored" data-anchor-id="sec-variance">Variance</h3>
+<p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much values deviate from their expectation, on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
 <p><span class="math display">\[ \operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2 \]</span></p>
 <p>Because</p>
 <p><span class="math display">\[ \operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2 \]</span></p>
+<section id="sec-var-random-vector" class="level4">
+<h4 class="anchored" data-anchor-id="sec-var-random-vector">Variance of a Random Vector</h4>
+<p>For a random vector <span class="math inline">\(\mathbf{X}\)</span>, we store the pairwise <strong>variances</strong> of elements and <strong><a href="#sec-covariance" class="quarto-xref">covariances</a></strong> in a <strong><a href="#sec-covariance-matrix" class="quarto-xref">covariance matrix</a></strong> (aka. auto-covariance matrix or variance matrix) noted <span class="math inline">\(\mathbf{\Sigma}\)</span> or <span class="math inline">\(K_{\mathbf{x}\mathbf{x}}\)</span> or <span class="math inline">\(\operatorname{Cov}_{\mathbf{x} \sim P}\)</span>, defined as</p>
+<p><span class="math display">\[ \mathbf{\Sigma} = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \]</span> <span class="math display">\[\begin{aligned}
+\mathbf{\Sigma} = K_{\mathbf{X}\mathbf{Y}}
+&amp; = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \\
+&amp; = \operatorname{E}[\mathbf{X}\mathbf{X}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}]^\top
+\end{aligned}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Each entry <span class="math inline">\(\Sigma_{i, j} = \operatorname{Cov}(X_i, X_j)\)</span> — see <a href="#sec-covariance" class="quarto-xref">covariance</a>), and by definition, for diagonal entries <span class="math inline">\(\Sigma_{i, i} = \operatorname{Cov}(X_i, X_i) = \operatorname{Var}(X_i)\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We have the following property when applying a linear transformation represented by the appropriately dimensioned matrix <span class="math inline">\(\mathbf{A}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Cov}(\mathbf{AX}, \mathbf{AX}) &amp; = \operatorname{E}[(\mathbf{AX} - \operatorname{E}[\mathbf{AX}])(\mathbf{AX} - \operatorname{E}[\mathbf{AX}])^\top] \\
+&amp; = \operatorname{E}[\mathbf{AX}(\mathbf{AX})^\top] - \operatorname{E}[\mathbf{AX}]\operatorname{E}[(\mathbf{AX})^\top] \\
+&amp; = \operatorname{E}[\mathbf{AX}\mathbf{X}^\top\mathbf{A}^\top] - \operatorname{E}[\mathbf{AX}]\operatorname{E}[\mathbf{X}^\top\mathbf{A}^\top] \\
+&amp; = \mathbf{A}\operatorname{E}[\mathbf{X}\mathbf{X}^\top]\mathbf{A}^\top - \mathbf{A}\operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}^\top]\mathbf{A}^\top \\
+&amp; = \mathbf{A}(\operatorname{E}[\mathbf{X}\mathbf{X}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}^\top])\mathbf{A}^\top \\
+&amp; = \mathbf{A}\mathbf{\Sigma}\mathbf{A}^\top
+\end{aligned}
+\]</span></p>
+<!---TODO--->
+<p>As a result of the [linearity of expectation]</p>
+</div>
+</div>
 </section>
-<section id="standard-deviation" class="level4">
-<h4 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h4>
-<p>Because the variance is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
+</section>
+<section id="standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h3>
+<p>Because the <a href="#sec-variance" class="quarto-xref">variance</a> is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
 <p><span class="math display">\[ \operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)} \]</span></p>
 </section>
-<section id="covariance" class="level4">
-<h4 class="anchored" data-anchor-id="covariance">Covariance</h4>
-<p>TODO once I understand it fully enough to explain it.</p>
+<section id="sec-covariance" class="level3">
+<h3 class="anchored" data-anchor-id="sec-covariance">Covariance</h3>
+<p><strong>Covariance</strong> is a measure of the joint variability of two <a href="#sec-random-variables" class="quarto-xref">random variables</a>.</p>
+<p><span class="math display">\[ \operatorname{Cov}(X, Y) = \operatorname{E}[(X - \operatorname{E}[X])(Y - \operatorname{E}[Y])] \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\operatorname{Cov}(X, X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{Var}(X)\)</span></p>
+</div>
+</div>
+<section id="sec-covariance-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="sec-covariance-matrix">Covariance Matrix of two Random Vectors</h4>
+<p>For random vectors <span class="math inline">\(\mathbf{X} \in \mathbb{R}^m\)</span>, <span class="math inline">\(\mathbf{Y} \in \mathbb{R}^n\)</span>, the <strong>covariance matrix</strong> is a matrix <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span> defined as</p>
+<p><span class="math display">\[\begin{aligned}
+K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}[\mathbf{X}])(\mathbf{Y} - \operatorname{E}[\mathbf{Y}])^\top] \\
+&amp; = \operatorname{E}[\mathbf{X}\mathbf{Y}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{Y}]^\top
+\end{aligned}\]</span></p>
+<p>We have <span class="math inline">\(\operatorname{Cov}(X_i, Y_j) = K_{X_iY_j} = \operatorname{E}[(X_i - \operatorname{E}[X_i])(Y_j - \operatorname{E}[Y_j])]\)</span> found at index <span class="math inline">\((i, j)\)</span> in <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span></p>
+<p>If <span class="math inline">\(\mathbf{X} = \mathbf{Y}\)</span> this is the <a href="#sec-var-random-vector" class="quarto-xref">auto-covariance matrix or variance matrix</a> of this random vector <span class="math inline">\(\mathbf{X}\)</span></p>
+<p>If <span class="math inline">\(\mathbf{X} \neq \mathbf{Y}\)</span> this is the <strong>cross-covariance matrix</strong> of <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span></p>
+<!--- TODO: correlation, KL-Divergence --->
 </section>
 </section>
-</section>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
 </section>
 <section id="proofs" class="level2">
 <h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
 <p>Later!</p>
-</section>
-<section id="algorithms" class="level2">
-<h2 class="anchored" data-anchor-id="algorithms">Algorithms</h2>
 </section>
 <section id="notation" class="level2">
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
@@ -503,6 +593,7 @@ window.Quarto = {
 <li><span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\mathcal{\Omega}\)</span>: the sample space / universe (the set of all possible outcomes)</li>
 <li><span class="math inline">\(|\mathcal{X}|\)</span>: the cardinality of set <span class="math inline">\(\mathcal{X}\)</span> (its number of events)</li>
 <li><span class="math inline">\(X\)</span>: a random variable</li>
+<li><span class="math inline">\(\mathbf{X}\)</span>: a random vector</li>
 <li><span class="math inline">\(P\)</span>: a probability distribution</li>
 <li><span class="math inline">\(X \sim P\)</span>: the random variable <span class="math inline">\(X\)</span> follows the probability distribution <span class="math inline">\(P\)</span></li>
 <li><span class="math inline">\(a \propto b\)</span>: <span class="math inline">\(a\)</span> is proportional to <span class="math inline">\(b\)</span>, eg. <span class="math inline">\(a = kb\)</span></li>
@@ -515,11 +606,11 @@ window.Quarto = {
 <li><span class="math inline">\(X \perp Y\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent</li>
 <li><span class="math inline">\(X \perp Y \mid Z\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are conditionally independent given <span class="math inline">\(Z\)</span></li>
 <li><span class="math inline">\(\sigma_X\)</span>: standard deviation of random variable <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\(\textrm{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
-<li><span class="math inline">\(\textrm{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(\operatorname{\rho}(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
+<li><span class="math inline">\(\operatorname{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
+<li><span class="math inline">\(\operatorname{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(\operatorname{\rho}(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\operatorname{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
 <li><span class="math inline">\(\operatorname{H}(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\(D_{\textrm{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
+<li><span class="math inline">\(D_{\operatorname{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
 </ul>
 
 

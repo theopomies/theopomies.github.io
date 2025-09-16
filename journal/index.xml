@@ -10,7 +10,32 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Mon, 15 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 16 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Some more Probability / Statistics and a ZeRO3 + HSDP lesson</title>
+  <link>https://theopomies.com/journal/2025-09-16.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="covariance-random-vectors-outer-product" class="level3">
+
+</section>
+<section id="fsdp3-hsdp" class="level3">
+<h3 class="anchored" data-anchor-id="fsdp3-hsdp">FSDP3 + HSDP</h3>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-16.html</guid>
+  <pubDate>Tue, 16 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Reviewing Daniel Han’s guest lecture + Backprop Ninja</title>
   <link>https://theopomies.com/journal/2025-09-15.html</link>
