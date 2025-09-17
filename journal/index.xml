@@ -12,7 +12,7 @@
 <generator>quarto-1.8.24</generator>
 <lastBuildDate>Tue, 16 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Some more Probability / Statistics and a ZeRO3 + HSDP lesson</title>
+  <title>Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S)</title>
   <link>https://theopomies.com/journal/2025-09-16.html</link>
   <description><![CDATA[ 
 
@@ -21,10 +21,14 @@
 
 
 <section id="covariance-random-vectors-outer-product" class="level3">
-
+<h3 class="anchored" data-anchor-id="covariance-random-vectors-outer-product">Covariance + Random Vectors + outer product</h3>
+<p>Today I tried to reaaaally understand what <a href="../notes/probability.html#sec-covariance">covariance</a> is, and I think I did. This led me to covariane matrices, which led me to the expectation and variance for random vectors — basically component-wise expectation and (co)variance. This in turn led me to <a href="../notes/linear-algebra.html#sec-outer-product">outer products</a> for a quick digression.</p>
+<p>That’s it, it’s not much but it’s honest work. I tried to really understand what they were and why the way it’s computed makes sense.</p>
 </section>
-<section id="fsdp3-hsdp" class="level3">
-<h3 class="anchored" data-anchor-id="fsdp3-hsdp">FSDP3 + HSDP</h3>
+<section id="zero3-hsdp" class="level3">
+<h3 class="anchored" data-anchor-id="zero3-hsdp">ZeRO3 + HSDP</h3>
+<p>Then in the evening we had a lesson on ZeRO3 (ZeRO with sharded optimizer states, gradients <strong>and</strong> model params) and HSDP (FSDP with Hybrid Shards). Not gonna lie, it was a bit dense, and it’s only gonna increase in complexity. I’ve been naughty and did not do too much homework on these lessons, tomorrow I’ll make up for it and grind hard on ZeRO{1,2,3}/{F,H}SDP, to fully grok it.</p>
+<p>Juggling regular job, gym, learning/writing math for DL and S2S <em>is</em> intense, but I know that’s the zone where I thrive and reach my potential.</p>
 
 
 </section>

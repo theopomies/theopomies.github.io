@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2025-09-16">
-<meta name="description" content="todo">
+<meta name="description" content="Wrote about expectation/variance for random vectors and covariance matrix, followed by the S2S course on ZeRO3 and HSDP">
 
-<title>Some more Probability / Statistics and a ZeRO3 + HSDP lesson – Theo Pomies</title>
+<title>Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S) – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,8 +75,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta name="twitter:title" content="Some more Probability / Statistics and a ZeRO3 + HSDP lesson – Theo Pomies">
-<meta name="twitter:description" content="todo">
+<meta name="twitter:title" content="Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S) – Theo Pomies">
+<meta name="twitter:description" content="Wrote about expectation/variance for random vectors and covariance matrix, followed by the S2S course on ZeRO3 and HSDP">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -302,7 +302,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#covariance-random-vectors-outer-product" id="toc-covariance-random-vectors-outer-product" class="nav-link active" data-scroll-target="#covariance-random-vectors-outer-product">Covariance + Random Vectors + outer product</a></li>
-  <li><a href="#fsdp3-hsdp" id="toc-fsdp3-hsdp" class="nav-link" data-scroll-target="#fsdp3-hsdp">FSDP3 + HSDP</a></li>
+  <li><a href="#zero3-hsdp" id="toc-zero3-hsdp" class="nav-link" data-scroll-target="#zero3-hsdp">ZeRO3 + HSDP</a></li>
   </ul>
 </nav>
     </div>
@@ -312,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Some more Probability / Statistics and a ZeRO3 + HSDP lesson</h1>
+<h1 class="title">Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">mle</div>
@@ -322,7 +322,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    todo
+    Wrote about expectation/variance for random vectors and covariance matrix, followed by the S2S course on ZeRO3 and HSDP
   </div>
 </div>
 
@@ -347,9 +347,13 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="covariance-random-vectors-outer-product" class="level3">
 <h3 class="anchored" data-anchor-id="covariance-random-vectors-outer-product">Covariance + Random Vectors + outer product</h3>
+<p>Today I tried to reaaaally understand what <a href="../notes/probability.html#sec-covariance">covariance</a> is, and I think I did. This led me to covariane matrices, which led me to the expectation and variance for random vectors — basically component-wise expectation and (co)variance. This in turn led me to <a href="../notes/linear-algebra.html#sec-outer-product">outer products</a> for a quick digression.</p>
+<p>That’s it, it’s not much but it’s honest work. I tried to really understand what they were and why the way it’s computed makes sense.</p>
 </section>
-<section id="fsdp3-hsdp" class="level3">
-<h3 class="anchored" data-anchor-id="fsdp3-hsdp">FSDP3 + HSDP</h3>
+<section id="zero3-hsdp" class="level3">
+<h3 class="anchored" data-anchor-id="zero3-hsdp">ZeRO3 + HSDP</h3>
+<p>Then in the evening we had a lesson on ZeRO3 (ZeRO with sharded optimizer states, gradients <strong>and</strong> model params) and HSDP (FSDP with Hybrid Shards). Not gonna lie, it was a bit dense, and it’s only gonna increase in complexity. I’ve been naughty and did not do too much homework on these lessons, tomorrow I’ll make up for it and grind hard on ZeRO{1,2,3}/{F,H}SDP, to fully grok it.</p>
+<p>Juggling regular job, gym, learning/writing math for DL and S2S <em>is</em> intense, but I know that’s the zone where I thrive and reach my potential.</p>
 
 
 </section>
