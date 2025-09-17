@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete">
+<meta name="dcterms.date" content="2025-09-17">
+<meta name="description" content="Implemented DP and ZeRO1 from scratch in a Modal notebook followed by two guest lectures, DTensor/DeviceMesh and Parallel Processing, as part of S2S">
 
-<title>Notes – Theo Pomies</title>
+<title>Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +33,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../img/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -74,68 +73,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-categories','listing-date-modified','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Theo Pomies" href="index.xml" data-external="1"><meta name="twitter:title" content="Notes – Theo Pomies">
-<meta name="twitter:description" content="All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete">
+<meta name="twitter:title" content="Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing – Theo Pomies">
+<meta name="twitter:description" content="Implemented DP and ZeRO1 from scratch in a Modal notebook followed by two guest lectures, DTensor/DeviceMesh and Parallel Processing, as part of S2S">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -333,7 +274,7 @@ window.Quarto = {
 <span class="menu-text">posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../notes/index.html" aria-current="page"> 
+    <a class="nav-link" href="../notes/index.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item">
@@ -355,8 +296,16 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#implementing-dp-and-zero-1-from-scratch" id="toc-implementing-dp-and-zero-1-from-scratch" class="nav-link active" data-scroll-target="#implementing-dp-and-zero-1-from-scratch">Implementing DP and ZeRO-1 from scratch</a></li>
+  <li><a href="#dtensor-and-devicemesh" id="toc-dtensor-and-devicemesh" class="nav-link" data-scroll-target="#dtensor-and-devicemesh">DTensor and DeviceMesh</a></li>
+  <li><a href="#parallel-processing-on-modal" id="toc-parallel-processing-on-modal" class="nav-link" data-scroll-target="#parallel-processing-on-modal">Parallel Processing on Modal</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -364,12 +313,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Notes</h1>
-</div>
+<h1 class="title">Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">mle</div>
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete
+    Implemented DP and ZeRO1 from scratch in a Modal notebook followed by two guest lectures, DTensor/DeviceMesh and Parallel Processing, as part of S2S
   </div>
 </div>
 
@@ -377,6 +330,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 17, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -386,152 +345,26 @@ window.Quarto = {
 </header>
 
 
-<p><a href="index.xml">rss</a></p>
+<p>Like I said <a href="../journal/2025-09-16.html">yesterday</a>, I had been a bit passive during the course (Scratch To Scale), not missing a class, going through the material, but not implementing it from scratch. This was for multiple reasons, including overload (doing a lot lately) but that’s no excuse. (Reading <a href="https://x.com/justinskycak/status/1967657669713596786" target="_blank">this tweet</a> was a much needed kick in the butt)</p>
+<section id="implementing-dp-and-zero-1-from-scratch" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-dp-and-zero-1-from-scratch">Implementing DP and ZeRO-1 from scratch</h3>
+<p>So I took the class replays, the <a href="https://huggingface.co/spaces/nanotron/ultrascale-playbook" target="_blank">UltraScale Playbook</a>, the paper, blogs etc. and tried to really understand the precise interweaving of computations and communications. At some point it just <strong>clicked</strong>, like really, not the first level like “ok I get it”, but the last “ok, I get it <strong>now</strong>”. But then you write the PyTorch code, and the little details bite you. I had the general picture, now I had to do the grunt work. I made a DP wrapper for a model, handling gradient sync, then I wrote a ZeRO-1 Optimizer wrapper. I did what seemed obvious from what I understood: try to shard the optimizer states. For that I wanted to <code>del useless_state_on_this_rank</code>. Except states are lazy. So I just removed the optimizers pointers to some of the model params, as a result the optimizer simply doesn’t create states for them since it ignores their existence.</p>
+<p>I’ll link a notebook once I’ve done ZeRO-2 and 3</p>
+</section>
+<section id="dtensor-and-devicemesh" class="level3">
+<h3 class="anchored" data-anchor-id="dtensor-and-devicemesh">DTensor and DeviceMesh</h3>
+<p>Mostly 🤯. <a href="https://x.com/wanchao_" target="_blank">Wanchao Liang</a> from Thinking Machines, <strong>author</strong> of PyTorch’s DTensor and TorchTitan, gave us a lecture on DTensor. It was dense, mindblowing, and intense since I follow this cohort from France, so lessons are in the evening.</p>
+<p>Basically, if I had to explain what I understood, DTensors are a syntactic sugar over Distributed Tensors and paralllel operations on them. Using specs, we can explain how we want to distribute a tensor, sharding it, replicating it, or representing it as a partial-tensor, pending a reduction.</p>
+</section>
+<section id="parallel-processing-on-modal" class="level3">
+<h3 class="anchored" data-anchor-id="parallel-processing-on-modal">Parallel Processing on Modal</h3>
+<p>Finally we had a great lecture/demo by <a href="https://x.com/charles_irl" target="_blank">Charles Frye</a> on the history of computation and parallel programming, followed by demonstrations of how to run distributed/parallel programs on Modal.</p>
+<p>I’ve been using Modal to run my notebooks so far, so it’s great to see how we can run scripts/jobs on it too!</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1758137874559" data-listing-date-modified-sort="1758067200000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1779">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/distributed-training.html" class="no-external">Distributed Training</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/distributed-training.html" class="no-external">
-<p>Distributed training study notes and algorithms.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/distributed-training.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 17, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aA==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1758137874559" data-listing-date-modified-sort="1757980800000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1395">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/probability.html" class="no-external">Probability and Information Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/probability.html" class="no-external">
-<p>Small Probability &amp; Information Theory cheatsheet.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/probability.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 16, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aA==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1758137874559" data-listing-date-modified-sort="1757635200000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1065">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/calculus.html" class="no-external">Calculus</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/calculus.html" class="no-external">
-<p>All things calculus, differential or integral.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/calculus.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1758137874559" data-listing-date-modified-sort="1757635200000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1660">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/linear-algebra.html" class="no-external">Linear Algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/linear-algebra.html" class="no-external">
-<p>All things Linear Algebra, matrices, vectors etc.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/linear-algebra.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1758137874560" data-listing-date-modified-sort="1756944000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/pytorch.html" class="no-external">PyTorch</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/pytorch.html" class="no-external">
-<p>torch cheatsheet, common methods or tricks.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/pytorch.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 4, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="dHlwZXNjcmlwdA==" data-listing-date-sort="1739491200000" data-listing-file-modified-sort="1758137874560" data-listing-date-modified-sort="1739577600000" data-listing-reading-time-sort="2" data-listing-word-count-sort="249">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/typescript.html" class="no-external">On Typescript</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dHlwZXNjcmlwdA=='); return false;">typescript</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/typescript.html" class="no-external">
-<p>A few notes on Typescript for my future self.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/typescript.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Feb 15, 2025
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

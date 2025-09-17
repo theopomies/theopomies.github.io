@@ -1,18 +1,12 @@
 [
   {
-    "listing": "/notes/index.html",
-    "items": [
-      "/notes/probability.html",
-      "/notes/calculus.html",
-      "/notes/linear-algebra.html",
-      "/notes/distributed-training.html",
-      "/notes/pytorch.html",
-      "/notes/typescript.html"
-    ]
+    "listing": "/posts/index.html",
+    "items": []
   },
   {
     "listing": "/journal/index.html",
     "items": [
+      "/journal/2025-09-17.html",
       "/journal/2025-09-16.html",
       "/journal/2025-09-15.html",
       "/journal/2025-09-13.html",
@@ -31,7 +25,14 @@
     ]
   },
   {
-    "listing": "/posts/index.html",
-    "items": []
+    "listing": "/notes/index.html",
+    "items": [
+      "/notes/distributed-training.html",
+      "/notes/probability.html",
+      "/notes/calculus.html",
+      "/notes/linear-algebra.html",
+      "/notes/pytorch.html",
+      "/notes/typescript.html"
+    ]
   }
 ]

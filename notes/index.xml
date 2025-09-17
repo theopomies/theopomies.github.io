@@ -12,6 +12,906 @@
 <generator>quarto-1.8.24</generator>
 <lastBuildDate>Tue, 02 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Distributed Training</title>
+  <dc:creator>Theo POMIES</dc:creator>
+  <link>https://theopomies.com/notes/distributed-training.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="functions-methods" class="level2">
+<h2 class="anchored" data-anchor-id="functions-methods">Functions / Methods</h2>
+<section id="basics-point-point" class="level3">
+<h3 class="anchored" data-anchor-id="basics-point-point">Basics (Point-Point)</h3>
+<p><code>send</code> and <code>recv</code> to send or receive a tensor synchronously — from/to a single rank.</p>
+<p>And their async counterparts, <code>isend</code> and <code>irecv</code>.</p>
+<div id="1426f246" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> dist.get_rank()</span>
+<span id="cb1-2">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb1-7">    request <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> dist.isend(tensor, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-8">    ...</span>
+<span id="cb1-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># can do something else, like more sends for example!</span></span>
+<span id="cb1-10">    ...</span>
+<span id="cb1-11">    request.wait() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># now block until it's been fulfilled</span></span>
+<span id="cb1-12"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">elif</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:</span>
+<span id="cb1-13">    dist.recv(tensor, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># recv is synchronous, so it will block until tensor is fully received</span></span>
+<span id="cb1-14"></span>
+<span id="cb1-15"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="92e55525" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])</code></pre>
+</div>
+</div>
+</section>
+<section id="collective-operations" class="level3">
+<h3 class="anchored" data-anchor-id="collective-operations">Collective Operations</h3>
+<p>Collective operations allow communication (data-transfer) from All-&gt;Point, Point-&gt;All and All-&gt;All.</p>
+<section id="point-all" class="level4">
+<h4 class="anchored" data-anchor-id="point-all">Point-&gt;All</h4>
+<section id="broadcast" class="level5">
+<h5 class="anchored" data-anchor-id="broadcast">Broadcast</h5>
+<p>Broadcast (<code>torch.distributed.broadcast(tensor, src, ...)</code>) allows a rank to <em>broadcast</em> a tensor to the whole group.</p>
+<div id="19400713" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb3-4"></span>
+<span id="cb3-5">dist.broadcast(tensor, src<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb3-6"></span>
+<span id="cb3-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div></div>
+</div>
+<div id="4d00d639" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])
+
+========== rank 2 ==========
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])</code></pre>
+</div>
+</div>
+</section>
+<section id="scatter" class="level5">
+<h5 class="anchored" data-anchor-id="scatter">Scatter</h5>
+<p>Scatter (<code>torch.distributed.scatter(tensor, scatter_list, src, ...)</code>) allows us to <em>scatter</em> — split and broadcast different chunks of — a tensor from a rank to the whole group.</p>
+<div id="42c4abc1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb5-2">scatter_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> i, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(world_size)]</span>
+<span id="cb5-3"></span>
+<span id="cb5-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Scatter list: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>scatter_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-6"></span>
+<span id="cb5-7">dist.scatter(tensor, scatter_list, src<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb5-8"></span>
+<span id="cb5-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="ca38a407" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Scatter list: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+Before: tensor([0., 0., 0.])
+After: tensor([0, 1, 2])
+
+========== rank 1 ==========
+Scatter list: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+Before: tensor([0., 0., 0.])
+After: tensor([3, 4, 5])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="all-point" class="level4">
+<h4 class="anchored" data-anchor-id="all-point">All-&gt;Point</h4>
+<section id="reduce" class="level5">
+<h5 class="anchored" data-anchor-id="reduce">Reduce</h5>
+<p>Reduce (<code>torch.distributed.reduce(tensor, dst, op, ...)</code>) performs a reduction operation (N-&gt;1, eg. sum, max, min, prod, …) and the <code>dst</code> rank receives the result.</p>
+<div id="13d732f2" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb7-2"></span>
+<span id="cb7-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb7-4"></span>
+<span id="cb7-5">dist.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">reduce</span>(tensor, dst<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb7-6"></span>
+<span id="cb7-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="c0ae8fca" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([3, 5, 7])
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+After: tensor([3, 4, 5])</code></pre>
+</div>
+</div>
+</section>
+<section id="gather" class="level5">
+<h5 class="anchored" data-anchor-id="gather">Gather</h5>
+<p>Gather (<code>torch.distributed.gather(tensor, gather_list, dst, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.</p>
+<div id="188d02fa" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb9-2">gather_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(world_size)]</span>
+<span id="cb9-3"></span>
+<span id="cb9-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb9-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb9-6"></span>
+<span id="cb9-7">dist.gather(tensor, gather_list, dst<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb9-8"></span>
+<span id="cb9-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="9caa7fa0" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+Before: tensor([3, 4, 5])
+
+========== rank 1 ==========
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+After: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="all-all" class="level4">
+<h4 class="anchored" data-anchor-id="all-all">All-&gt;All</h4>
+<section id="all-reduce" class="level5">
+<h5 class="anchored" data-anchor-id="all-reduce">All-Reduce</h5>
+<p>All-Reduce (<code>torch.distributed.all_reduce(tensor, op, ...)</code>) performs a <em>reduction</em> operation, like <code>reduce</code>, but every rank receives the result — rather than a single one with <code>reduce</code>. Think of it as <code>reduce</code> + <code>broadcast</code> — though it is optimized by techniques like ring-reduce.</p>
+<div id="dde04738" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb11-2"></span>
+<span id="cb11-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb11-4"></span>
+<span id="cb11-5">dist.all_reduce(tensor, op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb11-6"></span>
+<span id="cb11-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="398ca052" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0, 1, 2])
+After: tensor([3, 5, 7])
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+After: tensor([3, 5, 7])</code></pre>
+</div>
+</div>
+</section>
+<section id="all-gather" class="level5">
+<h5 class="anchored" data-anchor-id="all-gather">All-Gather</h5>
+<p>All-Gather (<code>torch.distributed.all_gather(tensor, gather_list, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in <em>every</em> rank. Think of it as running <code>gather</code> on all ranks.</p>
+<div id="c2caf177" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb13-2">gather_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(world_size)]</span>
+<span id="cb13-3"></span>
+<span id="cb13-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb13-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb13-6"></span>
+<span id="cb13-7">dist.all_gather(tensor, gather_list)</span>
+<span id="cb13-8"></span>
+<span id="cb13-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="6d0cba55" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 2 ==========
+Before: tensor([0, 1, 2])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
+
+========== rank 1 ==========
+Before: tensor([3, 4, 5])
+Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
+After: [tensor([0, 1, 2]), tensor([3, 4, 5])]</code></pre>
+</div>
+</div>
+</section>
+<section id="reduce-scatter" class="level5">
+<h5 class="anchored" data-anchor-id="reduce-scatter">Reduce-Scatter</h5>
+<p>Reduce-Scatter (<code>torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)</code>) performs a <em>reduction</em> operation — like other <code>reduce</code> functions — and <em>scatters</em> the resulting tensor. Think of it like <code>reduce</code> + <code>scatter</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It needs <code>len(input_list) == world_size</code> and every tensor in <code>input_list</code> to have the same shape of <code>output_tensor</code>.</p>
+</div>
+</div>
+<div id="b7643278" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">tensor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb15-2">scatter_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [torch.tensor([(rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> (j <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> j <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)]</span>
+<span id="cb15-3"></span>
+<span id="cb15-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb15-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>scatter_list<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb15-6"></span>
+<span id="cb15-7">dist.reduce_scatter(tensor, scatter_list, op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
+<span id="cb15-8"></span>
+<span id="cb15-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+</div>
+<div id="7f6fafe8" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-stdout">
+<pre><code>========== rank 0 ==========
+Before: tensor([0., 0.])
+Before: [tensor([1, 2]), tensor([1, 4]), tensor([1, 8])]
+After: tensor([ 6, 12])
+
+========== rank 1 ==========
+Before: tensor([0., 0.])
+Before: [tensor([2, 4]), tensor([ 4, 16]), tensor([ 8, 64])]
+After: tensor([14, 56])
+
+========== rank 2 ==========
+Before: tensor([0., 0.])
+Before: [tensor([3, 6]), tensor([ 9, 36]), tensor([ 27, 216])]
+After: tensor([ 36, 288])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="other" class="level4">
+<h4 class="anchored" data-anchor-id="other">Other</h4>
+<section id="barrier" class="level5">
+<h5 class="anchored" data-anchor-id="barrier">Barrier</h5>
+<p>Barrier (<code>torch.distributed.barrier(...)</code>) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of <code>.join()</code> for threads or processes)</p>
+</section>
+</section>
+</section>
+</section>
+<section id="algorithms-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="algorithms-techniques">Algorithms / Techniques</h2>
+<section id="data-sharding" class="level3">
+<h3 class="anchored" data-anchor-id="data-sharding">Data Sharding</h3>
+<p>Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the <code>DataLoader</code> with <code>sampler=[instance of DistributedSampler]</code>.</p>
+</section>
+<section id="types-of-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-parallelism">Types of parallelism</h3>
+<p>The goal of parallelism is to maximize throughput and cluster utilization.</p>
+<!--TODO: gradient accumulation somewhere -->
+<!--TODO: activation checkpointing -->
+<ul>
+<li><strong>Data Parallelism</strong> (<strong>DP</strong>): Each rank has a replica of the model — they’re <strong>replicants</strong> — and receives a different mini-batch. After optional [Gradient Accumulation] , gradients are averaged across ranks (<code>all_reduce</code>).</li>
+<li><strong>Pipeline Parallelism</strong> (<strong>PP</strong>): The model is split along the layers. Each rank has 1+ consecutive layers of the model, and we orchestrate sequential forward/backward passes along the ranks. This is <strong>inter-layer</strong> parallelism.</li>
+<li><strong>Tensor Parallelism</strong> (<strong>TP</strong>): The model’s layers themselves are split across ranks. We need more complex orchestration since a single tensor’s values are scattered across different ranks. This is <strong>intra-layer</strong> parallelism.</li>
+<li><strong>Expert Parallelism</strong> (<strong>EP</strong>): A specific type of <strong>TP</strong> where we only split the experts of an <strong>MoE</strong> across ranks.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ZeRO/FSDP is not a parallelism strategy in the strict sense, but a memory-optimization strategy.</strong> It’s a highly memory-efficient form DP.</p>
+<ul>
+<li><strong>Parallelism</strong> = distributing <em>computation</em> to increase throughput.</li>
+<li><strong>Memory optimization</strong> (eg. ZeRO/FSDP) = sharding model states (parameters, gradients, optimizer states) across ranks so the model fits in memory, while each rank still computes the full forward and backward pass.</li>
+</ul>
+<p>Thus:</p>
+<ul>
+<li>With <strong>ZeRO/FSDP</strong>, every rank executes the full network computation but stores only a shard of the model states.</li>
+<li>With <strong>TP/EP/PP</strong>, computation itself is partitioned across ranks, and the combined work reconstructs the whole forward/backward pass.</li>
+</ul>
+<p>These approaches are complementary and usually combined in large-scale training.</p>
+</div>
+</div>
+</section>
+<section id="ddp-distributed-data-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="ddp-distributed-data-parallelism">DDP — Distributed Data Parallelism</h3>
+<p>Distributed Data Parallelism is a type of parallelism where each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients (<code>all_reduce</code> sum + division by world_size or avg operation if available), perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.</p>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> SimpleDataParaellism():</span>
+<span id="cb17-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, model):</span>
+<span id="cb17-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model</span>
+<span id="cb17-4"></span>
+<span id="cb17-5">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.parameters():</span>
+<span id="cb17-6">            rank_0_params <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> param.data.clone()</span>
+<span id="cb17-7">            dist.broadcast(rank_0_params, src<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb17-8">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> torch.equal(param.data, rank_0_params), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Parameters mismatch at initialization"</span></span>
+<span id="cb17-9"></span>
+<span id="cb17-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> sync_grad(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb17-11">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.parameters():</span>
+<span id="cb17-12">            dist.all_reduce(param.grad, op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dist.ReduceOp.AVG) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># only available on NCCL backend</span></span>
+<span id="cb17-13">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># eq.</span></span>
+<span id="cb17-14">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dist.all_reduce(param.grad, op=dist.ReduceOp.SUM)</span></span>
+<span id="cb17-15">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># param.grad /= dist.get_world_size()</span></span></code></pre></div></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The above is a Toy implementation, in reality you do <strong>not</strong> waste time and resources by doing a single <code>all_reduce</code> at the end. This leaves GPUs idle. You interleave computations and communications</p>
+</div>
+</div>
+</section>
+<section id="sec-zero-fsdp" class="level3">
+<h3 class="anchored" data-anchor-id="sec-zero-fsdp">ZeRO / FSDP</h3>
+<p><strong>Ze</strong>ro <strong>R</strong>edudency <strong>O</strong>ptimizer (ZeRO) by DeepSpeed is a modeling strategy involving sharding states and parameters during training as a mean of optimizing peak memory. The core idea is that the optimizer states, gradients and/or model parameters are sharded, retrieved only when necessary for some computation, then anything we do not use anymore is discarded.</p>
+<p><strong>F</strong>ully <strong>S</strong>harded <strong>D</strong>ata <strong>P</strong>arallelism (FSDP) is PyTorch’s implementation of ZeRo.</p>
+<p><a href="https://huggingface.co/papers/1910.02054" target="_blank">Paper</a> <a href="https://www.microsoft.com/en-us/research/blog/zero-deepspeed-new-system-optimizations-enable-training-models-with-over-100-billion-parameters/" target="_blank">Article</a> <a href="https://huggingface.co/papers/2304.11277" target="_blank">FSDP Paper</a> <a href="https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html" target="_blank">FSDP Doc</a></p>
+<section id="zero-1" class="level4">
+<h4 class="anchored" data-anchor-id="zero-1">ZeRO-1</h4>
+<p>ZeRO stage 1 (aka. <img src="https://latex.codecogs.com/png.latex?P_%7Bos%7D">) is the sharding/partitioning of <strong>optimizer states</strong> only. 4x memory reduction, same communication volume as DP (approx.).</p>
+<p><strong>Forward pass</strong></p>
+<ul>
+<li>Same as DP: each rank stores the full model parameters and runs the full forward pass.</li>
+</ul>
+<p><strong>Backward pass</strong></p>
+<ul>
+<li>Same as DP: each rank computes all gradients locally.</li>
+<li>Same as DP: gradients are averaged across ranks via <code>all_reduce</code>.</li>
+</ul>
+<p><strong>Optimizer step</strong></p>
+<ul>
+<li>Each rank holds the full parameters and full averaged gradients.</li>
+<li>Each rank updates <strong>only the parameter shard</strong> corresponding to its shard of the optimizer state.</li>
+<li>Updated parameter shards are then exchanged (<code>all_gather</code>) so all ranks end up with the full updated model.</li>
+</ul>
+</section>
+<section id="zero-2" class="level4">
+<h4 class="anchored" data-anchor-id="zero-2">ZeRO-2</h4>
+<p>ZeRO stage 2 (aka. <img src="https://latex.codecogs.com/png.latex?P_%7Bos%7D%20+%20P_g">) is the sharding/partitioning of optimizer states <strong>and</strong> <strong>gradient</strong>. 8x memory reduction, same communication volume as DP and ZeRO-1.</p>
+</section>
+<section id="zero-3" class="level4">
+<h4 class="anchored" data-anchor-id="zero-3">ZeRO-3</h4>
+<p>ZeRO stage 3 (aka. <img src="https://latex.codecogs.com/png.latex?P_%7Bos%7D%20+%20P_g%20+%20P_p">) is the sharding/partitioning of optimizer states and gradient <strong>and</strong> <strong>model parameters</strong>. Memory reduction scales linearing with our parallelism degree, larger increase in communications — 50% — (need to <code>all_gather</code> and <code>reduce_scatter</code> parameters before and after every computation requiring them).</p>
+<p>(Assuming FP16 params and FP32 optimizer states)</p>
+</section>
+</section>
+</section>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<ul>
+<li><strong>device</strong>: Hardware unit — GPU <code>"cuda:0"</code>, CPU <code>"cpu"</code> etc. <strong>that’s where tensors and computations live</strong></li>
+<li><strong>node</strong>: Phyisical machine/server (or VPS whatever) that has 1+ devices</li>
+<li><strong>process</strong>: Python process/worker, executing a copy of the code/script — often on a single device (GPU)</li>
+<li><strong>rank</strong>: ID of a process — often that maps to a single device. <strong>rank</strong> without qualifiers is <strong>global rank</strong></li>
+<li><strong>world</strong>: Set of all processes part of our current distributed job</li>
+<li><strong>global</strong> rank, world rank: rank across all processes/nodes. <strong>note</strong>: collective operations take the <strong>global rank</strong> (or just <strong>rank</strong>) as input for <code>src</code>/<code>dst</code></li>
+<li><strong>local rank</strong>: rank within a single node (<strong>node</strong> <em>not</em> group). <strong>note</strong>: <code>device</code> takes the <strong>local rank</strong> <code>"cuda:{local_rank}"</code></li>
+<li><strong>group</strong>: subset of processes (1+ nodes) that we’ve grouped for sub-communications. <strong>note</strong>: we still use <strong>global rank</strong> for intra-group communication.</li>
+</ul>
+</section>
+<section id="resources-references-bookmarks" class="level2">
+<h2 class="anchored" data-anchor-id="resources-references-bookmarks">Resources / References / Bookmarks</h2>
+<ul>
+<li><a href="https://huggingface.co/spaces/nanotron/ultrascale-playbook" target="_blank">HF UltraScale Playbook</a></li>
+<li><a href="https://docs.pytorch.org/docs/stable/distributed.html" target="_blank">torch.distributed doc</a>, RTFM</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/notes/distributed-training.html</guid>
+  <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Probability and Information Theory</title>
   <dc:creator>Theo POMIES</dc:creator>
   <link>https://theopomies.com/notes/probability.html</link>
@@ -365,841 +1265,6 @@ Note
  ]]></description>
   <category>math</category>
   <guid>https://theopomies.com/notes/calculus.html</guid>
-  <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Distributed Training</title>
-  <dc:creator>Theo POMIES</dc:creator>
-  <link>https://theopomies.com/notes/distributed-training.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="functions-methods" class="level2">
-<h2 class="anchored" data-anchor-id="functions-methods">Functions / Methods</h2>
-<section id="basics-point-point" class="level3">
-<h3 class="anchored" data-anchor-id="basics-point-point">Basics (Point-Point)</h3>
-<p><code>send</code> and <code>recv</code> to send or receive a tensor synchronously — from/to a single rank.</p>
-<p>And their async counterparts, <code>isend</code> and <code>irecv</code>.</p>
-<div id="fa4fb56c" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> dist.get_rank()</span>
-<span id="cb1-2">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb1-3"></span>
-<span id="cb1-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>:</span>
-<span id="cb1-7">    request <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> dist.isend(tensor, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb1-8">    ...</span>
-<span id="cb1-9">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># can do something else, like more sends for example!</span></span>
-<span id="cb1-10">    ...</span>
-<span id="cb1-11">    request.wait() <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># now block until it's been fulfilled</span></span>
-<span id="cb1-12"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:</span>
-<span id="cb1-13">    dist.recv(tensor, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># recv is synchronous, so it will block until tensor is fully received</span></span>
-<span id="cb1-14"></span>
-<span id="cb1-15"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="9edebfc7" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0, 1, 2])
-After: tensor([0, 1, 2])
-
-========== rank 1 ==========
-Before: tensor([0., 0., 0.])
-After: tensor([0, 1, 2])</code></pre>
-</div>
-</div>
-</section>
-<section id="collective-operations" class="level3">
-<h3 class="anchored" data-anchor-id="collective-operations">Collective Operations</h3>
-<p>Collective operations allow communication (data-transfer) from All-&gt;Point, Point-&gt;All and All-&gt;All.</p>
-<section id="point-all" class="level4">
-<h4 class="anchored" data-anchor-id="point-all">Point-&gt;All</h4>
-<section id="broadcast" class="level5">
-<h5 class="anchored" data-anchor-id="broadcast">Broadcast</h5>
-<p>Broadcast (<code>torch.distributed.broadcast(tensor, src, ...)</code>) allows a rank to <em>broadcast</em> a tensor to the whole group.</p>
-<div id="94c7a994" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb3-4"></span>
-<span id="cb3-5">dist.broadcast(tensor, src<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb3-6"></span>
-<span id="cb3-7"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">)</span></span></code></pre></div></div>
-</div>
-<div id="4e07dc62" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0, 1, 2])
-After: tensor([0, 1, 2])
-
-========== rank 1 ==========
-Before: tensor([0., 0., 0.])
-After: tensor([0, 1, 2])
-
-========== rank 2 ==========
-Before: tensor([0., 0., 0.])
-After: tensor([0, 1, 2])</code></pre>
-</div>
-</div>
-</section>
-<section id="scatter" class="level5">
-<h5 class="anchored" data-anchor-id="scatter">Scatter</h5>
-<p>Scatter (<code>torch.distributed.scatter(tensor, scatter_list, src, ...)</code>) allows us to <em>scatter</em> — split and broadcast different chunks of — a tensor from a rank to the whole group.</p>
-<div id="718d0643" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb5-2">scatter_list <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> i, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> i <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(world_size)]</span>
-<span id="cb5-3"></span>
-<span id="cb5-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Scatter list: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>scatter_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb5-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb5-6"></span>
-<span id="cb5-7">dist.scatter(tensor, scatter_list, src<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb5-8"></span>
-<span id="cb5-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="daf72629" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Scatter list: [tensor([0, 1, 2]), tensor([3, 4, 5])]
-Before: tensor([0., 0., 0.])
-After: tensor([0, 1, 2])
-
-========== rank 1 ==========
-Scatter list: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
-Before: tensor([0., 0., 0.])
-After: tensor([3, 4, 5])</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="all-point" class="level4">
-<h4 class="anchored" data-anchor-id="all-point">All-&gt;Point</h4>
-<section id="reduce" class="level5">
-<h5 class="anchored" data-anchor-id="reduce">Reduce</h5>
-<p>Reduce (<code>torch.distributed.reduce(tensor, dst, op, ...)</code>) performs a reduction operation (N-&gt;1, eg. sum, max, min, prod, …) and the <code>dst</code> rank receives the result.</p>
-<div id="06bd1b74" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span></span>
-<span id="cb7-2"></span>
-<span id="cb7-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb7-4"></span>
-<span id="cb7-5">dist.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">reduce</span>(tensor, dst<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, op<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
-<span id="cb7-6"></span>
-<span id="cb7-7"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="1d19eabb" class="cell" data-execution_count="9">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0, 1, 2])
-After: tensor([3, 5, 7])
-
-========== rank 1 ==========
-Before: tensor([3, 4, 5])
-After: tensor([3, 4, 5])</code></pre>
-</div>
-</div>
-</section>
-<section id="gather" class="level5">
-<h5 class="anchored" data-anchor-id="gather">Gather</h5>
-<p>Gather (<code>torch.distributed.gather(tensor, gather_list, dst, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in a single rank.</p>
-<div id="c62a6501" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span></span>
-<span id="cb9-2">gather_list <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(world_size)]</span>
-<span id="cb9-3"></span>
-<span id="cb9-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb9-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb9-6"></span>
-<span id="cb9-7">dist.gather(tensor, gather_list, dst<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb9-8"></span>
-<span id="cb9-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="73308654" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0, 1, 2])
-Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
-Before: tensor([3, 4, 5])
-
-========== rank 1 ==========
-Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
-After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
-After: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="all-all" class="level4">
-<h4 class="anchored" data-anchor-id="all-all">All-&gt;All</h4>
-<section id="all-reduce" class="level5">
-<h5 class="anchored" data-anchor-id="all-reduce">All-Reduce</h5>
-<p>All-Reduce (<code>torch.distributed.all_reduce(tensor, op, ...)</code>) performs a <em>reduction</em> operation, like <code>reduce</code>, but every rank receives the result — rather than a single one with <code>reduce</code>. Think of it as <code>reduce</code> + <code>broadcast</code> — though it is optimized by techniques like ring-reduce.</p>
-<div id="198166eb" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span></span>
-<span id="cb11-2"></span>
-<span id="cb11-3"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb11-4"></span>
-<span id="cb11-5">dist.all_reduce(tensor, op<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
-<span id="cb11-6"></span>
-<span id="cb11-7"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="f5760595" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0, 1, 2])
-After: tensor([3, 5, 7])
-
-========== rank 1 ==========
-Before: tensor([3, 4, 5])
-After: tensor([3, 5, 7])</code></pre>
-</div>
-</div>
-</section>
-<section id="all-gather" class="level5">
-<h5 class="anchored" data-anchor-id="all-gather">All-Gather</h5>
-<p>All-Gather (<code>torch.distributed.all_gather(tensor, gather_list, ...)</code>) <em>gathers</em> — pulls — a tensor, of the same size, from every rank and stores them in a list in <em>every</em> rank. Think of it as running <code>gather</code> on all ranks.</p>
-<div id="4f7714e3" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.arange(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span></span>
-<span id="cb13-2">gather_list <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(world_size)]</span>
-<span id="cb13-3"></span>
-<span id="cb13-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb13-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb13-6"></span>
-<span id="cb13-7">dist.all_gather(tensor, gather_list)</span>
-<span id="cb13-8"></span>
-<span id="cb13-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gather_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="5b7e1dd1" class="cell" data-execution_count="15">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 2 ==========
-Before: tensor([0, 1, 2])
-Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
-After: [tensor([0, 1, 2]), tensor([3, 4, 5])]
-
-========== rank 1 ==========
-Before: tensor([3, 4, 5])
-Before: [tensor([0., 0., 0.]), tensor([0., 0., 0.])]
-After: [tensor([0, 1, 2]), tensor([3, 4, 5])]</code></pre>
-</div>
-</div>
-</section>
-<section id="reduce-scatter" class="level5">
-<h5 class="anchored" data-anchor-id="reduce-scatter">Reduce-Scatter</h5>
-<p>Reduce-Scatter (<code>torch.distributed.reduce_scatter(output_tensor, input_list, op, ...)</code>) performs a <em>reduction</em> operation — like other <code>reduce</code> functions — and <em>scatters</em> the resulting tensor. Think of it like <code>reduce</code> + <code>scatter</code>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It needs <code>len(input_list) == world_size</code> and every tensor in <code>input_list</code> to have the same shape of <code>output_tensor</code>.</p>
-</div>
-</div>
-<div id="ffe23fec" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">tensor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.zeros(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb15-2">scatter_list <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [torch.tensor([(rank <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> i <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)]) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span> (j <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> j <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)]</span>
-<span id="cb15-3"></span>
-<span id="cb15-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb15-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Before: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>scatter_list<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb15-6"></span>
-<span id="cb15-7">dist.reduce_scatter(tensor, scatter_list, op<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
-<span id="cb15-8"></span>
-<span id="cb15-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"After: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tensor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div></div>
-</div>
-<div id="953a0900" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-stdout">
-<pre><code>========== rank 0 ==========
-Before: tensor([0., 0.])
-Before: [tensor([1, 2]), tensor([1, 4]), tensor([1, 8])]
-After: tensor([ 6, 12])
-
-========== rank 1 ==========
-Before: tensor([0., 0.])
-Before: [tensor([2, 4]), tensor([ 4, 16]), tensor([ 8, 64])]
-After: tensor([14, 56])
-
-========== rank 2 ==========
-Before: tensor([0., 0.])
-Before: [tensor([3, 6]), tensor([ 9, 36]), tensor([ 27, 216])]
-After: tensor([ 36, 288])</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="other" class="level4">
-<h4 class="anchored" data-anchor-id="other">Other</h4>
-<section id="barrier" class="level5">
-<h5 class="anchored" data-anchor-id="barrier">Barrier</h5>
-<p>Barrier (<code>torch.distributed.barrier(...)</code>) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of <code>.join()</code> for threads or processes)</p>
-</section>
-</section>
-</section>
-</section>
-<section id="algorithms-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="algorithms-techniques">Algorithms / Techniques</h2>
-<section id="types-of-parallelism" class="level3">
-<h3 class="anchored" data-anchor-id="types-of-parallelism">Types of parallelism</h3>
-<p>The goal of parallelism is to maximize throughput / cluster utilization.</p>
-<ul>
-<li><strong>Data Parallelism</strong> (<strong>DP</strong>): Each rank has a replica of the model — they’re <strong>replicants</strong> — and receives a different mini-batch. After [Gradient Accumulation] (optional), average the gradients (<code>all_reduce</code>).</li>
-<li><strong>Pipeline Parallelism</strong> (<strong>PP</strong>): The model is split along the layers. Each rank has 1+ layer of the model, and we orchestrate sequential forward/backward passes along the ranks. This is <strong>inter-layer</strong> parallelism.</li>
-<li><strong>Tensor Parallelism</strong> (<strong>TP</strong>): The model’s layers are split across ranks. We need more complex orchestration since a single tensor’s values are on different ranks. This is <strong>intra-layer</strong> parallelism.</li>
-<li><strong>Expert Parallelism</strong> (<strong>EP</strong>): A specific type of <strong>TP</strong> where we only split the experts of an <strong>MoE</strong> across ranks.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>ZeRO/FSDP is not a <strong>parallelism</strong> strategy, but a <strong>modelling</strong> strategy.</p>
-<p>Parallelism = optimizing throughput Modelling <img src="https://latex.codecogs.com/png.latex?%5Capprox"> optimizing memory</p>
-<p>Both can (and should) be combined.</p>
-</div>
-</div>
-</section>
-<section id="ddp-distributed-data-parallelism" class="level3">
-<h3 class="anchored" data-anchor-id="ddp-distributed-data-parallelism">DDP — Distributed Data Parallelism</h3>
-<p>Distributed Data Parallelism is a type of parallelism where each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients (<code>all_reduce</code> sum + division by world_size), perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> SimpleDataParaellism():</span>
-<span id="cb17-2">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, model):</span>
-<span id="cb17-3">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model</span>
-<span id="cb17-4"></span>
-<span id="cb17-5">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> model.parameters():</span>
-<span id="cb17-6">            rank_0_params <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> param.data.clone()</span>
-<span id="cb17-7">            dist.broadcast(rank_0_params, src<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-8">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">assert</span> torch.equal(param.data, rank_0_params), <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Parameters mismatch at initialization"</span></span>
-<span id="cb17-9"></span>
-<span id="cb17-10">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> sync_grad(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb17-11">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> param <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> model.parameters():</span>
-<span id="cb17-12">            dist.all_reduce(param.grad, op<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dist.ReduceOp.SUM)</span>
-<span id="cb17-13">            param.grad <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span> dist.get_world_size()</span></code></pre></div></div>
-</section>
-<section id="data-sharding" class="level3">
-<h3 class="anchored" data-anchor-id="data-sharding">Data Sharding</h3>
-<p>Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the <code>DataLoader</code> with <code>sampler=[instance of DistributedSampler]</code>.</p>
-</section>
-<section id="zero" class="level3">
-<h3 class="anchored" data-anchor-id="zero">ZeRO</h3>
-<p><strong>Ze</strong>ro <strong>R</strong>edudency <strong>O</strong>ptimizer is a modeling strategy involving sharding states and parameters during training as a mean of optimizing peak memory. The core idea is that the states and/or parameters are sharded, retrieved only when necessary for some computation, updated information is shared, then anything we do not use anymore is discarded.</p>
-</section>
-</section>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
-</section>
-<section id="terminology" class="level2">
-<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
-<ul>
-<li><strong>device</strong>: Hardware unit — GPU <code>"cuda:0"</code>, CPU <code>"cpu"</code> etc. <strong>that’s where tensors and computations live</strong></li>
-<li><strong>node</strong>: Phyisical machine/server (or VPS whatever) that has 1+ devices</li>
-<li><strong>process</strong>: Python process/worker, executing a copy of the code/script — often on a single device (GPU)</li>
-<li><strong>rank</strong>: ID of a process — often that maps to a single device. <strong>rank</strong> without qualifiers is <strong>global rank</strong></li>
-<li><strong>world</strong>: Set of all processes part of our current distributed job</li>
-<li><strong>global</strong> rank, world rank: rank across all processes/nodes. <strong>note</strong>: collective operations take the <strong>global rank</strong> (or just <strong>rank</strong>) as input for <code>src</code>/<code>dst</code></li>
-<li><strong>local rank</strong>: rank within a single node (<strong>node</strong> <em>not</em> group). <strong>note</strong>: <code>device</code> takes the <strong>local rank</strong> <code>"cuda:{local_rank}"</code></li>
-<li><strong>group</strong>: subset of processes (1+ nodes) that we’ve grouped for sub-communications. <strong>note</strong>: we still use <strong>global rank</strong> for intra-group communication.</li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>mle</category>
-  <category>python</category>
-  <guid>https://theopomies.com/notes/distributed-training.html</guid>
   <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 <item>

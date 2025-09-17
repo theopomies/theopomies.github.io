@@ -10,7 +10,41 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Tue, 16 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 17 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing</title>
+  <link>https://theopomies.com/journal/2025-09-17.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Like I said <a href="../journal/2025-09-16.html">yesterday</a>, I had been a bit passive during the course (Scratch To Scale), not missing a class, going through the material, but not implementing it from scratch. This was for multiple reasons, including overload (doing a lot lately) but that’s no excuse. (Reading <a href="https://x.com/justinskycak/status/1967657669713596786" target="_blank">this tweet</a> was a much needed kick in the butt)</p>
+<section id="implementing-dp-and-zero-1-from-scratch" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-dp-and-zero-1-from-scratch">Implementing DP and ZeRO-1 from scratch</h3>
+<p>So I took the class replays, the <a href="https://huggingface.co/spaces/nanotron/ultrascale-playbook" target="_blank">UltraScale Playbook</a>, the paper, blogs etc. and tried to really understand the precise interweaving of computations and communications. At some point it just <strong>clicked</strong>, like really, not the first level like “ok I get it”, but the last “ok, I get it <strong>now</strong>”. But then you write the PyTorch code, and the little details bite you. I had the general picture, now I had to do the grunt work. I made a DP wrapper for a model, handling gradient sync, then I wrote a ZeRO-1 Optimizer wrapper. I did what seemed obvious from what I understood: try to shard the optimizer states. For that I wanted to <code>del useless_state_on_this_rank</code>. Except states are lazy. So I just removed the optimizers pointers to some of the model params, as a result the optimizer simply doesn’t create states for them since it ignores their existence.</p>
+<p>I’ll link a notebook once I’ve done ZeRO-2 and 3</p>
+</section>
+<section id="dtensor-and-devicemesh" class="level3">
+<h3 class="anchored" data-anchor-id="dtensor-and-devicemesh">DTensor and DeviceMesh</h3>
+<p>Mostly 🤯. <a href="https://x.com/wanchao_" target="_blank">Wanchao Liang</a> from Thinking Machines, <strong>author</strong> of PyTorch’s DTensor and TorchTitan, gave us a lecture on DTensor. It was dense, mindblowing, and intense since I follow this cohort from France, so lessons are in the evening.</p>
+<p>Basically, if I had to explain what I understood, DTensors are a syntactic sugar over Distributed Tensors and paralllel operations on them. Using specs, we can explain how we want to distribute a tensor, sharding it, replicating it, or representing it as a partial-tensor, pending a reduction.</p>
+</section>
+<section id="parallel-processing-on-modal" class="level3">
+<h3 class="anchored" data-anchor-id="parallel-processing-on-modal">Parallel Processing on Modal</h3>
+<p>Finally we had a great lecture/demo by <a href="https://x.com/charles_irl" target="_blank">Charles Frye</a> on the history of computation and parallel programming, followed by demonstrations of how to run distributed/parallel programs on Modal.</p>
+<p>I’ve been using Modal to run my notebooks so far, so it’s great to see how we can run scripts/jobs on it too!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-17.html</guid>
+  <pubDate>Wed, 17 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S)</title>
   <link>https://theopomies.com/journal/2025-09-16.html</link>
