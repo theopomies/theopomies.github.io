@@ -1,0 +1,26 @@
+---
+title: Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing
+description: Implemented DP and ZeRO1 from scratch in a Modal notebook followed by two guest lectures, DTensor/DeviceMesh and Parallel Processing, as part of S2S
+categories: [mle, python]
+date: 2025-09-17
+---
+
+Like I said [yesterday](/journal/2025-09-16.qmd), I had been a bit passive during the course (Scratch To Scale), not missing a class, going through the material, but not implementing it from scratch. This was for multiple reasons, including overload (doing a lot lately) but that's no excuse. (Reading [this tweet](https://x.com/justinskycak/status/1967657669713596786){target=_blank} was a much needed kick in the butt)
+
+### Implementing DP and ZeRO-1 from scratch
+
+So I took the class replays, the [UltraScale Playbook](https://huggingface.co/spaces/nanotron/ultrascale-playbook){target=_blank}, the paper, blogs etc. and tried to really understand the precise interweaving of computations and communications. At some point it just **clicked**, like really, not the first level like "ok I get it", but the last "ok, I get it **now**". But then you write the PyTorch code, and the little details bite you. I had the general picture, now I had to do the grunt work. I made a DP wrapper for a model, handling gradient sync, then I wrote a ZeRO-1 Optimizer wrapper. I did what seemed obvious from what I understood: try to shard the optimizer states. For that I wanted to `del useless_state_on_this_rank`. Except states are lazy. So I just removed the optimizers pointers to some of the model params, as a result the optimizer simply doesn't create states for them since it ignores their existence.
+
+I'll link a notebook once I've done ZeRO-2 and 3
+
+### DTensor and DeviceMesh
+
+Mostly 🤯. [Wanchao Liang](https://x.com/wanchao_){target=_blank} from Thinking Machines, **author** of PyTorch's DTensor and TorchTitan, gave us a lecture on DTensor. It was dense, mindblowing, and intense since I follow this cohort from France, so lessons are in the evening.
+
+Basically, if I had to explain what I understood, DTensors are a syntactic sugar over Distributed Tensors and paralllel operations on them. Using specs, we can explain how we want to distribute a tensor, sharding it, replicating it, or representing it as a partial-tensor, pending a reduction.
+
+### Parallel Processing on Modal
+
+Finally we had a great lecture/demo by [Charles Frye](https://x.com/charles_irl){target=_blank} on the history of computation and parallel programming, followed by demonstrations of how to run distributed/parallel programs on Modal.
+
+I've been using Modal to run my notebooks so far, so it's great to see how we can run scripts/jobs on it too!

@@ -2,7 +2,7 @@
 title: Distributed Training
 author: Theo POMIES
 date: 2025-09-02
-date-modified: 2025-09-10
+date-modified: 2025-09-17
 description: Distributed training study notes and algorithms.
 categories: [mle, python]
 ---
@@ -298,27 +298,39 @@ print(f"After: {tensors[2]}")
 Barrier (`torch.distributed.barrier(...)`) synchronizes all ranks (processes), waiting for all of them to reach the barrier. (think of `.join()` for threads or processes)
 
 ## Algorithms / Techniques
+
+### Data Sharding
+
+Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the `DataLoader` with `sampler=[instance of DistributedSampler]`.
+
 ### Types of parallelism
 
-The goal of parallelism is to maximize throughput / cluster utilization.
+The goal of parallelism is to maximize throughput and cluster utilization.
 
-* **Data Parallelism** (**DP**): Each rank has a replica of the model — they're **replicants** — and receives a different mini-batch. After [Gradient Accumulation] (optional), average the gradients (`all_reduce`).
-* **Pipeline Parallelism** (**PP**): The model is split along the layers. Each rank has 1+ layer of the model, and we orchestrate sequential forward/backward passes along the ranks. This is **inter-layer** parallelism.
-* **Tensor Parallelism** (**TP**): The model's layers are split across ranks. We need more complex orchestration since a single tensor's values are on different ranks. This is **intra-layer** parallelism.
+<!--TODO: gradient accumulation somewhere -->
+<!--TODO: activation checkpointing -->
+* **Data Parallelism** (**DP**): Each rank has a replica of the model — they're **replicants** — and receives a different mini-batch. After optional [Gradient Accumulation] , gradients are averaged across ranks (`all_reduce`).
+* **Pipeline Parallelism** (**PP**): The model is split along the layers. Each rank has 1+ consecutive layers of the model, and we orchestrate sequential forward/backward passes along the ranks. This is **inter-layer** parallelism.
+* **Tensor Parallelism** (**TP**): The model's layers themselves are split across ranks. We need more complex orchestration since a single tensor's values are scattered across different ranks. This is **intra-layer** parallelism.
 * **Expert Parallelism** (**EP**): A specific type of **TP** where we only split the experts of an **MoE** across ranks.
 
 ::: {.callout-important}
-ZeRO/FSDP is not a **parallelism** strategy, but a **modelling** strategy.
+**ZeRO/FSDP is not a parallelism strategy in the strict sense, but a memory-optimization strategy.** It's a highly memory-efficient form DP.
 
-Parallelism = optimizing throughput
-Modelling $\approx$ optimizing memory
+* **Parallelism** = distributing *computation* to increase throughput.
+* **Memory optimization** (eg. ZeRO/FSDP) = sharding model states (parameters, gradients, optimizer states) across ranks so the model fits in memory, while each rank still computes the full forward and backward pass.
 
-Both can (and should) be combined.
+Thus:
+
+* With **ZeRO/FSDP**, every rank executes the full network computation but stores only a shard of the model states.
+* With **TP/EP/PP**, computation itself is partitioned across ranks, and the combined work reconstructs the whole forward/backward pass.
+
+These approaches are complementary and usually combined in large-scale training.
 :::
 
 ### DDP — Distributed Data Parallelism
 
-Distributed Data Parallelism is a type of parallelism where each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients (`all_reduce` sum + division by world_size), perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
+Distributed Data Parallelism is a type of parallelism where each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients (`all_reduce` sum + division by world_size or avg operation if available), perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
 
 :::{.callout-note}
 The difference between DDP and DP is that DDP uses processes to avoid the GIL and DP uses threads. Do not use DP, only DDP.
@@ -336,19 +348,52 @@ class SimpleDataParaellism():
 
     def sync_grad(self):
         for param in model.parameters():
-            dist.all_reduce(param.grad, op=dist.ReduceOp.SUM)
-            param.grad /= dist.get_world_size()
+            dist.all_reduce(param.grad, op=dist.ReduceOp.AVG) # only available on NCCL backend
+            # eq.
+            # dist.all_reduce(param.grad, op=dist.ReduceOp.SUM)
+            # param.grad /= dist.get_world_size()
 ```
 
-### Data Sharding
+:::{.callout-note}
+The above is a Toy implementation, in reality you do **not** waste time and resources by doing a single `all_reduce` at the end. This leaves GPUs idle. You interleave computations and communications
+:::
 
-Data Sharding is the process of sharding — splitting — the dataset / dataloader so that each rank only pulls their own unique mini-batches of the training data. This avoids duplicates and is more commucation / memory efficient that duplicating the same full dataset on every rank. To do this with torch, setup the `DataLoader` with `sampler=[instance of DistributedSampler]`.
+### ZeRO / FSDP {#sec-zero-fsdp}
 
-### ZeRO
+**Ze**ro **R**edudency **O**ptimizer (ZeRO) by DeepSpeed is a modeling strategy involving sharding states and parameters during training as a mean of optimizing peak memory. The core idea is that the optimizer states, gradients and/or model parameters are sharded, retrieved only when necessary for some computation, then anything we do not use anymore is discarded.
 
-**Ze**ro **R**edudency **O**ptimizer is a modeling strategy involving sharding states and parameters during training as a mean of optimizing peak memory. The core idea is that the states and/or parameters are sharded, retrieved only when necessary for some computation, updated information is shared, then anything we do not use anymore is discarded.
+**F**ully **S**harded **D**ata **P**arallelism (FSDP) is PyTorch's implementation of ZeRo.
 
-## Notes
+[Paper](https://huggingface.co/papers/1910.02054){target=_blank} [Article](https://www.microsoft.com/en-us/research/blog/zero-deepspeed-new-system-optimizations-enable-training-models-with-over-100-billion-parameters/){target=_blank} [FSDP Paper](https://huggingface.co/papers/2304.11277){target=_blank} [FSDP Doc](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html){target=_blank}
+
+#### ZeRO-1
+
+ZeRO stage 1 (aka. $P_{os}$) is the sharding/partitioning of **optimizer states** only. 4x memory reduction, same communication volume as DP (approx.).
+
+**Forward pass**
+
+* Same as DP: each rank stores the full model parameters and runs the full forward pass.
+
+**Backward pass**
+
+* Same as DP: each rank computes all gradients locally.
+* Same as DP: gradients are averaged across ranks via `all_reduce`.
+
+**Optimizer step**
+
+* Each rank holds the full parameters and full averaged gradients.
+* Each rank updates **only the parameter shard** corresponding to its shard of the optimizer state.
+* Updated parameter shards are then exchanged (`all_gather`) so all ranks end up with the full updated model.
+
+#### ZeRO-2
+
+ZeRO stage 2 (aka. $P_{os} + P_g$) is the sharding/partitioning of optimizer states **and** **gradient**. 8x memory reduction, same communication volume as DP and ZeRO-1.
+
+#### ZeRO-3
+
+ZeRO stage 3 (aka. $P_{os} + P_g + P_p$) is the sharding/partitioning of optimizer states and gradient **and** **model parameters**. Memory reduction scales linearing with our parallelism degree, larger increase in communications — 50% — (need to `all_gather` and `reduce_scatter` parameters before and after every computation requiring them).
+
+(Assuming FP16 params and FP32 optimizer states)
 
 ## Terminology
 
@@ -360,3 +405,7 @@ Data Sharding is the process of sharding — splitting — the dataset / dataloa
 * **global** rank, world rank: rank across all processes/nodes. **note**: collective operations take the **global rank** (or just **rank**) as input for `src`/`dst`
 * **local rank**: rank within a single node (**node** _not_ group). **note**: `device` takes the **local rank** `"cuda:{local_rank}"`
 * **group**: subset of processes (1+ nodes) that we've grouped for sub-communications. **note**: we still use **global rank** for intra-group communication.
+
+## Resources / References / Bookmarks
+* [HF UltraScale Playbook](https://huggingface.co/spaces/nanotron/ultrascale-playbook){target=_blank}
+* [torch.distributed doc](https://docs.pytorch.org/docs/stable/distributed.html){target=_blank}, RTFM
