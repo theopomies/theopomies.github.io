@@ -1,10 +1,19 @@
 ---
-title: Some more Probability / Statistics and a ZeRO3 + HSDP lesson
-description: todo
+title: Some more probability & statistics and a ZeRO3 + HSDP lesson (S2S)
+description: Wrote about expectation/variance for random vectors and covariance matrix, followed by the S2S course on ZeRO3 and HSDP
 categories: [math, mle, python]
 date: 2025-09-16
 ---
 
 ### Covariance + Random Vectors + outer product
 
-### FSDP3 + HSDP
+Today I tried to reaaaally understand what [covariance](/notes/probability.qmd#sec-covariance) is, and I think I did. This led me to covariane matrices, which led me to the expectation and variance for random vectors — basically component-wise expectation and (co)variance. This in turn led me to [outer products](/notes/linear-algebra.qmd#sec-outer-product) for a quick digression.
+
+That's it, it's not much but it's honest work. I tried to really understand what they were and why the way it's computed makes sense.
+
+### ZeRO3 + HSDP
+
+Then in the evening we had a lesson on ZeRO3 (ZeRO with sharded optimizer states, gradients **and** model params) and HSDP (FSDP with Hybrid Shards).
+Not gonna lie, it was a bit dense, and it's only gonna increase in complexity. I've been naughty and did not do too much homework on these lessons, tomorrow I'll make up for it and grind hard on ZeRO{1,2,3}/{F,H}SDP, to fully grok it.
+
+Juggling regular job, gym, learning/writing math for DL and S2S _is_ intense, but I know that's the zone where I thrive and reach my potential.
