@@ -1,0 +1,14 @@
+---
+title: ZeRO-2 + Arctic Sequence Length Training presentation by Tunji Ruwase from Snowflake
+description: Writing the backbone for ZeRO-2 and an isntructive call with Tunji Ruwase from Snowflake introducing Arctic Sequence Length Training as part of S2S
+categories: [mle, python]
+date: 2025-09-18
+---
+
+### ZeRo-1 -> ZeRO-2
+
+Well, today I realized my toy implementation of ZeRO-1 was not very scalable, I flattened the optimizer states and split them so that each rank owned complete state tensors. This is no-bueno because very unbalanced, for 2 GPUs, rank 0 owned 99% of the total size, for 3 optimizer state tensors, and rank 1 owned 1% of the total size, for 3 state tensors too! Furthermore, it is a poor abstraction for my implementation of ZeRO-2. Now I'm flattening the weights, and sharding the tensors themselves.
+
+### ASLT by Tunji Ruwase
+
+Once again, as part of Scratch To Scale, we've had another wonderful lecture by yet another industry expert, [Tunji Ruwase](https://www.snowflake.com/en/blog/authors/olatunji--tunji--ruwase/){target=_blank} from [Snowflake](https://www.snowflake.com/){target=_blank}, previously from [Microsoft DeepSpeed](https://www.deepspeed.ai){target=_blank}! This technique allows the tiling of sequences to expand training to much longer sequences that would otherwise OOM. I'm not gonna lie, the level of these lectures is slightly out of my current knowledge frontier, but it's great because it forces me to _pull_ knowledge on-demande and learn very fast.

@@ -368,7 +368,7 @@ The above is a Toy implementation, in reality you do **not** waste time and reso
 
 #### ZeRO-1
 
-ZeRO stage 1 (aka. $P_{os}$) is the sharding/partitioning of **optimizer states** only. 4x memory reduction, same communication volume as DP (approx.).
+ZeRO stage 1 (aka. $P_{os}$) is the sharding/partitioning of **optimizer states** only. 4x memory reduction, communication volume of the same order as DP (gradient all-reduce dominates).
 
 **Forward pass**
 
@@ -379,6 +379,10 @@ ZeRO stage 1 (aka. $P_{os}$) is the sharding/partitioning of **optimizer states*
 * Same as DP: each rank computes all gradients locally.
 * Same as DP: gradients are averaged across ranks via `all_reduce`.
 
+:::{.callout-note}
+Can be a `reduce_scatter` too
+:::
+
 **Optimizer step**
 
 * Each rank holds the full parameters and full averaged gradients.
@@ -387,13 +391,48 @@ ZeRO stage 1 (aka. $P_{os}$) is the sharding/partitioning of **optimizer states*
 
 #### ZeRO-2
 
-ZeRO stage 2 (aka. $P_{os} + P_g$) is the sharding/partitioning of optimizer states **and** **gradient**. 8x memory reduction, same communication volume as DP and ZeRO-1.
+ZeRO stage 2 (aka. $P_{os} + P_g$) is the sharding/partitioning of optimizer states **and** **gradient**. 8x memory reduction, communication volume of the same order as DP and ZeRO-1.
+
+**Forward pass**
+
+* Same as DP: each rank stores the full model parameters and runs the full forward pass.
+
+**Backward pass**
+
+* Each rank computes gradients locally, so gradients are temporarily materialized on every rank. This means ZeRO-2 has the same _peak_ memory as ZeRO-1, but 8x lower _persistent_ memory.
+* Gradients are averaged and sharded across ranks (`reduce_scatter`) — think averaging + sending to each rank the shard of the gradients that corresponds **exactly** to its optimizer state
+
+**Optimizer step**
+
+* Each rank holds the full parameters.
+* Each rank holds **only the averaged gradients** corresponding to its shard of the optimizer state.
+* Each rank updates **only the parameter shard** corresponding to its shard of the optimizer state.
+* Updated parameter shards are then exchanged (`all_gather`) so all ranks end up with the full updated model.
 
 #### ZeRO-3
 
-ZeRO stage 3 (aka. $P_{os} + P_g + P_p$) is the sharding/partitioning of optimizer states and gradient **and** **model parameters**. Memory reduction scales linearing with our parallelism degree, larger increase in communications — 50% — (need to `all_gather` and `reduce_scatter` parameters before and after every computation requiring them).
+ZeRO stage 3 (aka. $P_{os} + P_g + P_p$) is the sharding/partitioning of optimizer states and gradient **and** **model parameters**. Memory reduction scales linearly with our parallelism degree, larger communication overhead (≈50% more than DP/ZeRO-1/2) — (need to `all_gather` and `reduce_scatter` parameters before and after every computation requiring them).
 
 (Assuming FP16 params and FP32 optimizer states)
+
+**Forward pass**
+
+* Each rank stores its shard of the model parameters.
+* Whenever a parameter is needed for computation, it is materialized (`all_gather` from its shard)
+* The computation is done
+* The local param is released/flushed (`del`/`=None`) on every rank but the one owning it
+
+**Backward pass**
+
+* Each rank runs the backward pass for its full model replica, but parameters must be all-gathered on demand.
+* Gradients are produced during backprop, then immediately reduce-scattered so only the owning rank keeps the shard.
+
+**Optimizer step**
+
+* Each rank holds **only the parameters' shard** corresponding to its shard of the gradients and optimizer state.
+* Each rank holds **only the averaged gradients' shard** corresponding to its shard of the parameters and optimizer state.
+* Each rank updates **only the parameter shard** corresponding to its shard of the optimizer state.
+* Updated parameter shards are then exchanged (`all_gather`) so all ranks end up with the full updated model.
 
 ## Terminology
 
