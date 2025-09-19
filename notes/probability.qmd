@@ -7,13 +7,6 @@ description: Small Probability & Information Theory cheatsheet.
 categories: [math]
 ---
 
-```{python}
-# | echo: false
-import torch
-
-# TODO: Add torch examples!
-```
-
 ## Definitions & Formulas
 ### Outcomes and Events
 When studying probability, we are performing experiments, random trials or observations. The set of all possible _outcomes_ of this experiment is $\mathcal{\Omega}$ (or $\mathcal{S}$). eg. When rolling a die, $\mathcal{\Omega} = \{1,2,3,4,5,6\}$.
@@ -104,7 +97,11 @@ To follow mathematical notation, sometimes we use $\mu$ to denote this average.
 
 #### Properties
 
-<!--- TODO --->
+* Linearity: $\operatorname{E}[\alpha A + B] = \alpha \operatorname{E}[A] + \operatorname{E}[B]$
+* Equality: $X = Y \; \text{a.s.} \implies \operatorname{E}[X] = \operatorname{E}[Y]$
+* Constants: $X = c \implies \operatorname{E}[X] = c$
+* Tower property: $\operatorname{E}[\operatorname{E}[X]] = \operatorname{E}[X]$
+
 
 #### Expectation of a Random Vector
 
