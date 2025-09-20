@@ -1,0 +1,18 @@
+---
+title: DataLoader Workshop and some more ZeRO research
+description: Went through the new DataLoader (Sharding) Workshop for S2S and searched more techniques to make my ZeRO implementation better
+categories: [mle, python]
+date: 2025-09-19
+---
+
+Light work today on the ML side, big day at regular job, lots to do, it do be like that sometimes, and it's important to keep my priorities straight and aligned. I have the remember the opportunity that I have beign CTO and partner at [Kivala](https://kivala.fr){target=_blank}, I've cried in gratitude, I've prayed for this opportunity, Theo from 2 years wanted to be where I am, so even though I feel shiny object syndrom about AI/ML and the field's pillars are super interesting, I should not forget that I'm still a value-creation machine and I should first and foremost build Kivala, and sell it for a hefty price.
+
+### DataLoader Workshop
+
+Still, in the evening I went through the newly uploaded DataLoader workshop, once again as part of Scratch To Scale.
+
+Fairly interesting but I didn't learn much, I already had a strong understanding on the inner workings of a DataLoader and how to write a distributed one. Basically we just pull data index by rank so each rank gets its own mini-batch and there's no intersection.
+
+### ZeRO
+
+Finally still on the ZeRO side, I've explored better ways to implement it, better ways to wrap the model. I still feel like the gap between ease of toy implementation and production implementation are huge and I'm not sure I'll be able to build a production-ready, generci and flexible, ZeRO implementation. But I can say for sure that now I think I really do understand the algorithm much better than I did a few days ago.
