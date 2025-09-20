@@ -10,7 +10,35 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Thu, 18 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 19 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>DataLoader Workshop and some more ZeRO research</title>
+  <link>https://theopomies.com/journal/2025-09-19.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Light work today on the ML side, big day at regular job, lots to do, it do be like that sometimes, and it’s important to keep my priorities straight and aligned. I have the remember the opportunity that I have beign CTO and partner at <a href="https://kivala.fr" target="_blank">Kivala</a>, I’ve cried in gratitude, I’ve prayed for this opportunity, Theo from 2 years wanted to be where I am, so even though I feel shiny object syndrom about AI/ML and the field’s pillars are super interesting, I should not forget that I’m still a value-creation machine and I should first and foremost build Kivala, and sell it for a hefty price.</p>
+<section id="dataloader-workshop" class="level3">
+<h3 class="anchored" data-anchor-id="dataloader-workshop">DataLoader Workshop</h3>
+<p>Still, in the evening I went through the newly uploaded DataLoader workshop, once again as part of Scratch To Scale.</p>
+<p>Fairly interesting but I didn’t learn much, I already had a strong understanding on the inner workings of a DataLoader and how to write a distributed one. Basically we just pull data index by rank so each rank gets its own mini-batch and there’s no intersection.</p>
+</section>
+<section id="zero" class="level3">
+<h3 class="anchored" data-anchor-id="zero">ZeRO</h3>
+<p>Finally still on the ZeRO side, I’ve explored better ways to implement it, better ways to wrap the model. I still feel like the gap between ease of toy implementation and production implementation are huge and I’m not sure I’ll be able to build a production-ready, generci and flexible, ZeRO implementation. But I can say for sure that now I think I really do understand the algorithm much better than I did a few days ago.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-19.html</guid>
+  <pubDate>Fri, 19 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>ZeRO-2 + Arctic Sequence Length Training presentation by Tunji Ruwase from Snowflake</title>
   <link>https://theopomies.com/journal/2025-09-18.html</link>
