@@ -10,7 +10,71 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Fri, 19 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 22 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Regular job + slight progress on ZeRO-2/3</title>
+  <link>https://theopomies.com/journal/2025-09-22.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="regular-job" class="level3">
+<h3 class="anchored" data-anchor-id="regular-job">Regular Job</h3>
+<p>We’ve had some issues with our SIM provider resulting in intermittent loss of network on our edge devices, so I’m working on issues to mitigate and enhance our resilience infra.</p>
+<p>As a result of developping a new product from scratch in-house, we’ve worked on a design overhaul of the entire intercom system, which I’ve already fully implemented. But we’ve decided to ship this update to our existing system. That’s running on a completely different tech stack, so I have to duplicate the work and effort, leading to little time for ML.</p>
+</section>
+<section id="zero-23" class="level3">
+<h3 class="anchored" data-anchor-id="zero-23">ZeRO-2/3</h3>
+<p>Not much to add. I’ve begun writing my toy FSDP implementation, not much done yet. I did hit a wall trying to run the same script on my macbook pro and on Modal. torchrun would fail with cryptic issues about IPv6, here’s the line to run the script working:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">GLOO_SOCKET_FAMILY</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>inet <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PYTORCH_ENABLE_MPS_FALLBACK</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>1 <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> torch.distributed.run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--nnodes</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>1 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--node_rank</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>0 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--master_addr</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>127.0.0.1 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--master_port</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>29500 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--nproc_per_node</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>script.py<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div></div>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-22.html</guid>
+  <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>DataLoader Workshop and some more ZeRO research</title>
   <link>https://theopomies.com/journal/2025-09-19.html</link>

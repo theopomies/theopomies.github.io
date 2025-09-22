@@ -338,45 +338,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="ab237657" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ab237657" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="dec3b229" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_leaf(module: nn.Module):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(<span class="bu">list</span>(module.modules())) <span class="op">==</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="f5f21649" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> torch.nn.Linear(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> set_none(module, grad_input, grad_output):</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (torch.zeros_like(grad_output[<span class="dv">0</span>]),)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>x.register_full_backward_hook(set_none)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>inp <span class="op">=</span> torch.randn(<span class="dv">10</span>, <span class="dv">10</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> x(inp)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>res.<span class="bu">sum</span>().backward()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>x.weight.grad</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
-<pre><code>tensor([[ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918],
-        [ 5.8674, -1.1864, -1.6661,  6.2188,  4.6361,  0.7678, -1.6513, -3.1540,
-         -0.1099, -3.6918]])</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> nn.Sequential(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    nn.Sequential(nn.Linear(<span class="dv">10</span>, <span class="dv">10</span>), nn.Linear(<span class="dv">10</span>, <span class="dv">10</span>)), nn.Linear(<span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="7a930d89" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> module <span class="kw">in</span> model.modules():</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(module, is_leaf(module))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sequential(
+  (0): Sequential(
+    (0): Linear(in_features=10, out_features=10, bias=True)
+    (1): Linear(in_features=10, out_features=10, bias=True)
+  )
+  (1): Linear(in_features=10, out_features=10, bias=True)
+) False
+Sequential(
+  (0): Linear(in_features=10, out_features=10, bias=True)
+  (1): Linear(in_features=10, out_features=10, bias=True)
+) False
+Linear(in_features=10, out_features=10, bias=True) True
+Linear(in_features=10, out_features=10, bias=True) True
+Linear(in_features=10, out_features=10, bias=True) True</code></pre>
+</div>
+</div>
+<div id="dfd1301a" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>[<span class="op">*</span>[<span class="op">*</span>nn.Linear(<span class="dv">10</span>, <span class="dv">10</span>).modules()][<span class="dv">0</span>].modules()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>[Linear(in_features=10, out_features=10, bias=True)]</code></pre>
 </div>
 </div>
 
