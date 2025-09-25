@@ -1,0 +1,12 @@
+{
+  "hash": "78b4731c997aadfab73cf2c57f18e823",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Regular job + slight progress on ZeRO-2/3\ndescription: Fixing prod issues at Kivala, working on a design overhaul of the product + progress on ZeRO-2 and 3\ncategories: [mle, python]\ndate: 2025-09-22\n---\n\n### Regular Job\n\nWe've had some issues with our SIM provider resulting in intermittent loss of network on our edge devices, so I'm working on issues to mitigate and enhance our resilience infra.\n\nAs a result of developping a new product from scratch in-house, we've worked on a design overhaul of the entire intercom system, which I've already fully implemented. But we've decided to ship this update to our existing system. That's running on a completely different tech stack, so I have to duplicate the work and effort, leading to little time for ML.\n\n### ZeRO-2/3\n\nNot much to add. I've begun writing my toy FSDP implementation, not much done yet. I did hit a wall trying to run the same script on my macbook pro and on Modal. torchrun would fail with cryptic issues about IPv6, here's the line to run the script working:\n\n```{sh}\n#| code-overflow: wrap\nGLOO_SOCKET_FAMILY=inet PYTORCH_ENABLE_MPS_FALLBACK=1 uv run -m torch.distributed.run --nnodes=1 --node_rank=0 --master_addr=127.0.0.1 --master_port=29500 --nproc_per_node=2 <script.py>\n```\n\n",
+    "supporting": [
+      "2025-09-22_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

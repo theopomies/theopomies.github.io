@@ -1,0 +1,16 @@
+---
+title: Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun
+description: Two super interesting guest lectures from Scratch To Scale, on Async TP and Distributed Inference
+categories: [mle, python]
+date: 2025-09-24
+---
+
+### Async TP
+
+Yesterday we learned a bit more about TP, and today thanks to [Less Wright](https://x.com/lessw2020){target=_blank} we learned about Async TP. The idea is to decompose our operations (comm and computations) into more finegrained operations (say instead of a big matmul that would require receiving the full tensor, we do smaller matmuls and receive a sharded input slice by slice). We also have 2 streams, a computation stream performing matmuls (and other kernels) and a communication stream, that way we can do both in parallel and not waste cycles.
+
+However there is a "quantization wave" (see [this article](https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html){target=_blank}) at the end of matmuls, and because we split the work to interleave compute and comms, we have alot of matmuls. A solution is to swap the roles of the streams at the end of the first computations, having the compute stream become the comms stream and vice-versa.
+
+### Efficient Strategies for Distributed Inference
+
+Then [Marc Sun](https://x.com/_marcsun){target=_blank} gave us a very complete talk on optimizing inference. This [inside vLLM article](https://www.aleksagordic.com/blog/vllm){target=_blank} and this [Accelerating PyTorch inference article](https://pytorch.org/blog/accelerating-generative-ai-2/){target=_blank} should cover most of the topics. We discussed topics such as prefill vs decode phase, KV Caching, PagedAttention, `torch.compile`, Quantization, speculative decoding, continuous batching, prefix caching, TP/PP/DP.

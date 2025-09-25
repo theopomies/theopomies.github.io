@@ -15,6 +15,6 @@ As a result of developping a new product from scratch in-house, we've worked on 
 
 Not much to add. I've begun writing my toy FSDP implementation, not much done yet. I did hit a wall trying to run the same script on my macbook pro and on Modal. torchrun would fail with cryptic issues about IPv6, here's the line to run the script working:
 
-```sh
+```{.sh .code-overflow-wrap}
 GLOO_SOCKET_FAMILY=inet PYTORCH_ENABLE_MPS_FALLBACK=1 uv run -m torch.distributed.run --nnodes=1 --node_rank=0 --master_addr=127.0.0.1 --master_port=29500 --nproc_per_node=2 <script.py>
 ```

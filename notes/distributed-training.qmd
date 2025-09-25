@@ -309,7 +309,8 @@ The goal of parallelism is to maximize throughput and cluster utilization.
 
 <!--TODO: gradient accumulation somewhere -->
 <!--TODO: activation checkpointing -->
-* **Data Parallelism** (**DP**): Each rank has a replica of the model — they're **replicants** — and receives a different mini-batch. After optional [Gradient Accumulation] , gradients are averaged across ranks (`all_reduce`).
+<!--TODO: PP/TP/EP sections + link to journal 09-23 and 09-24 -->
+* **[Data Parallelism @sec-data-parallelism]** (**DP**): Each rank has a replica of the model — they're **replicants** — and receives a different mini-batch. After optional [Gradient Accumulation] , gradients are averaged across ranks (`all_reduce`).
 * **Pipeline Parallelism** (**PP**): The model is split along the layers. Each rank has 1+ consecutive layers of the model, and we orchestrate sequential forward/backward passes along the ranks. This is **inter-layer** parallelism.
 * **Tensor Parallelism** (**TP**): The model's layers themselves are split across ranks. We need more complex orchestration since a single tensor's values are scattered across different ranks. This is **intra-layer** parallelism.
 * **Expert Parallelism** (**EP**): A specific type of **TP** where we only split the experts of an **MoE** across ranks.
@@ -328,7 +329,7 @@ Thus:
 These approaches are complementary and usually combined in large-scale training.
 :::
 
-### DDP — Distributed Data Parallelism
+### DDP — Distributed Data Parallelism {#sec-data-parallelism}
 
 Distributed Data Parallelism is a type of parallelism where each _rank_ loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are **replicants**. Each rank then trains on a _different_ mini-batch (hence the importance of [data sharding](/notes/distributed-training.qmd#data-sharding)). We then average the gradients (`all_reduce` sum + division by world_size or avg operation if available), perform a step of gradient descent, rinse and repeat. If we _can_ use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device's VRAM.
 

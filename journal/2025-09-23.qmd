@@ -1,0 +1,20 @@
+---
+title: PP and TP with Scrach to Scale
+description: Learning about Pipeline Paralellism and Tensor Parallelism
+categories: [mle, python]
+date: 2025-09-23
+---
+
+### Pipeline Parallelism
+
+Pipeline Parallelism is a parallelism strategy that consists in distributing the model along layers on different ranks, and have the forward pass go sequentialy through the ranks. Think of it as having 1+ layers on each GPU, input in the first, get the activations, put them through the second etc.
+
+The trick now is orchestration. A naive implementation would be to process the full forward, and then the full backward (GPipe). But you incur a lot of idle time (Bubble).
+
+One solution is "1 forward 1 backward" (1f1b), where you interleave the forward and backward passes. This reminded me of DeepSeek's _Open Source Week_ where they released [DualPipe](https://github.com/deepseek-ai/DualPipe){target=_blank}
+
+### Tensor Parallelism
+
+TP is an intra-layer parallelism strategy that consists of sharding a layer/tensor across different ranks. This makes sense when you think of matmul, you can split a tensor, perform two matmuls (split_n @ input) and concatenate (for column parallel) or add (for row parallel) the results to recover the original output .
+
+TP is useful when the model is pretty wide AND you have NVLink. Without NVLink you get drowned in communications and the gains vanish.
