@@ -6,11 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Theo POMIES">
-<meta name="dcterms.date" content="2025-09-02">
-<meta name="description" content="Small Probability &amp; Information Theory cheatsheet.">
+<meta name="dcterms.date" content="2025-09-24">
+<meta name="description" content="Two super interesting guest lectures from Scratch To Scale, on Async TP and Distributed Inference">
 
-<title>Probability and Information Theory – Theo Pomies</title>
+<title>Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,38 +74,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta name="twitter:title" content="Probability and Information Theory – Theo Pomies">
-<meta name="twitter:description" content="Small Probability &amp; Information Theory cheatsheet.">
+<meta name="twitter:title" content="Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun – Theo Pomies">
+<meta name="twitter:description" content="Two super interesting guest lectures from Scratch To Scale, on Async TP and Distributed Inference">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -331,19 +301,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#definitions-formulas" id="toc-definitions-formulas" class="nav-link active" data-scroll-target="#definitions-formulas">Definitions &amp; Formulas</a>
-  <ul class="collapse">
-  <li><a href="#outcomes-and-events" id="toc-outcomes-and-events" class="nav-link" data-scroll-target="#outcomes-and-events">Outcomes and Events</a></li>
-  <li><a href="#probability-function" id="toc-probability-function" class="nav-link" data-scroll-target="#probability-function">Probability function</a></li>
-  <li><a href="#sec-random-variables" id="toc-sec-random-variables" class="nav-link" data-scroll-target="#sec-random-variables">Random Variables</a></li>
-  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ Theorem</a></li>
-  <li><a href="#expectation" id="toc-expectation" class="nav-link" data-scroll-target="#expectation">Expectation</a></li>
-  <li><a href="#sec-variance" id="toc-sec-variance" class="nav-link" data-scroll-target="#sec-variance">Variance</a></li>
-  <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard deviation</a></li>
-  <li><a href="#sec-covariance" id="toc-sec-covariance" class="nav-link" data-scroll-target="#sec-covariance">Covariance</a></li>
-  </ul></li>
-  <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
-  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#async-tp" id="toc-async-tp" class="nav-link active" data-scroll-target="#async-tp">Async TP</a></li>
+  <li><a href="#efficient-strategies-for-distributed-inference" id="toc-efficient-strategies-for-distributed-inference" class="nav-link" data-scroll-target="#efficient-strategies-for-distributed-inference">Efficient Strategies for Distributed Inference</a></li>
   </ul>
 </nav>
     </div>
@@ -353,41 +312,30 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability and Information Theory</h1>
+<h1 class="title">Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">math</div>
+    <div class="quarto-category">mle</div>
+    <div class="quarto-category">python</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Small Probability &amp; Information Theory cheatsheet.
+    Two super interesting guest lectures from Scratch To Scale, on Async TP and Distributed Inference
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Theo POMIES </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 2, 2025</p>
+      <p class="date">September 24, 2025</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 16, 2025</p>
-    </div>
-  </div>
     
   </div>
   
@@ -396,227 +344,14 @@ window.Quarto = {
 </header>
 
 
-<section id="definitions-formulas" class="level2">
-<h2 class="anchored" data-anchor-id="definitions-formulas">Definitions &amp; Formulas</h2>
-<section id="outcomes-and-events" class="level3">
-<h3 class="anchored" data-anchor-id="outcomes-and-events">Outcomes and Events</h3>
-<p>When studying probability, we are performing experiments, random trials or observations. The set of all possible <em>outcomes</em> of this experiment is <span class="math inline">\(\mathcal{\Omega}\)</span> (or <span class="math inline">\(\mathcal{S}\)</span>). eg. When rolling a die, <span class="math inline">\(\mathcal{\Omega} = \{1,2,3,4,5,6\}\)</span>.</p>
-<p>We can group these outcomes into <em>events</em> — <span class="math inline">\(\mathcal{E} \subseteq \mathcal{\Omega}\)</span>. eg. The event <span class="math inline">\(\mathcal{E} = \{\)</span>die shows an even number<span class="math inline">\(\} = \{2, 4, 6\}\)</span>. Whenever the outcome <span class="math inline">\(z\)</span> of the random experiment satisfies <span class="math inline">\(z \in \mathcal{E}\)</span>, the event <span class="math inline">\(\mathcal{E}\)</span> has occurred. Multiple events can occur from the same outcome, say we have <span class="math inline">\(\mathcal{A} = \{3, 6\}\)</span> “the result is divisible by 3” and <span class="math inline">\(\mathcal{B} = \{2, 4, 6\}\)</span>. <span class="math inline">\(z = 6\)</span> satisfies both <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<section id="async-tp" class="level3">
+<h3 class="anchored" data-anchor-id="async-tp">Async TP</h3>
+<p>Yesterday we learned a bit more about TP, and today thanks to <a href="https://x.com/lessw2020" target="_blank">Less Wright</a> we learned about Async TP. The idea is to decompose our operations (comm and computations) into more finegrained operations (say instead of a big matmul that would require receiving the full tensor, we do smaller matmuls and receive a sharded input slice by slice). We also have 2 streams, a computation stream performing matmuls (and other kernels) and a communication stream, that way we can do both in parallel and not waste cycles.</p>
+<p>However there is a “quantization wave” (see <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html" target="_blank">this article</a>) at the end of matmuls, and because we split the work to interleave compute and comms, we have alot of matmuls. A solution is to swap the roles of the streams at the end of the first computations, having the compute stream become the comms stream and vice-versa.</p>
 </section>
-<section id="probability-function" class="level3">
-<h3 class="anchored" data-anchor-id="probability-function">Probability function</h3>
-<p>The <strong>probability function</strong> maps events onto a real value <span class="math inline">\(P\colon \mathcal{E} \subseteq \mathcal{\Omega} \to [0, 1]\)</span>.</p>
-<p><span class="math inline">\(\operatorname{P}(\mathcal{E})\)</span> is the <em>probability associated with event <span class="math inline">\(\mathcal{E}\)</span></em>.</p>
-<section id="properties" class="level4">
-<h4 class="anchored" data-anchor-id="properties">Properties</h4>
-<ul>
-<li><span class="math inline">\(\operatorname{P}(\mathcal{E}) \geq 0\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\mathcal{\Omega}) = 1, \operatorname{P}(\mathcal{\emptyset}) = 0\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cup \mathcal{B}) = \operatorname{P}(\mathcal{A}) + \operatorname{P}(\mathcal{B}) - \operatorname{P}(\mathcal{A} \cap \mathcal{B})\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\bigcup_{i=1}^{\infty} \mathcal{A}_i) = \sum_{i=1}^{\infty} \operatorname{P}(\mathcal{A}_i), \quad \mathcal{A}_i \cap \mathcal{A}_j = \emptyset\: \text{for all}\: i \neq j\)</span> (= if all events <span class="math inline">\(\mathcal{A}_i\)</span> are <em>mutually exclusive</em>)</li>
-<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cap \mathcal{B}) = \operatorname{P}(\mathcal{A} \mid \mathcal{B})\operatorname{P}(\mathcal{B})\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\mathcal{A} \cap \mathcal{B}) = \operatorname{P}(\mathcal{A})\operatorname{P}(\mathcal{B}) \iff \mathcal{A} \perp \mathcal{B}\)</span> (eg. 2 fair dice rolls)</li>
-<li><span class="math inline">\(\mathcal{A} \perp \mathcal{B} \iff \operatorname{P}(\mathcal{A} \mid \mathcal{B}) = \operatorname{P}(\mathcal{A})\)</span></li>
-</ul>
-</section>
-</section>
-<section id="sec-random-variables" class="level3">
-<h3 class="anchored" data-anchor-id="sec-random-variables">Random Variables</h3>
-<p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> is a measurable function (mapping) <span class="math inline">\(X \colon \mathcal{\Omega} \to \mathcal{E}\)</span> from a sample space <span class="math inline">\(\mathcal{\Omega}\)</span> as a set of possible outcomes to a measurable space <span class="math inline">\(\mathcal{E}\)</span>.</p>
-<p>The probability that <span class="math inline">\(X\)</span> takes on a value in a measurable set <span class="math inline">\(\mathcal{S} \in \mathcal{E}\)</span> is written as <span class="math display">\[
-\operatorname{P}(X \in \mathcal{S}) = \operatorname{P}(\{\omega \in \mathcal{\Omega} \mid X(\omega) \in \mathcal{S}\})
-\]</span></p>
-<p>The probability that <span class="math inline">\(X\)</span> takes a <em>discrete</em> value <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(X = v\)</span>, is <span class="math inline">\(\operatorname{P}(X=v)\)</span>.</p>
-<p>Expressions like <span class="math inline">\(X = v\)</span> or <span class="math inline">\(X \geq v\)</span> define <strong>events</strong>, i.e., subsets of <span class="math inline">\(\Omega\)</span> whose probability can be measured.</p>
-<p>Random variables allow us to go from outcomes to values, like <span class="math inline">\(X(\omega) = \omega\)</span>, the random variable that associates to each die its value (identity function). This is also an example of a <em>discrete</em> random variable.</p>
-<p>When <span class="math inline">\(X\)</span> is <em>continuous</em>, it doesn’t make sense to have events like <span class="math inline">\(X = v\)</span> (and <span class="math inline">\(\operatorname{P}(X = v) = 0\)</span>); rather we use <span class="math inline">\(v \leq X \leq w\)</span> and probability <strong>densities</strong>. An example would be the height of a population. Probabilities are described via a <strong>probability density function</strong> <span class="math inline">\(p_X(x)\)</span>, with <span class="math display">\[
-\operatorname{P}(v \le X \le w) = \int_v^w p_X(x)\,dx
-\]</span></p>
-<p>We denote the probability distribution of <span class="math inline">\(X\)</span> as <span class="math inline">\(\operatorname{P}(X)\)</span> (strictly speaking <span class="math inline">\(P_X\)</span>, but we often write <span class="math inline">\(P(X)\)</span> for convenience).</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When the measurable space <span class="math inline">\(\mathcal{E}\)</span> is multi-dimensional, like <span class="math inline">\(\mathbb{R}^m\)</span>, we call the random variable <span class="math inline">\(\mathbf{X} \in \mathbb{R}^m\)</span> a <strong>random vector</strong>.</p>
-</div>
-</div>
-<section id="multiple-random-variables" class="level4">
-<h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
-<p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>). Equivalently it’s <span class="math inline">\(\operatorname{P}(\{A = a\} \cap \{B = b\})\)</span>, with an overloaded notation, the <strong>joint probability distribution</strong> becomes <span class="math inline">\(\operatorname{P}(A, B)\)</span></p>
-<p>Obviously <span class="math display">\[ \operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b) \]</span></p>
-<p>Also, we can <strong>marginalize</strong> <span class="math display">\[ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) \]</span></p>
-<p>Because <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span> are events, <span class="math display">\[\begin{aligned}
-\operatorname{P}(A = a, B = b) &amp; = \operatorname{P}(A = a \mid B = b)\operatorname{P}(B = b) \\
-\iff \operatorname{P}(A = a \mid B = b) &amp; = \operatorname{P}(A = a, B = b)/\operatorname{P}(B = b)
-\end{aligned}\]</span></p>
-</section>
-</section>
-<section id="bayes-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="bayes-theorem">Bayes’ Theorem</h3>
-<p>From the properties and definitions above, we can derive the following formula</p>
-<p><span class="math display">\[ \overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfrac{\overbrace{\operatorname{P}(B \mid A)}^{\text{likelihood}}\overbrace{\operatorname{P}(A)}^{\text{prior}}}{\underbrace{\operatorname{P}(B)}_{\text{observation}}} \]</span></p>
-<ul>
-<li>prior/hypothesis: our estimate or current belief about the probability of <span class="math inline">\(A\)</span></li>
-<li>observation/marginal likelihood/evidence: the evidence or observations we’ve made regarding <span class="math inline">\(B\)</span></li>
-<li>likelihood: a measure of how compatible our hypothesis is with our observation</li>
-</ul>
-<p>A simplified version is <span class="math inline">\(\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)\)</span></p>
-</section>
-<section id="expectation" class="level3">
-<h3 class="anchored" data-anchor-id="expectation">Expectation</h3>
-<p>The <strong>expectation</strong> (or <strong>expected value</strong>) is the weighted average of the values of <span class="math inline">\(X\)</span>.</p>
-<p>Discrete case:</p>
-<p><span class="math display">\[ \operatorname{E}[X] = \operatorname{E}_{X \sim P}[X] = \sum_x x\operatorname{P}(X=x) \]</span></p>
-<p>Continuous case:</p>
-<p><span class="math display">\[\operatorname{E}[X] = \int_{-\infty}^{\infty} x p(x) \;dx \]</span></p>
-<p>To follow mathematical notation, sometimes we use <span class="math inline">\(\mu\)</span> to denote this average.</p>
-<section id="properties-1" class="level4">
-<h4 class="anchored" data-anchor-id="properties-1">Properties</h4>
-<ul>
-<li>Linearity: <span class="math inline">\(\operatorname{E}[\alpha A + B] = \alpha \operatorname{E}[A] + \operatorname{E}[B]\)</span></li>
-<li>Equality: <span class="math inline">\(X = Y \; \text{a.s.} \implies \operatorname{E}[X] = \operatorname{E}[Y]\)</span></li>
-<li>Constants: <span class="math inline">\(X = c \implies \operatorname{E}[X] = c\)</span></li>
-<li>Tower property: <span class="math inline">\(\operatorname{E}[\operatorname{E}[X]] = \operatorname{E}[X]\)</span></li>
-</ul>
-</section>
-<section id="expectation-of-a-random-vector" class="level4">
-<h4 class="anchored" data-anchor-id="expectation-of-a-random-vector">Expectation of a Random Vector</h4>
-<p>For a vector-valued random variable — ie. the <strong>random vector</strong> <span class="math inline">\(\mathbf{X} \in \mathbb{R}^n\)</span>, we have <span class="math inline">\(\mathbf{\mu} = \operatorname{E}_{\mathbf{X} \sim P}[\mathbf{X}]\)</span> with <span class="math inline">\(\mu_i = \operatorname{E}_{\mathbf{X} \sim P}[x_i]\)</span> — the expectation of <span class="math inline">\(\mathbf{X}\)</span> is a vector of the expectations of each element <span class="math inline">\(x_i\)</span> of <span class="math inline">\(\mathbf{X}\)</span>.</p>
-</section>
-</section>
-<section id="sec-variance" class="level3">
-<h3 class="anchored" data-anchor-id="sec-variance">Variance</h3>
-<p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much values deviate from their expectation, on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
-<p><span class="math display">\[ \operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2 \]</span></p>
-<p>Because</p>
-<p><span class="math display">\[ \operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2 \]</span></p>
-<section id="sec-var-random-vector" class="level4">
-<h4 class="anchored" data-anchor-id="sec-var-random-vector">Variance of a Random Vector</h4>
-<p>For a random vector <span class="math inline">\(\mathbf{X}\)</span>, we store the pairwise <strong>variances</strong> of elements and <strong><a href="#sec-covariance" class="quarto-xref">covariances</a></strong> in a <strong><a href="#sec-covariance-matrix" class="quarto-xref">covariance matrix</a></strong> (aka. auto-covariance matrix or variance matrix) noted <span class="math inline">\(\mathbf{\Sigma}\)</span> or <span class="math inline">\(K_{\mathbf{x}\mathbf{x}}\)</span> or <span class="math inline">\(\operatorname{Cov}_{\mathbf{x} \sim P}\)</span>, defined as</p>
-<p><span class="math display">\[ \mathbf{\Sigma} = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \]</span> <span class="math display">\[\begin{aligned}
-\mathbf{\Sigma} = K_{\mathbf{X}\mathbf{Y}}
-&amp; = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \\
-&amp; = \operatorname{E}[\mathbf{X}\mathbf{X}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}]^\top
-\end{aligned}\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Each entry <span class="math inline">\(\Sigma_{i, j} = \operatorname{Cov}(X_i, X_j)\)</span> — see <a href="#sec-covariance" class="quarto-xref">covariance</a>), and by definition, for diagonal entries <span class="math inline">\(\Sigma_{i, i} = \operatorname{Cov}(X_i, X_i) = \operatorname{Var}(X_i)\)</span></p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We have the following property when applying a linear transformation represented by the appropriately dimensioned matrix <span class="math inline">\(\mathbf{A}\)</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-\operatorname{Cov}(\mathbf{AX}, \mathbf{AX}) &amp; = \operatorname{E}[(\mathbf{AX} - \operatorname{E}[\mathbf{AX}])(\mathbf{AX} - \operatorname{E}[\mathbf{AX}])^\top] \\
-&amp; = \operatorname{E}[\mathbf{AX}(\mathbf{AX})^\top] - \operatorname{E}[\mathbf{AX}]\operatorname{E}[(\mathbf{AX})^\top] \\
-&amp; = \operatorname{E}[\mathbf{AX}\mathbf{X}^\top\mathbf{A}^\top] - \operatorname{E}[\mathbf{AX}]\operatorname{E}[\mathbf{X}^\top\mathbf{A}^\top] \\
-&amp; = \mathbf{A}\operatorname{E}[\mathbf{X}\mathbf{X}^\top]\mathbf{A}^\top - \mathbf{A}\operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}^\top]\mathbf{A}^\top \\
-&amp; = \mathbf{A}(\operatorname{E}[\mathbf{X}\mathbf{X}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}^\top])\mathbf{A}^\top \\
-&amp; = \mathbf{A}\mathbf{\Sigma}\mathbf{A}^\top
-\end{aligned}
-\]</span></p>
-<!---TODO--->
-<p>As a result of the [linearity of expectation]</p>
-</div>
-</div>
-</section>
-</section>
-<section id="standard-deviation" class="level3">
-<h3 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h3>
-<p>Because the <a href="#sec-variance" class="quarto-xref">variance</a> is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
-<p><span class="math display">\[ \operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)} \]</span></p>
-</section>
-<section id="sec-covariance" class="level3">
-<h3 class="anchored" data-anchor-id="sec-covariance">Covariance</h3>
-<p><strong>Covariance</strong> is a measure of the joint variability of two <a href="#sec-random-variables" class="quarto-xref">random variables</a>.</p>
-<p><span class="math display">\[ \operatorname{Cov}(X, Y) = \operatorname{E}[(X - \operatorname{E}[X])(Y - \operatorname{E}[Y])] \]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><span class="math inline">\(\operatorname{Cov}(X, X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{Var}(X)\)</span></p>
-</div>
-</div>
-<section id="sec-covariance-matrix" class="level4">
-<h4 class="anchored" data-anchor-id="sec-covariance-matrix">Covariance Matrix of two Random Vectors</h4>
-<p>For random vectors <span class="math inline">\(\mathbf{X} \in \mathbb{R}^m\)</span>, <span class="math inline">\(\mathbf{Y} \in \mathbb{R}^n\)</span>, the <strong>covariance matrix</strong> is a matrix <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span> defined as</p>
-<p><span class="math display">\[\begin{aligned}
-K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}[\mathbf{X}])(\mathbf{Y} - \operatorname{E}[\mathbf{Y}])^\top] \\
-&amp; = \operatorname{E}[\mathbf{X}\mathbf{Y}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{Y}]^\top
-\end{aligned}\]</span></p>
-<p>We have <span class="math inline">\(\operatorname{Cov}(X_i, Y_j) = K_{X_iY_j} = \operatorname{E}[(X_i - \operatorname{E}[X_i])(Y_j - \operatorname{E}[Y_j])]\)</span> found at index <span class="math inline">\((i, j)\)</span> in <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span></p>
-<p>If <span class="math inline">\(\mathbf{X} = \mathbf{Y}\)</span> this is the <a href="#sec-var-random-vector" class="quarto-xref">auto-covariance matrix or variance matrix</a> of this random vector <span class="math inline">\(\mathbf{X}\)</span></p>
-<p>If <span class="math inline">\(\mathbf{X} \neq \mathbf{Y}\)</span> this is the <strong>cross-covariance matrix</strong> of <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span></p>
-<!--- TODO: correlation, KL-Divergence --->
-</section>
-</section>
-</section>
-<section id="proofs" class="level2">
-<h2 class="anchored" data-anchor-id="proofs">Proofs</h2>
-<p>Later!</p>
-</section>
-<section id="notation" class="level2">
-<h2 class="anchored" data-anchor-id="notation">Notation</h2>
-<ul>
-<li><span class="math inline">\(\mathcal{X}\)</span>: a set</li>
-<li><span class="math inline">\(\{a, b, c\}\)</span>: a set, with its elements</li>
-<li><span class="math inline">\(\emptyset\)</span>: the empty set</li>
-<li><span class="math inline">\(\mathcal{A} \subset \mathcal{B}\)</span>, <span class="math inline">\(\mathcal{A} \subsetneq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a proper/strict subset of <span class="math inline">\(\mathcal{B}\)</span></li>
-<li><span class="math inline">\(\mathcal{A} \subseteq \mathcal{B}\)</span>: <span class="math inline">\(\mathcal{A}\)</span> is a subest of <span class="math inline">\(\mathcal{B}\)</span></li>
-<li><span class="math inline">\(\mathcal{A} \cap \mathcal{B}\)</span>: the intersection of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>and</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
-<li><span class="math inline">\(\mathcal{A} \cup \mathcal{B}\)</span>: the union of sets <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> — “<span class="math inline">\(\mathcal{A}\)</span> <strong>or</strong> <span class="math inline">\(\mathcal{B}\)</span>”</li>
-<li><span class="math inline">\(\mathcal{A} \setminus \mathcal{B}\)</span>: set subtraction of <span class="math inline">\(\mathcal{B}\)</span> from <span class="math inline">\(\mathcal{A}\)</span>, elements from <span class="math inline">\(\mathcal{A}\)</span> but not in <span class="math inline">\(\mathcal{B}\)</span></li>
-<li><span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\mathcal{\Omega}\)</span>: the sample space / universe (the set of all possible outcomes)</li>
-<li><span class="math inline">\(|\mathcal{X}|\)</span>: the cardinality of set <span class="math inline">\(\mathcal{X}\)</span> (its number of events)</li>
-<li><span class="math inline">\(X\)</span>: a random variable</li>
-<li><span class="math inline">\(\mathbf{X}\)</span>: a random vector</li>
-<li><span class="math inline">\(P\)</span>: a probability distribution</li>
-<li><span class="math inline">\(X \sim P\)</span>: the random variable <span class="math inline">\(X\)</span> follows the probability distribution <span class="math inline">\(P\)</span></li>
-<li><span class="math inline">\(a \propto b\)</span>: <span class="math inline">\(a\)</span> is proportional to <span class="math inline">\(b\)</span>, eg. <span class="math inline">\(a = kb\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(\cdot)\)</span>: the probability function, maps events to their probability and random variables to their probability <em>distributions</em></li>
-<li><span class="math inline">\(\operatorname{P}(X)\)</span>: depending on the context, a probability distribution <em>or</em> the probability of any <span class="math inline">\(X=x\)</span>, meaning the formula is true for any value</li>
-<li><span class="math inline">\(\operatorname{P}(X=x)\)</span>: the probability assigned to the event where random variable <span class="math inline">\(X\)</span> takes value <span class="math inline">\(x\)</span></li>
-<li><span class="math inline">\(\operatorname{P}(X \mid Y)\)</span>: the conditional probability distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(\operatorname{p}(\cdot)\)</span>: a probability density function (PDF) associated with distribution <span class="math inline">\(P\)</span></li>
-<li><span class="math inline">\(\operatorname{E}[X]\)</span>: expectation of a random variable <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\(X \perp Y\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent</li>
-<li><span class="math inline">\(X \perp Y \mid Z\)</span>: random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are conditionally independent given <span class="math inline">\(Z\)</span></li>
-<li><span class="math inline">\(\sigma_X\)</span>: standard deviation of random variable <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\(\operatorname{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
-<li><span class="math inline">\(\operatorname{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(\operatorname{\rho}(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\operatorname{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
-<li><span class="math inline">\(\operatorname{H}(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\(D_{\operatorname{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
-</ul>
+<section id="efficient-strategies-for-distributed-inference" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-strategies-for-distributed-inference">Efficient Strategies for Distributed Inference</h3>
+<p>Then <a href="https://x.com/_marcsun" target="_blank">Marc Sun</a> gave us a very complete talk on optimizing inference. This <a href="https://www.aleksagordic.com/blog/vllm" target="_blank">inside vLLM article</a> and this <a href="https://pytorch.org/blog/accelerating-generative-ai-2/" target="_blank">Accelerating PyTorch inference article</a> should cover most of the topics. We discussed topics such as prefill vs decode phase, KV Caching, PagedAttention, <code>torch.compile</code>, Quantization, speculative decoding, continuous batching, prefix caching, TP/PP/DP.</p>
 
 
 </section>

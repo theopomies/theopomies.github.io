@@ -10,7 +10,63 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Mon, 22 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 24 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun</title>
+  <link>https://theopomies.com/journal/2025-09-24.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="async-tp" class="level3">
+<h3 class="anchored" data-anchor-id="async-tp">Async TP</h3>
+<p>Yesterday we learned a bit more about TP, and today thanks to <a href="https://x.com/lessw2020" target="_blank">Less Wright</a> we learned about Async TP. The idea is to decompose our operations (comm and computations) into more finegrained operations (say instead of a big matmul that would require receiving the full tensor, we do smaller matmuls and receive a sharded input slice by slice). We also have 2 streams, a computation stream performing matmuls (and other kernels) and a communication stream, that way we can do both in parallel and not waste cycles.</p>
+<p>However there is a “quantization wave” (see <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html" target="_blank">this article</a>) at the end of matmuls, and because we split the work to interleave compute and comms, we have alot of matmuls. A solution is to swap the roles of the streams at the end of the first computations, having the compute stream become the comms stream and vice-versa.</p>
+</section>
+<section id="efficient-strategies-for-distributed-inference" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-strategies-for-distributed-inference">Efficient Strategies for Distributed Inference</h3>
+<p>Then <a href="https://x.com/_marcsun" target="_blank">Marc Sun</a> gave us a very complete talk on optimizing inference. This <a href="https://www.aleksagordic.com/blog/vllm" target="_blank">inside vLLM article</a> and this <a href="https://pytorch.org/blog/accelerating-generative-ai-2/" target="_blank">Accelerating PyTorch inference article</a> should cover most of the topics. We discussed topics such as prefill vs decode phase, KV Caching, PagedAttention, <code>torch.compile</code>, Quantization, speculative decoding, continuous batching, prefix caching, TP/PP/DP.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-24.html</guid>
+  <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>PP and TP with Scrach to Scale</title>
+  <link>https://theopomies.com/journal/2025-09-23.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="pipeline-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="pipeline-parallelism">Pipeline Parallelism</h3>
+<p>Pipeline Parallelism is a parallelism strategy that consists in distributing the model along layers on different ranks, and have the forward pass go sequentialy through the ranks. Think of it as having 1+ layers on each GPU, input in the first, get the activations, put them through the second etc.</p>
+<p>The trick now is orchestration. A naive implementation would be to process the full forward, and then the full backward (GPipe). But you incur a lot of idle time (Bubble).</p>
+<p>One solution is “1 forward 1 backward” (1f1b), where you interleave the forward and backward passes. This reminded me of DeepSeek’s <em>Open Source Week</em> where they released <a href="https://github.com/deepseek-ai/DualPipe" target="_blank">DualPipe</a></p>
+</section>
+<section id="tensor-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="tensor-parallelism">Tensor Parallelism</h3>
+<p>TP is an intra-layer parallelism strategy that consists of sharding a layer/tensor across different ranks. This makes sense when you think of matmul, you can split a tensor, perform two matmuls (split_n @ input) and concatenate (for column parallel) or add (for row parallel) the results to recover the original output .</p>
+<p>TP is useful when the model is pretty wide AND you have NVLink. Without NVLink you get drowned in communications and the gains vanish.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-23.html</guid>
+  <pubDate>Tue, 23 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Regular job + slight progress on ZeRO-2/3</title>
   <link>https://theopomies.com/journal/2025-09-22.html</link>
@@ -28,7 +84,7 @@
 <section id="zero-23" class="level3">
 <h3 class="anchored" data-anchor-id="zero-23">ZeRO-2/3</h3>
 <p>Not much to add. I’ve begun writing my toy FSDP implementation, not much done yet. I did hit a wall trying to run the same script on my macbook pro and on Modal. torchrun would fail with cryptic issues about IPv6, here’s the line to run the script working:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-overflow-wrap code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">GLOO_SOCKET_FAMILY</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -569,31 +625,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>math</category>
   <guid>https://theopomies.com/journal/2025-08-29.html</guid>
   <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Setting up this blog!</title>
-  <link>https://theopomies.com/journal/2025-08-28.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="this-blog" class="level2">
-<h2 class="anchored" data-anchor-id="this-blog">This “Blog”</h2>
-<p>Today’s the day!</p>
-<p>I’ve decided to document my learning process to “transition” from SWE / using AI <img src="https://latex.codecogs.com/png.latex?%5Clongrightarrow"> MLE/Applied Research/ building and training AI.</p>
-<p>After experimenting with <a href="https://marimo.io" target="_blank">marimo</a>, loving it and <a href="https://github.com/marimo-team/marimo/issues/6172" target="_blank">struggling</a> to make a blog out of marimo notebooks and experiments, I’ve stumbled upon <a href="https://www.fast.ai/posts/2020-01-20-nb2md.html" target="_blank">this article</a> by <a href="https://x.com/jeremyphoward" target="_blank">Jeremy Howard</a> encouraging me to write my blog via notebooks + <a href="https://quarto.org" target="_blank">Quarto</a>.</p>
-<p>It also happens that I had just purchased the <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale course/conference</a> by the brilliant <a href="https://x.com/thezachmueller" target="_blank">Zach Mueller</a> and <a href="https://muellerzr.github.io" target="_blank">his blog</a> was also using Quarto — which I would soon learn was no coincidence, Zach and Jeremy were closed and Zach contributed to Jeremy’s framework, <a href="https://www.fast.ai" target="_blank">fast.ai</a>.</p>
-<p>So there it is, I intend to document my learning process, render notebooks of experiments, store knowledge, formulas I’ve finally understood even if I’m the last person on earth to do so, bookmarks, reading notes etc.</p>
-
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <guid>https://theopomies.com/journal/2025-08-28.html</guid>
-  <pubDate>Thu, 28 Aug 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

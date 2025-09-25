@@ -1,11 +1,9 @@
 [
   {
-    "listing": "/posts/index.html",
-    "items": []
-  },
-  {
     "listing": "/journal/index.html",
     "items": [
+      "/journal/2025-09-24.html",
+      "/journal/2025-09-23.html",
       "/journal/2025-09-22.html",
       "/journal/2025-09-19.html",
       "/journal/2025-09-18.html",
@@ -28,12 +26,16 @@
     ]
   },
   {
+    "listing": "/posts/index.html",
+    "items": []
+  },
+  {
     "listing": "/notes/index.html",
     "items": [
       "/notes/distributed-training.html",
       "/notes/probability.html",
-      "/notes/calculus.html",
       "/notes/linear-algebra.html",
+      "/notes/calculus.html",
       "/notes/pytorch.html",
       "/notes/typescript.html"
     ]
