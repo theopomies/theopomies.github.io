@@ -10,7 +10,39 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Wed, 24 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 27 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism</title>
+  <link>https://theopomies.com/journal/2025-09-25.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The last 2 days have been really busy, so I couldn’t even attend to the 3 classes that took place then. I caught up all of them this saturday, but it’s fine, I was already familiar with the topics</p>
+<section id="diloco" class="level3">
+<h3 class="anchored" data-anchor-id="diloco">DiLoCo</h3>
+<p>The first guest lecture was DiLoCo by Zach Charles from Google. DiLoCo is a distributed, internet-scale training strategy, very similar to federated training. Basically, on local nodes you implement regular DDP / other paralellism. Then, after H timesteps, you exchange parameters, and perform an outer-gradient step. The idea is that naively averaging parameters degrades performance, but trying to find the overall gradient over the H timesteps, and combining them, allows to find the distributed overall gradient, which is more pertinent. Overlapping some of the training examples allows to introduce a larger overlap of distributions (and gradients).</p>
+<p>To further optimize this decentralized techine, researchers introduced Streaming DiLoCo, a variant, once again, overlapping computations and communications</p>
+</section>
+<section id="decentralized-training" class="level3">
+<h3 class="anchored" data-anchor-id="decentralized-training">Decentralized Training</h3>
+<p>Then, <a href="https://x.com/samsja19" target="_blank">Sami Jaghouar</a> from <a href="https://www.primeintellect.ai" target="_blank">Prime Intellect</a> discussed Decentralized Training overall, with DiLoCo, OpenDiLoCo (their version) and Intellect-1, their 10B model trained across 3 continents (!!!). He also discussed applying such decentralized patterns to RL, which is even easier, with one cluster/node performing inference, another the reward model, and yet another the training models. He insisted on the importance of fault tolerance, as the risk of having GPU failures grows with the number of GPU, and becomes daily occurences with frontier scale clusters.</p>
+</section>
+<section id="expert-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="expert-parallelism">Expert Parallelism</h3>
+<p>Finaly, <a href="https://x.com/m_sirovatka" target="_blank">Matej Sirovatka</a> from GPU MODE explained in more details the math behind MoE and Expert Parellism, a form of tensor parallelism where the experts of a MoE are scattered across ranks.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-25.html</guid>
+  <pubDate>Sat, 27 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun</title>
   <link>https://theopomies.com/journal/2025-09-24.html</link>
@@ -591,40 +623,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>math</category>
   <guid>https://theopomies.com/journal/2025-09-01.html</guid>
   <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Started reading The Manga Guide to Linear Algebra</title>
-  <link>https://theopomies.com/journal/2025-08-29.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="the-manga-guide-to-linear-algebra" class="level2">
-<h2 class="anchored" data-anchor-id="the-manga-guide-to-linear-algebra">The Manga Guide to Linear Algebra</h2>
-<section id="why" class="level3">
-<h3 class="anchored" data-anchor-id="why">Why?</h3>
-<p>Yes, this might sound weird if you don’t know the concept, but hear me out. After seing it praised on Twitter/X by an anon, I got myself a copy of <a href="https://www.amazon.com/Manga-Guide-Linear-Algebra/dp/1593274130" target="_blank">The Manga Guide to Linear Algebra</a>.</p>
-<p>It’s pretty good if you want to quickly get up to speed, develop intuition, but does not go too deep into formal proofs.</p>
-<p>You might not know me, but before going to a Software Engineering School, I studied math for 2 years in Uni, and dropped out because it was too “theorical”, not concrete enough for me, I needed to <em>grok</em> the formulas, to visualize, feel the proofs naturally and see the applications. Sadly, partly due to how Uni works — partly due to playing League of Legends too much — I did not get the level of understanding required for my attention to stick.</p>
-<p>Now that I’ve become a SWE, I’ve seen the practical uses of such Math, and I now find myself <em>needing</em> more of it! So, step by step I’ll try to go from intuition and basics (this book) -&gt; implementing existing algorithms -&gt; proofs and more advanced formulas and theorem (some other textbook like <a href="https://linear.axler.net/LADR4e.pdf" target="_blank">Linear Algebra Done Right</a>) -&gt; understanding ML architecture choices -&gt; being able to invent/discover new arch and techniques?</p>
-</section>
-<section id="what-i-learned-so-far" class="level3">
-<h3 class="anchored" data-anchor-id="what-i-learned-so-far">What I learned so far</h3>
-<p>Being somewhat familiar with Linear Algebra and computer science, I already knew a few things, so I read pretty fast through the first bits.</p>
-<p>The first thing I learned were the techniques for computing the determinant for matrices of dimensions 4 and above. There’s a technique based on the generalisation of the formula <img src="https://latex.codecogs.com/png.latex?%5Cdet(%5Cmathbf%7BA%7D)%20=%20a_%7B11%7Da_%7B22%7D%20-%20a_%7B12%7Da_%7B21%7D">.</p>
-<p>Along with the interpretation/intuition for the determinant (consolidated by 3b1b).</p>
-<p>But there’s also <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">an algorithm (LU decomposition)</a> used in computer science based on a set of rules for determinant and gaussian reduction.</p>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>math</category>
-  <guid>https://theopomies.com/journal/2025-08-29.html</guid>
-  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

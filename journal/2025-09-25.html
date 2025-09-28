@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Daily journal, accountability management and learning tracking.">
+<meta name="dcterms.date" content="2025-09-27">
+<meta name="description" content="Today I took the saturday to catch up on Thu and Fri’s lessons, missed because of how busy I’ve been">
 
-<title>Journal – Theo Pomies</title>
+<title>Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +33,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../img/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -74,68 +73,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-categories','listing-date','listing-title','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Theo Pomies" href="index.xml" data-external="1"><meta name="twitter:title" content="Journal – Theo Pomies">
-<meta name="twitter:description" content="Daily journal, accountability management and learning tracking.">
+<meta name="twitter:title" content="Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism – Theo Pomies">
+<meta name="twitter:description" content="Today I took the saturday to catch up on Thu and Fri’s lessons, missed because of how busy I’ve been">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -337,7 +278,7 @@ window.Quarto = {
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../journal/index.html" aria-current="page"> 
+    <a class="nav-link" href="../journal/index.html"> 
 <span class="menu-text">journal</span></a>
   </li>  
 </ul>
@@ -355,8 +296,16 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#diloco" id="toc-diloco" class="nav-link active" data-scroll-target="#diloco">DiLoCo</a></li>
+  <li><a href="#decentralized-training" id="toc-decentralized-training" class="nav-link" data-scroll-target="#decentralized-training">Decentralized Training</a></li>
+  <li><a href="#expert-parallelism" id="toc-expert-parallelism" class="nav-link" data-scroll-target="#expert-parallelism">Expert Parallelism</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -364,12 +313,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Journal</h1>
-</div>
+<h1 class="title">Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">mle</div>
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Daily journal, accountability management and learning tracking.
+    Today I took the saturday to catch up on Thu and Fri’s lessons, missed because of how busy I’ve been
   </div>
 </div>
 
@@ -377,6 +330,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 27, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -386,562 +345,24 @@ window.Quarto = {
 </header>
 
 
-<p><a href="index.xml">rss</a></p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758931200000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="267">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-25.html" class="no-external">Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-25.html" class="no-external">
-<p>Today I took the saturday to catch up on Thu and Fri’s lessons, missed because of how busy I’ve been</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-25.html" class="no-external">
-<div class="listing-date">
-Sep 27, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758672000000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="196">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-24.html" class="no-external">Async Tensor Parallelism with Less Wright + Efficient Strategies for Distributed Inference with Marc Sun</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-24.html" class="no-external">
-<p>Two super interesting guest lectures from Scratch To Scale, on Async TP and Distributed Inference</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-24.html" class="no-external">
-<div class="listing-date">
-Sep 24, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758585600000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="182">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-23.html" class="no-external">PP and TP with Scrach to Scale</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-23.html" class="no-external">
-<p>Learning about Pipeline Paralellism and Tensor Parallelism</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-23.html" class="no-external">
-<div class="listing-date">
-Sep 23, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758499200000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="151">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-22.html" class="no-external">Regular job + slight progress on ZeRO-2/3</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-22.html" class="no-external">
-<p>Fixing prod issues at Kivala, working on a design overhaul of the product + progress on ZeRO-2 and 3</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-22.html" class="no-external">
-<div class="listing-date">
-Sep 22, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758240000000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="247">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-19.html" class="no-external">DataLoader Workshop and some more ZeRO research</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-19.html" class="no-external">
-<p>Went through the new DataLoader (Sharding) Workshop for S2S and searched more techniques to make my ZeRO implementation better</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-19.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758153600000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="165">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-18.html" class="no-external">ZeRO-2 + Arctic Sequence Length Training presentation by Tunji Ruwase from Snowflake</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-18.html" class="no-external">
-<p>Writing the backbone for ZeRO-2 and an isntructive call with Tunji Ruwase from Snowflake introducing Arctic Sequence Length Training as part of S2S</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-18.html" class="no-external">
-<div class="listing-date">
-Sep 18, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1758067200000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="352">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-17.html" class="no-external">Implementing ZeRO-1 + Lectures on DTensor/DeviceMesh and Parallel Processing</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-17.html" class="no-external">
-<p>Implemented DP and ZeRO1 from scratch in a Modal notebook followed by two guest lectures, DTensor/DeviceMesh and Parallel Processing, as part of S2S</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-17.html" class="no-external">
-<div class="listing-date">
-Sep 17, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWF0aCUyQ21sZSUyQ3B5dGhvbg==" data-listing-date-sort="1757980800000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="166">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-16.html" class="no-external">Some more probability &amp; statistics and a ZeRO3 + HSDP lesson (S2S)</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-16.html" class="no-external">
-<p>Wrote about expectation/variance for random vectors and covariance matrix, followed by the S2S course on ZeRO3 and HSDP</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-16.html" class="no-external">
-<div class="listing-date">
-Sep 16, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWF0aCUyQ21sZQ==" data-listing-date-sort="1757894400000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="287">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-15.html" class="no-external">Reviewing Daniel Han’s guest lecture + Backprop Ninja</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-15.html" class="no-external">
-<p>Reviewing Daniel Han’s triton kernel lecture and going through backprop ninja (again) by Andrej Karpathy</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-15.html" class="no-external">
-<div class="listing-date">
-Sep 15, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="bWF0aCUyQ21sZQ==" data-listing-date-sort="1757721600000" data-listing-file-modified-sort="1759085860166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="277">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-13.html" class="no-external">Connectionism and Cursor articles</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-13.html" class="no-external">
-<p>Read Thinking Machines’s first blog article + cursor’s article on online RL training for Cursor Tab</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-13.html" class="no-external">
-<div class="listing-date">
-Sep 13, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWF0aA==" data-listing-date-sort="1757635200000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="90">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-12.html" class="no-external">Finished eigendecomposition notes + Jacobian</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-12.html" class="no-external">
-<p>Wrote some notes on eigendecomposition and the Jacobian matrix</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-12.html" class="no-external">
-<div class="listing-date">
-Sep 12, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="bWxlJTJDbWF0aA==" data-listing-date-sort="1757548800000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="176">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-11.html" class="no-external">Writing triton kernels with Daniel Han from Unsloth + linear algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-11.html" class="no-external">
-<p>A guest speaker session with Daniel Han on writig triton kernel (S2S), a light mode to this website and new linear algebra notes</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-11.html" class="no-external">
-<div class="listing-date">
-Sep 11, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-categories="bWxl" data-listing-date-sort="1757462400000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="83">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-10.html" class="no-external">FP8 Training with Phuc Nguyen (HF)</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-10.html" class="no-external">
-<p>Evening guest speaker: FP8 Training with Phuc (S2S)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-10.html" class="no-external">
-<div class="listing-date">
-Sep 10, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="13" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757376000000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-09.html" class="no-external">ZeRO / FSDP with Sylvain Gugger and Scott Mueller</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-09.html" class="no-external">
-<p>Evening study session for Scratch To Scale (S2S)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-09.html" class="no-external">
-<div class="listing-date">
-Sep 9, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="14" data-categories="cHl0aG9uJTJDbWF0aA==" data-listing-date-sort="1757289600000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="184">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-08.html" class="no-external">Marimo Workshop + Integrals refresher</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-08.html" class="no-external">
-<p>A superb Marimo workshop with Vincent Warmerdam (S2S) and binge watching Essence Of Calculus (3b1b)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-08.html" class="no-external">
-<div class="listing-date">
-Sep 8, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="15" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1757030400000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="298">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-05.html" class="no-external">Ray / Anyscale workshop with S2S</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-05.html" class="no-external">
-<p>An enlighting workshop to learn Ray with Robert Nishihara of Anyscale</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-05.html" class="no-external">
-<div class="listing-date">
-Sep 5, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="16" data-categories="cHl0aG9uJTJDbWxlJTJDbWF0aA==" data-listing-date-sort="1756944000000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-04.html" class="no-external">Going through DDP with S2S</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-04.html" class="no-external">
-<p>Finishing the preliminaries for D2L and quick evening study session on DDP with torch.distributed primitives</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-04.html" class="no-external">
-<div class="listing-date">
-Sep 4, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1756857600000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="130">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-03.html" class="no-external">Fireside chat QA with Yuxiang Wei from Meta FAIR with S2S</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-03.html" class="no-external">
-<p>Questions surrounding distributed training at FAIR</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-03.html" class="no-external">
-<div class="listing-date">
-Sep 3, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="18" data-categories="bWF0aCUyQ3B5dGhvbiUyQ21sZQ==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="194">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-02.html" class="no-external">Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-02.html" class="no-external">
-<p>Learning about distributed training on GPUs (S2S) and preliminaries for D2L</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-02.html" class="no-external">
-<div class="listing-date">
-Sep 2, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="19" data-categories="bWF0aA==" data-listing-date-sort="1756684800000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="122">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-09-01.html" class="no-external">Finished reading The Manga Guide to Linear Algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-09-01.html" class="no-external">
-<p>Learning more about Linear Transformations, Eigen{vectors, values} and Diagonalization</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-09-01.html" class="no-external">
-<div class="listing-date">
-Sep 1, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="20" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-08-29.html" class="no-external">Started reading The Manga Guide to Linear Algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-08-29.html" class="no-external">
-<p>(Re-)Developping intuition around Linear Algebra</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-08-29.html" class="no-external">
-<div class="listing-date">
-Aug 29, 2025
-</div>
-<div class="listing-reading-time">2 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="21" data-categories="cHl0aG9u" data-listing-date-sort="1756339200000" data-listing-file-modified-sort="1759085860165" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="139">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../journal/2025-08-28.html" class="no-external">Setting up this blog!</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../journal/2025-08-28.html" class="no-external">
-<p>Today I decided I would convert my old Next.js blog to Notebooks + Quarto and document my learning process</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../journal/2025-08-28.html" class="no-external">
-<div class="listing-date">
-Aug 28, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+<p>The last 2 days have been really busy, so I couldn’t even attend to the 3 classes that took place then. I caught up all of them this saturday, but it’s fine, I was already familiar with the topics</p>
+<section id="diloco" class="level3">
+<h3 class="anchored" data-anchor-id="diloco">DiLoCo</h3>
+<p>The first guest lecture was DiLoCo by Zach Charles from Google. DiLoCo is a distributed, internet-scale training strategy, very similar to federated training. Basically, on local nodes you implement regular DDP / other paralellism. Then, after H timesteps, you exchange parameters, and perform an outer-gradient step. The idea is that naively averaging parameters degrades performance, but trying to find the overall gradient over the H timesteps, and combining them, allows to find the distributed overall gradient, which is more pertinent. Overlapping some of the training examples allows to introduce a larger overlap of distributions (and gradients).</p>
+<p>To further optimize this decentralized techine, researchers introduced Streaming DiLoCo, a variant, once again, overlapping computations and communications</p>
+</section>
+<section id="decentralized-training" class="level3">
+<h3 class="anchored" data-anchor-id="decentralized-training">Decentralized Training</h3>
+<p>Then, <a href="https://x.com/samsja19" target="_blank">Sami Jaghouar</a> from <a href="https://www.primeintellect.ai" target="_blank">Prime Intellect</a> discussed Decentralized Training overall, with DiLoCo, OpenDiLoCo (their version) and Intellect-1, their 10B model trained across 3 continents (!!!). He also discussed applying such decentralized patterns to RL, which is even easier, with one cluster/node performing inference, another the reward model, and yet another the training models. He insisted on the importance of fault tolerance, as the risk of having GPU failures grows with the number of GPU, and becomes daily occurences with frontier scale clusters.</p>
+</section>
+<section id="expert-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="expert-parallelism">Expert Parallelism</h3>
+<p>Finaly, <a href="https://x.com/m_sirovatka" target="_blank">Matej Sirovatka</a> from GPU MODE explained in more details the math behind MoE and Expert Parellism, a form of tensor parallelism where the experts of a MoE are scattered across ranks.</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
