@@ -1,0 +1,22 @@
+---
+title: Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism
+description: Today I took the saturday to catch up on Thu and Fri's lessons, missed because of how busy I've been
+categories: [mle, python]
+date: 2025-09-27
+---
+
+The last 2 days have been really busy, so I couldn't even attend to the 3 classes that took place then. I caught up all of them this saturday, but it's fine, I was already familiar with the topics
+
+### DiLoCo
+
+The first guest lecture was DiLoCo by Zach Charles from Google. DiLoCo is a distributed, internet-scale training strategy, very similar to federated training. Basically, on local nodes you implement regular DDP / other paralellism. Then, after H timesteps, you exchange parameters, and perform an outer-gradient step. The idea is that naively averaging parameters degrades performance, but trying to find the overall gradient over the H timesteps, and combining them, allows to find the distributed overall gradient, which is more pertinent. Overlapping some of the training examples allows to introduce a larger overlap of distributions (and gradients).
+
+To further optimize this decentralized techine, researchers introduced Streaming DiLoCo, a variant, once again, overlapping computations and communications
+
+### Decentralized Training
+
+Then, [Sami Jaghouar](https://x.com/samsja19){target=_blank} from [Prime Intellect](https://www.primeintellect.ai){target=_blank} discussed Decentralized Training overall, with DiLoCo, OpenDiLoCo (their version) and Intellect-1, their 10B model trained across 3 continents (!!!). He also discussed applying such decentralized patterns to RL, which is even easier, with one cluster/node performing inference, another the reward model, and yet another the training models. He insisted on the importance of fault tolerance, as the risk of having GPU failures grows with the number of GPU, and becomes daily occurences with frontier scale clusters.
+
+### Expert Parallelism
+
+Finaly, [Matej Sirovatka](https://x.com/m_sirovatka){target=_blank} from GPU MODE explained in more details the math behind MoE and Expert Parellism, a form of tensor parallelism where the experts of a MoE are scattered across ranks.

@@ -7,6 +7,8 @@ description: Distributed training study notes and algorithms.
 categories: [mle, python]
 ---
 
+<!-- TODO: DiLoCo, Streaming DiLoCo -->
+
 ```{python}
 # | echo: false
 import torch
