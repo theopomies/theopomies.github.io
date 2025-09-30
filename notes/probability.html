@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,8 +41,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c7acbf03b739e6ea3c57108c3f1e4bcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2a833b3b0b26eee7022ba723d34efb31.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2a833b3b0b26eee7022ba723d34efb31.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-72d1e8b689827015b54a19b7d884d8e5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -336,11 +336,12 @@ window.Quarto = {
   <li><a href="#outcomes-and-events" id="toc-outcomes-and-events" class="nav-link" data-scroll-target="#outcomes-and-events">Outcomes and Events</a></li>
   <li><a href="#probability-function" id="toc-probability-function" class="nav-link" data-scroll-target="#probability-function">Probability function</a></li>
   <li><a href="#sec-random-variables" id="toc-sec-random-variables" class="nav-link" data-scroll-target="#sec-random-variables">Random Variables</a></li>
-  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ Theorem</a></li>
+  <li><a href="#sec-bayes-theorem" id="toc-sec-bayes-theorem" class="nav-link" data-scroll-target="#sec-bayes-theorem">Bayes’ Theorem</a></li>
   <li><a href="#expectation" id="toc-expectation" class="nav-link" data-scroll-target="#expectation">Expectation</a></li>
   <li><a href="#sec-variance" id="toc-sec-variance" class="nav-link" data-scroll-target="#sec-variance">Variance</a></li>
   <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard deviation</a></li>
   <li><a href="#sec-covariance" id="toc-sec-covariance" class="nav-link" data-scroll-target="#sec-covariance">Covariance</a></li>
+  <li><a href="#maximum-likelihood-and-negative-log-likelihood" id="toc-maximum-likelihood-and-negative-log-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood-and-negative-log-likelihood">Maximum Likelihood (and Negative Log-Likelihood)</a></li>
   </ul></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
@@ -385,7 +386,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 16, 2025</p>
+      <p class="date-modified">September 30, 2025</p>
     </div>
   </div>
     
@@ -457,8 +458,8 @@ Note
 \end{aligned}\]</span></p>
 </section>
 </section>
-<section id="bayes-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="bayes-theorem">Bayes’ Theorem</h3>
+<section id="sec-bayes-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="sec-bayes-theorem">Bayes’ Theorem</h3>
 <p>From the properties and definitions above, we can derive the following formula</p>
 <p><span class="math display">\[ \overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfrac{\overbrace{\operatorname{P}(B \mid A)}^{\text{likelihood}}\overbrace{\operatorname{P}(A)}^{\text{prior}}}{\underbrace{\operatorname{P}(B)}_{\text{observation}}} \]</span></p>
 <ul>
@@ -578,6 +579,29 @@ K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}
 <p>If <span class="math inline">\(\mathbf{X} \neq \mathbf{Y}\)</span> this is the <strong>cross-covariance matrix</strong> of <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span></p>
 <!--- TODO: correlation, KL-Divergence --->
 </section>
+</section>
+<section id="maximum-likelihood-and-negative-log-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-and-negative-log-likelihood">Maximum Likelihood (and Negative Log-Likelihood)</h3>
+<p>Considering model parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> and data examples <span class="math inline">\(X\)</span>, the goal of Machine Learning is to find <span class="math inline">\(\boldsymbol{\theta}\)</span> such that <span class="math display">\[\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)\]</span></p>
+<p>By <a href="#sec-bayes-theorem" class="quarto-xref">Bayes’ theorem</a></p>
+<p><span class="math display">\[ \mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}} \dfrac{P(X \mid \boldsymbol{\theta})P(\boldsymbol{\theta})}{P(X)} \]</span></p>
+<p>However <span class="math inline">\(P(X)\)</span> and <span class="math inline">\(P(\boldsymbol{\theta})\)</span> can be dropped because <span class="math inline">\(P(X)\)</span> is independent on <span class="math inline">\(\boldsymbol{\theta}\)</span>, and we have no prior information or “belief” on the best parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>, so <span class="math inline">\(P(\boldsymbol{\theta})\)</span> uninformative.</p>
+<p>Hence, our best parameter estimation is the argument <span class="math inline">\(\boldsymbol{\theta}\)</span> maximizing the likelihood (probability of seeing data <span class="math inline">\(X\)</span> knowing parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>):</p>
+<p><span class="math display">\[ \hat{\boldsymbol{\theta}} = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(X \mid \boldsymbol{\theta}) \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Negative Log-Likelihood
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In practice, we often use Negative Log-Likelihood in ML. The Log part comes from numerical stability and transforming products into sums. Imagine computing the likelihood for billions of data points, it would require too much precision for fp32. But the log-likelihood fits easily and precisely.</p>
+<p>The negative part comes from loss/cost functions, which we want to minimize, not maximize. Because log is continuous and increasing we can transform the maximization problem into a minimization one by taking <span class="math inline">\(-P(X \mid \boldsymbol{\theta})\)</span>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="proofs" class="level2">
