@@ -2,7 +2,7 @@
 title: Probability and Information Theory
 author: Theo POMIES
 date: 2025-09-02
-date-modified: 2025-09-16
+date-modified: 2025-09-30
 description: Small Probability & Information Theory cheatsheet.
 categories: [math]
 ---
@@ -69,7 +69,7 @@ $$\begin{aligned}
 \iff \operatorname{P}(A = a \mid B = b) & = \operatorname{P}(A = a, B = b)/\operatorname{P}(B = b)
 \end{aligned}$$
 
-### Bayes' Theorem
+### Bayes' Theorem {#sec-bayes-theorem}
 
 From the properties and definitions above, we can derive the following formula
 
@@ -183,6 +183,29 @@ If $\mathbf{X} = \mathbf{Y}$ this is the [auto-covariance matrix or variance mat
 If $\mathbf{X} \neq \mathbf{Y}$ this is the **cross-covariance matrix** of $\mathbf{X}$ and $\mathbf{Y}$
 
 <!--- TODO: correlation, KL-Divergence --->
+
+### Maximum Likelihood (and Negative Log-Likelihood)
+
+Considering model parameters $\boldsymbol{\theta}$ and data examples $X$, the goal of Machine Learning is to find $\boldsymbol{\theta}$ such that $$\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)$$
+
+By [Bayes' theorem @sec-bayes-theorem]
+
+$$ \mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}} \dfrac{P(X \mid \boldsymbol{\theta})P(\boldsymbol{\theta})}{P(X)} $$
+
+However $P(X)$ and $P(\boldsymbol{\theta})$ can be dropped because $P(X)$ is independent on $\boldsymbol{\theta}$, and we have no prior information or "belief" on the best parameters $\boldsymbol{\theta}$, so $P(\boldsymbol{\theta})$ uninformative.
+
+Hence, our best parameter estimation is the argument $\boldsymbol{\theta}$ maximizing the likelihood (probability of seeing data $X$ knowing parameters $\boldsymbol{\theta}$):
+
+$$ \hat{\boldsymbol{\theta}} = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(X \mid \boldsymbol{\theta}) $$
+
+:::{.callout-note}
+#### Negative Log-Likelihood
+
+In practice, we often use Negative Log-Likelihood in ML. The Log part comes from numerical stability and transforming products into sums. Imagine computing the likelihood for billions of data points, it would require too much precision for fp32. But the log-likelihood fits easily and precisely.
+
+The negative part comes from loss/cost functions, which we want to minimize, not maximize. Because log is continuous and increasing we can transform the maximization problem into a minimization one by taking $-P(X \mid \boldsymbol{\theta})$.
+:::
+
 
 ## Proofs
 
