@@ -1,9 +1,9 @@
 ---
-title: Probability and Information Theory
+title: Probability, Statistics and Information Theory
 author: Theo POMIES
 date: 2025-09-02
 date-modified: 2025-09-30
-description: Small Probability & Information Theory cheatsheet.
+description: Small Probability, Statistics & Information Theory cheatsheet.
 categories: [math]
 ---
 
@@ -95,7 +95,7 @@ $$\operatorname{E}[X] = \int_{-\infty}^{\infty} x p(x) \;dx $$
 
 To follow mathematical notation, sometimes we use $\mu$ to denote this average.
 
-#### Properties
+#### Properties {#sec-expectation-properties}
 
 * Linearity: $\operatorname{E}[\alpha A + B] = \alpha \operatorname{E}[A] + \operatorname{E}[B]$
 * Equality: $X = Y \; \text{a.s.} \implies \operatorname{E}[X] = \operatorname{E}[Y]$
@@ -147,8 +147,7 @@ $$
 \end{aligned}
 $$
 
-<!---TODO--->
-As a result of the [linearity of expectation]
+As a result of the [linearity of expectation @sec-expectation-properties]
 :::
 
 ### Standard deviation
