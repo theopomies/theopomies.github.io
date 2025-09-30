@@ -1,0 +1,16 @@
+---
+title: Maximum Likelihood and LoRA on Connectionism
+description: Writing notes about negative log-likelihood and reading about LoRA on Connectionism
+categories: [mle, python]
+date: 2025-09-30
+---
+
+Big days for Kivala, our V2 product's development is coming along very well and I've been hard working on the software side to make this release a success and expand Kivala Worldwide. It's taking a lot of my time, so today I read about ML in the train to Paris
+
+### Maximum Likelihood
+
+I wrote about Maximum Likelihood and negative log likelihood today in my [probabilities](/notes/probabilities.qmd) cheatsheet. Basically we want to maximize the likelihood of our model parameters based on a set of examples. For numerical stability and to transform this objective in a minimizing problem, we can use the negative log likelihood.
+
+### LoRA on Connectionism
+
+I read [Thinking Machine's new Connectionism article](https://thinkingmachines.ai/blog/lora/){target=_blank} by [John Schulman](https://x.com/johnschulman2){target=_blank}. They discuss sort of scaling laws, rank choices and learning rates for LoRAs. Still important to note that [Tim Dettmers](https://x.com/Tim_Dettmers){target=_blank} did similar experiments and document them 2 years ago.

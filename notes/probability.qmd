@@ -185,7 +185,8 @@ If $\mathbf{X} \neq \mathbf{Y}$ this is the **cross-covariance matrix** of $\mat
 
 ### Maximum Likelihood (and Negative Log-Likelihood)
 
-Considering model parameters $\boldsymbol{\theta}$ and data examples $X$, the goal of Machine Learning is to find $\boldsymbol{\theta}$ such that $$\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)$$
+Considering model parameters $\boldsymbol{\theta}$ and data examples $X$, the goal of Machine Learning is to find $\boldsymbol{\theta}$ such that
+$$\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)$$
 
 By [Bayes' theorem @sec-bayes-theorem]
 
