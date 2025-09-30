@@ -1,11 +1,8 @@
 [
   {
-    "listing": "/posts/index.html",
-    "items": []
-  },
-  {
     "listing": "/journal/index.html",
     "items": [
+      "/journal/2025-09-30.html",
       "/journal/2025-09-25.html",
       "/journal/2025-09-24.html",
       "/journal/2025-09-23.html",
@@ -29,6 +26,10 @@
       "/journal/2025-08-29.html",
       "/journal/2025-08-28.html"
     ]
+  },
+  {
+    "listing": "/posts/index.html",
+    "items": []
   },
   {
     "listing": "/notes/index.html",

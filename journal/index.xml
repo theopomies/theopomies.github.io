@@ -10,7 +10,34 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Sat, 27 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 30 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Maximum Likelihood and LoRA on Connectionism</title>
+  <link>https://theopomies.com/journal/2025-09-30.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Big days for Kivala, our V2 product’s development is coming along very well and I’ve been hard working on the software side to make this release a success and expand Kivala Worldwide. It’s taking a lot of my time, so today I read about ML in the train to Paris</p>
+<section id="maximum-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood">Maximum Likelihood</h3>
+<p>I wrote about Maximum Likelihood and negative log likelihood today in my <a href="../notes/probabilities.qmd">probabilities</a> cheatsheet. Basically we want to maximize the likelihood of our model parameters based on a set of examples. For numerical stability and to transform this objective in a minimizing problem, we can use the negative log likelihood.</p>
+</section>
+<section id="lora-on-connectionism" class="level3">
+<h3 class="anchored" data-anchor-id="lora-on-connectionism">LoRA on Connectionism</h3>
+<p>I read <a href="https://thinkingmachines.ai/blog/lora/" target="_blank">Thinking Machine’s new Connectionism article</a> by <a href="https://x.com/johnschulman2" target="_blank">John Schulman</a>. They discuss sort of scaling laws, rank choices and learning rates for LoRAs. Still important to note that <a href="https://x.com/Tim_Dettmers" target="_blank">Tim Dettmers</a> did similar experiments and document them 2 years ago.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>mle</category>
+  <category>python</category>
+  <guid>https://theopomies.com/journal/2025-09-30.html</guid>
+  <pubDate>Tue, 30 Sep 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Catching up on classes, DiLoCo, Decentralized Training and Expert Parallelism</title>
   <link>https://theopomies.com/journal/2025-09-25.html</link>
@@ -600,29 +627,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>mle</category>
   <guid>https://theopomies.com/journal/2025-09-02.html</guid>
   <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Finished reading The Manga Guide to Linear Algebra</title>
-  <link>https://theopomies.com/journal/2025-09-01.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I had a lot of work to do for my day job, we are trying to build and commercialize V2 of <a href="https://www.kivala.fr" target="_blank">our intercom system</a>, and I was faced with technical difficulties that left me very little time to work on math / ML. I still found the time to finish The Manga Guide to Linear Algebra, and learned a few important concepts and techniques!</p>
-<section id="still-i-did-a-few-things" class="level3">
-<h3 class="anchored" data-anchor-id="still-i-did-a-few-things">Still, I did a <em>few</em> things</h3>
-<p>TIL about [subspaces], [linear spans], the [rank] of a matrix and a technique to find it via <a href="../notes/linear-algebra.html#sec-gaussian-elimination">Gaussian Eliminination</a> — as usual, linear algebra appears to be the art of applying Gaussian Elimination correctly —, [Eigenvalues] and [Eigenvectors]! That was still packed!</p>
-<p>I skimmed through the materials for <a href="https://maven.com/walk-with-code/scratch-to-scale" target="_blank">Scratch To Scale</a>, the course I’m following by <a href="https://x.com/thezachmueller" target="_blank">Scott Mueller</a>, beginning tomorrow.</p>
-
-
-</section>
-
- ]]></description>
-  <category>math</category>
-  <guid>https://theopomies.com/journal/2025-09-01.html</guid>
-  <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
