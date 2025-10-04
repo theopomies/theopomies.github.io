@@ -1,0 +1,18 @@
+---
+title: NOT ML, building my first Yocto image from scratch on MacOS
+description: Built (compiled) our new products Yocto Linux image from scratch in Devcontainers on MacOS
+categories: [kivala, embedded]
+date: 2025-10-02
+---
+
+The timeline for the release of our new product is narrowing, so I still don't have a lot of time for ML. I still take some time to read daily papers, blog posts and X/Twitter threads, but I can't afford to code for ML right now.
+
+### Yocto Linux
+
+The Yocto Project is an embedded linux distribution linux distribution maintained by the Linux Fundation with OpenEmbedded. It allows to create a custom distribution with every lib and dependency you want and no mas. It's meant to be build on GNU/Linux but with a few shenanigans it runs fine on MacOS.
+
+I learned a lot, fast, with the help of my good friend gpt-5, about metas, recipes, BSPs, bitbake and such, and now after a few tweaks I have managed to run and flash our brand new image on the prototype, and run one V2 app, so all is well and going according to plan.
+
+I think learning about distributed training will help a little in managed a cluster of embedded linux devices all around the world, we'll see!
+
+I still hope to have more free time soon to get back to the ML grind, but the startup grind is still thrilling.
