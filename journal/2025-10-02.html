@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete">
+<meta name="dcterms.date" content="2025-10-02">
+<meta name="description" content="Built (compiled) our new products Yocto Linux image from scratch in Devcontainers on MacOS">
 
-<title>Notes – Theo Pomies</title>
+<title>NOT ML, building my first Yocto image from scratch on MacOS – Theo Pomies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +33,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../img/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -74,68 +73,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-categories','listing-date-modified','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Theo Pomies" href="index.xml" data-external="1"><meta name="twitter:title" content="Notes – Theo Pomies">
-<meta name="twitter:description" content="All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete">
+<meta name="twitter:title" content="NOT ML, building my first Yocto image from scratch on MacOS – Theo Pomies">
+<meta name="twitter:description" content="Built (compiled) our new products Yocto Linux image from scratch in Devcontainers on MacOS">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -333,7 +274,7 @@ window.Quarto = {
 <span class="menu-text">posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../notes/index.html" aria-current="page"> 
+    <a class="nav-link" href="../notes/index.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item">
@@ -355,8 +296,14 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#yocto-linux" id="toc-yocto-linux" class="nav-link active" data-scroll-target="#yocto-linux">Yocto Linux</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -364,12 +311,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Notes</h1>
-</div>
+<h1 class="title">NOT ML, building my first Yocto image from scratch on MacOS</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">kivala</div>
+    <div class="quarto-category">embedded</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    All my notes, formulas and proofs for me to reference later. These are evolving documents, so they might at times be incomplete
+    Built (compiled) our new products Yocto Linux image from scratch in Devcontainers on MacOS
   </div>
 </div>
 
@@ -377,6 +328,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 2, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -386,152 +343,18 @@ window.Quarto = {
 </header>
 
 
-<p><a href="index.xml">rss</a></p>
+<p>The timeline for the release of our new product is narrowing, so I still don’t have a lot of time for ML. I still take some time to read daily papers, blog posts and X/Twitter threads, but I can’t afford to code for ML right now.</p>
+<section id="yocto-linux" class="level3">
+<h3 class="anchored" data-anchor-id="yocto-linux">Yocto Linux</h3>
+<p>The Yocto Project is an embedded linux distribution linux distribution maintained by the Linux Fundation with OpenEmbedded. It allows to create a custom distribution with every lib and dependency you want and no mas. It’s meant to be build on GNU/Linux but with a few shenanigans it runs fine on MacOS.</p>
+<p>I learned a lot, fast, with the help of my good friend gpt-5, about metas, recipes, BSPs, bitbake and such, and now after a few tweaks I have managed to run and flash our brand new image on the prototype, and run one V2 app, so all is well and going according to plan.</p>
+<p>I think learning about distributed training will help a little in managed a cluster of embedded linux devices all around the world, we’ll see!</p>
+<p>I still hope to have more free time soon to get back to the ML grind, but the startup grind is still thrilling.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aA==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1759564813961" data-listing-date-modified-sort="1759190400000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1596">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/probability.html" class="no-external">Probability, Statistics and Information Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/probability.html" class="no-external">
-<p>Small Probability, Statistics &amp; Information Theory cheatsheet.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/probability.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 30, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWxlJTJDcHl0aG9u" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1759564813960" data-listing-date-modified-sort="1758067200000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2082">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/distributed-training.html" class="no-external">Distributed Training</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/distributed-training.html" class="no-external">
-<p>Distributed training study notes and algorithms.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/distributed-training.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 17, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aA==" data-listing-date-sort="1756425600000" data-listing-file-modified-sort="1759564813961" data-listing-date-modified-sort="1757635200000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1660">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/linear-algebra.html" class="no-external">Linear Algebra</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/linear-algebra.html" class="no-external">
-<p>All things Linear Algebra, matrices, vectors etc.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/linear-algebra.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aA==" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1759564813960" data-listing-date-modified-sort="1757635200000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1065">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/calculus.html" class="no-external">Calculus</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/calculus.html" class="no-external">
-<p>All things calculus, differential or integral.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/calculus.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="cHl0aG9uJTJDbWxl" data-listing-date-sort="1756771200000" data-listing-file-modified-sort="1759564813961" data-listing-date-modified-sort="1756944000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/pytorch.html" class="no-external">PyTorch</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWxl'); return false;">mle</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/pytorch.html" class="no-external">
-<p>torch cheatsheet, common methods or tricks.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/pytorch.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Sep 4, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="dHlwZXNjcmlwdA==" data-listing-date-sort="1739491200000" data-listing-file-modified-sort="1759564813961" data-listing-date-modified-sort="1739577600000" data-listing-reading-time-sort="2" data-listing-word-count-sort="249">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/typescript.html" class="no-external">On Typescript</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dHlwZXNjcmlwdA=='); return false;">typescript</div>
-
-</div>
-<div class="delink listing-description"><a href="../notes/typescript.html" class="no-external">
-<p>A few notes on Typescript for my future self.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../notes/typescript.html" class="no-external">
-<div class="metadata-value listing-date-modified">
-Feb 15, 2025
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

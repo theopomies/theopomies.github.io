@@ -10,7 +10,33 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Tue, 30 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 02 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>NOT ML, building my first Yocto image from scratch on MacOS</title>
+  <link>https://theopomies.com/journal/2025-10-02.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The timeline for the release of our new product is narrowing, so I still don’t have a lot of time for ML. I still take some time to read daily papers, blog posts and X/Twitter threads, but I can’t afford to code for ML right now.</p>
+<section id="yocto-linux" class="level3">
+<h3 class="anchored" data-anchor-id="yocto-linux">Yocto Linux</h3>
+<p>The Yocto Project is an embedded linux distribution linux distribution maintained by the Linux Fundation with OpenEmbedded. It allows to create a custom distribution with every lib and dependency you want and no mas. It’s meant to be build on GNU/Linux but with a few shenanigans it runs fine on MacOS.</p>
+<p>I learned a lot, fast, with the help of my good friend gpt-5, about metas, recipes, BSPs, bitbake and such, and now after a few tweaks I have managed to run and flash our brand new image on the prototype, and run one V2 app, so all is well and going according to plan.</p>
+<p>I think learning about distributed training will help a little in managed a cluster of embedded linux devices all around the world, we’ll see!</p>
+<p>I still hope to have more free time soon to get back to the ML grind, but the startup grind is still thrilling.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>kivala</category>
+  <category>embedded</category>
+  <guid>https://theopomies.com/journal/2025-10-02.html</guid>
+  <pubDate>Thu, 02 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Maximum Likelihood and LoRA on Connectionism</title>
   <link>https://theopomies.com/journal/2025-09-30.html</link>
@@ -595,38 +621,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>python</category>
   <guid>https://theopomies.com/journal/2025-09-03.html</guid>
   <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Starting Scratch To Scale (S2S) and Dive into Deep Learning (D2L)</title>
-  <link>https://theopomies.com/journal/2025-09-02.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Today I revised the basics of calculus on D2L, and ended the day with the first “lesson” on Distributed Training (S2S) by <a href="https://www.x.com/thezachmueller">Zach Mueller</a>.</p>
-<section id="calculus" class="level3">
-<h3 class="anchored" data-anchor-id="calculus">Calculus</h3>
-<p>I worked a bit on calculus, and there’s always something to learn, even we you go as far back as the high-school level stuff. Small example, it’s just today that I realized that <img src="https://latex.codecogs.com/png.latex?%5Cdfrac%7Bdx%7D%7Bdy%7D%20=%20%5Cdfrac%7B1%7D%7B%5Cfrac%7Bdy%7D%7Bdx%7D%7D"> (cf.&nbsp;the definition of derivative as a limit).</p>
-<p>I also got my hands back into multivariate calculus and learning useful identities.</p>
-</section>
-<section id="distributed-training-s2s" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-training-s2s">Distributed Training (S2S)</h3>
-<p>Finally, I finished the day learning the basics of distributed/parallel processing/training on GPUs (using <code>torch.distributed</code>, we’re not yet at the triton or CUDA level, but someday we’ll be there, just watch).</p>
-<p>We went from the <a href="../notes/distributed-training.html#basics-point-point">primitives</a> — (i)send and (i)recv — to the <a href="../notes/distributed-training.html#collective-operations">collective operations</a> — reduce, all_reduce, scatter, reduce_scatter, broadcast, barrier, all2all, gather, all_gather. I can now much more easily conceive how distributed training algorithms work.</p>
-<p>I learned a few distributed training concepts, such as the <em>rank</em>.</p>
-<p>I concluded the day by running my first notebooks accelerated by more than 1 GPU on <a href="https://www.modal.com" target="_blank">Modal</a>. I’d done some lightly GPU accelerated stuff on <a href="https://www.kaggle.com" target="_blank">Kaggle</a>, but now I could grasp how to do stuff with multiple GPUs.</p>
-
-
-</section>
-
- ]]></description>
-  <category>math</category>
-  <category>python</category>
-  <category>mle</category>
-  <guid>https://theopomies.com/journal/2025-09-02.html</guid>
-  <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
