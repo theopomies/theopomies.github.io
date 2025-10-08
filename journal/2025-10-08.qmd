@@ -1,0 +1,22 @@
+---
+title: Blogs and videos
+description: Still too busy to code math / ML ...
+categories: []
+date: 2025-10-08
+---
+
+I'm feeling both very hyped for Kivala and very down regarding my lack of time for ML these last weeks...
+
+This entry is gonna be short, I'm trying to get the ball back rolling for writing daily, these moments kinda suck because I want to reflect, I want to build a habit of working on this side quest and document it, but being CTO/lead at a startup with an innovative product but still in a quite saturated market (intercom/digicodes) requires 110% of my time and attention and I've been trying to be hitting the gym 5/7 and sleep min 9h/nights so that's tough.
+
+I spend a lot of time in trains, moving throughout france seeing family, friends, going to the Kivala HQ etc., internet quality sucks in the train so I use this time to read mostly
+
+### Kivala
+
+Wrote some scripts, got a new hardware prototype, ran the app on it, fixed some hardware issues, updated our current hardware with a release allowing Light themeing for the bright days + QoL fixes.
+
+### ML
+
+Read some blogs articles and essays, 2 from John Schulman (KL Divergence estimator and Research career advice), 1 from thinking machines on their Tinker framework, downladed and skimmed some papers (tiny MoEs, diffusion papers, world models and RL). Started reading a book about information theory, I'll write more about it once I understand enough to.
+
+Overall I'm still proud of myself and I feel like I've got my priorities straight, my current startup is my income AND capital upside could be huge, and my health is primordial, I still feel in peak form, shape and energy.
