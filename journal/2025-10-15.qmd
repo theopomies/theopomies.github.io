@@ -1,0 +1,18 @@
+---
+title: Read one paper (TRM)
+description: Well, that's disappointing (not the paper, it's awesome, but my free time)
+categories: [ml, paper]
+date: 2025-10-15
+---
+
+I'll be quick because besides watching some youtube explainers, reading a few blog posts and seeing the AI/ML trends on X, I have had no time last week. (How can anyone juggle a startup, family, girlfriend AND learning on the side?)
+
+### TRM
+
+I read the [Tiny Recursive Model paper](https://huggingface.co/papers/2510.04871){target=_blank}, by [Alexia Jolicoeur-Martineau](https://x.com/jm_alexia){target=_blank}.
+
+The idea is a smaller, simpler, more interpretable Hierarchical Reasoning Model (HRM), another recursive model proposed earlier.
+
+The model uses a single network with 3 inputs (the input features, the previous output and the latent reasoning output) and 2 outputs (a current target feature and a latent reasoning output), and performs "inner" loops trying to improve reasoning, then the output.
+
+Interestingly it generalizes very well at tiny sizes, and adding more layers or parameters degrades performance leading to overfitting.
