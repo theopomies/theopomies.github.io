@@ -10,7 +10,33 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Wed, 08 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 15 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Read one paper (TRM)</title>
+  <link>https://theopomies.com/journal/2025-10-15.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I’ll be quick because besides watching some youtube explainers, reading a few blog posts and seeing the AI/ML trends on X, I have had no time last week. (How can anyone juggle a startup, family, girlfriend AND learning on the side?)</p>
+<section id="trm" class="level3">
+<h3 class="anchored" data-anchor-id="trm">TRM</h3>
+<p>I read the <a href="https://huggingface.co/papers/2510.04871" target="_blank">Tiny Recursive Model paper</a>, by <a href="https://x.com/jm_alexia" target="_blank">Alexia Jolicoeur-Martineau</a>.</p>
+<p>The idea is a smaller, simpler, more interpretable Hierarchical Reasoning Model (HRM), another recursive model proposed earlier.</p>
+<p>The model uses a single network with 3 inputs (the input features, the previous output and the latent reasoning output) and 2 outputs (a current target feature and a latent reasoning output), and performs “inner” loops trying to improve reasoning, then the output.</p>
+<p>Interestingly it generalizes very well at tiny sizes, and adding more layers or parameters degrades performance leading to overfitting.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>ml</category>
+  <category>paper</category>
+  <guid>https://theopomies.com/journal/2025-10-15.html</guid>
+  <pubDate>Wed, 15 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Blogs and videos</title>
   <link>https://theopomies.com/journal/2025-10-08.html</link>
@@ -587,44 +613,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>mle</category>
   <guid>https://theopomies.com/journal/2025-09-05.html</guid>
   <pubDate>Fri, 05 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Going through DDP with S2S</title>
-  <link>https://theopomies.com/journal/2025-09-04.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="finishing-the-preliminaries-for-d2l" class="level3">
-<h3 class="anchored" data-anchor-id="finishing-the-preliminaries-for-d2l">Finishing the preliminaries for D2L</h3>
-<p>Well, finally I’m done with the “catching up” for D2L, with a good refresher on Probabilities. Since I studied stats and probabilities at university, I didn’t <em>learn</em> anything new here, but it’s always good to refresh some knowledge, and re-derive formulas, to have them in mind and <em>grok</em> or <em>accept</em> them as true. Like the classic <a href="../notes/probability.html#bayes-theorem">Bayes Theorem</a>, I always accepted the formula as a way to flip conditional probabilities, but rarely as a way of updating a prior.</p>
-</section>
-<section id="evening-study-session-on-ddp" class="level3">
-<h3 class="anchored" data-anchor-id="evening-study-session-on-ddp">Evening study session on DDP</h3>
-<p>We discussed the <a href="../notes/distributed-training.html#algorithms-techniques">different types of parallelism</a> (for ML distributed training):</p>
-<ul>
-<li>(Distributed) Data Parallelism (<strong>DDP</strong>): Each <em>rank</em> loads a copy — replica — of the model, after each optimizer step they always all have the same parameters, they are <strong>replicants</strong>. Each rank then trains on a <em>different</em> mini-batch (hence the importance of <a href="../notes/distributed-training.html#data-sharding">data sharding</a>). We then average the gradients, perform a step of gradient descent, rinse and repeat. If we <em>can</em> use this, we should, it has the least amount of overhead, but it requires that the model + optimizer states all fit in the device’s VRAM.</li>
-<li>Pipeline Parallelism (<strong>PP</strong>): We split the model across different ranks without splitting the layers (so we split <em>along the layers</em>). That is <em>inter-layer</em> parallelism. An exaggeration would be having a model with 2 hidden layers and 1 output layer split across 3 GPUs.</li>
-<li>Tensor Parallelism (<strong>TP</strong>): We split the layers of the model across different ranks, that’s <em>intra-layer</em> parallelism. This could be useful if some layers are so large they don’t even fit in a single device. To reduce overhead, it’s advisable that even if a layer is split across different <em>ranks</em>, all parts remain on the same <em>node</em>. (See <a href="../notes/distributed-training.html#terminology">terminology</a>)</li>
-</ul>
-<p>There’s also</p>
-<ul>
-<li>Expert Parallelism (<strong>EP</strong>): For Mixture-of-Experts (<strong>MoE</strong>) we can split the experts on different devices.</li>
-</ul>
-<p>We didn’t discuss much this last one but I knew about it already and searched a bit to know more about it.</p>
-<p>Last but not least we discussed the issue of DataLoaders / Samplers, and the importance of data sharding. They are a mean of “splitting” efficiently our dataset so that each rank sees a different mini-batch of data. Also, each process only loads its <em>shard</em> so it’s more memory/communication efficient.</p>
-
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>mle</category>
-  <category>math</category>
-  <guid>https://theopomies.com/journal/2025-09-04.html</guid>
-  <pubDate>Thu, 04 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
