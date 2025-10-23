@@ -1,0 +1,20 @@
+---
+title: Habitual Newsletter Reading + Paper downloading
+description: Read about new VLM techniques
+categories: [ml, paper]
+date: 2025-10-23
+---
+
+Read my newsletters [bycloud](mail.bycloud.ai){target=_blank} and [AINews](news.smol.ai){target=_blank}.
+
+Read about the new trend in VLMs / OCR -> removing the VAE and and using CLIP / SAM / DINO = Pure vision model backbones.
+
+Watched a video on [subliminal learning by Welch Labs](https://www.youtube.com/watch?v=NUAb6zHXqdI){target=_blank} and [Yann LeCunn's talk about JEPA, World Models and the future of AI](https://www.youtube.com/watch?v=yUmDRxV0krg){target=_blank}.
+
+No AI / ML Code (Only day job code)
+
+Legs workout, deload week, 12/20 RPE (Whoop rates RPE / 20)
+
+### Conclusion
+
+Need to work on more actionnable steps + spend less time on X (1h max).

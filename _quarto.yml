@@ -20,8 +20,6 @@ website:
   favicon: img/favicon.ico
   navbar:
     title: false
-    # collapse: false
-    # tools-collapse: false
     background: $body-bg
     color: $body-color
     left:
