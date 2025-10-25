@@ -1,0 +1,19 @@
+---
+title: Entropy, KL-Divergence and a call with a potential customer
+description: Entropy content + prospect call
+categories: [math, freelance]
+date: 2025-10-24
+---
+
+### Content
+* Read my newsletters [AINews](news.smol.ai){target=_blank} and [HF Daily Papers](https://huggingface.co/papers/){target=_blank}.
+* Watched a video on [Probability and Entropy by Artem Kirsanov](https://www.youtube.com/watch?v=KHVR587oW8I){target=_blank}.
+* Read more about the topic in [D2L](https://d2l.ai){target=_blank}'s appendix: Information Theory
+
+### Actions
+* No AI / ML Code (Only day job code)
+* Call with a potential customer for coding a recruitment SaaS for them.
+* Chest+Back workout, deload week, 12/20 RPE.
+
+### Conclusion
+Spent less time on X (1h max) and more time learning.

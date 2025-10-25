@@ -1,0 +1,13 @@
+---
+title: Writing notes on probability and information theory
+description: Consolidating learning and writing notes
+categories: [math]
+date: 2025-10-25
+---
+
+### Content
+* Read my newsletters [AINews](news.smol.ai){target=_blank} and [HF Daily Papers](https://huggingface.co/papers/){target=_blank}.
+* Re-Watched the video on [Entropy by Artem Kirsanov](https://www.youtube.com/watch?v=KHVR587oW8I){target=_blank} to write notes.
+
+### Actions
+* Wrote notes on Information Theory and Entropy

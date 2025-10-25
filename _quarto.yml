@@ -29,8 +29,8 @@ website:
         text: posts
       - href: notes/index.qmd
         text: notes
-      - href: journal/index.qmd
-        text: journal
+      # - href: journal/index.qmd
+      #   text: journal
     tools:
       - icon: twitter-x
         href: https://x.com/theopomies
