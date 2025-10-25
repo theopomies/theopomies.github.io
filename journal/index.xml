@@ -10,7 +10,75 @@
 <atom:link href="https://theopomies.com/journal/index.xml" rel="self" type="application/rss+xml"/>
 <description>Daily journal, accountability management and learning tracking.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Thu, 23 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 25 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Writing notes on probability and information theory</title>
+  <link>https://theopomies.com/journal/2025-10-25.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="content" class="level3">
+
+<ul>
+<li>Read my newsletters <a href="news.smol.ai" target="_blank">AINews</a> and <a href="https://huggingface.co/papers/" target="_blank">HF Daily Papers</a>.</li>
+<li>Re-Watched the video on <a href="https://www.youtube.com/watch?v=KHVR587oW8I" target="_blank">Entropy by Artem Kirsanov</a> to write notes.</li>
+</ul>
+</section>
+<section id="actions" class="level3">
+<h3 class="anchored" data-anchor-id="actions">Actions</h3>
+<ul>
+<li>Wrote notes on Information Theory and Entropy</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <guid>https://theopomies.com/journal/2025-10-25.html</guid>
+  <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Entropy, KL-Divergence and a call with a potential customer</title>
+  <link>https://theopomies.com/journal/2025-10-24.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="content" class="level3">
+<h3 class="anchored" data-anchor-id="content">Content</h3>
+<ul>
+<li>Read my newsletters <a href="news.smol.ai" target="_blank">AINews</a> and <a href="https://huggingface.co/papers/" target="_blank">HF Daily Papers</a>.</li>
+<li>Watched a video on <a href="https://www.youtube.com/watch?v=KHVR587oW8I" target="_blank">Probability and Entropy by Artem Kirsanov</a>.</li>
+<li>Read more about the topic in <a href="https://d2l.ai" target="_blank">D2L</a>’s appendix: Information Theory</li>
+</ul>
+</section>
+<section id="actions" class="level3">
+<h3 class="anchored" data-anchor-id="actions">Actions</h3>
+<ul>
+<li>No AI / ML Code (Only day job code)</li>
+<li>Call with a potential customer for coding a recruitment SaaS for them.</li>
+<li>Chest+Back workout, deload week, 12/20 RPE.</li>
+</ul>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Spent less time on X (1h max) and more time learning.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>math</category>
+  <category>freelance</category>
+  <guid>https://theopomies.com/journal/2025-10-24.html</guid>
+  <pubDate>Fri, 24 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Habitual Newsletter Reading + Paper downloading</title>
   <link>https://theopomies.com/journal/2025-10-23.html</link>
@@ -555,60 +623,6 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
   <category>mle</category>
   <guid>https://theopomies.com/journal/2025-09-10.html</guid>
   <pubDate>Wed, 10 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>ZeRO / FSDP with Sylvain Gugger and Scott Mueller</title>
-  <link>https://theopomies.com/journal/2025-09-09.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="zero-fsdp" class="level3">
-<h3 class="anchored" data-anchor-id="zero-fsdp">ZeRO / FSDP</h3>
-<p>Tonight we had a superb lesson — very dense — by <a href="https://x.com/GuggerSylvain">Sylvain Gugger</a>{_target=blank} on ZeRO, followed by a code dive-in with Scott. Overall takeaway (more detailed in <a href="../notes/distributed-training.html#">my notes</a>): * adam is stateful: has states, so ~4x model size in total to store - ZeRO: <strong>Ze</strong>ro <strong>R</strong>edudency <strong>O</strong>ptimizer -&gt; sharding optimizer state: each gpu updates a subset of the models params then they share it all together all_gather - ZeRO2: Also sharding gradients - ZeRO3 == FSDP (PyTorch version): also sharding the model!</p>
-<p>ZeRO is NOT A PARALLELISM strategy, it’s a modeling one. Think parallelism = more throughput, modeling strategy <img src="https://latex.codecogs.com/png.latex?%5Capprox"> memory optimizations</p>
-
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>mle</category>
-  <guid>https://theopomies.com/journal/2025-09-09.html</guid>
-  <pubDate>Tue, 09 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Marimo Workshop + Integrals refresher</title>
-  <link>https://theopomies.com/journal/2025-09-08.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="binge-watched-essence-of-calculus" class="level3">
-<h3 class="anchored" data-anchor-id="binge-watched-essence-of-calculus">Binge watched Essence of Calculus</h3>
-<p>After digging back into probabilities, I realized how important it was that I not only know <a href="../notes/calculus.html#integrals">integrals</a> and formulas, but also that I completely <em>grok</em> and am able to derive these formulas from first principles. So I re-watched the entire <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Essence of Calculus</a> series by the incredible <a href="https://www.youtube.com/@3blue1brown" target="_blank">3b1b / Grant Sanderson</a>.</p>
-<p>And grokking I did, between the videos and my old high-school and college lessons somewhere hidden deep inside my mind, I feel a renewed understanding of integration, so I wrote notes for the future me that will obviously forget again.</p>
-</section>
-<section id="some-more-linear-algebra" class="level3">
-<h3 class="anchored" data-anchor-id="some-more-linear-algebra">Some more Linear Algebra</h3>
-<p>Some research into the basics — first principles always wins — led me to learn about <a href="../notes/linear-algebra.html#sec-elementary-matrix">Elementary Matrices</a>. I’d never given more thought to Gaussian Elimination that just using the row operations to achieve my goal. But thinking about elementary matrices and their properties, made things like <a href="../notes/linear-algebra.html#lu-decomposition-or-lu-factorization">LU decomposition</a> click even more.</p>
-</section>
-<section id="marimo-workshop" class="level3">
-<h3 class="anchored" data-anchor-id="marimo-workshop">Marimo Workshop</h3>
-<p>To finish off this awesome day of learning, we had a workshop with <a href="https://koaning.io/" target="_blank">Vincent Warmerdam</a> from the <a href="https://marimo.io" target="_blank">Marimo</a> team. I love marimo and I loved learning more about it’s capabilities and ways to hack (with / at) it.</p>
-
-
-</section>
-
- ]]></description>
-  <category>python</category>
-  <category>math</category>
-  <guid>https://theopomies.com/journal/2025-09-08.html</guid>
-  <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

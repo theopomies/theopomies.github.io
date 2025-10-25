@@ -307,10 +307,6 @@ window.Quarto = {
     <a class="nav-link" href="../notes/index.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../journal/index.html"> 
-<span class="menu-text">journal</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
@@ -337,11 +333,15 @@ window.Quarto = {
   <li><a href="#probability-function" id="toc-probability-function" class="nav-link" data-scroll-target="#probability-function">Probability function</a></li>
   <li><a href="#sec-random-variables" id="toc-sec-random-variables" class="nav-link" data-scroll-target="#sec-random-variables">Random Variables</a></li>
   <li><a href="#sec-bayes-theorem" id="toc-sec-bayes-theorem" class="nav-link" data-scroll-target="#sec-bayes-theorem">Bayes’ Theorem</a></li>
-  <li><a href="#expectation" id="toc-expectation" class="nav-link" data-scroll-target="#expectation">Expectation</a></li>
+  <li><a href="#sec-expectation" id="toc-sec-expectation" class="nav-link" data-scroll-target="#sec-expectation">Expectation</a></li>
   <li><a href="#sec-variance" id="toc-sec-variance" class="nav-link" data-scroll-target="#sec-variance">Variance</a></li>
   <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard deviation</a></li>
   <li><a href="#sec-covariance" id="toc-sec-covariance" class="nav-link" data-scroll-target="#sec-covariance">Covariance</a></li>
   <li><a href="#maximum-likelihood-and-negative-log-likelihood" id="toc-maximum-likelihood-and-negative-log-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood-and-negative-log-likelihood">Maximum Likelihood (and Negative Log-Likelihood)</a></li>
+  <li><a href="#information" id="toc-information" class="nav-link" data-scroll-target="#information">Information</a></li>
+  <li><a href="#sec-entropy" id="toc-sec-entropy" class="nav-link" data-scroll-target="#sec-entropy">Entropy</a></li>
+  <li><a href="#sec-cross-entropy" id="toc-sec-cross-entropy" class="nav-link" data-scroll-target="#sec-cross-entropy">Cross-Entropy</a></li>
+  <li><a href="#kullback-leibler-divergence-kl-divergence" id="toc-kullback-leibler-divergence-kl-divergence" class="nav-link" data-scroll-target="#kullback-leibler-divergence-kl-divergence">Kullback-Leibler Divergence (KL-Divergence)</a></li>
   </ul></li>
   <li><a href="#proofs" id="toc-proofs" class="nav-link" data-scroll-target="#proofs">Proofs</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
@@ -386,7 +386,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 30, 2025</p>
+      <p class="date-modified">October 25, 2025</p>
     </div>
   </div>
     
@@ -450,18 +450,26 @@ Note
 <section id="multiple-random-variables" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-random-variables">Multiple Random Variables</h4>
 <p><span class="math inline">\(\operatorname{P}(A = a, B = b)\)</span> is the <strong>joint probability</strong> of <span class="math inline">\(A = a\)</span> <strong>and</strong> <span class="math inline">\(B = b\)</span> (it’s the intersection of the events <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>). Equivalently it’s <span class="math inline">\(\operatorname{P}(\{A = a\} \cap \{B = b\})\)</span>, with an overloaded notation, the <strong>joint probability distribution</strong> becomes <span class="math inline">\(\operatorname{P}(A, B)\)</span></p>
-<p>Obviously <span class="math display">\[ \operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b) \]</span></p>
-<p>Also, we can <strong>marginalize</strong> <span class="math display">\[ \operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v) \]</span></p>
-<p>Because <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span> are events, <span class="math display">\[\begin{aligned}
+<p>Obviously <span class="math display">\[
+\operatorname{P}(A = a, B = b) \leq \operatorname{P}(A=a) \quad \text{and} \quad \operatorname{P}(A = a, B = b) \leq \operatorname{P}(B=b)
+\]</span></p>
+<p>Also, we can <strong>marginalize</strong> <span class="math display">\[
+\operatorname{P}(A = a) = \sum_v \operatorname{P}(A = a, B = v)
+\]</span></p>
+<p>Because <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span> are events, <span class="math display">\[
+\begin{aligned}
 \operatorname{P}(A = a, B = b) &amp; = \operatorname{P}(A = a \mid B = b)\operatorname{P}(B = b) \\
 \iff \operatorname{P}(A = a \mid B = b) &amp; = \operatorname{P}(A = a, B = b)/\operatorname{P}(B = b)
-\end{aligned}\]</span></p>
+\end{aligned}
+\]</span></p>
 </section>
 </section>
 <section id="sec-bayes-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="sec-bayes-theorem">Bayes’ Theorem</h3>
 <p>From the properties and definitions above, we can derive the following formula</p>
-<p><span class="math display">\[ \overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfrac{\overbrace{\operatorname{P}(B \mid A)}^{\text{likelihood}}\overbrace{\operatorname{P}(A)}^{\text{prior}}}{\underbrace{\operatorname{P}(B)}_{\text{observation}}} \]</span></p>
+<p><span class="math display">\[
+\overbrace{\operatorname{P}(A \mid B)}^{\text{posterior probability}} = \dfrac{\overbrace{\operatorname{P}(B \mid A)}^{\text{likelihood}}\overbrace{\operatorname{P}(A)}^{\text{prior}}}{\underbrace{\operatorname{P}(B)}_{\text{observation}}}
+\]</span></p>
 <ul>
 <li>prior/hypothesis: our estimate or current belief about the probability of <span class="math inline">\(A\)</span></li>
 <li>observation/marginal likelihood/evidence: the evidence or observations we’ve made regarding <span class="math inline">\(B\)</span></li>
@@ -469,13 +477,17 @@ Note
 </ul>
 <p>A simplified version is <span class="math inline">\(\operatorname{P}(A \mid B) \propto \operatorname{P}(B \mid A)\operatorname{P}(A)\)</span></p>
 </section>
-<section id="expectation" class="level3">
-<h3 class="anchored" data-anchor-id="expectation">Expectation</h3>
+<section id="sec-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-expectation">Expectation</h3>
 <p>The <strong>expectation</strong> (or <strong>expected value</strong>) is the weighted average of the values of <span class="math inline">\(X\)</span>.</p>
 <p>Discrete case:</p>
-<p><span class="math display">\[ \operatorname{E}[X] = \operatorname{E}_{X \sim P}[X] = \sum_x x\operatorname{P}(X=x) \]</span></p>
+<p><span class="math display">\[
+\operatorname{E}[X] = \operatorname{E}_{X \sim P}[X] = \sum_x x\operatorname{P}(X=x)
+\]</span></p>
 <p>Continuous case:</p>
-<p><span class="math display">\[\operatorname{E}[X] = \int_{-\infty}^{\infty} x p(x) \;dx \]</span></p>
+<p><span class="math display">\[
+\operatorname{E}[X] = \int_{-\infty}^{\infty} x p(x) \;dx
+\]</span></p>
 <p>To follow mathematical notation, sometimes we use <span class="math inline">\(\mu\)</span> to denote this average.</p>
 <section id="sec-expectation-properties" class="level4">
 <h4 class="anchored" data-anchor-id="sec-expectation-properties">Properties</h4>
@@ -494,17 +506,26 @@ Note
 <section id="sec-variance" class="level3">
 <h3 class="anchored" data-anchor-id="sec-variance">Variance</h3>
 <p>The <strong>variance</strong> is a measure of dispersion, it quantifies <em>how much values deviate from their expectation, on average</em>. The variance is the expectation of the squared difference between the values and the expected value.</p>
-<p><span class="math display">\[ \operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2 \]</span></p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = \operatorname{E}[(X - \operatorname{E}[X])^2] = \operatorname{E}[X^2] - (\operatorname{E}[X])^2
+\]</span></p>
 <p>Because</p>
-<p><span class="math display">\[ \operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2 \]</span></p>
+<p><span class="math display">\[
+\operatorname{E}[X^2 - 2X\operatorname{E}[X] + \operatorname{E}[X]^2] = \operatorname{E}[X^2] - 2(\operatorname{E}[X])^2 + (\operatorname{E}[X])^2
+\]</span></p>
 <section id="sec-var-random-vector" class="level4">
 <h4 class="anchored" data-anchor-id="sec-var-random-vector">Variance of a Random Vector</h4>
 <p>For a random vector <span class="math inline">\(\mathbf{X}\)</span>, we store the pairwise <strong>variances</strong> of elements and <strong><a href="#sec-covariance" class="quarto-xref">covariances</a></strong> in a <strong><a href="#sec-covariance-matrix" class="quarto-xref">covariance matrix</a></strong> (aka. auto-covariance matrix or variance matrix) noted <span class="math inline">\(\mathbf{\Sigma}\)</span> or <span class="math inline">\(K_{\mathbf{x}\mathbf{x}}\)</span> or <span class="math inline">\(\operatorname{Cov}_{\mathbf{x} \sim P}\)</span>, defined as</p>
-<p><span class="math display">\[ \mathbf{\Sigma} = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \]</span> <span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+\mathbf{\Sigma} = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top]
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
 \mathbf{\Sigma} = K_{\mathbf{X}\mathbf{Y}}
 &amp; = \operatorname{E}_{\mathbf{X} \sim P}[(\mathbf{X} - \mathbf{\mu})(\mathbf{X} - \mathbf{\mu})^\top] \\
 &amp; = \operatorname{E}[\mathbf{X}\mathbf{X}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{X}]^\top
-\end{aligned}\]</span></p>
+\end{aligned}
+\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -547,12 +568,16 @@ Note
 <section id="standard-deviation" class="level3">
 <h3 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h3>
 <p>Because the <a href="#sec-variance" class="quarto-xref">variance</a> is a squared difference, we can take its square root to get the <strong>standard deviation</strong> which has the benefit of being in the same unit as our random variable.</p>
-<p><span class="math display">\[ \operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)} \]</span></p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = \sigma^2_X \iff \sigma_X = \sqrt{\operatorname{Var}(X)}
+\]</span></p>
 </section>
 <section id="sec-covariance" class="level3">
 <h3 class="anchored" data-anchor-id="sec-covariance">Covariance</h3>
 <p><strong>Covariance</strong> is a measure of the joint variability of two <a href="#sec-random-variables" class="quarto-xref">random variables</a>.</p>
-<p><span class="math display">\[ \operatorname{Cov}(X, Y) = \operatorname{E}[(X - \operatorname{E}[X])(Y - \operatorname{E}[Y])] \]</span></p>
+<p><span class="math display">\[
+\operatorname{Cov}(X, Y) = \operatorname{E}[(X - \operatorname{E}[X])(Y - \operatorname{E}[Y])]
+\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -569,24 +594,32 @@ Note
 <section id="sec-covariance-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="sec-covariance-matrix">Covariance Matrix of two Random Vectors</h4>
 <p>For random vectors <span class="math inline">\(\mathbf{X} \in \mathbb{R}^m\)</span>, <span class="math inline">\(\mathbf{Y} \in \mathbb{R}^n\)</span>, the <strong>covariance matrix</strong> is a matrix <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span> defined as</p>
-<p><span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+\begin{aligned}
 K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}[\mathbf{X}])(\mathbf{Y} - \operatorname{E}[\mathbf{Y}])^\top] \\
 &amp; = \operatorname{E}[\mathbf{X}\mathbf{Y}^\top] - \operatorname{E}[\mathbf{X}]\operatorname{E}[\mathbf{Y}]^\top
-\end{aligned}\]</span></p>
+\end{aligned}
+\]</span></p>
 <p>We have <span class="math inline">\(\operatorname{Cov}(X_i, Y_j) = K_{X_iY_j} = \operatorname{E}[(X_i - \operatorname{E}[X_i])(Y_j - \operatorname{E}[Y_j])]\)</span> found at index <span class="math inline">\((i, j)\)</span> in <span class="math inline">\(K_{\mathbf{X}\mathbf{Y}}\)</span></p>
 <p>If <span class="math inline">\(\mathbf{X} = \mathbf{Y}\)</span> this is the <a href="#sec-var-random-vector" class="quarto-xref">auto-covariance matrix or variance matrix</a> of this random vector <span class="math inline">\(\mathbf{X}\)</span></p>
 <p>If <span class="math inline">\(\mathbf{X} \neq \mathbf{Y}\)</span> this is the <strong>cross-covariance matrix</strong> of <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span></p>
-<!--- TODO: correlation, KL-Divergence --->
+<!--- TODO: correlation --->
 </section>
 </section>
 <section id="maximum-likelihood-and-negative-log-likelihood" class="level3">
 <h3 class="anchored" data-anchor-id="maximum-likelihood-and-negative-log-likelihood">Maximum Likelihood (and Negative Log-Likelihood)</h3>
-<p>Considering model parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> and data examples <span class="math inline">\(X\)</span>, the goal of Machine Learning is to find <span class="math inline">\(\boldsymbol{\theta}\)</span> such that <span class="math display">\[\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)\]</span></p>
+<p>Considering model parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> and data examples <span class="math inline">\(X\)</span>, the goal of Machine Learning is to find <span class="math inline">\(\boldsymbol{\theta}\)</span> such that <span class="math display">\[
+\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X)
+\]</span></p>
 <p>By <a href="#sec-bayes-theorem" class="quarto-xref">Bayes’ theorem</a></p>
-<p><span class="math display">\[ \mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}} \dfrac{P(X \mid \boldsymbol{\theta})P(\boldsymbol{\theta})}{P(X)} \]</span></p>
+<p><span class="math display">\[
+\mathop{\mathrm{argmax}} P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}} \dfrac{P(X \mid \boldsymbol{\theta})P(\boldsymbol{\theta})}{P(X)}
+\]</span></p>
 <p>However <span class="math inline">\(P(X)\)</span> and <span class="math inline">\(P(\boldsymbol{\theta})\)</span> can be dropped because <span class="math inline">\(P(X)\)</span> is independent on <span class="math inline">\(\boldsymbol{\theta}\)</span>, and we have no prior information or “belief” on the best parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>, so <span class="math inline">\(P(\boldsymbol{\theta})\)</span> uninformative.</p>
 <p>Hence, our best parameter estimation is the argument <span class="math inline">\(\boldsymbol{\theta}\)</span> maximizing the likelihood (probability of seeing data <span class="math inline">\(X\)</span> knowing parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>):</p>
-<p><span class="math display">\[ \hat{\boldsymbol{\theta}} = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(X \mid \boldsymbol{\theta}) \]</span></p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\theta}} = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(\boldsymbol{\theta}\mid X) = \mathop{\mathrm{argmax}}_{\boldsymbol{\theta}}\, P(X \mid \boldsymbol{\theta})
+\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -599,6 +632,122 @@ K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}
 <div class="callout-body-container callout-body">
 <p>In practice, we often use Negative Log-Likelihood in ML. The Log part comes from numerical stability and transforming products into sums. Imagine computing the likelihood for billions of data points, it would require too much precision for fp32. But the log-likelihood fits easily and precisely.</p>
 <p>The negative part comes from loss/cost functions, which we want to minimize, not maximize. Because log is continuous and increasing we can transform the maximization problem into a minimization one by taking <span class="math inline">\(-P(X \mid \boldsymbol{\theta})\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="information" class="level3">
+<h3 class="anchored" data-anchor-id="information">Information</h3>
+<p><strong>Information</strong> is approximately the amount of “surprise” of an event or statement. Information tells you something you didn’t already know. The more surprising it is, the more information it carries.</p>
+<section id="self-information" class="level4">
+<h4 class="anchored" data-anchor-id="self-information">Self-Information</h4>
+<p>For an event <span class="math inline">\(X\)</span>, with probability <span class="math inline">\(p\)</span>, it’s self-information is defined as</p>
+<p><span class="math display">\[
+\operatorname{I}(X) = \log \dfrac{1}{p} = -\log p
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We use <span class="math inline">\(\log = \log_2\)</span> when measuring information in bits (typical in computer science and digital systems)</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="sec-entropy">Entropy</h3>
+<p>The <strong>entropy</strong> of a random variable <span class="math inline">\(X\)</span> with probability mass function (p.m.f., discrete case) or density function (p.d.f., continuous case) <span class="math inline">\(p(x)\)</span> is the <strong><a href="#sec-expectation" class="quarto-xref">expected</a> amount of information</strong> contained in its outcomes:</p>
+<p><span class="math display">\[
+\operatorname{H}[X] = \operatorname{E}[\operatorname{I}(X)] = -\operatorname{E}[\log p(X)].
+\]</span></p>
+<p>In explicit form for the discrete case:</p>
+<p><span class="math display">\[
+\operatorname{H}(X) = -\sum_x p(x) \log p(x)
+\]</span></p>
+<p>and for the continuous case (differential entropy):</p>
+<p><span class="math display">\[
+\operatorname{H}(X) = -\int p(x) \log p(x) \, dx.
+\]</span></p>
+</section>
+<section id="sec-cross-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="sec-cross-entropy">Cross-Entropy</h3>
+<p><strong>Cross-entropy</strong> is the <strong>expected information content</strong> of samples drawn from a true distribution <span class="math inline">\(P\)</span>, when they are evaluated under an assumed (model) distribution <span class="math inline">\(Q\)</span>:</p>
+<p><span class="math display">\[
+\operatorname{H}(P, Q) = -\sum_x p(x) \log q(x)
+\quad \text{or} \quad
+-\int p(x) \log q(x) \, dx.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It measures how well <span class="math inline">\(Q\)</span> approximates <span class="math inline">\(P\)</span>: lower cross-entropy indicates a better model fit.</p>
+<p>If the model is perfect, <span class="math inline">\(Q = P\)</span>, then</p>
+<p><span class="math display">\[
+\operatorname{H}(P, Q) = \operatorname{H}(P, P) = \operatorname{H}(P),
+\]</span></p>
+<p>and in general,</p>
+<p><span class="math display">\[
+\operatorname{H}(P, Q) \ge \operatorname{H}(P),
+\]</span></p>
+<p>meaning that incorrect assumptions about <span class="math inline">\(P\)</span> can only increase the expected information (i.e., the coding cost).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\operatorname{H}(P, Q) \neq \operatorname{H}(Q, P)\)</span></p>
+</div>
+</div>
+</section>
+<section id="kullback-leibler-divergence-kl-divergence" class="level3">
+<h3 class="anchored" data-anchor-id="kullback-leibler-divergence-kl-divergence">Kullback-Leibler Divergence (KL-Divergence)</h3>
+<p><a href="#sec-cross-entropy" class="quarto-xref">Cross-Entropy</a> measures how well <span class="math inline">\(Q\)</span> approximates <span class="math inline">\(P\)</span>, including the <strong>irreducible uncertainty</strong> (the <a href="#sec-entropy" class="quarto-xref">entropy</a> of <span class="math inline">\(P\)</span>). <strong>KL-Divergence</strong> isolates the extra information incurred by using <span class="math inline">\(Q\)</span> instead of <span class="math inline">\(P\)</span>, defined as</p>
+<p><span class="math display">\[
+\operatorname{D_{KL}}(P | Q) = \operatorname{H}(P, Q) - \operatorname{H}(P),
+\]</span></p>
+<p>making clear that KL-divergence is the <strong>cross-entropy minus the true entropy</strong> — the “extra surprise” from assuming <span class="math inline">\(Q\)</span>.</p>
+<p>It is always non-negative and zero only when <span class="math inline">\(P = Q\)</span>.</p>
+<p><span class="math display">\[
+\operatorname{D_{KL}}(P | Q) = \sum_x p(x) \log \frac{p(x)}{q(x)}
+\quad \text{or} \quad
+\int p(x) \log \frac{p(x)}{q(x)} \, dx.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Step by step <span class="math display">\[
+\begin{aligned}
+p(x) \log \frac{1}{q(x)} - p(x) \log \frac{1}{p(x)} &amp; = p(x) [\log \frac{1}{q(x)} - \log \frac{1}{p(x)}] \\
+&amp; = p(x) [\log p(x) - \log q(x)] \\
+&amp; = p(x) \log \frac{p(x)}{q(x)} \\
+\end{aligned}
+\]</span></p>
 </div>
 </div>
 </section>
@@ -637,6 +786,7 @@ K_{\mathbf{X}\mathbf{Y}} &amp; = \operatorname{E}[(\mathbf{X} - \operatorname{E}
 <li><span class="math inline">\(\operatorname{Var}(X)\)</span>: variance of random variable <span class="math inline">\(X\)</span>, equal to <span class="math inline">\(\sigma^2_X\)</span></li>
 <li><span class="math inline">\(\operatorname{Cov}(X, Y)\)</span>: covariance of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
 <li><span class="math inline">\(\operatorname{\rho}(X, Y)\)</span>: the Pearson correlation coefficient between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, equals <span class="math inline">\(\frac{\operatorname{Cov}(X, Y)}{\sigma_X \sigma_Y}\)</span></li>
+<li><span class="math inline">\(\operatorname{I}(X)\)</span>: self-information of event <span class="math inline">\(X\)</span></li>
 <li><span class="math inline">\(\operatorname{H}(X)\)</span>: entropy of random variable <span class="math inline">\(X\)</span></li>
 <li><span class="math inline">\(D_{\operatorname{KL}}(P\|Q)\)</span>: the KL-divergence (or relative entropy) from distribution <span class="math inline">\(Q\)</span> to distribution <span class="math inline">\(P\)</span></li>
 </ul>
